@@ -1,0 +1,388 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://distill.pub/template.v2.js"></script>
+  <style><%= require("raw-loader!../static/style.css") %></style>
+  
+  <script src="vis/js/d3.min.js" charset="utf-8"></script>
+  <script src="vis/js/underscore.js" charset="utf-8"></script>
+  <script src="vis/js/rounding.js" charset="utf-8"></script>
+  <script src="vis/util.js" charset="utf-8"></script>
+  <script src="vis/GridWorld.js" charset="utf-8"></script>
+  <script src="vis/LearnQV.js" charset="utf-8"></script>
+  <script src="vis/Policy.js" charset="utf-8"></script>
+  <script src="vis/Aprox.js" charset="utf-8"></script>
+
+  <script src="vis/cliff.js" charset="utf-8"></script>
+  <script src="vis/compare.js" charset="utf-8"></script>
+  <script src="vis/tug.js" charset="utf-8"></script>
+  <script src="vis/tug_baseline.js" charset="utf-8"></script>
+  <script src="vis/reinforce.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+<d-front-matter>
+  <script type="text/json">{
+  "title": "TD Learning as Intersecting Paths",
+  "description": "",
+  "password": "td",
+  "authors": [
+
+    {
+      "author": "Chris Olah",
+      "authorURL": "https://colah.github.io/",
+      "affiliation": "Google Brain Team",
+      "affiliationURL": "https://g.co/brain"
+    }
+  ],
+  "katex": {
+    "strict": false,
+    "delimiters": [
+      {
+        "left": "$",
+        "right": "$",
+        "display": false
+      },
+      {
+        "left": "$$",
+        "right": "$$",
+        "display": true
+      }
+    ]
+  }
+  }</script>
+</d-front-matter>
+
+<style>
+  #cliff_iter .cell rect {
+    fill: #e7eae7;
+  }
+  .cell rect {
+    fill: #e7eae7;
+  }
+</style>
+
+<d-title>
+  <h1>TD Learning as Intersecting Paths</h1>
+  <figure class="l-page">
+    <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
+  </figure>
+  <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
+</d-title>
+
+<d-article>
+  
+    <h2>Reinforcement Learning</h2>
+    <br>
+    <h3>DeepIntro</h3>
+  
+
+  
+    <h2>Overview</h2>
+    <br>
+    <ul>
+      <li>Introduction</li>
+      <li>Policy Value Methods</li>
+      <li>Policy Gradient Methods</li>
+    </ul>
+  
+
+
+
+  
+    <h1>What is RL?</h1>
+  
+  
+    <h2>What is RL?</h2>
+    <br>
+    <ul>
+      <li>Learning by Exploration</li>
+      <li>Evaluative Feedback</li>
+    </ul>
+  
+  
+    <h2>Agent-Environment Interface</h2>
+    <p><img src="imgs/RL_interface.png"></p>
+    <p>(Sutton & Barto, 1998)
+  
+
+
+
+  
+    <h1>Function Approximators</h1>
+  
+  
+    <h2>Function Approximator Abstraction</h2>
+    <br>
+    <ul>
+      <li>Evaluate: $~~~f(x)$</li>
+      <li>Update: $~~~~~f(x) ~\hookleftarrow~ y$</li>
+    </ul>
+  
+  
+    <h2>Tabular Environments/Approximators</h2>
+  
+
+
+
+
+
+  
+    <h1>Policy Value Methods</h1>
+  
+  
+    <h2>What is value?</h2>
+    <br>
+    <h3>Long-Term</h3>
+  
+  
+    <h2>What is value?</h2>
+    <br>
+    <h3>Time Discounted Reward</h3>
+    <br>
+    <p>$$R = \sum_t \gamma^t r_t$$ </p>
+  
+  
+    <h2>Policy Value Iteration</h2>
+  
+  
+    <h2>Policy Value Iteration : Cliff Walking</h2>
+    <br>
+    <figure class="l-page">
+    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+    </figure>
+    <script> cliff_vis(d3.select("#cliff_iter")); </script>
+  
+  
+    <h2>Value $\to$ Policy</h2>
+    <br>
+    <ul>
+      <li>Exploration</li>
+      <li>Epsilon-Greedy Policies</li>
+    </ul>
+  
+
+  
+    <h2>Learning Value from Experience</h2>
+  
+
+    
+      <h2>Monte-Carlo Learning</h2>
+      <br>
+      <p>Value of state is average return.</p>
+    
+
+    
+      <h2>Monte-Carlo Learning</h2>
+      <br>
+      <p>$$V(s_t) ~\hookleftarrow~ R_t~~~~~~~~~~~~$$</p>
+      <br>
+      <p>$$V(s_t) ~\hookleftarrow~ \sum_i \gamma^i r_{t+i}$$</p>
+    
+
+      
+      <figure class="l-page">
+      <div id="compare1" style="width:300px; height:500px; margin:auto; position:relative;"> </div>
+      </figure>
+      <script> compare_vis(d3.select("#compare1"), {algs: ["MC"] }); </script>
+    
+
+    
+      <h2>Temporal Difference Learning</h2>
+      <br>
+      <p>Merge paths for greater statistical efficiency.</p>
+    
+
+    
+      <h2>Temporal Difference Learning</h2>
+      <br>
+      <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
+    
+
+      
+      <figure class="l-page">
+      <div id="compare2" style="width:650px; height:500px; margin:auto; position:relative;"> </div>
+      </figure>
+      <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script>
+    
+
+
+  
+    <h2>Q functions</h2>
+    <br>
+    <p>State-Action Values</p>
+    <p>Easier to make policies</p>
+  
+
+  
+    <h2>MC and TD still work.</h2>
+  
+
+  
+    <h2>Monte-Carlo Learning for $Q(s,a)$</h2>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ R_t$$</p>
+  
+
+  
+    <h2>TD Learning for $Q(s,a)$ (SARSA)</h2>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma*Q(s_{t+1}, a_{t+1})$$</p>
+  
+
+  
+    <h2>On-Policy vs Off-Policy</h2>
+  
+
+  
+    <h3>TD can be rewritten as:</h3>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
+    <br>
+    <p>$$V(s) = Q(s,a) ~~ \text{where} ~~ a \sim \pi(a|s) $$</p>
+  
+
+  
+    <h3>TD can be rewritten as:</h3>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
+    <br>
+    <p>$$V(s) = \sum_a \pi(s,a) Q(s,a)$$</p>
+  
+
+  
+    <h2>Estimating the value under present policy</h2>
+  
+
+  
+    <h3>Could also use a different policy $\pi'$</h3>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
+    <br>
+    <p>$$V(s) = \sum_a \pi'(s,a) Q(s,a)$$</p>
+  
+
+  
+    <h3>Q-learning: off-policy optimal</h3>
+    <br>
+    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
+    <br>
+    <p>$$V(s) = \max_a Q(s,a)$$</p>
+  
+
+    
+    <figure class="l-page">
+    <div id="compare3" style="width:1000px; height:500px; margin:auto; position:relative;"> </div>
+    </figure>
+    <script> compare_vis(d3.select("#compare3"), {algs: ["MC", "TD", "Q"] }); </script>
+  
+  
+    <h2>Problem: Overconfidence of Q-learning</h2>
+    <br>
+    <p>Solution: double Q-learning</p>
+  
+  
+    <h2>Problem: TD and function approximators</h2>
+    <br>
+    <p>Solution: traces?</p>
+  
+
+
+
+
+  
+    <h1>Policy Gradient Methods</h1>
+  
+
+  
+    <h2>REINFORCE</h2>
+    <br>
+    <p>Backprop through sampling</p>
+  
+  
+    <p>(avoid where possible!)</p>
+  
+  
+    <p><img src="imgs/reinforce1.png" style="width:30%;"></p>
+  
+  
+    <p><img src="imgs/reinforce2.png" style="width:50%;"></p>
+  
+  
+    <p><img src="imgs/reinforce3.png" style="width:50%;"></p>
+  
+  
+    <h2>REINFORCE = A Tug of War</h2>
+    <br>
+    <p>Got to make it fair; divide by prob.</p>
+  
+  
+    <h2>REINFOCE</h2>
+    <figure class="l-page">
+    <div id="tug" style="width:600px; height:500px; margin: auto;"> </div>
+    </figure>
+    <script> tug_vis(d3.select("#tug")); </script>
+  
+
+  
+    <h2>REINFOCE on GridWorld</h2>
+    <br>
+    <figure class="l-page">
+    <div id="reinforce" style="width:300px; height:300px; margin:auto; position:relative;"> </div>
+    </figure>
+    <script> reinforce_vis(d3.select("#reinforce")); </script>
+  
+
+  
+    <h2>REINFOCE with Baseline</h2>
+    <figure class="l-page">
+    <div id="tug_baseline" style="width:600px; height:500px; margin: auto;"> </div>
+    </figure>
+    <script> tug_baseline_vis(d3.select("#tug_baseline")); </script>
+  
+
+  
+    <h2>Actor Critic Models</h2>
+    <br>
+    <h3>Policy Gradients + Value Functions</h3>
+  
+
+  
+    <h2>Using Value Functions</h2>
+    <br>
+    <ul>
+      <li>Get rid of noise from future actions</li>
+      <li>Baseline</li>
+      <li>Gradient (continuous action spaces)</li>
+    </ul>
+  
+
+  
+    <h2>Advantage actor critic</h2>
+    <br>
+    <p>Advantage: $~~~~Q(s,a) - V(s)$</p>
+  
+
+  
+    <h2>Continuous Action Spaces</h2>
+
+</d-article>
+
+
+
+<d-appendix>
+  <h3>Acknowledgments</h3>
+  <p>
+  </p>
+
+
+  <d-footnote-list></d-footnote-list>
+  <d-citation-list></d-citation-list>
+</d-appendix>
+
+<d-bibliography src="bibliography.bib"></d-bibliography>
+
+</body>
