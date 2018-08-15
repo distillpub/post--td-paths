@@ -1,5 +1,5 @@
-# post--differentiable-parameterizations
-Examples of differentiable image parameterizations that allow solving previously intractable optimization tasks.
+# post--td-paths
+Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?
 
 ## Developing
 

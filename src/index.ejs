@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://distill.pub/template.v2.js"></script>
   <style><%= require("raw-loader!../static/style.css") %></style>
+  <style type="text/css">@import "vis/playground.css";</style>
   
   <script src="vis/js/d3.min.js" charset="utf-8"></script>
   <script src="vis/js/underscore.js" charset="utf-8"></script>
@@ -37,6 +38,13 @@
       "affiliation": "Google Brain Team",
       "affiliationURL": "https://g.co/brain"
     }
+
+    {
+      "author": "Sam Greydanus",
+      "authorURL": "https://greydanus.github.io/about.html",
+      "affiliation": "Google Brain Team",
+      "affiliationURL": "https://g.co/brain"
+    }
   ],
   "katex": {
     "strict": false,
@@ -66,7 +74,8 @@
 </style>
 
 <d-title>
-  <h1>TD Learning as Intersecting Paths</h1>
+  <h1>TD Learning and the Effect of Merging Paths</h1>
+  <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
   <figure class="l-page">
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
   </figure>
@@ -74,300 +83,103 @@
 </d-title>
 
 <d-article>
-  
-    <h2>Reinforcement Learning</h2>
-    <br>
-    <h3>DeepIntro</h3>
-  
 
-  
-    <h2>Overview</h2>
-    <br>
+    <h3>Introduction</h3>
+    <p>Set the scene and talk about reinforcement learning in general.</p>
+
+    <img style="width: 100%; margin-top: 15px;" src="mockups/concepts.png"/>
+
+    <h3>Function approximation</h3>
     <ul>
-      <li>Introduction</li>
-      <li>Policy Value Methods</li>
-      <li>Policy Gradient Methods</li>
+      <li>Evaluate: $$~~~f(x)$$</li>
+      <li>Update: $$~~~~~f(x) ~\hookleftarrow~ y$$</li>
     </ul>
-  
 
-
-
-  
-    <h1>What is RL?</h1>
-  
-  
-    <h2>What is RL?</h2>
-    <br>
-    <ul>
-      <li>Learning by Exploration</li>
-      <li>Evaluative Feedback</li>
-    </ul>
-  
-  
-    <h2>Agent-Environment Interface</h2>
-    <p><img src="imgs/RL_interface.png"></p>
-    <p>(Sutton & Barto, 1998)
-  
-
-
-
-  
-    <h1>Function Approximators</h1>
-  
-  
-    <h2>Function Approximator Abstraction</h2>
-    <br>
-    <ul>
-      <li>Evaluate: $~~~f(x)$</li>
-      <li>Update: $~~~~~f(x) ~\hookleftarrow~ y$</li>
-    </ul>
-  
-  
-    <h2>Tabular Environments/Approximators</h2>
-  
-
-
-
-
-
-  
-    <h1>Policy Value Methods</h1>
-  
-  
-    <h2>What is value?</h2>
-    <br>
-    <h3>Long-Term</h3>
-  
-  
-    <h2>What is value?</h2>
-    <br>
-    <h3>Time Discounted Reward</h3>
-    <br>
-    <p>$$R = \sum_t \gamma^t r_t$$ </p>
-  
-  
     <h2>Policy Value Iteration</h2>
-  
-  
-    <h2>Policy Value Iteration : Cliff Walking</h2>
     <br>
-    <figure class="l-page">
-    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+
+    <img style="width: 60%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
+
+    <p>What is value?</p>
+    <br>
+    <p>Time-discounted reward </p>
+    <p>$$R = \sum_t \gamma^t r_t$$ </p>
+
+    
+    <h3>Cliff walking</h3>
+    <br>
+    <!-- <figure class="l-page">
+    <div id="cliff_iter" style="width:400px; height:350px; position:relative;"> </div>
     </figure>
-    <script> cliff_vis(d3.select("#cliff_iter")); </script>
+    <script -->> cliff_vis(d3.select("#cliff_iter")); </script>
   
   
-    <h2>Value $\to$ Policy</h2>
+    <h3>From value to policy</h3>
     <br>
     <ul>
       <li>Exploration</li>
       <li>Epsilon-Greedy Policies</li>
     </ul>
-  
 
-  
+
     <h2>Learning Value from Experience</h2>
+    <br>
+
+    <img style="width: 50%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
+
+
+    <h3>Monte-Carlo Learning</h3>
+    <br>
+    <p>Value of state is average return.</p>
+  
+    <br>
+    <p>$$V(s_t) ~\hookleftarrow~ R_t~~~~~~~~~~~~$$</p>
+    <br>
+    <p>$$V(s_t) ~\hookleftarrow~ \sum_i \gamma^i r_{t+i}$$</p>
   
 
     
-      <h2>Monte-Carlo Learning</h2>
-      <br>
-      <p>Value of state is average return.</p>
-    
-
-    
-      <h2>Monte-Carlo Learning</h2>
-      <br>
-      <p>$$V(s_t) ~\hookleftarrow~ R_t~~~~~~~~~~~~$$</p>
-      <br>
-      <p>$$V(s_t) ~\hookleftarrow~ \sum_i \gamma^i r_{t+i}$$</p>
-    
-
-      
-      <figure class="l-page">
-      <div id="compare1" style="width:300px; height:500px; margin:auto; position:relative;"> </div>
-      </figure>
-      <script> compare_vis(d3.select("#compare1"), {algs: ["MC"] }); </script>
-    
-
-    
-      <h2>Temporal Difference Learning</h2>
-      <br>
-      <p>Merge paths for greater statistical efficiency.</p>
-    
-
-    
-      <h2>Temporal Difference Learning</h2>
-      <br>
-      <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-    
-
-      
-      <figure class="l-page">
-      <div id="compare2" style="width:650px; height:500px; margin:auto; position:relative;"> </div>
-      </figure>
-      <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script>
-    
+    <figure class="l-page">
+    <div id="compare1" style="width:300px; height:500px; margin:auto; position:relative;"> </div>
+    </figure>
+    <script> compare_vis(d3.select("#compare1"), {algs: ["MC"] }); </script>
 
 
+    <h3>Temporal Difference Learning</h3>
+    <br>
+    <p>Merge paths for greater statistical efficiency.</p>
+
+    <br>
+    <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
   
-    <h2>Q functions</h2>
+
+    
+    <figure class="l-page">
+    <div id="compare2" style="width:650px; height:500px; margin:auto; position:relative;"> </div>
+    </figure>
+    <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script>
+
+
+    <h3>Re-weighting the future</h3>
     <br>
     <p>State-Action Values</p>
     <p>Easier to make policies</p>
-  
+    <p>MC and TD still work.</p>
+    <p>“Q functions are split value state value functions.” How do we merge them back </p>
 
-  
-    <h2>MC and TD still work.</h2>
-  
-
-  
-    <h2>Monte-Carlo Learning for $Q(s,a)$</h2>
+    <p>Why Q-learning is overconfident</p>
     <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ R_t$$</p>
-  
 
-  
-    <h2>TD Learning for $Q(s,a)$ (SARSA)</h2>
+    <h2>Function approximation</h2>
     <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma*Q(s_{t+1}, a_{t+1})$$</p>
-  
+    <p>Neural networks, so forth</p>
 
-  
-    <h2>On-Policy vs Off-Policy</h2>
-  
+    <img style="width: 100%; margin-top: 15px" src="mockups/averagers.png"/>
 
-  
-    <h3>TD can be rewritten as:</h3>
+    <h2>Playground</h2>
     <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-    <br>
-    <p>$$V(s) = Q(s,a) ~~ \text{where} ~~ a \sim \pi(a|s) $$</p>
-  
-
-  
-    <h3>TD can be rewritten as:</h3>
-    <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-    <br>
-    <p>$$V(s) = \sum_a \pi(s,a) Q(s,a)$$</p>
-  
-
-  
-    <h2>Estimating the value under present policy</h2>
-  
-
-  
-    <h3>Could also use a different policy $\pi'$</h3>
-    <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-    <br>
-    <p>$$V(s) = \sum_a \pi'(s,a) Q(s,a)$$</p>
-  
-
-  
-    <h3>Q-learning: off-policy optimal</h3>
-    <br>
-    <p>$$Q(s_t, a_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-    <br>
-    <p>$$V(s) = \max_a Q(s,a)$$</p>
-  
-
-    
-    <figure class="l-page">
-    <div id="compare3" style="width:1000px; height:500px; margin:auto; position:relative;"> </div>
-    </figure>
-    <script> compare_vis(d3.select("#compare3"), {algs: ["MC", "TD", "Q"] }); </script>
-  
-  
-    <h2>Problem: Overconfidence of Q-learning</h2>
-    <br>
-    <p>Solution: double Q-learning</p>
-  
-  
-    <h2>Problem: TD and function approximators</h2>
-    <br>
-    <p>Solution: traces?</p>
-  
-
-
-
-
-  
-    <h1>Policy Gradient Methods</h1>
-  
-
-  
-    <h2>REINFORCE</h2>
-    <br>
-    <p>Backprop through sampling</p>
-  
-  
-    <p>(avoid where possible!)</p>
-  
-  
-    <p><img src="imgs/reinforce1.png" style="width:30%;"></p>
-  
-  
-    <p><img src="imgs/reinforce2.png" style="width:50%;"></p>
-  
-  
-    <p><img src="imgs/reinforce3.png" style="width:50%;"></p>
-  
-  
-    <h2>REINFORCE = A Tug of War</h2>
-    <br>
-    <p>Got to make it fair; divide by prob.</p>
-  
-  
-    <h2>REINFOCE</h2>
-    <figure class="l-page">
-    <div id="tug" style="width:600px; height:500px; margin: auto;"> </div>
-    </figure>
-    <script> tug_vis(d3.select("#tug")); </script>
-  
-
-  
-    <h2>REINFOCE on GridWorld</h2>
-    <br>
-    <figure class="l-page">
-    <div id="reinforce" style="width:300px; height:300px; margin:auto; position:relative;"> </div>
-    </figure>
-    <script> reinforce_vis(d3.select("#reinforce")); </script>
-  
-
-  
-    <h2>REINFOCE with Baseline</h2>
-    <figure class="l-page">
-    <div id="tug_baseline" style="width:600px; height:500px; margin: auto;"> </div>
-    </figure>
-    <script> tug_baseline_vis(d3.select("#tug_baseline")); </script>
-  
-
-  
-    <h2>Actor Critic Models</h2>
-    <br>
-    <h3>Policy Gradients + Value Functions</h3>
-  
-
-  
-    <h2>Using Value Functions</h2>
-    <br>
-    <ul>
-      <li>Get rid of noise from future actions</li>
-      <li>Baseline</li>
-      <li>Gradient (continuous action spaces)</li>
-    </ul>
-  
-
-  
-    <h2>Advantage actor critic</h2>
-    <br>
-    <p>Advantage: $~~~~Q(s,a) - V(s)$</p>
-  
-
-  
-    <h2>Continuous Action Spaces</h2>
+    <div id="playground"></div>
+    <script src="vis/Playground.js" charset="utf-8"></script>
 
 </d-article>
 
