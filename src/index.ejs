@@ -145,7 +145,7 @@
     <br>
 
     <p>
-      Our next step is to examine how policy, experience, and the two value functions relate to one another. The first thing to notice is that they have natural dependencies on one another. An agent needs a policy in order to collect experience. In the same way, it needs experience in order to make a value estimate. Completing the cycle, it turns out that an agent needs an RL agent needs a value estimate in order to improve its policy.
+      Our next step is to examine how policy, experience, and the two value functions relate to one another. The first thing to notice is that there are natural dependencies. An agent needs a policy in order to collect experience. In the same way, it needs experience in order to make a value estimate. Completing the cycle, it turns out that an agent needs an RL agent needs a value estimate in order to improve its policy.
     </p>
 
     <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
@@ -170,7 +170,27 @@
     </p>
 
     <p>
-      <b>Learning value.</b> Learning value is the hard part! First
+      <b>Learning value.</b> Learning value is often the hardest part! As we sketch an outline of value estimation here, keep in mind that the remainder of the article will be devoted to its nuances.
+      </p>
+
+    <p>
+      The first step of value estimation is <i>credit assignment</i>: given a series of states leading up to a reward, who gets the credit? Most of the time, we assume that we don't have a model of an environment's underlying dynamics
+      <d-footnote>
+          This is the model-free assumption in RL. There is a vibrant area of research around model-based RL where this is not the case.
+      </d-footnote>
+      , so this question is hard to answer. One of the few assumptions we can make is that states separated by fewer time steps probably contributed more. In this case, the amount of reward (or credit) assigned to each state is equal to the sum of time-discounted rewards:
+    </p>
+
+    <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
+
+    <p>
+      In the equation above, $$\gamma$$ is a constant between zero and one which determines how much a reward should be discounted across time steps. Now, for tuple in our experience, we have an estimate of the future reward. The simplest way of computing the expected future reward at state $$s_i$$, now, is just to take the average return for all tuples containing $$s_i$$
+    </p>
+
+    <center><p>$$\hat V(s_i) = \frac{1}{N} \sum_{s'=s} R_{s'}$$ </p> </center>
+
+    <p>
+      Having defined return, the simplest way to estimate a state's value would be to take the average of all returns associated with that state. That is how Monte Carlo learning works! Surprisingly, we'll see later that you can do better than this using TD methods.
     </p>
 
     <p>
@@ -187,18 +207,18 @@
 
     <h3>Example: Cliff walking</h3>
     <br>
-    <img style="width: 95%; margin-top: 15px;" src="mockups/cliff-walking.png"/>
+
+    <figure id="figure-cliff-walking" class="subgrid" style="margin-top: 0;">
+      <img style="width: 100%; margin-top: 15px;" src="mockups/cliff-walking.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
+        Cliff walking.
+      </figcaption>
+    </figure>
 <!--     <figure class="l-page">
     <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
     </figure>
     <script> cliff_vis(d3.select("#cliff_iter")); </script> -->
-  
-<!--     <h3>From value to policy</h3>
-    <br>
-    <ul>
-      <li>Exploration</li>
-      <li>Epsilon-Greedy Policies</li>
-    </ul> -->
 
 
 
@@ -218,8 +238,6 @@
     <h2>Monte Carlo Learning</h2>
     <br>
 
-    <img style="width: 50%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
-
 
     <p>Value of state is average return.</p>
   
@@ -227,13 +245,6 @@
     <p>$$V(s_t) ~\hookleftarrow~ R_t~~~~~~~~~~~~$$</p>
     <br>
     <p>$$V(s_t) ~\hookleftarrow~ \sum_i \gamma^i r_{t+i}$$</p>
-  
-
-    
-    <figure class="l-page">
-    <div id="compare1" style="width:300px; height:500px; margin:auto; position:relative;"> </div>
-    </figure>
-    <script> compare_vis(d3.select("#compare1"), {algs: ["MC"] }); </script>
 
 
 
@@ -243,7 +254,16 @@
 
     <h2>Intersecting Paths: TD Learning</h2>
     <br>
-    <p>Merge paths for greater statistical efficiency.</p>
+    
+    <figure id="figure-mc-vs-td" class="subgrid" style="margin-top: 0;">
+      <center>
+        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
+      </center>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">4</a>:
+        Monte Carlo Learning vs. Temporal Difference Learning.
+      </figcaption>
+    </figure>
 
     <br>
     <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
