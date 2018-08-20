@@ -74,7 +74,7 @@
 </style>
 
 <d-title>
-  <h1>TD Learning and the Effect of Merging Paths</h1>
+  <h1>TD Learning as Intersecting Paths</h1>
   <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
   <figure class="l-page">
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
@@ -84,21 +84,98 @@
 
 <d-article>
 
-    <h3>Introduction</h3>
-    <p>Set the scene and talk about reinforcement learning in general.</p>
 
-    <img style="width: 100%; margin-top: 15px;" src="mockups/concepts.png"/>
 
-    <h3>Function approximation</h3>
-    <ul>
-      <li>Evaluate: $$~~~f(x)$$</li>
-      <li>Update: $$~~~~~f(x) ~\hookleftarrow~ y$$</li>
-    </ul>
+    <!-- Estimating value -->
+<!--     <p>
+      After making an important decision, we often ask ourselves, "What might have happened if we had acted differently?" One of the most beautiful and infuriating parts of life is that there is no answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened. Sometimes, though, these guesses can be quite good. They allow us to make good choices, even when we are placed in situations we have been in before.
+    </p> -->
+
+<!--     <p>
+      The dilemma of how to choose among several actions without being <i>certain</i> about their consequences is central to reinforcement learning. In this article, we consider several ways an agent can learn from experience. We interpret experience as a series of paths through an environmnet and then show how Temporal Difference (TD) methods, unlike Monte Carlo methods, merges these paths where they intersect to increase statistical efficiency.
+    </p> -->
+
+    <p>
+      After making an important decision, we often ask ourselves, "What might have happened if we had acted differently?" One of the most beautiful and infuriating parts of life is that there is no answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened...
+    </p>
+
+    <p>
+      Reinforcement learning (RL) agents face the same issue. More specifically, they can never choose more than a one action at a time. This makes it difficult to compare the relative outcomes of two actions. The agents get around this problem by having a concept of <i>state</i>. An agent's state summarizes its relationship to its environment and it tends to recur over time. Using states, agents can draw analogies between past and future decisions and thus make better decisions over time.
+    </p>
+
+    <p>
+      Monte Carlo (MC) Learning and Temporal Difference (TD) Learning are two methods of organizing state information. Sometimes we think of TD learning as a practical approximation of MC. But there is more to the story: TD methods often outperform MC methods by a large margin, something that we wouldn't expect from an approximation. In this post, we introduce a new intuition based on the idea that an agent's experience is composed of many paths. We show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. Merging paths gives TD a leg up on Monte Carlo, but it comes with a catch: when TD merges the <i>wrong</i> paths it performs much worse.
+    </p>
+
+    <h3>Key Concepts</h3>
+
+    <p>
+      First, we need to agree on terminology. In the reinforcement learning paradigm, we start out with an agent and an environment. The agent's goal is to maximize the amount of reward it receives by interacting with the environment. The environment's goal is, well, to be an environment.
+    </p>
+    <p>
+      The agent and environment interact with each other at discrete points in time called time steps. At each time step, the agent gets to make an observation of the environment. The agent then combines the observation with previous experience to compute a state. The state, loosely speaking, summarizes the agent's relationship with its environment. Finally, the agent gets to interact with the environment by selecting an action. The environment responds to the action with a reward and a new observation, and the cycle continues.
+    </p>
+
+    <p>
+      Having set up the basic context of reinforcement learning, we need to introduce four higher-level concepts: policy, experience, value, and action-value. Taken together, they are all an agent needs in order to learn from experience.
+    </p>
+
+    <figure id="figure-concepts" class="subgrid" style="margin-top: 0;">
+      <img style="width: 100%; margin-top: 15px;" src="mockups/concepts.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">1</a>:
+        Four key concepts that are key to learning from experience.
+      </figcaption>
+    </figure>
+
+    <p>
+      <li> <b>Policy.</b> An agent chooses how to interact with its environment using a policy function $$\pi$$. For any state $$s$$, the agent chooses action $$a$$ with probability $$\pi(s,a)$$.</li>
+
+      <li> <b>Experience.</b> Experience is the sum of an agent's interactions with its environment. Each interaction is includes the agent's state, the action it chose, and the reward $$r$$ it received. We can write this as a tuple, $$(s,a,r)$$. As an agent explores its environment, it builds up a "path" of these tuples, one for each time step. Think of each episode in the agent's experience as a different path.</li>
+
+      <!-- <li> <b>Value functions.</b> An agent uses value functions to make generalizations about its experience. We'll consider two different value functions: the state-value function $$V(s)$$ and the action-value function $$Q(s,a)$$. Each of these functions measures the agent's expected future rewards, or value, when it is in a given context. As you can see, the action-value function is a bit more specific because it considers the case when an agent is in a specific state <i>and</i> has chosen an action.</li> -->
+
+      <li> <b>State-value function.</b> An agent uses value functions to make generalizations about its experience. To be specific, value functions measure an agent's expected future rewards given a specific context, which is called the <i>value</i> of the context. The state-value function $$V(s)$$, for example, measures an agent's expected rewards in the contect of a state.</li>
+
+      <li> <b>Action-value function.</b> The action-value function $$Q(s,a)$$, meanwhile, measures an agent's expected future rewards in the contect of a particular state-action pair. As you can see, Q values are a bit more specific than state values.</li>
+    </p>
+
 
     <h2>Policy Value Iteration</h2>
     <br>
 
-    <img style="width: 60%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
+    <p>
+      Our next step is to examine how policy, experience, and the two value functions relate to one another. The first thing to notice is that they have natural dependencies on one another. An agent needs a policy in order to collect experience. In the same way, it needs experience in order to make a value estimate. Completing the cycle, it turns out that an agent needs an RL agent needs a value estimate in order to improve its policy.
+    </p>
+
+    <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
+      <img style="width: 100%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
+        Policy value iteration.
+      </figcaption>
+    </figure>
+
+    <p>
+      The cycle we have just outlined is called <i>policy value iteration</i>
+        <d-footnote>
+          Sometimes people lump experience into the policy step, hence "policy value iteration" rather than "policy experience value iteration." But we chose not to do this because the "paths" interpretation of experience is important to our thesis.
+        </d-footnote>
+
+      As the agent follows this cycle its policy improves, experience increases, and value functions get better. The agent "grows up" :) Every reinforcement learning algorithm performs policy iteration in one form or another; where algorithms differ is in the way they perform updates. As you can imagine, a small difference in the way an agent updates its policy function can have a significant impact on its experience, value update, and hence its future policies.
+    </p>
+
+    <p>
+      <b>Running the policy.</b> This step is mostly set in stone. The main difference between algorithms is how much of the policy gets run. Some algorithms perform policy value iteration after every time step whereas others only make updates after an episode, or a batch of episodes.
+    </p>
+
+    <p>
+      <b>Learning value.</b> Learning value is the hard part! First
+    </p>
+
+    <p>
+      <b>Choosing a policy.</b>
+    </p>
 
     <p>What is value?</p>
     <br>
@@ -106,30 +183,44 @@
     <p>$$R = \sum_t \gamma^t r_t$$ </p>
 
     
-    <h3>Cliff walking</h3>
+
+
+    <h3>Example: Cliff walking</h3>
     <br>
-    <!-- <figure class="l-page">
-    <div id="cliff_iter" style="width:400px; height:350px; position:relative;"> </div>
+    <img style="width: 95%; margin-top: 15px;" src="mockups/cliff-walking.png"/>
+<!--     <figure class="l-page">
+    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
     </figure>
-    <script -->> cliff_vis(d3.select("#cliff_iter")); </script>
+    <script> cliff_vis(d3.select("#cliff_iter")); </script> -->
   
-  
-    <h3>From value to policy</h3>
+<!--     <h3>From value to policy</h3>
     <br>
     <ul>
       <li>Exploration</li>
       <li>Epsilon-Greedy Policies</li>
+    </ul> -->
+
+
+
+
+    <h2>Aside: Function approximation</h2>
+    <ul>
+      <li>Evaluate: $$~~~f(x)$$</li>
+      <li>Update: $$~~~~~f(x) ~\hookleftarrow~ y$$</li>
     </ul>
 
 
-    <h2>Learning Value from Experience</h2>
+
+
+
+
+
+    <h2>Monte Carlo Learning</h2>
     <br>
 
     <img style="width: 50%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
 
 
-    <h3>Monte-Carlo Learning</h3>
-    <br>
     <p>Value of state is average return.</p>
   
     <br>
@@ -145,7 +236,12 @@
     <script> compare_vis(d3.select("#compare1"), {algs: ["MC"] }); </script>
 
 
-    <h3>Temporal Difference Learning</h3>
+
+
+
+
+
+    <h2>Intersecting Paths: TD Learning</h2>
     <br>
     <p>Merge paths for greater statistical efficiency.</p>
 
@@ -160,7 +256,12 @@
     <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script>
 
 
-    <h3>Re-weighting the future</h3>
+
+
+
+
+
+    <h2>Re-weighting the Future</h2>
     <br>
     <p>State-Action Values</p>
     <p>Easier to make policies</p>
@@ -170,11 +271,21 @@
     <p>Why Q-learning is overconfident</p>
     <br>
 
-    <h2>Function approximation</h2>
+
+
+
+
+
+    <h2>TD Learning and State Approximators</h2>
     <br>
     <p>Neural networks, so forth</p>
 
     <img style="width: 100%; margin-top: 15px" src="mockups/averagers.png"/>
+
+
+
+
+
 
     <h2>Playground</h2>
     <br>
