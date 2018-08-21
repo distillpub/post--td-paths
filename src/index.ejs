@@ -96,11 +96,11 @@
     </p> -->
 
     <p>
-      After making an important decision, we often ask ourselves, "What might have happened if we had acted differently?" One of the most beautiful but daunting parts of life is that there is no answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened...
+      After making an important decision, we often ask ourselves, "What might have happened if I had acted differently?" One of the most beautiful but daunting parts of life is that there is no way to answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened...
     </p>
 
     <p>
-      Reinforcement learning (RL) agents face the same issue: they can never choose more than one action at a time. This makes it hard for them to compare the relative outcomes of two actions. The only way to get around this problem is to maintain a concept of <i>state</i>. An agent's state summarizes its relationship with the environment. Agents use states to draw analogies between past decisions and future decisions, enabling them to make better decisions over time.
+      Reinforcement learning (RL) agents face the same issue: they cannot choose more than one action at a time. They, too, can never know the relative outcomes of two actions. In order to learn from experience, RL agents maintain a concept of state. States summarize the agent-environment relationship and tend to recur over time. States allow agents to draw analogies between past and future decisions, thus making better decisions over time.
 
     <p>
       Monte Carlo (MC) Learning and Temporal Difference (TD) Learning are two methods that RL agents use to do this. Sometimes we think of TD learning as a practical approximation of MC. But there is more to the story: TD methods sometimes outperform MC methods by a large margin, something that we wouldn't expect from an approximation. In this post, we introduce an intuition based on the idea that an agent's experience is a set of paths. We show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. Merging paths lets TD outperform Monte Carlo so long as the intersections are well-chosen. Otherwise, TD ends up being worse than Monte Carlo.
@@ -109,21 +109,21 @@
     <h3>The Reinforcement Learning Paradigm</h3>
 
     <p>
-      To set the scene, we must begin with an agent and an environment. The goal of the agent is to maximize its rewards by interacting with the environmnet. The poor environment asks nothing in return.
+      The reinforcement learning paradigm begins with an agent and an environment. The agent's goal is to maximize its rewards by interacting with the environmnet. The poor environment responds with rewards and asks nothing in return.
     </p>
     <p>
       Interactions between agent and environment happen over one or more discrete intervals of time, or "time steps." At each time step $$t$$, the agent makes an observation $$o_t$$ of the environment and combines it with previous experience to compute a state $$s_t$$. Then, the agent uses past experiences with similar states to select an action $$a_t$$. The environment responds with a reward $$r_{t+1}$$ and a new observation $$o_{t+1}$$, and the cycle repeats.
     </p>
 
     <p>
-      For state $$s$$, we consider an agent that selects action $$a$$ with probability $$\pi(s,a)$$. We call $$\pi$$ the agent's policy function. When the agent uses its policy to interact with the environment, it gains experience $$E$$. You can think of $$E$$ as the som of the agent's interactions with the environment, where each interaction is a $$(s,a,r)$$ tuple. When the agent interacts with the environment over the course of several time steps, we can think of the experience as being made up of a "path" of these tuples.
+      For state $$s$$, we consider an agent that selects action $$a$$ with probability $$\pi(s,a)$$. We call $$\pi$$ the agent's <b>policy function</b>. When the agent uses its policy to interact with the environment, it gains <b>experience</b> $$E$$. You can think of $$E$$ as the som of the agent's interactions with the environment, where each interaction is a $$(s,a,r)$$ tuple. When the agent interacts with the environment over the course of several time steps, we can think of the experience as being made up of a "path" of these tuples.
     </p>
 
     <figure id="figure-concepts" class="subgrid" style="margin-top: 0;">
       <img style="width: 100%; margin-top: 15px;" src="mockups/concepts.png"/>
       <figcaption class="l-body">
         <a href="#figure-rgba-diagram" class="figure-number">1</a>:
-        Four key concepts that are key to learning from experience.
+        Four key concepts for learning from experience.
       </figcaption>
     </figure>
 
@@ -132,11 +132,11 @@
       <d-footnote>
           This is the model-free assumption in RL. There is a vibrant area of research around model-based RL where this is not the case.
       </d-footnote>.
-      Instead, we will focus on using experience to learn a state-value function $$V(s)$$ or an action-value function $$Q(s,a)$$. With these functions, we can choose better policies.
+      Instead, we will focus on using experience to learn a <b>state-value function</b> $$V(s)$$ or an <b>action-value function</b> $$Q(s,a)$$. With these functions, we can choose better policies.
     </p>
 
     <p>
-      But what are these value functions estimating? The short answer is that they are estimating the sum of future rewards that the agent can expect to receive, given its current state (in the case of state-value functions) and current policy. As we explore two methods of using experience to estimate value, though, we'll find that there are some nuances to this idea.
+      Value functions estimate the sum of future rewards that an agent can expect to receive, given its context (e.g state for $$V(s)$$) and policy. As we explore two methods of using experience to estimate value, we'll find that there are some nuances to this idea.
     </p>
 
 <!--     </p>
@@ -156,7 +156,7 @@
     <br>
 
     <p>
-      You may have noticed that there is a natural cycle from and agent's policy to its experience to its value estimates, and back again. As the agent follows this cycle, its policy improves, its experience increases, and its value estimates get more precise. The agent "grows up." What we've just described is a process called <i>policy value iteration</i>
+      You may have noticed that there is a natural cycle from an agent's policy to experience to value estimate, and back again. As the agent follows this cycle, its policy improves, its experience increases, and its value estimates become more precise. The agent "grows up." This is a process called <i>policy value iteration</i>
         <d-footnote>
           Sometimes people lump experience into the policy step, hence "policy value iteration" rather than "policy experience value iteration." But we chose not to do this because the "paths" interpretation of experience is important to our thesis.
         </d-footnote>
@@ -178,8 +178,18 @@
       <b>Running the policy.</b> This is how the agent updates its experience. Some algorithms do this for only one time step, whereas others will run an entire episode or batch of episodes. Some algorithms keep a replay memory of all the agent's training experience whereas others do not store experience at all.
     </p>
 
+
     <p>
       <b>Value learning.</b> In this step, the agent updates its value estimate.
+    </p>
+
+      <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
+
+    <p>
+      The most obvious way to estimate value from returns is just to take the average:.
+      <center><p>$$\hat V(s_i) = \frac{1}{N} \sum_{s'=s} R_{s'}$$ </p> </center>
+      This is just Monte Carlo value estimation. The surprising fact is that we can do better than this.
+
     </p>
 
     <p>
