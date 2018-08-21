@@ -84,39 +84,36 @@
 
 <d-article>
 
+  <p>
+    After making an important decision, we often ask ourselves: “What would have happened if I had acted differently?” One of the most beautiful and daunting aspects of life is that we can never know. The best we can do is consider previous experience and make a guess…
+  </p>
 
+  <p>
+    Reinforcement learning agents face the same challenge. At each decision point, they can choose only one action. When they observe the rewards for an action, they have no way of knowing whether a different action would have produced higher rewards. They, too, must learn from experience.
+  </p>
 
-    <!-- Estimating value -->
-<!--     <p>
-      After making an important decision, we often ask ourselves, "What might have happened if we had acted differently?" One of the most beautiful and infuriating parts of life is that there is no answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened. Sometimes, though, these guesses can be quite good. They allow us to make good choices, even when we are placed in situations we have been in before.
-    </p> -->
+  <p>
+    Monte Carlo Learning and Temporal Difference (TD) Learning are two methods that agents use to do this. Sometimes we think of TD as a practical approximation of Monte Carlo, but there is more to the story. TD can outperform Monte Carlo by a large margin, something that we wouldn’t expect from an approximation.
+  </p>
 
-<!--     <p>
-      The dilemma of how to choose among several actions without being <i>certain</i> about their consequences is central to reinforcement learning. In this article, we consider several ways an agent can learn from experience. We interpret experience as a series of paths through an environmnet and then show how Temporal Difference (TD) methods, unlike Monte Carlo methods, merges these paths where they intersect to increase statistical efficiency.
-    </p> -->
+    <center> <p> Figure: TD outperforming MC? </p> </center>
 
-    <p>
-      After making an important decision, we often ask ourselves, "What might have happened if I had acted differently?" One of the most beautiful but daunting parts of life is that there is no way to answer to this question. The best we can do is use our past experiences to guess what <i>might</i> have happened...
-    </p>
+  <p>
+    In this post, we introduce a different intuition. We encourage the reader to think of experience as a series of overlapping paths. Then we show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. When TD merges the right paths, it makes huge gains over Monte Carlo. When it merges the wrong paths, it ends up doing worse.
+  </p>
 
-    <p>
-      Reinforcement learning (RL) agents face the same issue: they cannot choose more than one action at a time. They, too, can never know the relative outcomes of two actions. In order to learn from experience, RL agents maintain a concept of state. States summarize the agent-environment relationship and tend to recur over time. States allow agents to draw analogies between past and future decisions, thus making better decisions over time.
-
-    <p>
-      Monte Carlo (MC) Learning and Temporal Difference (TD) Learning are two methods that RL agents use to do this. Sometimes we think of TD learning as a practical approximation of MC. But there is more to the story: TD methods sometimes outperform MC methods by a large margin, something that we wouldn't expect from an approximation. In this post, we introduce an intuition based on the idea that an agent's experience is a set of paths. We show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. Merging paths lets TD outperform Monte Carlo so long as the intersections are well-chosen. Otherwise, TD ends up being worse than Monte Carlo.
-    </p>
 
     <h3>The Reinforcement Learning Paradigm</h3>
 
     <p>
-      The reinforcement learning paradigm begins with an agent and an environment. The agent's goal is to maximize its rewards by interacting with the environmnet. The poor environment responds with rewards and asks nothing in return.
+      We begin our story with the reinforcement learning paradigm. An agent interacts with an environment over the course of one or more discrete time steps. At each time step, $$t$$, the agent gets to make an observation $$o_t$$ of the environment. Combining this observation with previous experience, the agent computes its state $$s_t$$. Then, the agent uses its <b>policy</b> $$\pi$$ to choose action $$a_t$$ with probability $$\pi(s,a)$$.
     </p>
     <p>
-      Interactions between agent and environment happen over one or more discrete intervals of time, or "time steps." At each time step $$t$$, the agent makes an observation $$o_t$$ of the environment and combines it with previous experience to compute a state $$s_t$$. Then, the agent uses past experiences with similar states to select an action $$a_t$$. The environment responds with a reward $$r_{t+1}$$ and a new observation $$o_{t+1}$$, and the cycle repeats.
-    </p>
-
+      Each time the agent acts, the environment responds with a reward, $$r_{t+1}$$ and a new observation $$o_{t+1}$$, and the cycle repeats. The agent's goal, of course, is to maximize the amount of rewards it receives from the environment over time.
+    </p> 
+<!-- improve transition -->
     <p>
-      For state $$s$$, we consider an agent that selects action $$a$$ with probability $$\pi(s,a)$$. We call $$\pi$$ the agent's <b>policy function</b>. When the agent uses its policy to interact with the environment, it gains <b>experience</b> $$E$$. You can think of $$E$$ as the som of the agent's interactions with the environment, where each interaction is a $$(s,a,r)$$ tuple. When the agent interacts with the environment over the course of several time steps, we can think of the experience as being made up of a "path" of these tuples.
+      When the agent uses its policy to interact with the environment, it gains <b>experience</b> $$E$$. You can think of $$E$$ as the som of the agent's interactions with the environment, where each interaction is a $$(s,a,r)$$ tuple. When the agent interacts with the environment over the course of several time steps, we can think of the experience as being made up of a "path" of these tuples.
     </p>
 
     <figure id="figure-concepts" class="subgrid" style="margin-top: 0;">
@@ -197,7 +194,7 @@
     </p>
 
     <p>
-      <b>THE WRITING AFTER THIS IS DEPRECATED.</b> I need to make it sound better.
+      <b>THE WRITING AFTER THIS IS DEPRECATED.</b> It needs to be re-worked
     </p>
 
     <p>
