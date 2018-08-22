@@ -96,8 +96,6 @@
     Monte Carlo Learning and Temporal Difference (TD) Learning are two methods that agents use to do this. Sometimes we think of TD as a practical approximation of Monte Carlo, but there is more to the story. TD can outperform Monte Carlo by a large margin, something that we wouldn’t expect of an approximation.
   </p>
 
-    <center> <p> Figure: TD outperforming MC? </p> </center>
-
   <p>
     In this post, we introduce a different intuition. We encourage the reader to think of experience as a series of overlapping paths. Then we show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. When TD merges the right paths, it makes huge gains over Monte Carlo. When it merges the wrong paths, it ends up doing worse.
   </p>
@@ -118,68 +116,69 @@
     </figure>
 
     <p>
-      The idea that we are maximizing long-term rewards is important. We’d like our agent to balance short-term rewards against long-term ones. A In the classic psychology experiment which offers, “one marshmallow now or two later” we’d like an agent that chooses the second option. But receiving one marshmallow now is probably better than receiving one marshmallow later. We would also like our agent to “discount” rewards in proportion to how much time it takes to earn them. The quantity that combines these two ideas is the “sum of time-discounted rewards,” or return, of an agent
+      <b>Measuring long-term reward.</b> One of the nuances of this setup is measuring long-term reward. If the agent forgoes some short term rewards in order to "set itself up" for large rewards later on, we should encourage that decision. But we'd like to maintain a slight bias towards short-term rewards: a unit of reward now should be worth more than a unit of reward far in the future. A quantity which captures both of these ideas is the time-discounted sum or rewards, or return:
     </p>
 
     <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
 
     <p>
-      Depending on context, an agent can expect to receive a certain amount of return. We call this the value of the context. When the context is simply the agent’s state, we measure value with a state-value function. Sometimes an agent has also selected an action; we measure the value of this context with an action-value function.
+      Now suppose we want to know how much long term reward an agent can <i>expect</i> to receive for being in a particular state. We can simply take the expectation value of all the returns the agent has received when in that state. We call this the value $$V(s)$$ of state $$s$$.
     </p>
 
+    <p>
+      <b>Two nice properties of value.</b> Value ends up being an immensely useful quantity. First, we can measure the value of other contexts, apart from states. Some contexts we'll touch on in this article include state-action pairs (denoted $$Q(s,a)$$), perturbed policies, and partial states. The second nice property of value is that whenever an agent does something to increase its value, it effectively increases its expected long-term reward. In other words, an agent can arrive at a strong long-term policy just by following a local value gradient.
+    </p>
 
     <h2>Policy Value Iteration</h2>
     <br>
 
-        <h3>Example: Cliff walking</h3>
-    <br>
-
-    <figure id="figure-cliff-walking" class="subgrid" style="margin-top: 0;">
-      <img style="width: 100%; margin-top: 15px;" src="mockups/cliff-walking.png"/>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
-        Cliff walking.
-      </figcaption>
-    </figure>
-<!--     <figure class="l-page">
-    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
-    </figure>
-    <script> cliff_vis(d3.select("#cliff_iter")); </script> -->
+    <p>
+      In this section we'll see how an agent can use value estimates to improve its policy. Let's start of with a simple example in which the agent needs to learn how to walk along a cliff without falling off.
+    </p>
 
     <p>
-      You may have noticed that there is a natural cycle from an agent's policy to experience to value estimate, and back again. As the agent follows this cycle, its policy improves, its experience increases, and its value estimates become more precise. The agent "grows up." This is a process called <i>policy value iteration</i>
-        <d-footnote>
-          Sometimes people lump experience into the policy step, hence "policy value iteration" rather than "policy experience value iteration." But we chose not to do this because the "paths" interpretation of experience is important to our thesis.
-        </d-footnote>
+      <b>Example: Cliff Walking.</b> Welcome to the cliff walking environment! Our goal is to reach the destination (blue square, +1 reward) and avoid falling off of the cliff (red rectangle, -1 reward). The agent's initial policy is to move into any of the neighboring states with equal probability.
+    </p>
+
+    <figure class="l-page">
+    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+    
+    <center>
+      <figcaption class="l-body" style="width:400px;" >
+        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
+        <b>Cliff walking:</b>
+          <li>Step 0: When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.</li>
+          <li>Step 1: Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination. </li>
+          <li>Step 2: Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value. </li>
+          <li>Step 3: An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.</li>
+      </figcaption>
+    </center>
+    </figure>
+    <script> cliff_vis(d3.select("#cliff_iter")); </script>
+
+    <p>
+      <b>Experience.</b> For a simple environment like cliff walking, we can compute value estimates analytically. In more complicated environments, though, this is impossible. Instead, the agent must run a its policy stochastically, gain experience, and then use its experience to make value estimates.
     </p>
 
     <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
       <img style="width: 100%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
       <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
+        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
         Policy value iteration.
       </figcaption>
     </figure>
 
     <p>
-      You might imagine how a small difference in the way an agent estimates value might have big consequences for its policy update, future experience, and the way it updates its value estimates the next time.
+      <b>Policy Value Iteration.</b> The cycle that takes the agent from policy, to experience, to value estimate, and back again is called policy value iteration
+      <d-footnote>
+        People usually lump experience into the policy step, hence "policy value iteration" instead of "policy experience value iteration." But we chose not to do this because the "paths" interpretation of experience is important to our thesis.
+      </d-footnote>.
+      As the cycle runs, the agent's policy improves, its experience increases, and its value estimates become more precise. The agent "grows up."
     </p>
 
-    <!-- <p>
-      <b>Running the policy.</b> This is how the agent updates its experience. Some algorithms do this for only one time step, whereas others will run an entire episode or batch of episodes. Some algorithms keep a replay memory of all the agent's training experience whereas others do not store experience at all.
-    </p>
     <p>
-      <b>Value learning.</b> In this step, the agent updates its value estimate.
+      You might imagine how a small difference in the way an agent estimates value might have big consequences for its policy update, future experience, and the way it updates its value estimates the next time.
     </p>
-      <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
-    <p>
-      The most obvious way to estimate value from returns is just to take the average:.
-      <center><p>$$\hat V(s_i) = \frac{1}{N} \sum_{s'=s} R_{s'}$$ </p> </center>
-      This is just Monte Carlo value estimation. The surprising fact is that we can do better than this.
-    </p>
-    <p>
-      <b>Policy update.</b> Once the agent has refined its value estimate, ...
-    </p> -->
 
 
     <h2>Aside: Function approximation</h2>
@@ -198,7 +197,7 @@
         <img style="width: 80%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
       </center>
       <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">4</a>:
+        <a href="#figure-rgba-diagram" class="figure-number">6</a>:
         Monte Carlo Learning vs. Temporal Difference Learning.
       </figcaption>
     </figure>
