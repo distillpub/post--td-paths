@@ -76,11 +76,17 @@
 <d-title>
   <h1>An Intersecting Paths Perspective on RL</h1>
   <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
+
   <figure class="l-page">
+    <img style="width: 100%;" src="mockups/hero.png"/>
+  </figure>
+</d-title>
+
+<!--   <figure class="l-page">
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
   </figure>
   <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
-</d-title>
+</d-title> -->
 
 <d-article>
 
@@ -107,26 +113,79 @@
       Our story begins with an agent and an environment. The agent gets to observe, interact with, and receive rewards from the environment. As it explores and gains experience, it tries to make sense of what actions led to the highest long-term reward.
     </p>
 
-    <figure id="figure-concepts" class="subgrid" style="margin-top: 0;">
-      <img style="width: 100%; margin-top: 15px;" src="mockups/concepts.png"/>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">1</a>:
-        Introduce policy, experience, and value functions in the captions beneath these figures. Also touch on the concept of a state.
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+
+        <img style="width: 80%; margin-top: 15px; " src="mockups/concepts.png"/>
+      <figcaption class="l-body" style="width: 100%;>
+        <a href="#figure-rgba-diagram" class="figure-number">1</a>: Key Concepts
+          <div class="eq-grid" style="grid-gap: 1%">
+            <div style="grid-row: 1; grid-column: 1;">
+              <b>Policy.</b> When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.
+            </div>
+            <div style="grid-row: 1; grid-column: 2;">
+              <b>Experience.</b> Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination.
+            </div>
+            <div style="grid-row: 1; grid-column: 3;">
+              <b>State-value function.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value.
+          </div>
+            <div style="grid-row: 1; grid-column: 4;">
+              <b>Action-value function.</b> An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.
+            </div>
+          </div>
       </figcaption>
+
+      </center>
     </figure>
 
     <p>
-      <b>Measuring long-term reward.</b> One of the nuances of this setup is measuring long-term reward. If the agent forgoes some short term rewards in order to "set itself up" for large rewards later on, we should encourage that decision. But we'd like to maintain a slight bias towards short-term rewards: a unit of reward now should be worth more than a unit of reward far in the future. A quantity which captures both of these ideas is the time-discounted sum or rewards, or return:
+      <b>Measuring long-term reward.</b> One of the nuances of this setup is measuring long-term reward. We often use a quantity called the time-discounted sum of rewards, or simply <i>the return</i>. Since the return is a sum over future rewards, it reinforces actions that lead not only to rewards at the next time step, but also to rewards over the course of hundreds or even thousands of time steps. This encourages the agent to think long term even without an explicit planning mechanism.
     </p>
 
     <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
 
     <p>
-      Now suppose we want to know how much long term reward an agent can <i>expect</i> to receive for being in a particular state. We can simply take the expectation value of all the returns the agent has received when in that state. We call this the value $$V(s)$$ of state $$s$$.
+      The other thing to notice about the return is that rewards received $$k$$ time steps in the future are $$\gamma^{k-1}$$ times what they would be worth if the agent received them immediately. By setting the discount factor $$\gamma$$ to values less than one, we bias the agent towards earning more immediate rewards.
     </p>
 
     <p>
-      <b>Two nice properties of value.</b> Value ends up being an immensely useful quantity. First, we can measure the value of other contexts, apart from states. Some contexts we'll touch on in this article include state-action pairs (denoted $$Q(s,a)$$), perturbed policies, and partial states. The second nice property of value is that whenever an agent does something to increase its value, it effectively increases its expected long-term reward. In other words, an agent can arrive at a strong long-term policy just by following a local value gradient.
+      <b>From reward to value.</b> Most of the time, we are not interested in how much return an agent received after passing through a particular state; we'd rather know how much the agent can expect to receive, in general, after passing through that state. We call this quantity the value of the state and measure it using a <i>state-value</i> function $$V(s)$$.
+    </p>
+
+    <p>
+<!--       <b>Why value matters.</b> We can measure the value of other contexts, apart from states. Some contexts we'll touch on in this article include perturbed policies, partial states, and state-action pairs ($$Q$$-values). The second nice property of value is that Whenever an agent does something to increase its value, it increases its expected long-term reward. In other words, an agent can arrive at a strong long-term policy just by following a local value gradient. -->
+
+      The remarkable thing about value is that an agent can maximize its long-term reward just by following local gradients of $$V(s)$$. In other words, the optimal policy of an agent is to choose actions which maximize $$V(s)$$ at every step. Any long-term planning that the agent might need to do gets integrated into our value function when we sum over discounted rewards.
+    </p>
+
+    <h3>Aside: Function approximation</h3>
+
+    <p>
+      Function approximators are important to this post and appear often enough that they deserve their own notation. We will write them as functions with hats and update them according to $$\hat f(x)_{k} ~\hookleftarrow~ y$$. This notation makes things like running averages look much more benign.
+    </p>
+
+    <div class="eq-grid">
+      <div style="grid-row: 1; grid-column: 1;"><d-math> V_k ~~ </d-math></div>
+      <div style="grid-row: 1; grid-column: 2;"><d-math> =~~ \frac{1}{k} \sum_{i=0}^{k} R_i </d-math></div>
+      <div style="grid-row: 2; grid-column: 2;"><d-math> =~~ V_{k-1} + \alpha [R_{k-1} - V_{k-1}] ~~~~</d-math></div>
+      <div style="grid-row: 3; grid-column: 1;"><d-math> V_k ~~ </d-math></div>
+      <div style="grid-row: 3; grid-column: 2;"><d-math> \hookleftarrow~~ R_k </d-math></div>
+     
+      <figcaption style="grid-row: 1; grid-column: 3; max-width:300px;">
+        Averages are usually expressed as a sum.
+      </figcaption>
+
+      <figcaption style="grid-row: 2; grid-column: 3; max-width:300px;">
+        Sometimes it makes more sense to keep a running average.
+      </figcaption>
+
+      <figcaption style="grid-row: 3; grid-column: 3; max-width:300px;">
+        Our notation for a running average update.
+      </figcaption>
+    </div>
+
+    <p>
+      One note on running averages is that we need to set $$\alpha=\frac{1}{k}$$ if we want to compute an <i>exact</i> running average. In practice, we can usually obtain the same empirical results by letting $$\alpha$$ be a small constant.
     </p>
 
     <h2>Policy Value Iteration</h2>
@@ -144,29 +203,27 @@
     <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
     
     <center>
-      <figcaption class="l-body" style="width:400px;" >
-        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
-        <b>Cliff walking:</b>
-          <li>Step 0: When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.</li>
-          <li>Step 1: Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination. </li>
-          <li>Step 2: Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value. </li>
-          <li>Step 3: An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.</li>
+      <figcaption class="l-body" style="width:100%;" >
+        <a href="#figure-rgba-diagram" class="figure-number">2</a>: Cliff Walking
+        <div class="eq-grid" style="grid-gap: 1%">
+          <div style="grid-row: 1; grid-column: 1;">
+            <b>Step 0.</b> When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.
+          </div>
+          <div style="grid-row: 1; grid-column: 2;">
+            <b>Step 1.</b> Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination.
+          </div>
+          <div style="grid-row: 1; grid-column: 3;">
+            <b>Step 2.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value.
+        </div>
+          <div style="grid-row: 1; grid-column: 4;">
+            <b>Step 3.</b> An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.
+          </div>
+        </div>
+      </div>
       </figcaption>
     </center>
     </figure>
     <script> cliff_vis(d3.select("#cliff_iter")); </script>
-
-    <p>
-      <b>Experience.</b> For a simple environment like cliff walking, we can compute value estimates analytically. In more complicated environments, though, this is impossible. Instead, the agent must run a its policy stochastically, gain experience, and then use its experience to make value estimates.
-    </p>
-
-    <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
-      <img style="width: 100%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
-        Policy value iteration.
-      </figcaption>
-    </figure>
 
     <p>
       <b>Policy Value Iteration.</b> The cycle that takes the agent from policy, to experience, to value estimate, and back again is called policy value iteration
@@ -176,25 +233,27 @@
       As the cycle runs, the agent's policy improves, its experience increases, and its value estimates become more precise. The agent "grows up."
     </p>
 
+    <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
+      <img style="width: 100%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
+        Policy value iteration.
+        <br>
+         <b>Experience.</b> For a simple environment like cliff walking, we can compute value estimates analytically. In more complicated environments, though, this is impossible. Instead, the agent must run a its policy stochastically, gain experience, and then use its experience to make value estimates.
+      </figcaption>
+    </figure>
+
     <p>
       You might imagine how a small difference in the way an agent estimates value might have big consequences for its policy update, future experience, and the way it updates its value estimates the next time.
     </p>
 
 
-    <h2>Aside: Function approximation</h2>
-    <ul>
-      <li>Evaluate: $$~~~f(x)$$</li>
-      <li>Update: $$~~~~~f(x) ~\hookleftarrow~ y$$</li>
-    </ul>
-
-
-
     <h2>Merging paths to beat Monte Carlo</h2>
     <br>
     
-    <figure id="figure-mc-vs-td" class="subgrid" style="margin-top: 0;">
+    <figure id="figure-mc-td" class="subgrid" style="margin-top: 0;">
       <center>
-        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-vs-td.png"/>
+        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-td.png"/>
       </center>
       <figcaption class="l-body">
         <a href="#figure-rgba-diagram" class="figure-number">6</a>:
@@ -206,11 +265,21 @@
     <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
   
 
-    
-    <figure class="l-page">
+
+    <figure id="figure-mc-td-animation" class="subgrid" style="margin-top: 0;">
+      <center>
+        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-td-animation.png"/>
+      </center>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">6</a>:
+        Animation.
+      </figcaption>
+    </figure>
+
+<!--     <figure class="l-page">
     <div id="compare2" style="width:650px; height:500px; margin:auto; position:relative;"> </div>
     </figure>
-    <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script>
+    <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script> -->
 
 
 
