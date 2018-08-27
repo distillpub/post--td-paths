@@ -77,16 +77,16 @@
   <h1>An Intersecting Paths Perspective on RL</h1>
   <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
 
-  <figure class="l-page">
+<!--   <figure class="l-page">
     <img style="width: 100%;" src="mockups/hero.png"/>
   </figure>
-</d-title>
+</d-title> -->
 
-<!--   <figure class="l-page">
+  <figure class="l-page">
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
   </figure>
   <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
-</d-title> -->
+</d-title>
 
 <d-article>
 
@@ -121,16 +121,16 @@
         <a href="#figure-rgba-diagram" class="figure-number">1</a>: Key Concepts
           <div class="eq-grid" style="grid-gap: 1%">
             <div style="grid-row: 1; grid-column: 1;">
-              <b>Policy.</b> When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.
+              <b>Policy.</b> An agent's policy tells it how to interact with the environment. The policy is a function, which we denote $$\pi(s,a)$$, and which tells us the probability the agent will select action $$a$$ when it is in state $$s$$. <!-- As you might guess, $$\sum_a \pi(s,a)=1$$ -->
             </div>
             <div style="grid-row: 1; grid-column: 2;">
-              <b>Experience.</b> Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination.
+              <b>Experience.</b> An agent's experience stores the entire history of its interactions with the environment. Each interaction can be summarized as a state-action-reward tuple $$(s,a,r)$$. The agent's experience is an ordered list of these interactions.
             </div>
             <div style="grid-row: 1; grid-column: 3;">
-              <b>State-value function.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value.
+              <b>State-value function.</b> Value measures <i>how much reward an agent can expect to receive in the long term</i>, given some context. The state-value $$V(s)$$ measures value in the context of an agent's state.
           </div>
             <div style="grid-row: 1; grid-column: 4;">
-              <b>Action-value function.</b> An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.
+              <b>Action-value function.</b> An action-value function, or $$Q$$-function, is a bit more specific than a state-value function. It measures the value of each action in a state. Being able to compare actions helps us choose better policies.
             </div>
           </div>
       </figcaption>
@@ -149,13 +149,11 @@
     </p>
 
     <p>
-      <b>From reward to value.</b> Most of the time, we are not interested in how much return an agent received after passing through a particular state; we'd rather know how much the agent can expect to receive, in general, after passing through that state. We call this quantity the value of the state and measure it using a <i>state-value</i> function $$V(s)$$.
+      <b>From reward to value.</b> Most of the time, we are not interested in how much return an agent received after passing through a particular state; we'd rather know how much the agent can expect to receive <i>in general</i> after passing through that state. We call this quantity the value of the state. We measure a states value using the state-value function $$V(s)$$.
     </p>
 
     <p>
-<!--       <b>Why value matters.</b> We can measure the value of other contexts, apart from states. Some contexts we'll touch on in this article include perturbed policies, partial states, and state-action pairs ($$Q$$-values). The second nice property of value is that Whenever an agent does something to increase its value, it increases its expected long-term reward. In other words, an agent can arrive at a strong long-term policy just by following a local value gradient. -->
-
-      The remarkable thing about value is that an agent can maximize its long-term reward just by following local gradients of $$V(s)$$. In other words, the optimal policy of an agent is to choose actions which maximize $$V(s)$$ at every step. Any long-term planning that the agent might need to do gets integrated into our value function when we sum over discounted rewards.
+      The remarkable thing about value is that an agent can maximize its long-term reward just by following local gradients of $$V(s)$$. In other words, the optimal policy of an agent is to choose actions which maximize $$V(s)$$ at every step. Any long-term planning gets integrated into our value function when we compute the return!
     </p>
 
     <h3>Aside: Function approximation</h3>
@@ -216,7 +214,7 @@
             <b>Step 2.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value.
         </div>
           <div style="grid-row: 1; grid-column: 4;">
-            <b>Step 3.</b> An optimal policy. It moves only upward and rightward and avoids transitions that take it over the cliff.
+            <b>Step 3.</b> An optimal policy. The agent moves only upward and rightward and avoids transitions that take it over the cliff.
           </div>
         </div>
       </div>
