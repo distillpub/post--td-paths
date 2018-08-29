@@ -27,7 +27,7 @@
 
 <d-front-matter>
   <script type="text/json">{
-  "title": "An Intersecting Paths Perspective on RL",
+  "title": "The Paths Perspective on Reinforcement Learning",
   "description": "",
   "password": "td",
   "authors": [
@@ -74,7 +74,7 @@
 </style>
 
 <d-title>
-  <h1>An Intersecting Paths Perspective on RL</h1>
+  <h1>The Paths Perspective on Reinforcement Learning</h1>
   <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
 
 <!--   <figure class="l-page">
@@ -91,34 +91,148 @@
 <d-article>
 
   <p>
-    After making an important decision, we often ask ourselves: “What would have happened if I had acted differently?” One of the most beautiful and daunting aspects of life is that we can never know. The best we can do is consider previous experience and make a guess…
+    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience, where it still has exciting scientific implications. But its implications reach further. Reinforcement learning has also become a core idea in machine learning, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
   </p>
 
   <p>
-    Reinforcement learning agents face the same challenge. At each decision point, they can choose only one action. When they observe the rewards for an action, they have no way of knowing whether a different action would have produced higher rewards. They, too, must learn from experience.
+    Deep Reinforcement Learning (deep RL) agents are of particular interest. They can master a broad range of game-playing and continuous control tasks, from Go to Dota to robotic manipulation with the same underlying methods. Based on these promising results, many researchers believe that deep RL has a bright future.
   </p>
 
   <p>
-    Monte Carlo Learning and Temporal Difference (TD) Learning are two methods that agents use to do this. Sometimes we think of TD as a practical approximation of Monte Carlo, but there is more to the story. TD can outperform Monte Carlo by a large margin, something that we wouldn’t expect of an approximation.
+    But in spite of the excitement around RL, a fundamental problem remains: RL agents need <i>much more</i> experience than humans to learn. One of the most important research questions in the field is how to get agents to squeeze more information out of less data.
   </p>
 
   <p>
-    In this post, we introduce a different intuition. We encourage the reader to think of experience as a series of overlapping paths. Then we show that TD methods merge these paths for greater statistical efficiency whereas MC methods keep them separate. When TD merges the right paths, it makes huge gains over Monte Carlo. When it merges the wrong paths, it ends up doing worse.
+    In this paper, we use a paths perspective on reinforcement learning to understand some key approaches to making RL more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is important as well. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient. In particular:
+    <li>
+      We'll show how Temporal Difference (TD) methods merge paths at intersections for greater statistical efficiency. This makes them equal or better than Monte Carlo methods in tabular agents!
+    </li>
+    <li>
+      We'll show how $$Q$$-values let us re-weight paths to keep an agent's experience in sync with a changing policy.
+    </li>
+    <li>
+      We'll show how state approximation merges nearby paths. When it merges the right paths, there are enormous benefits. When it merges the wrong ones, there are serious problems.
+    </li>
+  </p>
+
+  <p>
+    In a way, information about how paths relate to one another is just as important about <i>where</i> they lead. While much of deep RL focuses on how to gather more, or better experience, we argue that agents should also be designed to learn more from the experience they have.
   </p>
 
 
-    <h3>The Reinforcement Learning Paradigm</h3>
+
+
+
+    <h2>Background</h2>
 
     <p>
-      Our story begins with an agent and an environment. The agent gets to observe, interact with, and receive rewards from the environment. As it explores and gains experience, it tries to make sense of what actions led to the highest long-term reward.
+      Before diving into the paths perspective on RL, we will review the fundamental concepts of reinforcement learning by training an agent to walk along a cliff. The environment we'll use is called a Gridworld. Gridworlds are a common way to learn about RL because they are small, easy to visualize, and still communicate important ideas. We'll use them a fair bit in this post!
+    </p>
+
+    <figure id="fig-cliff-walking-setup" class="subgrid" style="margin-top: 0;">
+      <center>
+        <img style="width: 30%; margin-top: 15px;" src="figures/cliff-walking-setup.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">1</a>:
+        Cliff walking setup.
+      </figcaption>
+      </center>
+    </figure>
+
+    <p>
+      The Cliff Walking Gridworld is shown in Figure 1. The agent's goal is to find its way to the destination (blue square, +1 reward) without falling off the cliff (red rectangle, -1 reward). Each gray square represents a different state.
+    </p>
+
+    <p>
+      <b>Policy and value.</b> The agent gets to move from state to state by choosing an action (denoted by the dark gray triangles). The actions are shaded according to the probability that the agent will choose them. We write this probability as $$\pi(s,a)$$ where $$s$$ is a state (one of the light gray squares) and $$a$$ is an action (one of the gray triangles within that square). We call the function $$\pi$$ the agent's policy, since it tells us what the agent will do in a given state.
+    </p>
+
+    <p>
+      We also need to introduce the concept of <i>value</i>. If you peek ahead to Figure 2, you'll see that value is denoted as red and blue circles of various shades. Every state gets a value estimate, which we estimate using a state-value function $$V^{\pi}(s)$$. The value function measures how much long-term reward the agent can expect to receive, given that it is in state $$s$$ and follows policy $$\pi$$.
+    </p>
+
+    <p>
+      <b>Aside: return.</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that will maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term! We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $$R$$.
+    </p>
+
+    <center><p> $$R = \sum_t \gamma^t t_t  \quad \quad (1) $$ </p></center>
+
+    <p>
+      The idea of the return is to sum over all the rewards an agent receives in the future and discount each one by a factor of $$\gamma^{k-1}$$. The summation encourages the agent to think long term without an explicit planning mechanism; the most valuable actions are the ones that "set the agent up" for long term rewards. The discount factor $$\gamma$$ biases the agent towards earning more immediate rewards.
+    </p>
+
+    <p>
+      <b>Measuring value.</b> Now that we know how to measure long-term reward, we can talk about value. The value of a state is equal to the expectation over all the returns which correspond to that state, as shown in Equation 2. Instead of talking about what return an agent received after passing through a state once, the value function measures how much return the agent will receive after passing though a state <i>on average</i>.
+    </p>
+
+    <center><p> $$V^{\pi}(s) = \mathbb{E}(R_{s'}|s'=s) \quad \quad (2)$$ </p></center>
+
+    <p>
+      The remarkable thing about value is that an agent can maximize its long-term reward just by following local gradients of $$V^{\pi}(s)$$. In other words, the optimal policy of an agent is to choose actions which maximize $$V^{\pi}(s)$$ at every time step. Any long-term planning gets integrated into our value function when we compute the return!
+    </p>
+
+    <p>
+      <b>Learning to Cliff Walk.</b> Now we have all the ingredients we need to teach an agent to cliff walk. The first thing to notice is that, given a policy, we can collect experience and use it to estimate the value function. When we have learned a value function, we can use it to choose a better policy (one which always moves the agent to higher-value states). Look at Figure 2 to see this process in action.
+    </p>
+
+  <figure class="l-page">
+    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+    
+    <center>
+      <figcaption class="l-body" style="width:100%;" >
+        <a href="#figure-rgba-diagram" class="figure-number">2</a>: Cliff Walking
+
+        <div class="eq-grid" style="grid-gap: 1%">
+          <div style="grid-row: 1; grid-column: 1;">
+            <b>Step 0.</b> When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.
+          </div>
+          <div style="grid-row: 1; grid-column: 2;">
+            <b>Step 1.</b> Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination.
+          </div>
+          <div style="grid-row: 1; grid-column: 3;">
+            <b>Step 2.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update 2 reveals that these transitions are sending the agent to states of slightly lower value.
+        </div>
+          <div style="grid-row: 1; grid-column: 4;">
+            <b>Step 3.</b> An optimal policy. The agent moves only upward and rightward and avoids transitions that take it over the cliff.
+          </div>
+        </div>
+
+      </figcaption>
+    </center>
+
+    </figure>
+    <script> cliff_vis(d3.select("#cliff_iter")); </script>
+
+
+    <p>
+      <b>Policy Value Iteration.</b> A key takeaway of Figure 2 is that we can find a policy that maximizes an agent's return simply by alternating between value estimation and policy improvement. This is called <i>policy value iteration</i> and it works for any environment
+      <d-footnote>Assuming the Markov property holds.</d-footnote>.
+    </p>
+
+    <p>
+      But the most interesting part of policy value iteration is neither the value function nor the policy function. It's the experience. In fact, we believe it's better to visualize policy value iteration as a cycle between three steps: collecting experience, updating the value estimate, and updating the policy, as in Figure 3. Experience is important because it's the main bottleneck in policy value iteration; if we were able to make better value and policy updates from less experience, RL would be far better than it is!
+    </p>
+
+    <figure id="fig-policy-value-iteration" class="subgrid" style="margin-top: 0;">
+      <center>
+        <img style="width: 90%; margin-top: 15px;" src="figures/policy-value-iteration.png"/>
+      <figcaption class="l-body">
+        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
+        Policy value iteration. Describe the cycle in a bit more detail here.
+      </figcaption>
+      </center>
+    </figure>
+
+    <p>
+      <b>Key Concepts.</b> At this point, we have covered all of the background in reinforcement learning that we'll need for this post. The key concepts to remember are policy, experience, state-value functions, and action-value functions. Figure 4 summarizes these ideas. After a quick aside about function approximators, we will be ready to dive into the paths perspective on reinforcement learning.
     </p>
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
 
-        <img style="width: 80%; margin-top: 15px; " src="mockups/concepts.png"/>
+        <img style="width: 80%; margin-top: 15px; " src="figures/concepts.png"/>
       <figcaption class="l-body" style="width: 100%;>
-        <a href="#figure-rgba-diagram" class="figure-number">1</a>: Key Concepts
+        <a href="#figure-rgba-diagram" class="figure-number">4</a>: Key Concepts
           <div class="eq-grid" style="grid-gap: 1%">
             <div style="grid-row: 1; grid-column: 1;">
               <b>Policy.</b> An agent's policy tells it how to interact with the environment. The policy is a function, which we denote $$\pi(s,a)$$, and which tells us the probability the agent will select action $$a$$ when it is in state $$s$$. <!-- As you might guess, $$\sum_a \pi(s,a)=1$$ -->
@@ -130,7 +244,8 @@
               <b>State-value function.</b> Value measures <i>how much reward an agent can expect to receive in the long term</i>, given some context. The state-value $$V(s)$$ measures value in the context of an agent's state.
           </div>
             <div style="grid-row: 1; grid-column: 4;">
-              <b>Action-value function.</b> An action-value function, or $$Q$$-function, is a bit more specific than a state-value function. It measures the value of each action in a state. Being able to compare actions helps us choose better policies.
+              <b>Action-value function.</b> An action-value function, or $$Q$$-function, is a bit more specific than a state-value function. It measures the value of each action in a state. Being able to compare actions helps us choose better policies.  More text in the html comments.
+              <!-- So far, we have only used value functions in the context of a particular state ($V(s)$. It turns out that there are value functions for other contexts as well. For example, we can measure the value of a state \textit{and} an action using an action-value function denoted $Q(s,a)$. The action-value function is interesting because it lets the agent compare the value of actions to one another. Finding an optimal policy becomes very simple: the agent just chooses the action associated with the maximum $Q$-value. -->
             </div>
           </div>
       </figcaption>
@@ -139,27 +254,7 @@
     </figure>
 
     <p>
-      <b>Measuring long-term reward.</b> One of the nuances of this setup is measuring long-term reward. We often use a quantity called the time-discounted sum of rewards, or simply <i>the return</i>. Since the return is a sum over future rewards, it reinforces actions that lead not only to rewards at the next time step, but also to rewards over the course of hundreds or even thousands of time steps. This encourages the agent to think long term even without an explicit planning mechanism.
-    </p>
-
-    <center><p>$$R = \sum_t \gamma^t r_t$$ </p> </center>
-
-    <p>
-      The other thing to notice about the return is that rewards received $$k$$ time steps in the future are $$\gamma^{k-1}$$ times what they would be worth if the agent received them immediately. By setting the discount factor $$\gamma$$ to values less than one, we bias the agent towards earning more immediate rewards.
-    </p>
-
-    <p>
-      <b>From reward to value.</b> Most of the time, we are not interested in how much return an agent received after passing through a particular state; we'd rather know how much the agent can expect to receive <i>in general</i> after passing through that state. We call this quantity the value of the state. We measure a states value using the state-value function $$V(s)$$.
-    </p>
-
-    <p>
-      The remarkable thing about value is that an agent can maximize its long-term reward just by following local gradients of $$V(s)$$. In other words, the optimal policy of an agent is to choose actions which maximize $$V(s)$$ at every step. Any long-term planning gets integrated into our value function when we compute the return!
-    </p>
-
-    <h3>Aside: Function approximation</h3>
-
-    <p>
-      Function approximators are important to this post and appear often enough that they deserve their own notation. We will write them as functions with hats and update them according to $$\hat f(x)_{k} ~\hookleftarrow~ y$$. This notation makes things like running averages look much more benign.
+      <b>Aside: function approximators.</b> It's important to note that the value function is almost always approximate. The way to make this approximation is to keeps a running average of $$V(s)$$ for every state $$s$$. Writing the update to a running average can be a bit hairy, so we'll use a shorthand called <i>function approximator notation</i> in this post. Equation 3 gives an example of how this notation works<d-footnote>For the running average to be exact, we need to let $$\alpha=\frac{1}{k}$$. We can achieve similar results in practice by setting $$\alpha$$ to a small constant</d-footnote>:
     </p>
 
     <div class="eq-grid">
@@ -178,132 +273,139 @@
       </figcaption>
 
       <figcaption style="grid-row: 3; grid-column: 3; max-width:300px;">
-        Our notation for a running average update.
+        Function approximator notation of running average.
       </figcaption>
     </div>
 
     <p>
-      One note on running averages is that we need to set $$\alpha=\frac{1}{k}$$ if we want to compute an <i>exact</i> running average. In practice, we can usually obtain the same empirical results by letting $$\alpha$$ be a small constant.
+       There are many types of function approximation aside from running averages. Neural networks, for example, are an example of highly nonlinear function approximator. In this post, assume that our notation refers to a running average unless we specify otherwise.
     </p>
 
-    <h2>Policy Value Iteration</h2>
-    <br>
+
+
+
+
+    <h2>The Paths Perspective</h2>
 
     <p>
-      In this section we'll see how an agent can use value estimates to improve its policy. Let's start of with a simple example in which the agent needs to learn how to walk along a cliff without falling off.
+      Reinforcement learning literature often speaks of an agent's experience as a set of "trajectories" through state-space. These trajectories are often grouped together in batches: each item in the batch is a different trajectory. There are some practical advantages to doing this, but it obscures an important point: relationships <i>between</i> trajectories contain useful information!
     </p>
 
     <p>
-      <b>Example: Cliff Walking.</b> Welcome to the cliff walking environment! Our goal is to reach the destination (blue square, +1 reward) and avoid falling off of the cliff (red rectangle, -1 reward). The agent's initial policy is to move into any of the neighboring states with equal probability.
+      We think that using the term "paths" instead of "trajectories" provides a more flexible and accurate picture. Paths can intersect, overlap, and have different sizes relative to one another. Most importantly, it's easy to imagine a "network of paths", whereas a network of trajectories is less well-defined.
     </p>
 
-    <figure class="l-page">
-    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
-    
-    <center>
-      <figcaption class="l-body" style="width:100%;" >
-        <a href="#figure-rgba-diagram" class="figure-number">2</a>: Cliff Walking
-        <div class="eq-grid" style="grid-gap: 1%">
-          <div style="grid-row: 1; grid-column: 1;">
-            <b>Step 0.</b> When we start off with a completely random policy, the agent tends to fall off the cliff often. Thus the value estimate under this policy assigns low value to any state near the cliff.
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            <b>Step 1.</b> Having assigned low value to states near the cliff, the agent updates its policy in order to avoid those states. <!-- We may allow it to take an occasional random action, in which case it could still fall off the cliff, but this will happen only rarely. --> With a policy that avoids the cliff, the agent learns to assign higher value to actions that take it upwards and rightwards towards its destination.
-          </div>
-          <div style="grid-row: 1; grid-column: 3;">
-            <b>Step 2.</b> Almost there! The agent has not quite converged to an optimal policy, though, because the bottom row still has left-facing transitions. The value update #2 reveals that these transitions are sending the agent to states of slightly lower value.
-        </div>
-          <div style="grid-row: 1; grid-column: 4;">
-            <b>Step 3.</b> An optimal policy. The agent moves only upward and rightward and avoids transitions that take it over the cliff.
-          </div>
-        </div>
-      </div>
+    <p>
+      <b>Estimating value with paths.</b> As a concrete example of why the paths perspective is useful, let's take a closer look at value estimation. First we'll estimate value using Monte Carlo learning, which keeps paths separate and averages over them.
+    </p>
+
+    <p>
+      <b>Monte Carlo value estimation.</b> Let's return to Cliff World for a moment. A single path through Cliff World would look something like Figure 5a. Notice that the path is made up of discrete points; each has a different $$(s,a,r)$$ tuple. When we compute the agent's return, every point also gets a return $$R$$ associated with it.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 30%; margin-top: 15px; " src="figures/cliff-1path.jpg"/>
+        <img style="width: 30%; margin-top: 15px; " src="figures/cliff-2paths.jpg"/>
+      <figcaption class="l-body" style="width: 100%;">
+        <a href="#figure-rgba-diagram" class="figure-number">5</a>:
+        Experience as a set of paths through Cliff World.
       </figcaption>
-    </center>
-    </figure>
-    <script> cliff_vis(d3.select("#cliff_iter")); </script>
-
-    <p>
-      <b>Policy Value Iteration.</b> The cycle that takes the agent from policy, to experience, to value estimate, and back again is called policy value iteration
-      <d-footnote>
-        People usually lump experience into the policy step, hence "policy value iteration" instead of "policy experience value iteration." But we chose not to do this because the "paths" interpretation of experience is important to our thesis.
-      </d-footnote>.
-      As the cycle runs, the agent's policy improves, its experience increases, and its value estimates become more precise. The agent "grows up."
-    </p>
-
-    <figure id="figure-policy-value-iteration" class="subgrid" style="margin-top: 0;">
-      <img style="width: 100%; margin-top: 15px;" src="mockups/policy-value-iteration.png"/>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
-        Policy value iteration.
-        <br>
-         <b>Experience.</b> For a simple environment like cliff walking, we can compute value estimates analytically. In more complicated environments, though, this is impossible. Instead, the agent must run a its policy stochastically, gain experience, and then use its experience to make value estimates.
-      </figcaption>
+      </center>
     </figure>
 
     <p>
-      You might imagine how a small difference in the way an agent estimates value might have big consequences for its policy update, future experience, and the way it updates its value estimates the next time.
+      Now consider the two paths shown in Figure 5b and notice that they intersect at one of the states. There are two different returns associated with this point: one for the first path and one for the second. Since we defined value as the expected return of a state (see Equation 3), the value of the state where the two paths intersect is just the average of the two returns, $$V(s_{12})=\frac{1}{2}(R_1 + R_2)$$. As the number of returns increases, the average becomes a near-exact estimate of the state's value function.
     </p>
+
+    <center><p> $$V(s_t) \hookleftarrow R_t  \quad \quad (3) $$ </p></center>
+
+    <p>
+      We call this process Monte Carlo value estimation. Since it follows the exact definition of value, it is easy to assume that we cannot do any better than this. Surprisingly, we can!
+    </p>
+
+
+
 
 
     <h2>Merging paths to beat Monte Carlo</h2>
-    <br>
+
+    <p>
+      In this section, we will see how merging paths where they intersect can improve value estimation in a dramatic way. As we did earlier, we'll start with a simple example before diving into its implications.
+    </p>
+
+    <p>
+      <b>A GridWorld puzzle.</b> Let's imagine that our agent lives in a 3x3 GridWorld with deterministic rewards. The agent has already explored its environment a bit: the top row of Figure 6 summarizes its experience. Now the agent is exploring its world a fourth time, intent on earning the maximum possible reward. Which action should it take?
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 50%; margin-top: 15px; " src="figures/gridworld-puzzle.jpg"/>
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">6</a>:
+        A new 3x3 gridworld with three separate paths, and the beginning of a fourth. Using its three previous paths, the agent must decide whether to take a "down" or a "right" action. If the agent estimates value using Monte Carlo, it will take the "down" action whereas if it uses TD learning, it will take the "right" action.
+      </figcaption>
+      </center>
+    </figure>
+
+    <p>
+      Your intuitive answer is probably "left." This is indeed the best strategy. However, Monte Carlo value estimation will assign a higher value to the "right" action given the agent's experience. This is because when the agent took a "left" action in the middle state (path 2) it received $$+0$$ rewards. But when it took a "right" action (path 3) it earned $$+1$$ rewards. Based <i>only</i> on the paths that pass through the middle state, the agent should choose "right."
+    </p>
+
+    <p>
+      But this is a silly answer because moving "left" also takes the agent closer to the $$+10$$ reward in the bottom left square. The agent has already explored the route to the $$+10$$ reward, and it knows that the middle-left state is a high-reward state (letting $$\gamma=1$$, the value estimate on this state is $$V(s_{10}) = \frac{1}{2}(10 + 0) = 5$$). If only there was a way for the agent to access this information from the middle state...
+    </p>
+
+    <p>
+      <b>Temporal Difference (TD) value estimation.</b> Here's a solution to the GridWorld puzzle: let the agent build synthetic paths - routes it never took - from pieces of real paths. Now the agent can merge the first part of path 2 with the second part of path 1 (Figure 7). This "synthetic" path lets the agent assign high value to the "left" action in the center square.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 20%; margin-top: 15px; " src="figures/path-combo.jpg"/>
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">7</a>:
+        Combining paths 1 and 2.
+      </figcaption>
+      </center>
+    </figure>
+
+    <p>
+      What we've done, by merging paths, is let the upstream value of future states trickle backwards along paths that the agent never took. We can do this because the agent <i>could</i> have taken these paths. In other words, the agent has seen all the transitions shown in these paths; they just don't occur all in the same episode.
+    </p>
+
+    <center><p> $$V(s_t) \hookleftarrow r_t + \gamma V(s_{t+1})  \quad \quad (4) $$ </p></center>
+
+    <p>
+      This approach is called <i>Temporal Difference (TD) learning</i> and Equation 4 gives the corresponding update rule. Since $$R_t = r_t + \gamma R_{t+1}$$, you can see that this update rule is equal to Monte Carlo when $$R_{t+1} = V(s_{t+1})$$. When $$V(s_{t+1})$$ is a better estimate than $$R_{t+1}$$, TD learning performs a better update than Monte Carlo. Otherwise, Monte Carlo performs a better update. It turns out that $$V(s_{t+1})$$ is <i>always</i><d-footnote>We were unable to find a proof of this, so we wrote our own in Appendix A.</d-footnote> an equal or better estimate than $$R(s_{t+1})$$ for tabular agents (agents that do not perform state approximation).
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
+        <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">8</a>:
+        Comparing MC and TD.
+      </figcaption>
+    </center>
+    </figure>
+
+    <p>
+      <b>Comparing the two.</b> It's useful to see Monte Carlo and TD learning in action, on the same example. Figure 8 shows this comparison as a short animation. Notice how all the paths that precede an intersection look similar under TD learning, whereas this is not the case under Monte Carlo.
+    </p>
+
+    <p>
+      We have seen that tabular agents do better under TD learning. However, many agents including deep RL agents, are not tabular. These agents have no guarantee of learning better with TD. In fact, we'll see next that non-tabular agents often merge the <i>wrong</i> paths, in which case Monte Carlo is better.
+    </p>
+
+
+
+
+
+
+    <h2>Merging paths with state approximation</h2>
     
-    <figure id="figure-mc-td" class="subgrid" style="margin-top: 0;">
-      <center>
-        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-td.png"/>
-      </center>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">6</a>:
-        Monte Carlo Learning vs. Temporal Difference Learning.
-      </figcaption>
-    </figure>
-
-    <br>
-    <p>$$V(s_t) ~\hookleftarrow~ r_t + \gamma V(s_{t+1})$$</p>
-  
-
-
-    <figure id="figure-mc-td-animation" class="subgrid" style="margin-top: 0;">
-      <center>
-        <img style="width: 80%; margin-top: 15px;" src="mockups/mc-td-animation.png"/>
-      </center>
-      <figcaption class="l-body">
-        <a href="#figure-rgba-diagram" class="figure-number">6</a>:
-        Animation.
-      </figcaption>
-    </figure>
-
-<!--     <figure class="l-page">
-    <div id="compare2" style="width:650px; height:500px; margin:auto; position:relative;"> </div>
-    </figure>
-    <script> compare_vis(d3.select("#compare2"), {algs: ["MC", "TD"] }); </script> -->
-
-
-
-
-
-    <h2>Re-weighting the future: Q-values</h2>
-    <br>
-    <p>State-Action Values</p>
-    <p>Easier to make policies</p>
-    <p>MC and TD still work.</p>
-    <p>“Q functions are split value state value functions.” How do we merge them back </p>
-
-    <p>Why Q-learning is overconfident</p>
-    <br>
-
-
-
-
-
-
-    <h2>TD Learning and State Approximation</h2>
-    <br>
-    <p>Neural networks, so forth</p>
-
-    <img style="width: 100%; margin-top: 15px" src="mockups/averagers.png"/>
-
 
 
 
@@ -313,6 +415,90 @@
     <br>
     <div id="playground"></div>
     <script src="vis/Playground.js" charset="utf-8"></script>
+
+
+
+
+
+
+
+
+    <h2>Appendix A: TD is better than Monte Carlo for Tabular Agents</h2>
+
+    <h3>Setup</h3>
+
+    <p>
+      <b>Monte Carlo (MC).</b> Monte Carlo methods estimate the value of a state $$s_t$$ by computing the average return $$R_t$$ at that state. A simple every-visit MC update would look like Equation 1 where $$\alpha=\frac{1}{k}$$ and $$k$$ is the visit count of $$s_t$$.
+    </p>
+
+    <center>
+      <p>
+        $$V(s_t) \leftarrow V(s_t) + \alpha [R_t - V(s_t)]  \quad \quad (1) $$
+      </p>
+    </center>
+
+    <p>
+      <b>Temporal Differences (TD).</b> Another way to estimate the value of a state is with <i>temporal difference</i> (TD) learning. The idea of TD learning is to express the value of $$s_t$$ in terms of the values of its successor state $$s_{t+1}$$ along a trajectory, plus the change in reward due to the $$s_{t} \rightarrow s_{t+1}$$ transition.
+    </p>
+
+    <center>
+      <p>
+        $$V(s_t) \leftarrow V(s_t) + \alpha [r_{t+1} + \gamma V(s_{t+1}) - V(s_t)]  \quad \quad (2) $$
+      </p>
+    </center>
+
+
+    <p>
+      This approach is often called <i>bootstrapping</i> because each state uses the next state's value to update its own.
+    </p>
+
+    <p>
+      <b>Implementation notes.</b> Looking at Equations 1 and 2, we can see that the core difference between MC and TD updates is the substitution $$R_t \rightarrow r_{t+1} + \gamma V(s_{t+1})$$. Unfortunately, the classic algorithms for MC and TD value estimation are very different. In the textbook, <i>Reinforcement Learning: An Introduction</i>, the MC and TD algorithms are given on pages 92 and 120 respectively. For MC learning, the authors compute $$R_0...R_N$$ across each episode and average across episodes. For TD learning, the authors update $$V(s_t)$$ after each state transition in an episode.
+    </p>
+
+    <p>
+      In spite of these textbook differences between, most modern implementations of MC and TD are strikingly similar. The value updates happen at the end of each episode and proceed in reverse order from the last episode in the trajectory to the first. We choose to follow this format (and thus depart slightly from textbook definitions) for two reasons. First, doing so enables us to make tighter analogies between MC and TD. Second, most real-world applications of RL algorithms use this format.
+    </p>
+
+    <p>
+      Pseudocode for our versions of MC and TD value estimation can be found in Figure 1.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 70%; margin-top: 15px; " src="figures/pseudocode.png"/>
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">1</a>:
+        Pseudocode for Monte Carlo and TD Value Learning.
+      </figcaption>
+      </center>
+    </figure>
+
+    <h3>Proof</h3>
+
+    <p>
+      I'm just attaching a handwritten sketch of the proof for now.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 80%; margin-top: 15px; " src="figures/proof1.jpg"/>
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
+        Page 1 of proof.
+      </figcaption>
+      </center>
+    </figure>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 80%; margin-top: 15px; " src="figures/proof1.jpg"/>
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
+        Page 2 of proof.
+      </figcaption>
+      </center>
+    </figure>
 
 </d-article>
 
