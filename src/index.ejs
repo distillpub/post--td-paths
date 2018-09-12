@@ -77,16 +77,16 @@
   <h1>The Paths Perspective on Reinforcement Learning</h1>
   <p>Temporal Difference (TD) learning merges paths for greater statistical efficiency. What are the consequences?</p>
 
-<!--   <figure class="l-page">
-    <img style="width: 100%;" src="mockups/hero.png"/>
-  </figure>
-</d-title> -->
-
   <figure class="l-page">
+    <img style="width: 100%;" src="figures/hero.png"/>
+  </figure>
+</d-title>
+
+<!--   <figure class="l-page">
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"> </div>
   </figure>
   <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
-</d-title>
+</d-title> -->
 
 <d-article>
 
@@ -155,7 +155,7 @@
       <b>Aside: return.</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that will maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term! We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $$R$$.
     </p>
 
-    <center><p> $$R = \sum_t \gamma^t t_t  \quad \quad (1) $$ </p></center>
+    <center><p> $$R = \sum_t \gamma^t r_t  \quad \quad (1) $$ </p></center>
 
     <p>
       The idea of the return is to sum over all the rewards an agent receives in the future and discount each one by a factor of $$\gamma^{k-1}$$. The summation encourages the agent to think long term without an explicit planning mechanism; the most valuable actions are the ones that "set the agent up" for long term rewards. The discount factor $$\gamma$$ biases the agent towards earning more immediate rewards.
@@ -176,7 +176,10 @@
     </p>
 
   <figure class="l-page">
-    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+    <!-- <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div> -->
+  <figure class="l-page">
+    <img style="width: 100%;" src="figures/cliff-walking.png"/>
+  </figure>
     
     <center>
       <figcaption class="l-body" style="width:100%;" >
@@ -201,7 +204,7 @@
     </center>
 
     </figure>
-    <script> cliff_vis(d3.select("#cliff_iter")); </script>
+    <!-- <script> cliff_vis(d3.select("#cliff_iter")); </script> -->
 
 
     <p>
@@ -343,7 +346,7 @@
         <img style="width: 50%; margin-top: 15px; " src="figures/gridworld-puzzle.jpg"/>
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">6</a>:
-        A new 3x3 gridworld with three separate paths, and the beginning of a fourth. Using its three previous paths, the agent must decide whether to take a "down" or a "right" action. If the agent estimates value using Monte Carlo, it will take the "down" action whereas if it uses TD learning, it will take the "right" action.
+        A new 3x3 gridworld with three separate paths, and the beginning of a fourth. Using its three previous paths, the agent must decide whether to take a "left" or a "right" action. If the agent estimates value using Monte Carlo, it will take the "right" action whereas if it uses TD learning, it will take the "left" action.
       </figcaption>
       </center>
     </figure>
@@ -382,8 +385,11 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
-        <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
+      <figure class="l-page">
+        <img style="width: 666px;" src="figures/mc-td-animation.png"/>
+      </figure>
+        <!-- <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/> -->
+        <!-- <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script>  -->
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">8</a>:
         Comparing MC and TD.
@@ -423,82 +429,9 @@
 
 
 
-    <h2>Appendix A: TD is better than Monte Carlo for Tabular Agents</h2>
+    <h2>Appendix A: When does TD have lower variance than MC?</h2>
 
-    <h3>Setup</h3>
-
-    <p>
-      <b>Monte Carlo (MC).</b> Monte Carlo methods estimate the value of a state $$s_t$$ by computing the average return $$R_t$$ at that state. A simple every-visit MC update would look like Equation 1 where $$\alpha=\frac{1}{k}$$ and $$k$$ is the visit count of $$s_t$$.
-    </p>
-
-    <center>
-      <p>
-        $$V(s_t) \leftarrow V(s_t) + \alpha [R_t - V(s_t)]  \quad \quad (1) $$
-      </p>
-    </center>
-
-    <p>
-      <b>Temporal Differences (TD).</b> Another way to estimate the value of a state is with <i>temporal difference</i> (TD) learning. The idea of TD learning is to express the value of $$s_t$$ in terms of the values of its successor state $$s_{t+1}$$ along a trajectory, plus the change in reward due to the $$s_{t} \rightarrow s_{t+1}$$ transition.
-    </p>
-
-    <center>
-      <p>
-        $$V(s_t) \leftarrow V(s_t) + \alpha [r_{t+1} + \gamma V(s_{t+1}) - V(s_t)]  \quad \quad (2) $$
-      </p>
-    </center>
-
-
-    <p>
-      This approach is often called <i>bootstrapping</i> because each state uses the next state's value to update its own.
-    </p>
-
-    <p>
-      <b>Implementation notes.</b> Looking at Equations 1 and 2, we can see that the core difference between MC and TD updates is the substitution $$R_t \rightarrow r_{t+1} + \gamma V(s_{t+1})$$. Unfortunately, the classic algorithms for MC and TD value estimation are very different. In the textbook, <i>Reinforcement Learning: An Introduction</i>, the MC and TD algorithms are given on pages 92 and 120 respectively. For MC learning, the authors compute $$R_0...R_N$$ across each episode and average across episodes. For TD learning, the authors update $$V(s_t)$$ after each state transition in an episode.
-    </p>
-
-    <p>
-      In spite of these textbook differences between, most modern implementations of MC and TD are strikingly similar. The value updates happen at the end of each episode and proceed in reverse order from the last episode in the trajectory to the first. We choose to follow this format (and thus depart slightly from textbook definitions) for two reasons. First, doing so enables us to make tighter analogies between MC and TD. Second, most real-world applications of RL algorithms use this format.
-    </p>
-
-    <p>
-      Pseudocode for our versions of MC and TD value estimation can be found in Figure 1.
-    </p>
-
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-        <img style="width: 70%; margin-top: 15px; " src="figures/pseudocode.png"/>
-      <figcaption class="l-body" style="width: 50%;">
-        <a href="#figure-rgba-diagram" class="figure-number">1</a>:
-        Pseudocode for Monte Carlo and TD Value Learning.
-      </figcaption>
-      </center>
-    </figure>
-
-    <h3>Proof</h3>
-
-    <p>
-      I'm just attaching a handwritten sketch of the proof for now.
-    </p>
-
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-        <img style="width: 80%; margin-top: 15px; " src="figures/proof1.jpg"/>
-      <figcaption class="l-body" style="width: 50%;">
-        <a href="#figure-rgba-diagram" class="figure-number">2</a>:
-        Page 1 of proof.
-      </figcaption>
-      </center>
-    </figure>
-
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-        <img style="width: 80%; margin-top: 15px; " src="figures/proof1.jpg"/>
-      <figcaption class="l-body" style="width: 50%;">
-        <a href="#figure-rgba-diagram" class="figure-number">3</a>:
-        Page 2 of proof.
-      </figcaption>
-      </center>
-    </figure>
+    <a href="/files/Variance_TD_vs_MC.pdf">View pdf here.</a>
 
 </d-article>
 
