@@ -98,11 +98,11 @@
 <d-article>
 
   <p>
-    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience, where it still has exciting scientific implications. But its implications reach further. Reinforcement learning has also become a core idea in machine learning, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
+    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience but its implications reach further. It has also become a core area of research in machine learning, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
   </p>
 
   <p>
-    Deep Reinforcement Learning (deep RL) agents are of particular interest. They can master a broad range of game-playing and continuous control tasks, from Go to Dota to robotic manipulation with the same underlying methods. Based on these promising results, many researchers believe that deep RL has a bright future.
+    Deep Reinforcement Learning (deep RL) agents are of particular interest. They can beat world-champion Go players, defeat elite teams of Dota gamers, fly helicopters, control robot arms, and navigate virtual cityscapes - all by learning from experience. Based on these promising results, many researchers believe that deep RL has a bright future.
   </p>
 
   <p>
@@ -110,24 +110,22 @@
   </p>
 
   <p>
-    In this post, we use a paths perspective on reinforcement learning to understand some key approaches to making RL more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is too. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient. In particular:
-    <li>
-      Merging paths at intersections increases the statistical efficiency of value estimates. We use this fact to show why Temporal Difference (TD) estimates are <i>always</i> preferable to Monte Carlo estimates in tabular settings.
-    </li>
-    <li>
-      We'll show how state approximation merges nearby paths. When it merges the right paths, there are enormous benefits. When it merges the wrong ones, there are serious problems.
-    </li>
+    In this post, we use a paths perspective on reinforcement learning to understand one way of making agents more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is too. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient.
   </p>
 
   <p>
-    In a way, information about how paths relate to one another is just as important as information about <i>where</i> they lead. While much of deep RL focuses on how to gather more, or better experience, we argue that agents should also be designed to learn more from the experience they have.
+    The key way of doing this is to merge paths where they intersect; doing so allows both outcomes to flow backwards along both of the paths leading to the intersection. We'll show how Temporal Difference (TD) learning merges paths whereas Monte Carlo does not. Then we'll use this observation to show that TD estimates are <i>always</i> preferable to Monte Carlo estimates in tabular settings.
+  </p>
+
+  <p>
+    Most introductions to RL treat TD and Monte Carlo learning as separate algorithms. In this post, we show that the only difference between them is that one merges paths of experience whereas the other does not. We hope this will help the reader to think about RL with more clarity, and to appreciate the idea that the way and agent's experiences relate to one another can be just as important as the experiences themselves.
   </p>
 
 
 
 
 
-    <h2>Background</h2>
+    <h2>The fundamentals of reinforcement learning</h2>
 
     <p>
       Before diving into the paths perspective on RL, we will review the fundamental concepts of reinforcement learning by training an agent to walk along a cliff. The environment we'll use is called a Gridworld. Gridworlds are a common way to learn about RL because they are small, easy to visualize, and still communicate important ideas. We'll use them a fair bit in this post!
@@ -160,7 +158,7 @@
     </p>
 
     <p>
-      <b>Aside: return</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term. We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $R$.
+      <b>Aside: return</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term. We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $$R$$.
     </p>
 
     <center><p> $$R = \sum_t \gamma^t r_t  \quad \quad (1) $$ </p></center>
@@ -264,7 +262,7 @@
     </figure>
 
     <p>
-      <b>Aside: function approximators.</b> It's important to note that the value function is almost always approximate. The way to make this approximation is to keep a running average of $$V(s)$$ for every state $$s$$. Writing the update to a running average can be a bit hairy, so we'll use a shorthand called <i>function approximator notation</i> in this post. Equation 3 gives an example of how this notation works<d-footnote>For the running average to be exact, we need to let $$\alpha=\frac{1}{k}$$. We can achieve similar results in practice by setting $$\alpha$$ to a small constant</d-footnote>:
+      <b>Aside: running averages.</b> It's important to note that value functions are almost always approximate. The way to make this approximation is to keep a running average of $$V(s)$$ for every state $$s$$. Writing the update to a running average can be a bit hairy, so we'll use a shorthand called <i>function approximator notation</i> in this post. Equation 3 gives an example of how this notation works<d-footnote>For the running average to be exact, we need to let $$\alpha=\frac{1}{k}$$. We can achieve similar results in practice by setting $$\alpha$$ to a small constant</d-footnote>:
     </p>
 
     <div class="eq-grid">
@@ -287,9 +285,7 @@
       </figcaption>
     </div>
 
-    <p>
-      There are many types of function approximation aside from running averages. Neural networks, for example, are highly nonlinear function approximators. In this post, assume that our notation refers to a running average unless we specify otherwise.
-    </p>
+
 
 
 
@@ -344,7 +340,7 @@
     </p>
 
     <p>
-      Based on Equations 3 and 4 and Figures 6a and 6b, it's not clear whether MC or TD gives a better value estimate. But it turns out that using TD to merge paths makes estimates a lot better. In fact, we are going to see that so long as we merge the right paths, TD learning <i>always</i> beats Monte Carlo learning <d-footnote>We were unable to find a proof of this, so we <a href="https://v2.overleaf.com/read/hthxtqypcjxt">wrote our own</a></d-footnote>.
+      Based on Equations 3 and 4 and Figures 6a and 6b, it's not clear whether MC or TD gives a better value estimate. But it turns out that using TD to merge paths makes estimates a lot better. In fact, we are going to see that so long as we merge the right paths, TD learning <i>always</i> beats Monte Carlo learning <d-footnote>We were unable to fund a proof of this, so we wrote our own in <a href="#appendix-a">Appendix A.</a></d-footnote>.
     </p>
 
 
@@ -493,26 +489,43 @@
 
 
 
-    <h2>Implications for deep RL</h2>
+    <h2>Implications for deep reinforcement learning</h2>
 
     <p>
-      Any RL agent that uses a deep neural network for function approximation is called a deep RL agent. These agents have been responsible for a stunning series of empirical results in the past few years: they can beat world-champion Go players, defeat elite teams of Dota gamers, fly helicopters, control dextrous robot arms, and navigate cityscapes.
+      So far, we've seen why TD learning is more efficient than Monte Carlo learning. Empirical results over the past thirty years have supported this claim. Indeed, most modern deep RL agents use TD learning.
     </p>
 
     <p>
-      Early in training, a neural network might make the same erroneous value updates as the averager did in Figure 13. As training progressed, though, the neural network would be able to change the way it represents states so that states above the barrier would not share value updates with states below the barrier. The ability to learn such a distinction from experience is one of the things that makes neural networks exciting!
+      But one surprise is that there is evidence that deep RL agents which use Monte Carlo learning are competitive with those that use TD learning (cite). This would suggest that deep RL agents are not reaping the full benefits of TD learning. One way to explain this surprising result is to look at how neural networks merge paths of experience over the course of training.
     </p>
 
     <p>
-      <b>Monte Carlo or TD?</b> One of the things we've seen in this post is that there is a good theoretical reason to choose TD learning over Monte Carlo: it is more data-efficient! But we have also seen that TD learning is more sensitive to poor value estimates, especially when we use function approximators.
+      <b>How neural networks merge paths.</b> Early in training, neural networks, like averagers, tend to merge the wrong paths of experience. In the Cliff Walking example, an untrained neural network might make the same bad value updates as the averager did in Figure 12.
     </p>
 
     <p>
-      It turns out that choosing between MC and TD learning is an open question in deep RL (cite). In practice, many researchers use an algorithm called TD($$\lambda$$) which interpolates between MC and TD learning with coefficient $$\lambda$$ (TD($$\lambda$$=0) reduces to TD whereas TD($$\lambda=1$$) reduces to Monte Carlo).
+      But one exciting thing about neural networks is that they can learn to overcome these errors. As training progressed, the network might learn that the states just above the barrier have little correlation with states just below the barrier. The agent would end up learning a <i>state representation</i> in which these states are further apart than their Euclidean distances might suggest. This isn't something that a simple function approximator, like an averager, could do. It's part of the reason that deep RL is exciting!
     </p>
 
     <p>
-      I would like to end this story with a small empirical finding, especially one that trains a deep RL agent in a low-experience environment.
+      Researchers have observed this behavior in agents that are trained to perform robotic grasping. Figure \ref{fig:latent-distance} shows how one such agent has learned to a distance metric that takes obstacles into account.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 40%; margin: 15px; " src="figures/implications/latent-distance.png"/>
+        <figcaption class="l-body" style="width: 50%;">
+          <a href="#figure-rgba-diagram" class="figure-number">14</a>:A non-Euclidean distance metric learned by an RL agent in the the Universal Planning Networks paper. Lighter color implies larger latent distance.
+        </figcaption>
+      </center>
+    </figure>
+
+    <p>
+      <b>The best of both worlds?</b> There is an algorithm called TD($$\lambda$$) which interpolates between Monte Carlo and TD learning using the $$\lambda$$ coefficient. Often, TD($$\lambda$$) works better than either method in isolation. Researchers usually keep the $$\lambda$$ coefficient constant over the course of training. But if Monte Carlo learning is best early in training - before the agent has learned a good state representation - and TD learning is best later on, then maybe we should switch between the two over the course of training!
+    </p>
+
+    <p>
+      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo and the efficiency of TD methods. Deep RL is still a young area of research and there are many open questions; we hope this post clarifies the relationship between Monte Carlo and TD, and encourages readers to push the comparison even further.
     </p>
 
 
@@ -529,10 +542,20 @@
 
 
 
+    <div id="appendix-a"></div>
+    <h2>Appendix A: When does TD have lower variance than Monte Carlo?</h2>
 
-    <h2>Appendix A: When does TD have lower variance than MC?</h2>
+    <p>
+      As a supplement to the main argument of this post, we realized that we should rigorously define the connection between Monte Carlo and TD learning.
+    </p>
 
-    <a href="/files/Variance_TD_vs_MC.pdf">View pdf here.</a>
+    <p>
+      In the course of describing the connection, we were able to show that TD learning will - on average - converge as fast or faster than Monte Carlo learning for any environment and tabular value function. We could not find an existing version of this proof, so we though it useful to include.
+    </p>
+
+    <p>
+      You can find both supplements <a href="/files/Variance_TD_vs_MC.pdf">here</a>.
+    </p>
 
 </d-article>
 
