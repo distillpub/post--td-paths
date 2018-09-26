@@ -98,7 +98,7 @@
 <d-article>
 
   <p>
-    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience but its implications reach further. It has also become a core area of research in machine learning, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
+    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience but its implications reach further. In particular, it has become a core part of machine learning research, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
   </p>
 
   <p>
@@ -182,10 +182,8 @@
     </p>
 
   <figure class="l-page">
-    <!-- <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div> -->
-  <figure class="l-page">
-    <img style="width: 100%;" src="figures/cliff-walking.png"/>
-  </figure>
+    <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
+  <!-- <figure class="l-page"><img style="width: 100%;" src="figures/rl-basics/cliff-walking.png"/></figure> -->
     
     <center>
       <figcaption class="l-body" style="width:100%;" >
@@ -210,7 +208,7 @@
     </center>
 
     </figure>
-    <!-- <script> cliff_vis(d3.select("#cliff_iter")); </script> -->
+    <script> cliff_vis(d3.select("#cliff_iter")); </script>
 
 
     <p>
@@ -223,7 +221,7 @@
 
     <figure id="fig-policy-value-iteration" class="subgrid" style="margin-top: 0;">
       <center>
-        <img style="width: 90%; margin-top: 15px;" src="figures/policy-value-iteration.png"/>
+        <img style="width: 90%; margin-top: 15px;" src="figures/rl-basics/policy-value-iteration.png"/>
       <figcaption class="l-body">
         <a href="#figure-rgba-diagram" class="figure-number">3</a>:
         Policy value iteration. Describe the cycle in a bit more detail here.
@@ -238,7 +236,7 @@
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
 
-        <img style="width: 80%; margin-top: 15px; " src="figures/concepts.png"/>
+        <img style="width: 80%; margin-top: 15px; " src="figures/rl-basics/concepts.png"/>
       <figcaption class="l-body" style="width: 100%;>
         <a href="#figure-rgba-diagram" class="figure-number">4</a>: Key Concepts
           <div class="eq-grid" style="grid-gap: 1%">
@@ -410,11 +408,9 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-      <figure class="l-page">
-        <img style="width: 666px;" src="figures/mc-td-animation.png"/>
-      </figure>
-        <!-- <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/> -->
-        <!-- <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script>  -->
+      <!-- <figure class="l-page"> <img style="width: 666px;" src="figures/mc-td-animation.png"/> </figure> -->
+        <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
+        <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">10</a>:
         Comparing MC and TD.
