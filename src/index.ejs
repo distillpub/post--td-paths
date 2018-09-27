@@ -133,7 +133,8 @@
 
     <figure id="fig-cliff-walking-setup" class="subgrid" style="margin-top: 0;">
       <center>
-        <img style="width: 30%; margin-top: 15px;" src="figures/rl-basics/cliff-walking-setup.png"/>
+        <img style="width: 30%; margin-top: 15px;" src="figures/cliff-walking-actions.svg"/>
+        <img style="width: 30%; margin-top: 15px;" src="figures/cliff-walking-states.svg"/>
       <figcaption class="l-body">
         <a href="#figure-rgba-diagram" class="figure-number">1</a>:
         Cliff walking setup.
@@ -183,7 +184,7 @@
 
   <figure class="l-page">
     <div id="cliff_iter" style="width:600px; height:500px; position:relative;"> </div>
-  <!-- <figure class="l-page"><img style="width: 100%;" src="figures/rl-basics/cliff-walking.png"/></figure> -->
+  <!-- <figure class="l-page"><img style="width: 100%;" src="/cliff-walking.svg"/></figure> -->
     
     <center>
       <figcaption class="l-body" style="width:100%;" >
@@ -221,7 +222,7 @@
 
     <figure id="fig-policy-value-iteration" class="subgrid" style="margin-top: 0;">
       <center>
-        <img style="width: 90%; margin-top: 15px;" src="figures/rl-basics/policy-value-iteration.png"/>
+        <img style="width: 90%; margin-top: 15px;" src="figures/policy-value-iteration.svg"/>
       <figcaption class="l-body">
         <a href="#figure-rgba-diagram" class="figure-number">3</a>:
         Policy value iteration. Describe the cycle in a bit more detail here.
@@ -236,7 +237,7 @@
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
 
-        <img style="width: 80%; margin-top: 15px; " src="figures/rl-basics/concepts.png"/>
+        <img style="width: 80%; margin-top: 15px; " src="figures/concepts.svg"/>
       <figcaption class="l-body" style="width: 100%;>
         <a href="#figure-rgba-diagram" class="figure-number">4</a>: Key Concepts
           <div class="eq-grid" style="grid-gap: 1%">
@@ -297,9 +298,9 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 20%; margin: 15px; " src="figures/paths-perspective/cliffwalking-trajectories.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/paths-perspective/cliffwalking-paths.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/paths-perspective/cliffwalking-paths-merge.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/trajectories-separate.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/paths-separate.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/paths-merged.svg"/>
       <figcaption class="l-body" style="width: 100%;">
         <a href="#figure-rgba-diagram" class="figure-number">5</a>:
         Experience as a set of paths through Cliff World. The colors of the paths correspond to the agent's return.
@@ -317,8 +318,8 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 20%; margin: 15px; " src="figures/paths-perspective/cliffwalking-paths-mc.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/paths-perspective/cliffwalking-paths-td.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/paths-separate-mc.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/paths-merged-td.svg"/>
       <figcaption class="l-body" style="width: 100%;">
         <a href="#figure-rgba-diagram" class="figure-number">6</a>:
         Estimating value with (a) separate paths (b) and merged paths.
@@ -354,7 +355,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 50%; margin-top: 15px; " src="figures/beating-mc/gridworld-puzzle.svg"/>
+        <img style="width: 50%; margin-top: 15px; " src="figures/gridworld-puzzle.svg"/>
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">7</a>:
         A 3x4 Gridworld with three separate paths and the beginning of a fourth. Using its three previous paths, the agent must decide whether to take a "move up" or "move down" action.
@@ -372,7 +373,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 80%; margin-top: 15px; " src="figures/beating-mc/gridworld-puzzle-solved.svg"/>
+        <img style="width: 80%; margin-top: 15px; " src="figures/gridworld-puzzle-solved.svg"/>
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">8</a>:
         Learning policies in the 3x4 Gridworld using MC and TD learning. If the agent uses MC learning, it will take the "up" action whereas if it uses TD learning, it will take the optimal "down" action.
@@ -390,7 +391,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 20%; margin-top: 15px; " src="figures/beating-mc/path-combo.svg"/>
+        <img style="width: 20%; margin-top: 15px; " src="figures/gridworld-puzzle-merge.svg"/>
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">9</a>:
         Combining paths 1 and 2.
@@ -408,7 +409,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-      <!-- <figure class="l-page"> <img style="width: 666px;" src="figures/mc-td-animation.png"/> </figure> -->
+      <!-- <figure class="l-page"> <img style="width: 666px;" src="figures/mc-td-animation.svg"/> </figure> -->
         <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
         <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
       <figcaption class="l-body" style="width: 50%;">
@@ -431,9 +432,9 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 20%; margin: 15px; " src="figures/approx/motivate-approx-setup.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/approx/motivate-approx-tabular.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/approx/motivate-approx-approx.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/large-cliffworld-states.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/large-cliffworld-path.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/large-cliffworld-approx.svg"/>
       <figcaption class="l-body" style="width: 50%;">
         <a href="#figure-rgba-diagram" class="figure-number">11</a>:
         A large Cliffworld example shows how function approximation makes learning more efficient. By applying performing value updates to adjacent states along a trajectory, the agent in Figure 11c can generalize its policy to states it has never visited.
@@ -451,8 +452,8 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 20%; margin: 15px; " src="figures/approx/motivate-approx-approx.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/approx/approx-barrier.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/large-cliffworld-approx.svg"/>
+        <img style="width: 20%; margin: 15px; " src="figures/large-cliffworld-barrier.svg"/>
         <figcaption class="l-body" style="width: 50%;">
           <a href="#figure-rgba-diagram" class="figure-number">12</a>: Sometimes function approximation makes a bad assumption about which states are "nearby". The states immediately below the barrier in Figure 12b should not have received updates.
         </figcaption>
@@ -469,7 +470,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 70%; margin: 15px; " src="figures/approx/merge-wrong.svg"/>
+        <img style="width: 70%; margin: 15px; " src="figures/compare-function-approx.svg"/>
         <figcaption class="l-body" style="width: 50%;">
           <a href="#figure-rgba-diagram" class="figure-number">13</a>:Effects of state approximation.
         </figcaption>
@@ -509,7 +510,7 @@
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
-        <img style="width: 40%; margin: 15px; " src="figures/implications/latent-distance.png"/>
+        <img style="width: 40%; margin: 15px; " src="figures/latent-distance.png"/>
         <figcaption class="l-body" style="width: 50%;">
           <a href="#figure-rgba-diagram" class="figure-number">14</a>:A non-Euclidean distance metric learned by an RL agent in the the Universal Planning Networks paper. Lighter color implies larger latent distance.
         </figcaption>
