@@ -512,7 +512,7 @@
       <center>
         <img style="width: 40%; margin: 15px; " src="figures/latent-distance.png"/>
         <figcaption class="l-body" style="width: 50%;">
-          <a href="#figure-rgba-diagram" class="figure-number">14</a>:A non-Euclidean distance metric learned by an RL agent in the the Universal Planning Networks paper. Lighter color implies larger latent distance.
+          <a href="#figure-rgba-diagram" class="figure-number">14</a>:A non-Euclidean distance metric learned by an RL agent (cite). Lighter color implies larger latent distance.
         </figcaption>
       </center>
     </figure>
@@ -543,15 +543,15 @@
     <h2>Appendix A: When does TD have lower variance than Monte Carlo?</h2>
 
     <p>
-      As a supplement to the main argument of this post, we realized that we should rigorously define the connection between Monte Carlo and TD learning.
+      In the process of writing this post, we found it useful to re-write the pseudocode for Monte Carlo and TD learning in order to highlight formal connections between the two. Our versions of the algorithms are <i>slightly</i> different from those presented in Sutton.
     </p>
 
     <p>
-      In the course of describing the connection, we were able to show that TD learning will - on average - converge as fast or faster than Monte Carlo learning for any environment and tabular value function. We could not find an existing version of this proof, so we though it useful to include.
+      An exciting side effect was that, using our version of the two algorithms, we were able to show that TD learning will, on average, always converge as fast or faster than Monte Carlo learning for <i>any</i> RL agent that uses a tabular value function. We could not find any proofs of this sort online, so we wrote our own.
     </p>
 
     <p>
-      You can find both supplements <a href="/files/Variance_TD_vs_MC.pdf">here</a>.
+      The full text is <a href="/files/Variance_TD_vs_MC.pdf">here</a>.
     </p>
 
 </d-article>
