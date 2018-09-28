@@ -186,7 +186,7 @@
 
   var learning_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "160px")
+      .style("top", "140px")
       .style("left", (width+margin.left+margin.right+20)+"px")
       .style("padding", "10px")
 
@@ -231,7 +231,7 @@
 
   var visualize_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "270px")
+      .style("top", "300px")
       .style("left", (width+margin.left+margin.right+20)+"px")
       .style("padding", "10px")
       .style("width", "260px");
@@ -262,7 +262,7 @@
   });
 
   stage.append("br");
-  stage.append("p").text("A little experiment in visualizing RL environments by colah@ and cassandrax@.").attr('class', 'tiny');
+  // stage.append("p").text("A little experiment in visualizing RL environments by colah@ and cassandrax@.").attr('class', 'tiny');
 
 
   function randInt(n) {
