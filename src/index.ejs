@@ -81,11 +81,13 @@
 </style>
 
 <d-title>
-  <h1>The Paths Perspective on Reinforcement Learning</h1>
-  <p>A closer look at how Temporal Difference (TD) learning merges paths for greater statistical efficiency.</p>
+  <h1>The Paths Perspective on Temporal Difference Learning</h1>
+  <p>A closer look at how Temporal Difference (TD) learning merges paths to beat Monte Carlo learning.</p>
 
   <figure class="l-page">
-    <img style="width: 100%;" src="figures/hero.png"/>
+    <center>
+    <img style="width: 90%;" src="figures/artsy-hero.svg"/>
+  </center>
   </figure>
 </d-title>
 
@@ -96,29 +98,34 @@
 </d-title> -->
 
 <d-article>
-
+<!-- <d-cite key="Tsividis2017HumanAtari"></d-cite> -->
   <p>
-    Reinforcement learning is a field which attempts to formalize the question, "How do we learn from experience?" The question originated in psychology and neuroscience but its implications reach further. In particular, it has become a core part of machine learning research, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
+    Reinforcement learning is a field which asks the question, "How do we learn from experience?" The question originated in psychology and neuroscience but its implications reach further. In particular, it has become a core part of machine learning research, where it asks a slightly different question: "How can <i>computers</i> learn from experience?"
   </p>
 
   <p>
-    Deep Reinforcement Learning (deep RL) agents are of particular interest. They can beat world-champion Go players, defeat elite teams of Dota gamers, fly helicopters, control robot arms, and navigate virtual cityscapes - all by learning from experience. Based on these promising results, many researchers believe that deep RL has a bright future.
-  </p>
-
-  <p>
-    But in spite of the excitement around RL, a fundamental problem remains: RL agents need <i>much more</i> experience than humans to learn. One of the most important research questions in the field is how to get agents to squeeze more information out of less data.
+    Deep Reinforcement Learning (deep RL) agents are of particular interest. They can <a href="https://deepmind.com/research/alphago/">beat world-champion Go players</a>, <a href="https://blog.openai.com/learning-dexterity/">control robotic hands</a>, <a href="https://deepmind.com/blog/learning-to-generate-images/">draw simple pictures</a>, and <a href="https://deepmind.com/blog/learning-to-navigate-cities-without-a-map/">navigate cities without a map</a> - all by learning from experience. Based on these promising results, many researchers believe that deep RL has a bright future. But in spite of the excitement around RL, a fundamental problem remains: RL agents need <i>much</i> more experience than humans to learn. One of the most important research questions in the field is how to get agents to squeeze more information out of less data.
   </p>
 
   <p>
     In this post, we use a paths perspective on reinforcement learning to understand one way of making agents more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is too. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient.
   </p>
 
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+        <img style="width: 90%; margin: 15px; " src="figures/tsividis.png"/>
+        <figcaption class="l-body" style="width: 75%;">
+          <a href="#figure-rgba-diagram" class="figure-number">14</a>: The Atari 2600 games are a common RL benchmark. Researchers compared human performance against deep RL performance on four Atari games. The red lines denote a deep RL agent's performance after 46, 115, and 920 hours of experience. Black dots denote human performance after several minutes. The conclusion is that humans can learn these tasks over a hundred times more quickly than computers <d-cite key="Tsividis2017HumanAtari">(cite)</d-cite>
+        </figcaption>
+      </center>
+    </figure>
+
   <p>
     The key way of doing this is to merge paths where they intersect; doing so allows both outcomes to flow backwards along both of the paths leading to the intersection. We'll show how Temporal Difference (TD) learning merges paths whereas Monte Carlo does not. Then we'll use this observation to show that TD estimates are <i>always</i> preferable to Monte Carlo estimates in tabular settings.
   </p>
 
   <p>
-    Most introductions to RL treat TD and Monte Carlo learning as separate algorithms. In this post, we show that the only difference between them is that one merges paths of experience whereas the other does not. We hope this will help the reader to think about RL with more clarity, and to appreciate the idea that the way and agent's experiences relate to one another can be just as important as the experiences themselves.
+    Many introductions to reinforcement learning treat TD and Monte Carlo learning as separate algorithms <d-cite key="Sutton2017ReinforcementIntroduction">(cite)</d-cite>. In this post, we show that the only difference between them is that one merges paths of experience whereas the other does not. We hope this will help the reader to think about them with more clarity, and to appreciate the idea that the way an agent's experiences relate to one another can be just as important as the experiences themselves.
   </p>
 
 
@@ -493,7 +500,7 @@
     </p>
 
     <p>
-      But one surprise is that there is evidence that deep RL agents which use Monte Carlo learning are competitive with those that use TD learning (cite). This would suggest that deep RL agents are not reaping the full benefits of TD learning. One way to explain this surprising result is to look at how neural networks merge paths of experience over the course of training.
+      But one surprise is that there is evidence that deep RL agents which use Monte Carlo learning are competitive with those that use TD learning <d-cite key="Srinivas2018UniversalNetworks">(cite)</d-cite>. This would suggest that deep RL agents are not reaping the full benefits of TD learning. One way to explain this surprising result is to look at how neural networks merge paths of experience over the course of training.
     </p>
 
     <p>
@@ -519,6 +526,10 @@
 
     <p>
       <b>The best of both worlds?</b> There is an algorithm called TD($$\lambda$$) which interpolates between Monte Carlo and TD learning using the $$\lambda$$ coefficient. Often, TD($$\lambda$$) works better than either method in isolation. Researchers usually keep the $$\lambda$$ coefficient constant over the course of training. But if Monte Carlo learning is best early in training - before the agent has learned a good state representation - and TD learning is best later on, then maybe we should switch between the two over the course of training!
+    </p>
+
+    <p>
+      Talk about "TD or not TD" ICLR paper <d-cite key="Amiranashvili2018TDLearning">(cite)</d-cite>
     </p>
 
     <p>
