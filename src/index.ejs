@@ -86,7 +86,7 @@
 
   <figure class="l-page">
     <center>
-    <img style="width: 100%;" src="figures/artsy-hero-2x-details.svg"/>
+    <img style="width: 100%;" src="figures/artsy-hero.svg"/>
     <p> TD learning merges trajectories... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; whereas Monte Carlo does not. </p>
     <!-- <img style="width: 30%;" src="figures/hero.svg"/> -->
   </center>
@@ -109,11 +109,7 @@
     Deep Reinforcement Learning (deep RL) agents are of particular interest. They can <a href="https://deepmind.com/research/alphago/">beat world-champion Go players</a>, <a href="https://blog.openai.com/learning-dexterity/">control robotic hands</a>, <a href="https://deepmind.com/blog/learning-to-generate-images/">draw simple pictures</a>, and <a href="https://deepmind.com/blog/learning-to-navigate-cities-without-a-map/">navigate cities without a map</a> - all by learning from experience. Based on these results, many researchers believe that deep RL has a bright future. But in spite of the excitement around RL, a fundamental problem remains: RL agents need <i>much</i> more experience than humans to learn (see Figure 1). One of the most important research questions in the field is how to get agents to squeeze more information out of less data.
   </p>
 
-  <p>
-    In this post, we use a paths perspective on reinforcement learning to understand one way of making agents more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is too. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient.
-  </p>
-
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <figure class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
         <img style="width: 90%; margin: 15px; " src="figures/tsividis.png"/>
         <figcaption class="l-body" style="width: 75%;">
@@ -121,6 +117,10 @@
         </figcaption>
       </center>
     </figure>
+
+  <p>
+    In this post, we use a paths perspective on reinforcement learning to understand one way of making agents more efficient. In the paths perspective, we interpret an agent's experience as series of paths. Not only are the paths themselves important, but the way they relate to one another is too. In fact, we argue that making better use of these relations is an excellent way to make RL more data-efficient.
+  </p>
 
   <p>
     The key way of doing this is to merge paths where they intersect; doing so allows both outcomes to flow backwards along both of the paths leading to the intersection. We'll show how Temporal Difference (TD) learning merges paths whereas Monte Carlo does not. Then we'll use this observation to show that TD estimates are <i>always</i> preferable to Monte Carlo estimates in tabular settings.
@@ -151,9 +151,9 @@
       </center>
     </figure>
 
-    <p>
+<!--     <p>
       Before diving into the paths perspective on RL, we will review the fundamental concepts of reinforcement learning by training an agent to walk along a cliff. The environment we'll use is called a Gridworld. Gridworlds are a common way to learn about RL because they are small, easy to visualize, and still communicate important ideas. We'll use them a fair bit in this post!
-    </p>
+    </p> -->
 
     <p>
       The Cliff Walking Gridworld is shown in Figure 2. The agent's goal is to find its way to the destination (blue square, positive reward) without falling off the cliff (red rectangle, negative reward). Each gray square represents a different state.
@@ -168,7 +168,7 @@
     </p>
 
     <p>
-      <b>Aside: return</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term. We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $$R$$.
+      <b>Aside: return.</b> In the process of explaining value, we've motivated another important question: what is long-term reward? When we're training an agent, we want it to choose actions that maximize its reward over the course of tens, hundreds, or even thousands of steps into the future. Sometimes these actions are different from the actions which would maximize rewards in the short term. We measure long-term reward using a time-discounted sum of rewards (Equation 1) which we call the return $$R$$.
     </p>
 
     <center><p> $$R = \sum_t \gamma^t r_t  \quad \quad (1) $$ </p></center>
@@ -412,7 +412,7 @@
     </p>
 
     <p>
-      <b>TD Learning.</b> Here's a solution: let the agent build synthetic paths - routes it never took - from pieces of real paths. Now the agent can merge the first part of path 2 with the second part of path 1 (Figure 10). This "synthetic" path lets the agent assign high value to the "down" action in the center square.
+      <b>TD Learning.</b> Here's a solution: let the agent build synthetic paths - routes it never took - from pieces of real paths. Now the agent can merge the first part of path 2 with the second part of path 1 (Figure 10). This "synthetic" path lets the agent assign high value to the "down" action in state $$s_{11}$$.
     </p>
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
@@ -430,7 +430,7 @@
     </p>
 
     <p>
-      <b>Comparing the two.</b> It's useful to see Monte Carlo and TD learning in action, on the same example. Figure 11 shows this comparison as a short animation. Notice how all the paths that precede an intersection look similar under TD learning, whereas this is not the case under Monte Carlo.
+      <b>Comparing the two.</b> It's useful to see Monte Carlo and TD learning in action, on the same example. Figure 11 shows this comparison as a short animation. Notice how the two paths that precede an intersection look similar under TD learning, whereas this is not the case under Monte Carlo.
     </p>
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
@@ -469,7 +469,7 @@
     </figure>
 
     <p>
-      The idea behind function approximation is to learn a parametric value function $$v^{\pi}(s, \mathbf{w})$$ where the number of parameters in $$\mathbf{w}$$ is less than the total states in the environment. Updating one parameter will, on average, change the value estimate of more than one state. This <i>generalization</i> property of function approximators helps agents learn value efficiently over large - or even infinite - state spaces.
+      The idea behind function approximation is to learn a parametric value function $$v^{\pi}(s, \mathbf{w})$$ where the number of parameters in $$\mathbf{w}$$ is less than the total number of states in the environment. Updating one parameter will, on average, change the value estimate of more than one state. This <i>generalization</i> property of function approximators helps agents learn value efficiently over large - or even infinite - state spaces.
     </p>
 
     <p>
@@ -538,7 +538,7 @@
       <center>
         <img style="width: 40%; margin: 15px; " src="figures/latent-distance.png"/>
         <figcaption class="l-body" style="width: 40%;">
-          <a href="#figure-rgba-diagram" class="figure-number">15</a>: A non-Euclidean distance metric learned by an RL agent (cite). Lighter color implies larger latent distance.
+          <a href="#figure-rgba-diagram" class="figure-number">15</a>: A non-Euclidean distance metric learned by an RL agent (cite). Lighter color implies larger latent distance. <i>*NOTE: Re-read the theory part of that paper to make sure this example is relevant.</i>
         </figcaption>
       </center>
     </figure>
@@ -548,7 +548,7 @@
     </p>
 
     <p>
-      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo and the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the relationship between Monte Carlo and TD and encourages readers to push the comparison even further.
+      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the relationship between Monte Carlo and TD and encourages readers to push the comparison even further.
     </p>
 
 
