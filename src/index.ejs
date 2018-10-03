@@ -82,15 +82,9 @@
 
 <d-title>
   <h1>The Paths Perspective on Temporal Difference Learning</h1>
-  <p>A closer look at how Temporal Difference (TD) learning merges trajectories for greater statistical efficiency.</p>
-
-  <figure class="l-page">
-    <center>
-    <img style="width: 100%;" src="figures/artsy-hero.svg"/>
-    <p> TD learning merges trajectories... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; whereas Monte Carlo does not. </p>
-    <!-- <img style="width: 30%;" src="figures/hero.svg"/> -->
-  </center>
-  </figure>
+  <p>
+    A closer look at how Temporal Difference (TD) learning merges trajectories for greater statistical efficiency.
+  </p>
 </d-title>
 
 <!--   <figure class="l-page">
@@ -98,6 +92,20 @@
   </figure>
   <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
 </d-title> -->
+
+<!--   <figure class="l-page">
+    <center>
+      <img style="width: 80%;" src="figures/artsy-hero.svg"/>
+      <p> TD learning merges trajectories... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; whereas Monte Carlo does not. </p>
+    </center>
+  </figure> -->
+
+  <figure class="l-page">
+    <center>
+      <div id="playground" style="width:400px; height:450px; position:relative;"> </div>
+      <script src="vis/Playground.js" charset="utf-8"></script>
+    </center>
+  </figure>
 
 <d-article>
 <!-- <d-cite key="Tsividis2017HumanAtari"></d-cite> -->
@@ -365,7 +373,23 @@
     </p>
 
     <p>
-      Based on Equations 3 and 4 and Figures 7a and 7b, it's not clear which method, Monte Carlo or TD learning, gives a better value estimate. But it turns out that using TD learning to merge paths makes estimates a lot better. In fact, we are going to see that so long as we merge the right paths, TD learning <i>always</i> beats Monte Carlo learning <d-footnote>We were unable to fund a proof of this, so we wrote our own in <a href="#appendix-a">Appendix A.</a></d-footnote>.
+      <b>Comparing the two.</b> It's useful to see Monte Carlo and TD learning in action, on the same example. Figure 11 shows this comparison as a short animation. Notice how the two paths that precede an intersection look similar under TD learning, whereas this is not the case under Monte Carlo.
+    </p>
+
+    <figure class="l-page" style="width: 100%; margin-top: 15px;">
+      <center>
+      <!-- <figure class="l-page"> <img style="width: 666px;" src="figures/mc-td-animation.svg"/> </figure> -->
+        <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
+        <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
+      <figcaption class="l-body" style="width: 50%;">
+        <a href="#figure-rgba-diagram" class="figure-number">11</a>:
+        Comparing MC and TD.
+      </figcaption>
+    </center>
+    </figure>
+
+    <p>
+      So far, it's not clear which method gives a better value estimate. But it turns out that using TD learning to merge paths makes estimates a lot better. In fact, we are going to see that so long as we merge the right paths, TD learning <i>always</i> beats Monte Carlo learning <d-footnote>We were unable to fund a proof of this, so we wrote our own in <a href="#appendix-a">Appendix A.</a></d-footnote>.
     </p>
 
 
@@ -428,22 +452,6 @@
     <p>
       What we've done, by merging paths, is let the upstream value of future states trickle backwards along paths that the agent never took. We can do this because the agent has seen all the transitions shown in these paths, even though they don't all occur in the same episode. In other words, we have reason to believe the agent <i>could</i> take such paths.
     </p>
-
-    <p>
-      <b>Comparing the two.</b> It's useful to see Monte Carlo and TD learning in action, on the same example. Figure 11 shows this comparison as a short animation. Notice how the two paths that precede an intersection look similar under TD learning, whereas this is not the case under Monte Carlo.
-    </p>
-
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-      <!-- <figure class="l-page"> <img style="width: 666px;" src="figures/mc-td-animation.svg"/> </figure> -->
-        <div id="compare_mc_td" style="width:666px; height:400px; margin:auto; position:relative;"/>
-        <script> compare_vis(d3.select("#compare_mc_td"), {algs: ["MC", "TD"] }); </script> 
-      <figcaption class="l-body" style="width: 50%;">
-        <a href="#figure-rgba-diagram" class="figure-number">11</a>:
-        Comparing MC and TD.
-      </figcaption>
-    </center>
-    </figure>
 
 
 
@@ -554,7 +562,7 @@
 
 
 
-    <h2>Playground</h2>
+    <!-- <h2>Playground</h2>
     <br>
 
     <p>
@@ -566,7 +574,7 @@
     </p>
 
     <div id="playground" style="width:600px; height:450px; position:relative;"> </div>
-    <script src="vis/Playground.js" charset="utf-8"></script>
+    <script src="vis/Playground.js" charset="utf-8"></script> -->
 
 
 
