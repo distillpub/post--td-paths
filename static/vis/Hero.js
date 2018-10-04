@@ -1,20 +1,21 @@
 (function() {
-  var stage = d3.select("#playground")
+  var stage = d3.select("#hero")
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 20},
+  var margin = {top: 0, right: 0, bottom: 0, left: 0},
       width = 300,
       height = 300,
       grid_size = 5;
 
 
   var outer = stage.append("div")
-    .style("width", "10%")
-    .style("position", "relative");
+    .style("width", "100%");
 
   var svg = outer
       .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom);
+        .attr("class", "column")
+        .attr("id", "svg-0")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom);
 
   var main = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -143,47 +144,59 @@
   cell.exit().remove();
 
 
+//     var svg = outer
+//       .append("svg")
+
+//       function duplicate() {
+//     var original = document.getElementById('duplicater' + i);
+//     var clone = original.cloneNode(true); // "deep" clone
+//     clone.id = "duplicetor" + ++i; // there can only be one element with an ID
+//     clone.onclick = duplicate; // event handlers are not cloned
+//     original.parentNode.appendChild(clone);
+// }
+
+var original = document.getElementById('svg-0');
+var clone = original.cloneNode(true);
+clone.id = "svg-1";
+original.parentNode.appendChild(clone);
+
+
   // USER INTERFACE
   //================
 
   var epsilon=0.2;
   var discount=0.8;
 
-  var policy_div = outer.append("div")
+
+  var control_panel = outer.append("div")
+      .attr("class", "column")
+
+
+
+  var policy_div = control_panel.append("div")
     .attr("class", "control-panel")
-    .style("top", "20px")
-    .style("left", (width+margin.left+margin.right+20)+"px")
-    .append("div")
-      .style("position", "relative")
-      .style("width", "280px")
-      .style("height", "100px")
-      .style("margin", "0px")
+    .style("width", "260px")
+    .style("padding", "5px")
+    .style("height", "90px")
   policy_div.append("h2").text("Policy: epsilon-greedy")
-    .style("position", "absolute")
-    .style("left", "10px")
-    .style("top", "-5px")
+    .style("margin-top", "0px")
   policy_div.append("p").text("explore")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("left", "202px")
-    .style("top", "60px")
+    .style("top", "70px")
   policy_div.append("p").text("exploit")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("left", "10px")
-    .style("top", "60px")
-  policy_div.append("p").text("epsilon="+epsilon)
-    .attr('class', 'label')
-    .style("position", "absolute")
-    .style("left", "96px")
     .style("top", "70px")
 
   policy_div.append("button")
       .text("Run Episode")
       .on("click", () => run_episode(epsilon_greedy_policy) )
       .style("position", "absolute")
-      .style("left", "180px")
-      .style("top", "12px")
+      .style("left", "90px")
+      .style("top", "30px")
 
   policy_div.append("input")
     .attr("type", "range")
@@ -194,19 +207,19 @@
     .style("position", "absolute")
     .style("left", "30px")
     .style("width", "200px")
-    .style("top", "50px")
+    .style("top", "60px")
     .attr("value", epsilon)
 
-  var learning_div = outer.append("div")
-      .attr("class", "control-panel")
-      .style("top", "140px")
-      .style("left", (width+margin.left+margin.right+20)+"px")
-      .style("padding", "10px")
 
+  var learning_div = control_panel.append("div")
+      .attr("class", "control-panel")
+      .style("top", "130px")
+      .style("width", "260px")
+      .style("padding", "5px")
 
   learning_div.append("h2")
-    .style("margin-top", "0px")
     .text("Learning Algorithm")
+    .style("margin-top", "0px")
   var vis_select = learning_div.append("select");
   vis_select.append("option")
     .attr("value", "MC")
@@ -242,16 +255,17 @@
       .text("Update Q")
       .on("click", run_update);
 
-  var visualize_div = outer.append("div")
+
+
+  var visualize_div = control_panel.append("div")
       .attr("class", "control-panel")
-      .style("top", "300px")
-      .style("left", (width+margin.left+margin.right+20)+"px")
-      .style("padding", "10px")
+      .style("top", "240px")
+      .style("padding", "5px")
       .style("width", "260px");
 
   visualize_div.append("h2")
-    .style("margin-top", "0px")
-    .text("Visualization");
+    .text("Visualization")
+    .style("margin-top", "0px");
 
   var vis_select = visualize_div.append("select");
   vis_select.append("option").attr("value", "policy").text("policy")
@@ -516,13 +530,4 @@
   display();
   run_episode(epsilon_greedy_policy);
 
-  /*var circle = svg.selectAll("circle")
-      .data([32, 57, 293], function(d) { return d; });
-
-  circle.enter().append("circle")
-      .attr("cy", 60)
-      .attr("cx", function(d, i) { return i * 100 + 30; })
-      .attr("r", function(d) { return Math.sqrt(d); });
-
-  circle.exit().remove();*/
 })()

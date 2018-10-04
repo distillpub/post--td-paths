@@ -1,29 +1,35 @@
-#playground .cell rect {
+#hero .cell rect {
   fill: #efe7e7;
 }
-#playground .Q .triangle {
+#hero .Q .triangle {
 }
-#playground .goal {
+#hero .goal {
   fill: #44a;
 }
-#playground .cliff {
+#hero .cliff {
   fill: #a44;
 }
-#playground .control-panel {
+#hero .control-panel {
   position: absolute;
   background-color: #efe7e7;
   border-radius: 8px;
 }
-#playground .control-panel h2 {
+#hero .control-panel h2 {
   margin-top: 15px;
   font-weight: bold;
   font-size: 90%;
 }
 
-#playground .label{
+#hero .label{
   font-size: 14px;
 }
 
-#playground .tiny{
+#hero .tiny{
   font-size: 12px;
+}
+
+#hero .column {
+    float: left;
+    width: 31%;
+    padding: 1%;
 }
