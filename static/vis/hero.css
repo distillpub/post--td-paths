@@ -1,14 +1,27 @@
 #hero .cell rect {
   fill: #efe7e7;
 }
+#hero .cell2 rect {
+  fill: #efe7e7;
+}
+
 #hero .Q .triangle {
 }
+
 #hero .goal {
   fill: #44a;
 }
+#hero .goal2 {
+  fill: #44a;
+}
+
 #hero .cliff {
   fill: #a44;
 }
+#hero .cliff2 {
+  fill: #a44;
+}
+
 #hero .control-panel {
   position: absolute;
   background-color: #efe7e7;

@@ -1,5 +1,5 @@
 
-function compare_vis(main_div, config){
+function compare_vis(main_div, config, run=false){
 
 config = config || {};
 var grid_size = 7;
@@ -29,7 +29,7 @@ function make_label(pos_x, name, latex) {
 }
 
 label_data = {
-   MC: {name: "Monte-Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
+   MC: {name: "Monte Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
    TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_t + \\gamma V(s_{t+1})"},
    Q:  {name: "Q-Learning", eq: "\\begin{array}{l}Q(s_t, a_t) ~\\hookleftarrow~ r_t + \\gamma V(s_{t+1})\\\\ V(s) = \\max_a Q(s,a)\\end{array}"} }
 
@@ -52,7 +52,7 @@ function update(histories){
   });
 }
 
-(function visualize(){
+function visualize(){
   var agent1 = new env.Agent({start: {x: 4, y: grid_size-1}});
   action_names = repeat(grid_size-1, ["up"]);
   mapP(action_names, a_name => {
@@ -75,16 +75,9 @@ function update(histories){
       var P = agent2.step(a, 300);
       return P;
     });
-  }).then(() => setTimeout(() => {
-    env.states.forEach(s => {
-      for (var k in s.V) {s.V[k] = undefined;}
-      s.actions.forEach(a => {
-        for (var k in a.Q) {a.Q[k] = undefined;}
-      });
-    });
-    update([]);
-    visualize();
-  }, 6500));
-})()
+  });
+}
+
+if (run) { visualize()};
 
 }

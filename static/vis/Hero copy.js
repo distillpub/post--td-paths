@@ -13,12 +13,23 @@
   var svg1 = outer
       .append("svg")
         .attr("class", "column")
-        .attr("id", "svg1")
+        .attr("id", "svg0")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
+  var svg2 = outer
+    .append("svg")
+      .attr("class", "column")
+      .attr("id", "svg1")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom);
+
+
   var main1 = svg1.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var main2 = svg2.append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
   var X = d3.scale.linear().domain([0, grid_size]).range([0, width]);
   var Y = d3.scale.linear().domain([0, grid_size]).range([0, height]);
@@ -33,6 +44,8 @@
 
 
   var grid1 = main1.append("g").attr("class", "grid");
+  var grid2 = main2.append("g").attr("class", "grid");
+
 
   var cell_data1 = [];
   _.range(grid_size).forEach( y =>
@@ -40,16 +53,34 @@
       cell_data1.push({x: x, y: y}) ))
   cell_data1.splice(grid_size-2, 1); // remove the cell beneath the goal square
 
+  var cell_data2 = [];
+  _.range(grid_size).forEach( y =>
+    _.range(grid_size - 1 ).forEach(x =>
+      cell_data2.push({x: x, y: y}) ))
+  cell_data2.splice(grid_size-2, 1); // remove the cell beneath the goal square
+
+
   var actions = [ {name: "up", x: 0, y: 1},   {name: "down", x: 0, y: -1},
                   {name: "left", x: -1, y: 0}, {name: "right", x: 1, y: 0}, ];
 
   var cell1 = grid1.selectAll("g").data(cell_data1);
+  var cell2 = grid1.selectAll("g").data(cell_data2);
 
-  cell_enter = cell1.enter().append("g")
+
+  cell_enter1 = cell1.enter().append("g")
     .attr("class", d => "cell pos-" + d.x + "-" + d.y)
     .attr("transform", d => "translate(" + X(d.x) + "," + Y(d.y) + ")" );
 
-  cell_enter.append("rect").attr("class", "background")
+  cell_enter2 = cell2.enter().append("g")
+    .attr("class", d => "cell pos-" + d.x + "-" + d.y)
+    .attr("transform", d => "translate(" + X(d.x) + "," + Y(d.y) + ")" );
+
+
+  cell_enter1.append("rect").attr("class", "background")
+    .attr("width", S(0.95))
+    .attr("height", S(0.95));
+
+  cell_enter2.append("rect").attr("class", "background")
     .attr("width", S(0.95))
     .attr("height", S(0.95));
 
@@ -82,38 +113,54 @@
         );
   }
 
-  Vg = cell_enter.append("g").attr("class", "V").style("display", "none")
+  Vg1 = cell_enter1.append("g").attr("class", "V").style("display", "none")
       .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")");
-  Vg.append("circle").attr("r", S(0.3));
+  Vg2 = cell_enter2.append("g").attr("class", "V").style("display", "none")
+      .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")");
+  Vg1.append("circle").attr("r", S(0.3));
+  Vg2.append("circle").attr("r", S(0.3));
 
-  Qg = cell_enter.append("g").attr("class", "Q")
+  Qg1 = cell_enter1.append("g").attr("class", "Q")
+      .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")")
+      .call(add_triangles);
+  Qg2 = cell_enter2.append("g").attr("class", "Q")
       .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")")
       .call(add_triangles);
 
-  Pg = cell_enter.append("g").attr("class", "P").style("display", "none")
+  Pg1 = cell_enter1.append("g").attr("class", "P").style("display", "none")
       .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")")
       .call(add_triangles);
+  // Pg2 = cell_enter2.append("g").attr("class", "P").style("display", "none")
+  //     .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")")
+  //     .call(add_triangles);
 
-  function display() {
-    displayQ(Q_table1);
-    displayV(V_table1);
-    displayP(Q_table1);
+  function display1() {
+    displayQ(Qg1, Q_table1);
+    displayV(Vg1, V_table1);
+    displayP(Pg1, Q_table1);
   }
 
-  function displayQ(Q_table) {
+  function display2() {
+    displayQ(Qg2, Q_table2);
+    displayV(Vg2, V_table2);
+    displayP(Pg2, Q_table2);
+  }
+
+
+  function displayQ(Q_, Q_table) {
     actions.forEach(a =>
-      Qg.select("."+a.name).style("fill", d => Qscale(Q([d.x, d.y], a, Q_table)))
+      Q_.select("."+a.name).style("fill", d => Qscale(Q([d.x, d.y], a, Q_table)))
     );
   }
 
-  function displayV(V_table) {
-    Vg.select("circle").style("fill", d => Qscale(V([d.x, d.y], V_table)));
+  function displayV(V_, V_table) {
+    V_.select("circle").style("fill", d => Qscale(V([d.x, d.y], V_table)));
   }
 
-  function displayP(Q_table){
+  function displayP(P_, Q_table){
     //var epsilon=0.25;
     actions.forEach(a =>
-      Pg.select("."+a.name).style("fill", d => {
+      P_.select("."+a.name).style("fill", d => {
         var s = [d.x, d.y];
         var good_as = greedy_as(s, Q_table);
         if (_.contains(good_as, a)){
@@ -125,23 +172,41 @@
     );
   }
 
-  cliff = grid1.append("rect").attr("class", "cliff")
+  cliff1 = grid1.append("rect").attr("class", "cliff1")
     .attr("width", S(0.85))
     .attr("height", S(4.85))
     .attr("data-x", 4)
     .attr("data-y", 0)
     .attr("transform", d => "translate(" + X(4+0.05) + "," + Y(0+0.05) + ")" );
 
-  goal = grid1.append("rect").attr("class", "goal")
+  cliff2 = grid2.append("rect").attr("class", "cliff2")
+    .attr("width", S(0.85))
+    .attr("height", S(4.85))
+    .attr("data-x", 4)
+    .attr("data-y", 0)
+    .attr("transform", d => "translate(" + X(4+0.05) + "," + Y(0+0.05) + ")" );
+
+
+  goal1 = grid1.append("rect").attr("class", "goal1")
       .attr("width", S(0.85))
       .attr("height", S(0.85))
       .attr("data-x", 3)
       .attr("data-y", 0)
       .attr("transform", d => "translate(" + X(3+0.05) + "," + Y(0+0.05) + ")" );
 
-  agent_layer = grid1.append("g");
+  goal2 = grid2.append("rect").attr("class", "goal2")
+      .attr("width", S(0.85))
+      .attr("height", S(0.85))
+      .attr("data-x", 3)
+      .attr("data-y", 0)
+      .attr("transform", d => "translate(" + X(3+0.05) + "," + Y(0+0.05) + ")" );
+
+  agent_layer1 = grid1.append("g");
+  agent_layer2 = grid2.append("g");
 
   cell1.exit().remove();
+  cell2.exit().remove();
+
 
 
   // USER INTERFACE
@@ -186,7 +251,7 @@
     .attr("min", 0)
     .attr("max", 1)
     .attr("step", 0.01)
-    .on("mousemove", function () {epsilon=this.value; display();} )
+    .on("mousemove", function () {epsilon=this.value; display1();} )
     .style("position", "absolute")
     .style("left", "30px")
     .style("width", "200px")
@@ -231,7 +296,7 @@
   });
 
   function run_update() {
-    _.range(50).forEach(() => learning_algorithm(episode_histories));
+    _.range(50).forEach(() => learning_algorithm(episode_histories, Q_table1, V_table1));
   }
 
   learning_div.append("button")
@@ -281,55 +346,55 @@
 
   function new_episode() {
 
-    function random_agent_position(){
+    function random_agent_position1(){
       var x = randInt(grid_size), y = randInt(grid_size);
-      if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y")) || 
-          x == JSON.parse(cliff.attr("data-x")) ) {
-        return random_agent_position();
+      if (x == JSON.parse(goal1.attr("data-x")) && y == JSON.parse(goal1.attr("data-y")) || 
+          x == JSON.parse(cliff1.attr("data-x")) ) {
+        return random_agent_position1();
       }
       return [x,y];
     }
 
-    var x_init, y_init;
-    [x_init, y_init] = random_agent_position();
-    var agent = agent_layer.append("circle").attr("class", "agent")
+    var x_init1, y_init1;
+    [x_init1, y_init1] = random_agent_position1();
+    var agent1 = agent_layer1.append("circle").attr("class", "agent")
         .attr("r", S(0.12))
-        .attr("data-x", x_init).attr("cx", X(x_init + 0.475))
-        .attr("data-y", y_init).attr("cy", Y(y_init + 0.475));
+        .attr("data-x", x_init1).attr("cx", X(x_init1 + 0.475))
+        .attr("data-y", y_init1).attr("cy", Y(y_init1 + 0.475));
 
     function step(a, T) {
       T = T == undefined? 1000 : T;
       //debugger
-      var x = JSON.parse(agent.attr("data-x"));
-      var y = JSON.parse(agent.attr("data-y"));
+      var x = JSON.parse(agent1.attr("data-x"));
+      var y = JSON.parse(agent1.attr("data-y"));
       var x2 = x + a.x, y2 = y + a.y;
 
-      if (x2 == goal.attr("data-x") && y2 == goal.attr("data-y")) {
-        agent
+      if (x2 == goal1.attr("data-x") && y2 == goal1.attr("data-y")) {
+        agent1
           .attr("data-x", "")
           .attr("data-y", "")
           .transition(0.6*T)
             .attr("cx", X(x2+0.475))
             .attr("cy", Y(y2+0.475))
             .remove();
-        goal.transition(0.4*T).delay(0.4*T).style("fill", "#ccf");
-        goal.transition(0.1*T).delay(0.8*T).style("fill", "")
+        goal1.transition(0.4*T).delay(0.4*T).style("fill", "#ccf");
+        goal1.transition(0.1*T).delay(0.8*T).style("fill", "")
         return {reward: 1, end: true, state: ""};
 
-      } else if (x2 == cliff.attr("data-x")) {
-        agent
+      } else if (x2 == cliff1.attr("data-x")) {
+        agent1
           .attr("data-x", "")
           .attr("data-y", "")
           .transition(0.6*T)
             .attr("cx", X(x2+0.475))
             .attr("cy", Y(y2+0.475))
             .remove();
-        cliff.transition(0.4*T).delay(0.4*T).style("fill", "#fcc");
-        cliff.transition(0.1*T).delay(0.8*T).style("fill", "")
+        cliff1.transition(0.4*T).delay(0.4*T).style("fill", "#fcc");
+        cliff1.transition(0.1*T).delay(0.8*T).style("fill", "")
         return {reward: -1, end: true, state: ""};
 
       } else if (0 <= x2 && x2 < grid_size && 0 <= y2 && y2 < grid_size) {
-        agent
+        agent1
           .attr("data-x", x2)
           .attr("data-y", y2)
           .transition(0.6*T)
@@ -340,10 +405,10 @@
       } else {
         x2 = 0.3*x2 + 0.7*x;
         y2 = 0.3*y2 + 0.7*y;
-        agent.transition(0.4*T).ease("bounce")
+        agent1.transition(0.4*T).ease("bounce")
             .attr("cx", X(x2+0.45))
             .attr("cy", Y(y2+0.45));
-        agent.transition(0.2*T).delay(0.2*T)
+        agent1.transition(0.2*T).delay(0.2*T)
             .attr("cx", X(x+0.45))
             .attr("cy", Y(y+0.45));
         return {reward: 0, end: false, state: [x, y] };
@@ -351,7 +416,7 @@
 
     }
 
-    return {s0: [x_init, y_init], step: step};
+    return {s0: [x_init1, y_init1], step: step};
   }
 
 
@@ -361,12 +426,12 @@
 
   var episode_histories = [];
 
-  function run_episode(policy, Q_table) {
+  function run_episode(policy) {
     var history = [];
     var episode = new_episode();
     var s = episode.s0;
     var act_interval = setInterval(() => {
-      var a = policy(s, Q_table);
+      var a = policy(s, Q_table1);
       info = episode.step(a, 300);
       history.push({state: s, action: a, reward: info.reward});
       s = info.state;
@@ -386,10 +451,10 @@
     var optimal_as = [];
     var max_reward = -1;
     actions.forEach(a => {
-      if (Q(s,a, Q_table) > max_reward) {
-        max_reward = Q(s,a, Q_table);
+      if (Q(s,a,Q_table) > max_reward) {
+        max_reward = Q(s,a,Q_table);
         optimal_as = [a];
-      } else if (Q(s,a, Q_table) == max_reward){
+      } else if (Q(s,a,Q_table) == max_reward){
         optimal_as.push(a);
       }});
       return optimal_as;
@@ -428,89 +493,90 @@
     return v;
   }
 
-  function update_Q_MC(histories, V_table, Q_table){
+  function update_Q_MC(histories, Q_table_, V_table_){
     var R = 0;
     for (var n in histories){
       var history = histories[n];
       for (var i = history.length-1; i >= 0; i--) {
         var r = history[i].reward, s = history[i].state, a = history[i].action;
-        var v = Q_table[[s, a.name]];
+        var v = Q_table_[[s, a.name]];
         R = discount*R + r;
         if (v == undefined) v = 0;
-        Q_table[[s, a.name]] = v + 0.1*(R-v);
-        var v = V(s, V_table);
-        V_table[[s]] = v + 0.1*(R-v);
+        Q_table_[[s, a.name]] = v + 0.1*(R-v);
+        var v = V(s, V_table_);
+        V_table_[[s]] = v + 0.1*(R-v);
       }
     }
-    display()
+    display1()
   }
 
-  function update_Q_Q(histories, V_table, Q_table){
+  function update_Q_Q(histories, Q_table_, V_table_){
     var R = 0;
     for (var n in histories){
       var history = histories[n];
       for (var i = history.length-1; i >= 0; i--) {
         var r = history[i].reward, s = history[i].state, a = history[i].action;
         if (i != history.length-1){
-          R = discount*Qmax(history[i+1].state) + r;
+          R = discount*Qmax(history[i+1].state, Q_table_) + r;
         } else {
           R = r;
         }
-        var q = Q(s,a, Q_table);
-        Q_table[[s, a.name]] = q + 0.1*(R-q);
-        var v = V(s, V_table);
-        V_table[[s]] = v + 0.1*(R-v);
+        var q = Q(s,a, Q_table_);
+        Q_table_[[s, a.name]] = q + 0.1*(R-q);
+        var v = V(s, V_table_);
+        V_table_[[s]] = v + 0.1*(R-v);
       }
     }
-    display()
+    display1()
   }
 
-  function update_Q_SARSA(histories, V_table, Q_table){
+  function update_Q_SARSA(histories, Q_table_, V_table_){
     var R = 0;
     for (var n in histories){
       var history = histories[n];
       for (var i = history.length-1; i >= 0; i--) {
         var r = history[i].reward, s = history[i].state, a = history[i].action;
-        var v = Q_table[[s, a.name]];
+        var v = Q_table_[[s, a.name]];
         if (i != history.length-1){
-          R = discount*Q(history[i+1].state, history[i+1].action, Q_table) + r;
+          R = discount*Q(history[i+1].state, history[i+1].action, Q_table_) + r;
         } else {
           R = r;
         }
         if (v == undefined) v = 0;
-        Q_table[[s, a.name]] = v + 0.1*(R-v);
-        var v = V(s, V_table);
-        V_table[[s]] = v + 0.1*(R-v);
+        Q_table_[[s, a.name]] = v + 0.1*(R-v);
+        var v = V(s, V_table_);
+        V_table_[[s]] = v + 0.1*(R-v);
       }
     }
-    display()
+    display1()
   }
 
-  function update_Q_SARSA_V(histories, V_table, Q_table){
+  function update_Q_SARSA_V(histories, Q_table_, V_table_){
     var R = 0;
     for (var n in histories){
       var history = histories[n];
       for (var i = history.length-1; i >= 0; i--) {
         var r = history[i].reward, s = history[i].state, a = history[i].action;
-        var q = Q(s,a, Q_table);
+        var q = Q(s,a, Q_table_);
         var v = 0;
         if (i != history.length-1){
-          v = V(history[i+1].state, V_table);
+          v = V(history[i+1].state, V_table_);
           R = discount*v + r;
         } else {
           R = r;
         }
-        Q_table[[s, a.name]] = q + 0.1*(R-q);
-        v = V(s, V_table);
-        V_table[[s]] = v + 0.1*(R-v);
+        Q_table_[[s, a.name]] = q + 0.1*(R-q);
+        v = V(s, V_table_);
+        V_table_[[s]] = v + 0.1*(R-v);
       }
     }
-    display()
+    display1()
   }
 
   var learning_algorithm = update_Q_Q;
+  var learning_algorithm2 = update_Q_Q;
 
-  display();
-  run_episode(epsilon_greedy_policy, Q_table1);
+  display1();
+  run_episode(epsilon_greedy_policy);
 
 })()
