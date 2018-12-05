@@ -518,38 +518,42 @@
     <p>
       It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it breaks down when we add function approximation into the mix.
     </p>
-    <p>
-     First, we're going to take a quick detour through the world of $Q$-functions and off-policy learning in order to see another nice property of paths: they can be re-weighted.
-   </p>
 
 
-    <h2>$Q$-functions and off-policy learning</h2>
+    <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      Until now, we have focused on the problem of value estimation alone. Many times, once we've done value estimation, we'd like to use it to choose a better policy. It's not immediately obvious how to do that 
-
-
-      If an agent wants to earn the most rewards possible, then it makes sense to focus on paths with the highest value. This is the idea behind Q-learning, which is just TD learning with two tiny modifications.
+      Until now, we have focused on the problem of value estimation in a vacuum. Many times, though, we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about the relative values of each of the actions in a state.
     </p>
 
-    <center><p>$Q(s_t, a_t) \hookleftarrow r_t + \gamma V(s_{t+1})$</p></center>
-    <center><p>$V(s) \max_a r_t + Q(s, a)$</p></center>
+    <p>
+      <b>$Q$-functions.</b> The solution is to estimate value over both states and actions using a $Q$-function, $Q(s,a)$. Now, we can select actions according to:
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>a_t~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{argmax}} \limits_{a_t} Q(s_t,a)</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">Best action</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">$Q$-function for state $s_t$</figcaption>
+    </div>
 
     <p>
-      The first thing we've done is chop the value function up into several bins. Each of these bins corresponds to one of the actions available to the agent in state $s_t$.
-    <p>
+      Just by doing this at every time step, our agent can select the best possible policy, given the current value estimate. We can also recover $V(s)$ from $Q(s,a)$ using a simple weighted sum.
+    </p>
 
-    <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 0px;">
+    <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 15px;">
       <center>
         <img style="width: 80%; margin: 0px; " src="figures/qfunc-intro.svg"/>
           
       <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 50%; width: 70%;">
+        <div class="eq-grid" style="grid-gap: 45%; width: 70%;">
           <div style="grid-row: 1; grid-column: 1;">
-            $Q(s,a)$ estimates the value of taking action $a$ in state $s$.
+            $Q(s,a)$ estimates the value of action $a$ when in state $s$.
           </div>
           <div style="grid-row: 1; grid-column: 2;">
-            $V(s)$ estimates the value of a state under the current policy.
+            $V(s)$ estimates the value of state $s$.
           </div>
         </div>
       </figcaption>
@@ -557,15 +561,50 @@
     </figure>
 
     <p>
-      The second thing we've done is write the value of the state as the maximum value estimate across all possible actions. This makes sense, because when the agent is not exploring – when it wants to simply achieve the maximum value possible – it should choose the action which has the highest value estimate. In that case, Q-learning gives us a clear picture of what the best possible outcome looks like.
-    <p>
-
-    <p>
-      <b>Overconfidence of $Q$-learning.</b> Even though $Q$-learning has some nice properties...
+      It's worth noting that this value function is <i>slightly</i> different from the original value. No only is it different: it's better!
     </p>
 
+    <p>
+      The key is that there is usually some difference between an agent's empirical distribution and its policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference! This correction gives a better value estimate for the underlying policy.
+    </p>
 
-    <h2>How function approximation changes things</h2>
+    <p>
+      <b>Off-policy TD learning.</b> One drawback of value estimates is that they are policy-specific. Fortunately, $Q$-functions can help with this problem. Instead of re-weighting by the policy which collected the experience, we can also re-weight $Q$-values by a different policy. This lets us train an agent using data collected under a different policy!
+    </p>
+
+    <p>
+      In the paths perspective, off-policy TD learning corresponds to re-weighting the probabilities of every individual path.
+    </p>
+
+    <p>
+      <b>$Q$-learning.</b> When we train an RL agent, we are often especially interested in estimating the value function of an <i>optimal</i> policy. Since an optimal policy function is an $\textrm{argmax}$ over the highest $Q$-value in each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD learning.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+    
+      <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_t </d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> $Q$-value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 9; max-width:140px;">Next state value</figcaption>
+
+      <div style="grid-row: 5; grid-column: 1;"><d-math>V(s)~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>\mathop{\textrm{max}} \limits_{a} Q(s,a)</d-math></div>
+
+      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> Re-weighted value function </figcaption>
+      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
+
+    </div>
+
+    By reweighting paths with binary probability, $Q$-learning prunes the agent's experience aggressively, keeping only the paths that lead to the highest reward.
+
+
+    <h2>Merging Paths with Function Approximation</h2>
 
     <p>
       Up until now, we've kept track of a one parameter – the value of the running average – for every state. This worked fine for the simple Cliff World example, but it clearly won't work for environments that have very large or even infinite state-spaces. Unfortunately, most interesting RL problems fall under this category.
@@ -611,7 +650,7 @@
 
     <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
       <center>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-approx.svg"/>
+        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-barrier-intro.svg"/>
         <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-barrier.svg"/>
           
       <figcaption class="l-body">
@@ -697,7 +736,7 @@
 
 
 
-    <!-- <h2>Playground</h2>
+    <h2>Playground</h2>
     <br>
 
     <p>
@@ -709,28 +748,8 @@
     </p>
 
     <div id="playground" style="width:600px; height:450px; position:relative;"> </div>
-    <script src="vis/Playground.js" charset="utf-8"></script> -->
+    <script src="vis/Playground.js" charset="utf-8"></script>
 
-
-
-
-
-
-
-    <div id="appendix-a"></div>
-    <h2>Appendix A: When does TD have lower variance than Monte Carlo?</h2>
-
-    <p>
-      In the process of writing this post, we found it useful to re-write the pseudocode for Monte Carlo and TD learning in order to highlight formal connections between the two. Our versions of the algorithms are <i>slightly</i> different from those presented in Sutton.
-    </p>
-
-    <p>
-      An exciting side effect was that, using our version of the two algorithms, we were able to show that TD learning will, on average, always converge as fast or faster than Monte Carlo learning for <i>any</i> RL agent that uses a tabular value function. We could not find any proofs of this sort online, so we wrote our own.
-    </p>
-
-    <p>
-      The full text is <a href="./files/Variance_TD_vs_MC.pdf">here</a>.
-    </p>
 
 </d-article>
 
