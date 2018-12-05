@@ -150,7 +150,7 @@
   </figcaption>
 
   <p>
-    If a state is visited by only one episode, Monte Carlo says its value is the return of that episode. If multiple episodes visit a state, Monte Carlo estimate its value to be the average over them.
+    If a state is visited by only one episode, Monte Carlo says its value is the return of that episode. If multiple episodes visit a state, Monte Carlo estimates its value to be the average over them.
   </p>
 
   <p>
@@ -187,7 +187,7 @@
       <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State value </figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Return</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
       <figcaption style="grid-row: 2; grid-column: 9; max-width:140px;">Next state value</figcaption>
 
     </div>
@@ -220,10 +220,24 @@
   </figure>
 
     <p>
-      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea?
-      The first thing to notice is that the TD update rule is recursive – we can use it to expand $V(s_{t+1})$.
+      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? First, notice that $V(s_{t+1})$ is estimating the expected value of its updates:
     <p>
 
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+    
+      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\simeq~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} ~+~ \gamma V(s'_{t+2}) \bigl] </d-math></div>
+
+      <div style="grid-row: 3; grid-column: 3;"><d-math>\simeq~~</d-math></div>
+      <div style="grid-row: 3; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl] ~~+~~ \mathop{\mathbb{E}} \bigr[ \gamma V(s'_{t+2}) \bigl] </d-math></div>
+
+    </div>
+
+    <p>
+      We can use this to expand the recursive update rule:
+    <p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
   
@@ -237,7 +251,7 @@
     <div style="grid-row: 3; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 3; grid-column: 5;"><d-math>r_t </d-math></div>
     <div style="grid-row: 3; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} \bigr[ r'_{t+1}</d-math></div>
+    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1}</d-math></div>
     <div style="grid-row: 3; grid-column: 11;"><d-math>+</d-math></div>
     <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma V(s'_{t+2}) \bigl]</d-math></div>
 
@@ -245,59 +259,59 @@
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 5; grid-column: 5;"><d-math>r_t </d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}}\limits_{s'_{t+1}} \bigr[ V(s'_{t+2}) \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s'_{t+2}) \bigl]</d-math></div>
 
     <div style="grid-row: 7; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 7; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 7; grid-column: 5;"><d-math>r_t </d-math></div>
     <div style="grid-row: 7; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 7; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 7; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 7; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 7; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}}\limits_{s'_{t+1}} \mathop{\mathbb{E}}\limits_{s''_{t+2}} \bigr[ r''_{t+2} + \gamma V(s''_{t+3})\bigl]</d-math></div>
+    <div style="grid-row: 7; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} + \gamma V(s''_{t+3})\bigl]</d-math></div>
 
 </div>
 
     <p>
-      We could keep repeating this expansion forever. The important thing to realize here is that <i>TD updates are recursive</i>. This complicates things because Monte Carlo just does simple, straightforward averaging. How can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      We could keep repeating this expansion forever. So while the Monte Carlo update is a straightforward running average, the TD rule is a recursive mess. How can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
-      But they are not completely different. Let's expand the TD learning update just a bit more, and then write the Monte Carlo update in terms of reward rather than return.
+      But they are not so different after all. Let's expand the TD learning update a bit more and then rewrite the Monte Carlo update in terms of reward rather than return.
     </p>
   
   <div class="eq-grid" style="grid-gap: 8px;">
 
-    <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;">TD update</figcaption>
+    <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
+    <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
+    <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
+    <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
 
-    <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
-    <div style="grid-row: 2; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 2; grid-column: 5;"><d-math>r_t</d-math></div>
-    <div style="grid-row: 2; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} [ r'_{t+1} ]</d-math></div>
-    <div style="grid-row: 2; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}}\limits_{s'_{t+1}} \mathop{\mathbb{E}}\limits_{s''_{t+2}} [ r''_{t+2} ]</d-math></div>
-    <div style="grid-row: 2; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-
-    <figcaption style="grid-row: 4; grid-column: 1; max-width:140px;">MC update</figcaption>
+    <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">TD update</figcaption>
 
     <div style="grid-row: 5; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 5; grid-column: 5;"><d-math>r_t</d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma r'_{t+1}</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma r_{t+1}</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 r''_{t+2}</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 r_{t+2}</d-math></div>
     <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
     <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
+
+    <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">MC update</figcaption>
 
   </div>
 
 
     <p>
-      A pleasant symmetry has emerged! The difference between Monte Carlo and TD learning comes down to the nested expectation operators in the equation above. It turns out that there is a nice visual interpretation for what these expectation operators are doing. We call it that <i>paths perspective</i> on value learning.
+      A pleasant correspondence has emerged! The difference between Monte Carlo and TD learning comes down to the nested expectation operators in the equation above. It turns out that there is a nice visual interpretation for what these expectation operators are doing. We call it that <i>paths perspective</i> on value learning.
     </p>
 
     <h2>The Paths Perspective</h2>
@@ -325,7 +339,7 @@
     </figure>
 
     <p>
-      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. We need to realize that, wherever two trajectories intersect at a state, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths." <d-footnote>In this example </d-footnote>
+      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. We need to realize that, wherever two trajectories intersect at a state, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths."
     </p>
 
         <figure id="cliffworld-mc" class="l-page" style="margin-top: 0; width: 100%;">
@@ -356,7 +370,7 @@
     </figure>
 
     <p>
-      <b>Estimating value.</b> In this paths perspective, Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible futures</i>.
+      <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
 
         <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
@@ -378,32 +392,143 @@
     </figure>
 
     <p>
-      <b>Effect on variance.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages<d-footnote>In the tabular case.</d-footnote>, the method that gives the better estimate, on average, will be the one that averages over more items. This raises a natural question: Which estimator averages over more items?
+      <b>Effect on variance.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages,<d-footnote>In the tabular case.</d-footnote> the method that gives the better estimate, on average, will be the one that averages over more items. This raises a natural question: Which estimator averages over more items?
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>Var[V(s)]~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\propto~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\frac{C}{\sqrt{\textrm{paths}}} </d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\frac{1}{N} </d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> Variance of estimate </figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Inverse square root of items in the average</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Inverse of the number of items in the average</figcaption>
 
     </div>
 
+    <p>
+      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. This average runs over all trajectories that include $s$, which we will denote $T_s$.
+    </p>
+
+  <div class="eq-grid" style="grid-gap: 8px;">
+
+    <div style="grid-row: 1; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
+    <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
+    <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
+    <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma r'_{t+1}</d-math></div>
+    <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 r''_{t+2}</d-math></div>
+    <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
+
+    <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">MC update</figcaption>
+
+    <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]^{-1}~</d-math></div>
+    <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
+    <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
+    <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma 1</d-math></div>
+    <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 1</d-math></div>
+    <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
+
+    <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of MC update</figcaption>
+
+    <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]^{-1}~</d-math></div>
+    <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~</d-math></div>
+    <div style="grid-row: 9; grid-column: 5;"><d-math>T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
+    <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
+    <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
+
+    <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
+
+
+    <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
+    <div style="grid-row: 13; grid-column: 3;"><d-math>=~~</d-math></div>
+    <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{c}{T_s}</d-math></div>
+
+    <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
+
+  </div>
 
     <p>
-      Right off the bat, we can see that TD learning will never average over <i>fewer</i> items than Monte Carlo. This is because there will never be fewer paths than trajectories. In the worst case scenario, none of the trajectories will intersect and the two estimators will behave identically. Meanwhile, there are certainly situations in which there will be more paths than trajectories. We've already seen a simple example of this in Cliff World, but it's possible to imagine situations where there are dozens of intersections and <i>orders of magnitude</i> more paths than trajectories.
+      Now let's turn our attention to TD learning. The first thing to note is that when trajectories <i>don't</i> intersect, it makes the same updates as Monte Carlo. This is because the "paths" picture looks exactly like the "trajectories" picture.
     </p>
 
     <p>
-      <b>Unique outcomes.</b> The the variance of a Monte Carlo scales with the number of trajectories. It's tempting to say that the variance of TD learning scales with the number of paths, but this would be wrong: the paths that TD learning averages over are not independent of one another. In fact, if every path leads to the same outcome, then TD learning still has no advantage over Monte Carlo. In reality, TD learning decreases variance in proportion to the number of unique outcomes that it can reach. Monte Carlo only ever sees the result of one outcome at a time, so this still puts TD learning at a considerable advantage.
+      Whenever two trajectories do intersect, though, TD learning has the opportunity to do much better. Since TD learning averages over all future paths, it's tempting to say that its variance scales with the number of paths. This is false, though, because many paths are not be independent of each other. <d-footnote>For a concrete example of this idea, look back at the synthetic paths through Cliff World. You'll see, for example, that there are two paths that lead to the outcome where the agent reaches the goal. If we count these paths as separate items in an average, we will end up double-counting the contribution of this outcome. Hence we should count the number of <i>real</i> trajectories that are accessible via "synthetic" paths.</d-footnote>
     </p>
 
-    <h2>Maximizing value with TD learning</h2>
+    <p>
+      We can fix this problem by considering only the real trajectories that include the future states $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD estimates always have equal or lower variance than Monte Carlo estimates.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+
+      <div style="grid-row: 1; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} [ r'_{t+1} ]</d-math></div>
+      <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}}\limits_{s'_{t+1}} \mathop{\mathbb{E}}\limits_{s''_{t+2}} [ r''_{t+2} ]</d-math></div>
+      <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">TD update</figcaption>
+
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]^{-1}~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
+      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \frac{1}{ T_{s'_{t+1}}}</d-math></div>
+      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}}\limits_{s'} \mathop{\mathbb{E}}\limits_{s''} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
+
+      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[V(s)]^{-1}~~</d-math></div>
+      <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~~</d-math></div>
+      <div style="grid-row: 9; grid-column: 5;"><d-math>T_{s}</d-math></div>
+      <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma \frac{T_{s}}{\mathop{\mathbb{E}} \limits_{s'} [T_{s'_{t+1}}]}</d-math></div>
+      <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 \frac{T_{s}}{\mathop{\mathbb{E}}\limits_{s'} \mathop{\mathbb{E}}\limits_{s''} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
+
+      <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
+      <div style="grid-row: 13; grid-column: 3;"><d-math>\leq~~</d-math></div>
+      <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{c}{T_s}</d-math></div>
+
+      <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
+
+    </div>
 
     <p>
+      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it breaks down when we add function approximation into the mix.
+    </p>
+    <p>
+     First, we're going to take a quick detour through the world of $Q$-functions and off-policy learning in order to see another nice property of paths: they can be re-weighted.
+   </p>
+
+
+    <h2>$Q$-functions and off-policy learning</h2>
+
+    <p>
+      Until now, we have focused on the problem of value estimation alone. Many times, once we've done value estimation, we'd like to use it to choose a better policy. It's not immediately obvious how to do that 
+
+
       If an agent wants to earn the most rewards possible, then it makes sense to focus on paths with the highest value. This is the idea behind Q-learning, which is just TD learning with two tiny modifications.
     </p>
 
@@ -414,17 +539,17 @@
       The first thing we've done is chop the value function up into several bins. Each of these bins corresponds to one of the actions available to the agent in state $s_t$.
     <p>
 
-    <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
+    <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 0px;">
       <center>
-        <img style="width: 80%; margin: 0px; " src="figures/q-learning-intro.svg"/>
+        <img style="width: 80%; margin: 0px; " src="figures/qfunc-intro.svg"/>
           
       <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 26%; width: 70%;">
+        <div class="eq-grid" style="grid-gap: 50%; width: 70%;">
           <div style="grid-row: 1; grid-column: 1;">
-            A Q-function is a value function that has been divided up by the actions that can be taken in each state.
+            $Q(s,a)$ estimates the value of taking action $a$ in state $s$.
           </div>
           <div style="grid-row: 1; grid-column: 2;">
-            It's easy to recover a value function from a Q-function. Note that $p(a)$ denotes the probability of action $a$.
+            $V(s)$ estimates the value of a state under the current policy.
           </div>
         </div>
       </figcaption>
@@ -495,7 +620,7 @@
             Imagine changing the Cliff World setup by adding a long barrier.
           </div>
           <div style="grid-row: 1; grid-column: 2;">
-            Now ther Euclidean distance metric gives bad generalization.
+            Now the Euclidean distance metric gives bad generalization.
           </div>
         </div>
       </figcaption>
