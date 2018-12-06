@@ -116,8 +116,6 @@
   </p>
 
 
-
-
   <figure id="cliffworld-mc" class="l-body" style="margin-top: 0; width: 100%;">
 
       <img style="width: 30%; margin: 1%; " src="figures/cliffworld-path1.svg"/>
@@ -214,7 +212,7 @@
   </figure>
 
     <p>
-      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? First, notice that $V(s_{t+1})$ is estimating the expected value of its updates:
+      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as an expectation value over all of its updates:
     <p>
 
 
@@ -241,6 +239,8 @@
     <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
     <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
 
+    <div class="expansion-marker" style="grid-row: 2; grid-column: 9 / 14; "></div>
+
     <div style="grid-row: 3; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 3; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 3; grid-column: 5;"><d-math>r_t </d-math></div>
@@ -248,6 +248,8 @@
     <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 3; grid-column: 11;"><d-math>+</d-math></div>
     <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+2}) \bigl]</d-math></div>
+
+    <div class="expansion-marker" style="grid-row: 4; grid-column: 13 / 18; "></div>
 
     <div style="grid-row: 5; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
@@ -262,11 +264,11 @@
 </div>
 
     <p>
-      We could keep repeating this expansion forever. So while the Monte Carlo update is a straightforward running average, the TD rule is a recursive mess. How can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      We could keep repeating this expansion forever. It looks like Monte Carlo is a straightforward running average but TD learning is a recursive mess. How can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
-      But they are not so different after all. Let's expand the TD learning update a bit more and then rewrite the Monte Carlo update in terms of reward rather than return.
+      But they are not so different after all. Let's rewrite the Monte Carlo update in terms of reward and place it beside the expanded TD update.
     </p>
   
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -399,7 +401,7 @@
     </div>
 
     <p>
-      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. This average runs over all the trajectories $T_s$ that include $s$.
+      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. In the equations below, we show that its variance scales as the inverse of the number of trajectories through $s$. In order to simplify notation, we've introduced a "trajectory counting" operator $T_s$ which gives the number of trajectories that include state $s$.
     </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -416,7 +418,7 @@
 
     <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">MC update</figcaption>
 
-    <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]^{-1}~</d-math></div>
+    <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
     <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
@@ -428,15 +430,16 @@
 
     <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of MC update</figcaption>
 
-    <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]^{-1}~</d-math></div>
+    <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
     <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~</d-math></div>
-    <div style="grid-row: 9; grid-column: 5;"><d-math>T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 5;"><d-math>\bigr( 1</d-math></div>
     <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma 1</d-math></div>
     <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 T_s</d-math></div>
+    <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 1</d-math></div>
     <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
+    <div style="grid-row: 9; grid-column: 17;"><d-math>...~\bigl)</d-math></div>
+    <div style="grid-row: 9; grid-column: 19;"><d-math>\cdot~~ \frac{1}{T_s}</d-math></div>
 
     <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
 
@@ -458,7 +461,7 @@
     </p>
 
     <p>
-      We can fix this problem by considering only the trajectories $T_{s'_{t+1}}, T_{s''_{t+2}}$ that include the future states $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD always gives estimates with equal or lower variance than Monte Carlo.
+      We can fix this problem by considering only the real trajectories $T_{s'_{t+1}}, T_{s''_{t+2}}$ that are part of paths $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD always has equal or lower variance than Monte Carlo.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -467,35 +470,36 @@
       <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
       <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}}\limits_{s'_{t+1}} [ r'_{t+1} ]</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} [ r'_{t+1} ]</d-math></div>
       <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}}\limits_{s'_{t+1}} \mathop{\mathbb{E}}\limits_{s''_{t+2}} [ r''_{t+2} ]</d-math></div>
+      <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} [ r''_{t+2} ]</d-math></div>
       <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
       <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">TD update</figcaption>
 
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]^{-1}~</d-math></div>
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
       <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
       <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
       <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \frac{1}{ T_{s'_{t+1}}}</d-math></div>
+      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \frac{1}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
       <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}}\limits_{s'} \mathop{\mathbb{E}}\limits_{s''} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
       <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
       <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
       <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
 
-      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[V(s)]^{-1}~~</d-math></div>
+      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[V(s)]~~</d-math></div>
       <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~~</d-math></div>
-      <div style="grid-row: 9; grid-column: 5;"><d-math>T_{s}</d-math></div>
+      <div style="grid-row: 9; grid-column: 5;"><d-math>\bigr( 1</d-math></div>
       <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma \frac{T_{s}}{\mathop{\mathbb{E}} \limits_{s'} [T_{s'_{t+1}}]}</d-math></div>
+      <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma \frac{1}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
       <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 \frac{T_{s}}{\mathop{\mathbb{E}}\limits_{s'} \mathop{\mathbb{E}}\limits_{s''} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
       <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
+      <div style="grid-row: 9; grid-column: 17;"><d-math>...~\bigl)</d-math></div>
+      <div style="grid-row: 9; grid-column: 19;"><d-math> \cdot~~ \frac{1}{T_s}</d-math></div>
 
       <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
 
@@ -508,7 +512,7 @@
     </div>
 
     <p>
-      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it changes when we add function approximation into the mix.
+      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it changes when we add function approximation to the mix.
     </p>
 
 
@@ -541,11 +545,14 @@
         <img style="width: 80%; margin: 0px; " src="figures/qfunc-intro.svg"/>
           
       <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 45%; width: 70%;">
+        <div class="eq-grid" style="grid-gap: 20%; width: 70%;">
           <div style="grid-row: 1; grid-column: 1;">
             $Q(s,a)$ estimates the value of action $a$ when in state $s$.
           </div>
           <div style="grid-row: 1; grid-column: 2;">
+            Weighted sum
+          </div>
+          <div style="grid-row: 1; grid-column: 3;">
             $V(s)$ estimates the value of state $s$.
           </div>
         </div>
@@ -554,19 +561,23 @@
     </figure>
 
     <p>
-      It's worth noting that the value function we recover is slightly different from the original value. No only is it different: it's better!
+      It's worth noting that the value function we recover is slightly different from the original value function. And not only is it different, it's better.
     </p>
 
     <p>
-      The key is that there is usually some difference between an agent's empirical distribution of actions and its actual policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference! This correction gives a better value estimate of the underlying policy.
+      The key is that there is often a difference between an agent's empirical distribution of actions and its actual policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference. This correction gives a better value estimate of the underlying policy.
     </p>
 
     <p>
-      <b>Off-policy TD learning.</b> We can use the same re-weighting trick to adjust our value estimate to an entirely different policy. This lets us train an agent using data collected under a different policy, so we call it <i>off-policy</i> value estimation. A good way to think about this is as a process of "re-weighting" paths.
+      <b>Off-policy value estimation.</b> We can also use re-weighting to estimate value under a different policy than the one that collected the experience. We call this <i>off-policy</i> value estimation since the policy we want to find a value estimate under is not the one that was run.
     </p>
 
     <p>
-      <b>$Q$-learning.</b> When we train an RL agent, we are often especially interested in estimating the value function of an <i>optimal</i> policy. Since an optimal policy function is an $\textrm{argmax}$ over the highest $Q$-value in each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD learning.
+      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps most appropriate to say we are re-weighting over <i>paths</i>.
+    </p>
+
+    <p>
+      <b>$Q$-learning.</b> Estimating the value function of an <i>optimal</i> policy is often of special interest. Since an optimal policy function is an $\textrm{argmax}$ over the highest $Q$-value in each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD value estimation.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -593,18 +604,18 @@
     By reweighting paths with binary probabilities, $Q$-learning aggressively prunes the agent's experience, keeping only the paths that lead to the highest return.
 
 
-    <h2>Merging Paths with Function Approximation</h2>
+    <h2>Merging Paths with Function Approximators</h2>
 
     <p>
-      Up until now, we've kept track of a one parameter – the value of the running average – for every state. This worked fine for the simple Cliff World example, but it clearly won't work for environments that have very large or even infinite state-spaces. Unfortunately, most interesting RL problems fall under this category.
+      Up until now, we've kept track of a one parameter – the value of the running average – for every state. This worked fine for the simple Cliff World example, but it clearly won't work for environments that have large or infinite state-spaces. Unfortunately, most interesting RL problems fall under this category.
     </p>
 
     <p>
-      What we want is to learn fewer parameters than there are states. This means that, on average, updating one of these parameters will update the value estimate of more than one state. There are many ways of doing this in practice, but they all fall under the general category of <i>function approximation</i>.
+      In this section, we'll tackle value estimation when there are more states than learnable parameters. This means that, on average, updating one parameters will update more than one value estimate. There are countless methods for doing this: we refer to them collectively as <i>function approximators</i>.
     </p>
 
     <p>
-      To get a better idea of how function approximation changes things, let's return to the Cliff World example. This time, though, the environment has a lot more states. In the figure below, you can see the difference between tabular value estimation.
+      To get a better idea of how function approximators change things, let's return to the Cliff World example. This time, though, the environment has a large number of states.
     </p>
 
     <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
@@ -619,10 +630,10 @@
             As RL environments get bigger, the number of states grows dramatically.
           </div>
           <div style="grid-row: 1; grid-column: 2;">
-            Tabular value functions, which keep value estimates for each individual state, consume a great deal of memory and don't generalize
+            <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize
           </div>
           <div style="grid-row: 1; grid-column: 3;">
-            Function approximators save memory and let agents generalize to states they haven't visited.
+            <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't visited.
           </div>
         </div>
       </figcaption>
@@ -630,7 +641,7 @@
     </figure>
 
     <p>
-      <b>Merging "nearby" paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision of measuring "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between the two.
+      <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision of measuring "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
     </p>
 
     <p>
@@ -681,7 +692,7 @@
     </p>
 
     <p>
-      <b>Learning the meaning of "nearby."</b> Early in training, neural networks, like averagers, tend to merge the wrong paths of experience. In the Cliff Walking example, an untrained neural network might make the same bad value updates as the Euclidean averager.
+      Early in training, neural networks, like averagers, tend to merge the wrong paths of experience. In the Cliff Walking example, an untrained neural network might make the same bad value updates as the Euclidean averager.
     </p>
 
     <p>
@@ -692,12 +703,12 @@
       <center>
         <img style="width: 80%; margin: 15px; " src="figures/latent-distance.png"/>
       <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 3%; width: 80%;">
+        <div class="eq-grid" style="grid-gap: 3%; width: 85%;">
           <div style="grid-row: 1; grid-column: 1;">
-            A robotic hand, controlled by a neural network, that has learned its own concept of which states are "nearby." <d-cite key="Srinivas2018UniversalNetworks"></d-cite>
+            A robotic hand, controlled by a neural network, that has learned its own concept of which states are nearby. <d-cite key="Srinivas2018UniversalNetworks"></d-cite>
           </div>
           <div style="grid-row: 1; grid-column: 2;">
-            Dark blue circles are states that the agent thinks are "nearby" while the light blue circles are states that are far away.
+            Lighter blue $\rightarrow$ more distant.
           </div>
           <div style="grid-row: 1; grid-column: 3;">
             Notice that the shape and location of obstacles affects the agent's notion of distance.
