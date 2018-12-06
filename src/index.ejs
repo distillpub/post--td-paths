@@ -116,7 +116,7 @@
   </p>
 
 
-  <figure id="cliffworld-mc" class="l-body" style="margin-top: 0; width: 100%;">
+  <figure id="cliffworld-mc" class="l-body" style="margin-top: 0; margin-bottom: 0; width: 100%;">
 
       <img style="width: 30%; margin: 1%; " src="figures/cliffworld-path1.svg"/>
       <img style="width: 30%; margin: 1%; " src="figures/cliffworld-path2.svg"/>
@@ -131,7 +131,7 @@
             Other times it falls off the cliff.
           </figcaption>
           <figcaption style="grid-row: 1; grid-column: 3;">
-            Monte Carlo averages over the two trajectories.
+            Monte Carlo averages over trajectories where they intersect.
           </figcaption>
         </div>
       </figcaption>
@@ -170,7 +170,7 @@
       But we <i>can</i> do better! The trick is to use a method called <i>Temporal Difference (TD) learning</i> which bootstraps off of nearby states to make value updates.
     </p>
 
-    <div class="eq-grid" style="grid-gap: 8px;">
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
@@ -228,7 +228,7 @@
     </div>
 
     <p>
-      We can use this to expand the recursive update rule:
+      We can use this to expand the TD update rule recursively:
     <p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -401,7 +401,7 @@
     </div>
 
     <p>
-      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. In the equations below, we show that its variance scales as the inverse of the number of trajectories through $s$. In order to simplify notation, we've introduced a "trajectory counting" operator $T_s$ which gives the number of trajectories that include state $s$.
+      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. In the equations below, we show that its variance scales as the inverse of the number of trajectories through $s$. In order to simplify notation, we've introduced a "trajectory counting" operator $T_s$ which counts the number of trajectories that include state $s$.
     </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -450,6 +450,8 @@
 
     <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
 
+    <figcaption style="grid-row: 14; grid-column: 5/7; max-width:140px;">$C_{MC}$ is a constant</figcaption>
+
   </div>
 
     <p>
@@ -461,7 +463,7 @@
     </p>
 
     <p>
-      We can fix this problem by considering only the real trajectories $T_{s'_{t+1}}, T_{s''_{t+2}}$ that are part of paths $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD always has equal or lower variance than Monte Carlo.
+      We can fix this problem by using the $T$ operator to count only the real trajectories that run through states $s'_{t+1}, s''_{t+2}$, and so forth.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -512,7 +514,7 @@
     </div>
 
     <p>
-      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it changes when we add function approximation to the mix.
+      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how things change when we add function approximation to the mix.
     </p>
 
 
@@ -537,7 +539,7 @@
     </div>
 
     <p>
-      Just by doing this across all states, our agent can find an optimal policy. Anothernice property of $Q$-functions is that we can use them to recover $V(s)$ with a simple weighted sum.
+      Now we can select the optimal policy just by computing $a^*$ across all states. Another nice property of $Q$-functions is that we can use them to recover $V(s)$ with a simple weighted sum.
     </p>
 
     <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 15px;">
@@ -569,15 +571,15 @@
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> We can also use re-weighting to estimate value under a different policy than the one that collected the experience. We call this <i>off-policy</i> value estimation since the policy we want to find a value estimate under is not the one that was run.
+      <b>Off-policy value estimation.</b> We can also use re-weighting to estimate value under a different policy than the one that collected the experience. We call this <i>off-policy</i> value estimation since the policy isn't run through the environment.
     </p>
 
     <p>
-      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps most appropriate to say we are re-weighting over <i>paths</i>.
+      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps more appropriate to say that we are <i>re-weighting over paths</i>.
     </p>
 
     <p>
-      <b>$Q$-learning.</b> Estimating the value function of an <i>optimal</i> policy is often of special interest. Since an optimal policy function is an $\textrm{argmax}$ over the highest $Q$-value in each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD value estimation.
+      <b>$Q$-learning.</b> Estimating the value function of an <i>optimal</i> policy is often of special interest. Since an optimal policy function is an $\textrm{argmax}$ over the $Q$-values of each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD value estimation.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -611,7 +613,7 @@
     </p>
 
     <p>
-      In this section, we'll tackle value estimation when there are more states than learnable parameters. This means that, on average, updating one parameters will update more than one value estimate. There are countless methods for doing this: we refer to them collectively as <i>function approximators</i>.
+      In this section, we'll tackle value estimation when there are more states than learnable parameters. This means that, on average, updating one parameter will update more than one value estimate. There are countless methods for doing this: we refer to them collectively as <i>function approximators</i>.
     </p>
 
     <p>
@@ -641,7 +643,7 @@
     </figure>
 
     <p>
-      <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision of measuring "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
+      <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision to measure "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
     </p>
 
     <p>
