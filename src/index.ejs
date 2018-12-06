@@ -212,7 +212,7 @@
   </figure>
 
     <p>
-      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as an expectation value over all of its updates:
+      What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as the expectation over all of its TD updates:
     <p>
 
 
@@ -283,7 +283,7 @@
     <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
     <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
 
-    <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">TD update</figcaption>
+    <figcaption style="grid-row: 2; grid-column: 1/17; max-width:140px;">TD learning update</figcaption>
 
     <div style="grid-row: 5; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
@@ -295,19 +295,19 @@
     <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
     <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
-    <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">MC update</figcaption>
+    <figcaption style="grid-row: 6; grid-column: 1/17; max-width:140px;">Monte Carlo update</figcaption>
 
   </div>
 
 
     <p>
-      A pleasant correspondence has emerged! The difference between Monte Carlo and TD learning comes down to the nested expectation operators in the equation above. It turns out that there is a nice visual interpretation for what these expectation operators are doing. We call it that <i>paths perspective</i> on value learning.
+      A pleasant correspondence has emerged! The difference between Monte Carlo and TD learning comes down to the nested expectation operators in the equation above. It turns out that there is a nice visual interpretation for what they are doing. We call it that <i>paths perspective</i> on value learning.
     </p>
 
     <h2>The Paths Perspective</h2>
 
     <p>
-      It's easy to think about an agent's experience as a series of trajectories. The grouping is logical and easy to visualize.
+      We often think about an agent's experience as a series of trajectories. The grouping is logical and easy to visualize.
     </p>
 
     <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
@@ -329,7 +329,7 @@
     </figure>
 
     <p>
-      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. We need to realize that, wherever two trajectories intersect at a state, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths."
+      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths."
     </p>
 
         <figure id="cliffworld-mc" class="l-page" style="margin-top: 0; width: 100%;">
@@ -446,7 +446,7 @@
 
     <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
     <div style="grid-row: 13; grid-column: 3;"><d-math>=~~</d-math></div>
-    <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{c}{T_s}</d-math></div>
+    <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{C_{MC}}{T_s}</d-math></div>
 
     <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
 
@@ -505,7 +505,7 @@
 
       <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
       <div style="grid-row: 13; grid-column: 3;"><d-math>\leq~~</d-math></div>
-      <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{c}{T_s}</d-math></div>
+      <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{C_{MC}}{T_s}</d-math></div>
 
       <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
 
@@ -527,17 +527,17 @@
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
-      <div style="grid-row: 1; grid-column: 1;"><d-math>a_t~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{argmax}} \limits_{a_t}</d-math></div>
-      <div style="grid-row: 1; grid-column: 7;"><d-math>Q(s_t,a)</d-math></div>
+      <div style="grid-row: 1; grid-column: 1;"><d-math>a^*~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{argmax}} \limits_{a}</d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>Q(s,a)</d-math></div>
 
-      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">Best action</figcaption>
-      <figcaption style="grid-row: 2; grid-column: 7; max-width:140px;">$Q$-function for state $s_t$</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 1/5;">Best action</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 7;">$Q$-function</figcaption>
     </div>
 
     <p>
-      Just by doing this across all states, our agent can find an optimal policy! We can also recover $V(s)$ from $Q(s,a)$ using a simple weighted sum.
+      Just by doing this across all states, our agent can find an optimal policy. Anothernice property of $Q$-functions is that we can use them to recover $V(s)$ with a simple weighted sum.
     </p>
 
     <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 15px;">
@@ -588,7 +588,7 @@
       <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
       <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
 
-      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> $Q$-value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
       <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
       <figcaption style="grid-row: 2; grid-column: 9; max-width:140px;">Next state value</figcaption>
 
@@ -596,7 +596,7 @@
       <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
       <div style="grid-row: 5; grid-column: 5;"><d-math>\mathop{\textrm{max}} \limits_{a} Q(s,a)</d-math></div>
 
-      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> Re-weighted value function </figcaption>
+      <figcaption style="grid-row: 6; grid-column: 1/4; max-width:200px;"> Value function </figcaption>
       <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
 
     </div>
