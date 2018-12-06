@@ -1,5 +1,5 @@
 
-function compare_vis(main_div, config, run=false){
+function compare_vis(main_div, config){
 
 config = config || {};
 var grid_size = 7;
@@ -29,7 +29,7 @@ function make_label(pos_x, name, latex) {
 }
 
 label_data = {
-   MC: {name: "Monte Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
+   MC: {name: "Monte-Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
    TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_t + \\gamma V(s_{t+1})"},
    Q:  {name: "Q-Learning", eq: "\\begin{array}{l}Q(s_t, a_t) ~\\hookleftarrow~ r_t + \\gamma V(s_{t+1})\\\\ V(s) = \\max_a Q(s,a)\\end{array}"} }
 
@@ -78,6 +78,6 @@ function visualize(){
   });
 }
 
-if (run) { visualize()};
+visualize();
 
 }

@@ -6,9 +6,6 @@
 #playground .goal {
   fill: #44a;
 }
-#playground .cliff {
-  fill: #a44;
-}
 #playground .control-panel {
   position: absolute;
   background-color: #efe7e7;

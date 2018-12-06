@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://distill.pub/template.v2.js"></script>
   <style><%= require("raw-loader!../static/style.css") %></style>
-  <style type="text/css">@import "vis/hero.css";</style>
+  <style type="text/css">@import "vis/playground.css";</style>
   
   <script src="vis/js/d3.min.js" charset="utf-8"></script>
   <script src="vis/js/underscore.js" charset="utf-8"></script>
@@ -21,8 +21,8 @@
   <script src="vis/tug.js" charset="utf-8"></script>
   <script src="vis/tug_baseline.js" charset="utf-8"></script>
   <script src="vis/reinforce.js" charset="utf-8"></script>
-
 </head>
+
 
 <body>
 
@@ -88,18 +88,12 @@
   </p>
 </d-title>
 
-  <script>
-    function do_hero_vis(run) {
-      compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }, run);
-    }
-  </script>
-
   <figure>
     <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"></div>
-    <script> do_hero_vis(false); </script> 
+    <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
   </figure>
 
-  <center> <button type="button" onclick='do_hero_vis(true)'>Run</button> </center>
+  <center> <button type="button" onclick='alert("This button does not work yet.")'>Run</button> </center>
 
 <d-article>
 <!-- <d-cite key="Tsividis2017HumanAtari"></d-cite> -->
@@ -231,7 +225,7 @@
       <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} ~+~ \gamma V(s'_{t+2}) \bigl] </d-math></div>
 
       <div style="grid-row: 3; grid-column: 3;"><d-math>\simeq~~</d-math></div>
-      <div style="grid-row: 3; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl] ~~+~~ \mathop{\mathbb{E}} \bigr[ \gamma V(s'_{t+2}) \bigl] </d-math></div>
+      <div style="grid-row: 3; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl] ~~+~~ \gamma \mathop{\mathbb{E}} \bigr[ V(s'_{t+2}) \bigl] </d-math></div>
 
     </div>
 
@@ -251,25 +245,19 @@
     <div style="grid-row: 3; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 3; grid-column: 5;"><d-math>r_t </d-math></div>
     <div style="grid-row: 3; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1}</d-math></div>
+    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 3; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma V(s'_{t+2}) \bigl]</d-math></div>
+    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+2}) \bigl]</d-math></div>
 
     <div style="grid-row: 5; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 5; grid-column: 5;"><d-math>r_t </d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s'_{t+2}) \bigl]</d-math></div>
-
-    <div style="grid-row: 7; grid-column: 1;"><d-math></d-math></div>
-    <div style="grid-row: 7; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 7; grid-column: 5;"><d-math>r_t </d-math></div>
-    <div style="grid-row: 7; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 7; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
-    <div style="grid-row: 7; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 7; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} + \gamma V(s''_{t+3})\bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 5; grid-column: 17;"><d-math>\gamma^3 \mathop{\mathbb{E}} \mathop{\mathbb{E}} \mathop{\mathbb{E}}  ~ \bigr[ V(s'''_{t+3}) \bigl]</d-math></div>
 
 </div>
 
@@ -373,6 +361,10 @@
       <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
 
+    <p>
+      <b>TODO:</b> Make this next figure interactive. User can toggle 2 trajectories and 4 paths on and off to see them add together (as transparencies). They will add together to give Monte Carlo and TD value updates respectively.</i>.
+    </p>
+
         <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
       <center>
         <img style="width: 20%; margin: 15px; " src="figures/cliffworld-mc.svg"/>
@@ -407,7 +399,7 @@
     </div>
 
     <p>
-      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. This average runs over all trajectories that include $s$, which we will denote $T_s$.
+      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. This average runs over all the trajectories $T_s$ that include $s$.
     </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -462,11 +454,11 @@
     </p>
 
     <p>
-      Whenever two trajectories do intersect, though, TD learning has the opportunity to do much better. Since TD learning averages over all future paths, it's tempting to say that its variance scales with the number of paths. This is false, though, because many paths are not be independent of each other. <d-footnote>For a concrete example of this idea, look back at the synthetic paths through Cliff World. You'll see, for example, that there are two paths that lead to the outcome where the agent reaches the goal. If we count these paths as separate items in an average, we will end up double-counting the contribution of this outcome. Hence we should count the number of <i>real</i> trajectories that are accessible via "synthetic" paths.</d-footnote>
+      Whenever two trajectories do intersect, though, TD learning has the opportunity to do much better. Since TD learning averages over all future paths, it's tempting to say that its variance scales with the number of paths. This is false, though, because many paths are not independent of one other. <d-footnote>For a concrete example of this idea, look back at the synthetic paths through Cliff World. You'll see, for example, that there are two paths that lead to the outcome where the agent reaches the goal. If we count these paths as separate items in an average, we will end up double-counting the contribution of this outcome. Hence we should count the number of <i>real</i> trajectories that are accessible via "synthetic" paths.</d-footnote>
     </p>
 
     <p>
-      We can fix this problem by considering only the real trajectories that include the future states $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD estimates always have equal or lower variance than Monte Carlo estimates.
+      We can fix this problem by considering only the trajectories $T_{s'_{t+1}}, T_{s''_{t+2}}$ that include the future states $s'_{t+1}, s''_{t+2}$, and so forth. Using the expanded TD update we wrote down earlier, we can show that TD always gives estimates with equal or lower variance than Monte Carlo.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -516,31 +508,32 @@
     </div>
 
     <p>
-      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it breaks down when we add function approximation into the mix.
+      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how it changes when we add function approximation into the mix.
     </p>
 
 
     <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      Until now, we have focused on the problem of value estimation in a vacuum. Many times, though, we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about the relative values of each of the actions in a state.
+      There are many situations where we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about how to compare different actions.
     </p>
 
     <p>
-      <b>$Q$-functions.</b> The solution is to estimate value over both states and actions using a $Q$-function, $Q(s,a)$. Now, we can select actions according to:
+      <b>$Q$-functions.</b> The solution is to estimate value over both states <i>and</i> actions using the function $Q(s,a)$. Now, we can select actions according to:
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
       <div style="grid-row: 1; grid-column: 1;"><d-math>a_t~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{argmax}} \limits_{a_t} Q(s_t,a)</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{argmax}} \limits_{a_t}</d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>Q(s_t,a)</d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">Best action</figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">$Q$-function for state $s_t$</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 7; max-width:140px;">$Q$-function for state $s_t$</figcaption>
     </div>
 
     <p>
-      Just by doing this at every time step, our agent can select the best possible policy, given the current value estimate. We can also recover $V(s)$ from $Q(s,a)$ using a simple weighted sum.
+      Just by doing this across all states, our agent can find an optimal policy! We can also recover $V(s)$ from $Q(s,a)$ using a simple weighted sum.
     </p>
 
     <figure id="qfunc-intro" class="l-page" style="width: 100%; margin-top: 15px;">
@@ -561,19 +554,15 @@
     </figure>
 
     <p>
-      It's worth noting that this value function is <i>slightly</i> different from the original value. No only is it different: it's better!
+      It's worth noting that the value function we recover is slightly different from the original value. No only is it different: it's better!
     </p>
 
     <p>
-      The key is that there is usually some difference between an agent's empirical distribution and its policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference! This correction gives a better value estimate for the underlying policy.
+      The key is that there is usually some difference between an agent's empirical distribution of actions and its actual policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference! This correction gives a better value estimate of the underlying policy.
     </p>
 
     <p>
-      <b>Off-policy TD learning.</b> One drawback of value estimates is that they are policy-specific. Fortunately, $Q$-functions can help with this problem. Instead of re-weighting by the policy which collected the experience, we can also re-weight $Q$-values by a different policy. This lets us train an agent using data collected under a different policy!
-    </p>
-
-    <p>
-      In the paths perspective, off-policy TD learning corresponds to re-weighting the probabilities of every individual path.
+      <b>Off-policy TD learning.</b> We can use the same re-weighting trick to adjust our value estimate to an entirely different policy. This lets us train an agent using data collected under a different policy, so we call it <i>off-policy</i> value estimation. A good way to think about this is as a process of "re-weighting" paths.
     </p>
 
     <p>
@@ -601,7 +590,7 @@
 
     </div>
 
-    By reweighting paths with binary probability, $Q$-learning prunes the agent's experience aggressively, keeping only the paths that lead to the highest reward.
+    By reweighting paths with binary probabilities, $Q$-learning aggressively prunes the agent's experience, keeping only the paths that lead to the highest return.
 
 
     <h2>Merging Paths with Function Approximation</h2>
@@ -611,11 +600,11 @@
     </p>
 
     <p>
-      What we want is to learn fewer parameters than there are states. This means that, on average, updating one of these parameters will update the value estimate of more than one state. There are many ways of doing this in practice, but they all fall under the general idea of <i>function approximation</i>.
+      What we want is to learn fewer parameters than there are states. This means that, on average, updating one of these parameters will update the value estimate of more than one state. There are many ways of doing this in practice, but they all fall under the general category of <i>function approximation</i>.
     </p>
 
     <p>
-      To get a better idea of how function approximation changes things, let's return to the Cliff World example. This time, though, the environment has a lot more states than before. In the figure below, you can see the difference between tabular value estimation.
+      To get a better idea of how function approximation changes things, let's return to the Cliff World example. This time, though, the environment has a lot more states. In the figure below, you can see the difference between tabular value estimation.
     </p>
 
     <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
@@ -667,7 +656,7 @@
     </figure>
 
     <p>
-      <b>Merging the wrong paths.</b> The diagram below shows the ill effects of merging the wrong paths a bit more explicitly. Notice that, regardless of whether we use MC or TD learning, the function approximator gives a bad value estimate for the three states immediately above the barrier.
+      <b>Merging the wrong paths.</b> The diagram below shows the ill effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
 
     <figure class="l-page" style="width: 100%; margin-top: 15px;">
@@ -680,7 +669,7 @@
     </figure>
 
     <p>
-      Even though the averager is to blame for poor generalization, TD learning does much worse than Monte Carlo at handling them. This is the price we must pay for using TD learning: it is far more sensitive to these sorts of problems.
+      This is the price we must pay for using TD learning: it's far more sensitive to bad value updates.
     </p>
   
 
@@ -705,7 +694,7 @@
       <figcaption class="l-body">
         <div class="eq-grid" style="grid-gap: 3%; width: 80%;">
           <div style="grid-row: 1; grid-column: 1;">
-            A robotic hand, controlled by a neural network, that has learned its own concept of which states are "nearby."
+            A robotic hand, controlled by a neural network, that has learned its own concept of which states are "nearby." <d-cite key="Srinivas2018UniversalNetworks"></d-cite>
           </div>
           <div style="grid-row: 1; grid-column: 2;">
             Dark blue circles are states that the agent thinks are "nearby" while the light blue circles are states that are far away.
@@ -719,20 +708,19 @@
     </figure>
 
     <p>
-      <b>The best of both worlds?</b> So far, we have seen that TD learning has a clear advantage over Monte Carlo in tabular settings. But for different reasons, Monte Carlo can sometimes beat TD learning (or at least compete with it) when we use function approximation. Even though neural networks can learn to overcome bad generalization, it would be better if we were able to reduce bad generalization in the first place.
+      <b>The best of both worlds?</b> So far, we have seen that TD learning has a clear advantage over Monte Carlo in tabular settings. But for different reasons, Monte Carlo can sometimes beat TD learning (or at least compete with it) when we use function approximation <d-cite key="Amiranashvili2018TDLearning"></d-cite>. Even though neural networks can learn to overcome bad generalization, it would be better if we were able to reduce bad generalization in the first place.
     </p>
 
     <p>
-      That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates. <d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote> Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone.
+      That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates. <d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote> Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone. <b>TODO: add simple interactive figure where we can interpolate.</b>
 
     <p>
-      Researchers usually keep the $\lambda$ coefficient constant when they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe we should gradually decrease $\lambda$ over the course of training...
+      Researchers usually keep the $\lambda$ coefficient constant as they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe we should gradually decrease $\lambda$ over the course of training...
     </p>
 
     <p>
-      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the relationship between Monte Carlo and TD and encourages readers to push the comparison even further.
+      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the ideas around value estimation and inspires you to try some experiments of your own. <b>TODO: make ending stronger.</b>
     </p>
-
 
 
 
@@ -743,11 +731,7 @@
       In order to build intuition about how RL works, in particular about the relationship between various types of value learning, we encourage you to try training your own Gridworld agent in the playground below.
     </p>
 
-    <p>
-      TODO: Explain anything in the demo that we haven't touched on in the main body of the article.
-    </p>
-
-    <div id="playground" style="width:600px; height:450px; position:relative;"> </div>
+    <div id="playground"></div>
     <script src="vis/Playground.js" charset="utf-8"></script>
 
 

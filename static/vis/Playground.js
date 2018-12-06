@@ -1,14 +1,15 @@
 (function() {
+  console.log("shan")
   var stage = d3.select("#playground")
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
-      width = 300,
-      height = 300,
-      grid_size = 5;
+      width = 400,
+      height = 400,
+      grid_size = 4;
 
 
   var outer = stage.append("div")
-    .style("width", "10%")
+    .style("width", "100%")
     .style("position", "relative");
 
   var svg = outer
@@ -22,7 +23,7 @@
   var X = d3.scale.linear().domain([0, grid_size]).range([0, width]);
   var Y = d3.scale.linear().domain([0, grid_size]).range([0, height]);
   var S = d3.scale.linear().domain([0, grid_size]).range([0, width]);
-  var Qscale = d3.scale.linear().domain([-1, 0, 1]).range(["#f22", "#aaa", "#22f"]);
+  var Qscale = d3.scale.linear().domain([0, 1]).range(["#aaa", "#22f"]);
   var Pscale = d3.scale.linear().domain([0, 1]).range(["#d8d0d0", "#000"]);
 
   var line = d3.svg.line().x(d => X(d[0])).y(d => Y(d[1]));
@@ -35,9 +36,8 @@
 
   var cell_data = [];
   _.range(grid_size).forEach( y =>
-    _.range(grid_size - 1 ).forEach(x =>
+    _.range(grid_size ).forEach(x =>
       cell_data.push({x: x, y: y}) ))
-  cell_data.splice(grid_size-2, 1); // remove the cell beneath the goal square
 
   var actions = [ {name: "up", x: 0, y: 1},   {name: "down", x: 0, y: -1},
                   {name: "left", x: -1, y: 0}, {name: "right", x: 1, y: 0}, ];
@@ -69,9 +69,9 @@
   function add_triangles(g) {
     actions.forEach(a =>
       g.append("path").attr("class", "triangle " + a.name)
-        .attr("transform", "translate(" + X(0.25*a.x) + "," + Y(0.25*a.y) + ")")
+        .attr("transform", "translate(" + X(0.18*a.x) + "," + Y(0.18*a.y) + ")")
         .attr("d", function() {
-          var b = 0.0, f = 0.15, s = 0.18;
+          var b = 0.06, f = 0.15, s = 0.15;
           if (a.name == "down")  ps = [[-s, -b], [0, -f], [s, -b]];
           if (a.name == "up")    ps = [[-s, b], [0, f], [s, b]];
           if (a.name == "left")  ps = [[-b,-s], [-f, 0], [-b, s]];
@@ -124,21 +124,14 @@
     );
   }
 
-  cliff = grid.append("rect").attr("class", "cliff")
-    .attr("width", S(0.85))
-    .attr("height", S(4.85))
-    .attr("data-x", 4)
-    .attr("data-y", 0)
-    .attr("transform", d => "translate(" + X(4+0.05) + "," + Y(0+0.05) + ")" );
+  agent_layer = grid.append("g");
 
   goal = grid.append("rect").attr("class", "goal")
-      .attr("width", S(0.85))
-      .attr("height", S(0.85))
-      .attr("data-x", 3)
+      .attr("width", S(0.7))
+      .attr("height", S(0.7))
+      .attr("data-x", 1)
       .attr("data-y", 0)
-      .attr("transform", d => "translate(" + X(3+0.05) + "," + Y(0+0.05) + ")" );
-
-  agent_layer = grid.append("g");
+      .attr("transform", d => "translate(" + X(1+0.1) + "," + Y(0+0.1) + ")" );
 
   cell.exit().remove();
 
@@ -155,53 +148,50 @@
     .style("left", (width+margin.left+margin.right+20)+"px")
     .append("div")
       .style("position", "relative")
-      .style("width", "280px")
+      .style("width", "260px")
       .style("height", "100px")
       .style("margin", "0px")
-  policy_div.append("h2").text("Policy: epsilon-greedy")
-    .style("position", "absolute")
-    .style("left", "10px")
-    .style("top", "-5px")
+      .style("padding", "10px")
+
+  policy_div.append("h2")
+    .style("margin-top", "0px")
+    .text("Epsilon-greedy policy")
+
   policy_div.append("p").text("explore")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("left", "202px")
-    .style("top", "60px")
+    .style("top", "65px")
   policy_div.append("p").text("exploit")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("left", "10px")
-    .style("top", "60px")
-  policy_div.append("p").text("epsilon="+epsilon)
-    .attr('class', 'label')
-    .style("position", "absolute")
-    .style("left", "96px")
-    .style("top", "70px")
+    .style("top", "65px")
 
   policy_div.append("button")
       .text("Run Episode")
       .on("click", () => run_episode(epsilon_greedy_policy) )
       .style("position", "absolute")
-      .style("left", "180px")
-      .style("top", "12px")
+      .style("left", "90px")
+      .style("top", "90px")
 
   policy_div.append("input")
     .attr("type", "range")
     .attr("min", 0)
     .attr("max", 1)
     .attr("step", 0.01)
-    .on("mousemove", function () {epsilon=this.value; display();} )
+    .on("mousemove", function () {epsilon=this.value; display(); })
     .style("position", "absolute")
     .style("left", "30px")
     .style("width", "200px")
     .style("top", "50px")
-    .attr("value", epsilon)
 
   var learning_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "140px")
+      .style("top", "150px")
       .style("left", (width+margin.left+margin.right+20)+"px")
       .style("padding", "10px")
+      .style("width", "260px");
 
 
   learning_div.append("h2")
@@ -244,7 +234,7 @@
 
   var visualize_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "300px")
+      .style("top", "307px")
       .style("left", (width+margin.left+margin.right+20)+"px")
       .style("padding", "10px")
       .style("width", "260px");
@@ -255,9 +245,9 @@
 
   var vis_select = visualize_div.append("select");
   vis_select.append("option").attr("value", "policy").text("policy")
-  vis_select.append("option").attr("value", "Q").text("Q(s,a)")
+  vis_select.append("option").attr("value", "Q").text("Q")
     .attr("selected", "selected")
-  vis_select.append("option").attr("value", "V").text("V(s)")
+  vis_select.append("option").attr("value", "V").text("V")
   vis_select.on("change", function() {
     if (this.value == "policy") {
       Pg.style("display", "");
@@ -286,8 +276,7 @@
 
     function random_agent_position(){
       var x = randInt(grid_size), y = randInt(grid_size);
-      if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y")) || 
-          x == JSON.parse(cliff.attr("data-x")) ) {
+      if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y"))) {
         return random_agent_position();
       }
       return [x,y];
@@ -306,7 +295,6 @@
       var x = JSON.parse(agent.attr("data-x"));
       var y = JSON.parse(agent.attr("data-y"));
       var x2 = x + a.x, y2 = y + a.y;
-
       if (x2 == goal.attr("data-x") && y2 == goal.attr("data-y")) {
         agent
           .attr("data-x", "")
@@ -315,22 +303,11 @@
             .attr("cx", X(x2+0.475))
             .attr("cy", Y(y2+0.475))
             .remove();
+        //agent.transition().delay(0.6*T)
+        //  .style("display", "none"); //remove();
         goal.transition(0.4*T).delay(0.4*T).style("fill", "#ccf");
         goal.transition(0.1*T).delay(0.8*T).style("fill", "")
         return {reward: 1, end: true, state: ""};
-
-      } else if (x2 == cliff.attr("data-x")) {
-        agent
-          .attr("data-x", "")
-          .attr("data-y", "")
-          .transition(0.6*T)
-            .attr("cx", X(x2+0.475))
-            .attr("cy", Y(y2+0.475))
-            .remove();
-        cliff.transition(0.4*T).delay(0.4*T).style("fill", "#fcc");
-        cliff.transition(0.1*T).delay(0.8*T).style("fill", "")
-        return {reward: -1, end: true, state: ""};
-
       } else if (0 <= x2 && x2 < grid_size && 0 <= y2 && y2 < grid_size) {
         agent
           .attr("data-x", x2)
@@ -339,7 +316,6 @@
             .attr("cx", X(x2+0.45))
             .attr("cy", Y(y2+0.45));
         return {reward: 0, end: false, state: [x2, y2] };
-
       } else {
         x2 = 0.3*x2 + 0.7*x;
         y2 = 0.3*y2 + 0.7*y;
@@ -356,6 +332,8 @@
 
     return {s0: [x_init, y_init], step: step};
   }
+
+
 
 
 
