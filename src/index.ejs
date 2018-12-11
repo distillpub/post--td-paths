@@ -257,9 +257,9 @@
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
     <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
-    <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 17;"><d-math>\gamma^3 \mathop{\mathbb{E}} \mathop{\mathbb{E}} \mathop{\mathbb{E}}  ~ \bigr[ V(s'''_{t+3}) \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}}  ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 15;"><d-math>+~</d-math></div>
+    <div style="grid-row: 5; grid-column: 17;"><d-math>...~~</d-math></div>
 
 </div>
 
@@ -273,29 +273,47 @@
   
   <div class="eq-grid" style="grid-gap: 8px;">
 
-    <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
-    <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
-    <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
-    <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
-    <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
 
-    <figcaption style="grid-row: 2; grid-column: 1/17; max-width:140px;">TD learning update</figcaption>
 
+
+    <figcaption style="grid-row: 1; grid-column: 1/3; max-width:140px;"><b>MC update</b></figcaption>
+    <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
+    <div style="grid-row: 2; grid-column: 3;"><d-math>~\hookleftarrow~~</d-math></div>
+    <div style="grid-row: 2; grid-column: 5;"><d-math>r_t</d-math></div>
+    <div style="grid-row: 2; grid-column: 7;"><d-math>+~</d-math></div>
+    <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma ~ r_{t+1}</d-math></div>
+    <div style="grid-row: 2; grid-column: 11;"><d-math>+~</d-math></div>
+    <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 ~ r_{t+2}</d-math></div>
+    <div style="grid-row: 2; grid-column: 15;"><d-math>+~</d-math></div>
+    <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
+
+
+    <figcaption style="grid-row: 3; grid-column: 5/7; max-width:90px; margin: 0px; padding: 0px;">Reward from present path.</figcaption>
+
+    <figcaption style="grid-row: 3; grid-column: 9/11; max-width:125px; margin: 0px; padding: 0px;">Reward from present path.</figcaption>
+
+    <figcaption style="grid-row: 3; grid-column: 13/14; max-width:125px; margin: 0px; padding: 0px;">Reward from present path...</figcaption>
+
+    <figcaption style="grid-row: 4; grid-column: 1/3; max-width:140px; margin-top: 22px;"><b>TD update</b></figcaption>
     <div style="grid-row: 5; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
-    <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
+    <div style="grid-row: 5; grid-column: 3;"><d-math>~\hookleftarrow~~</d-math></div>
     <div style="grid-row: 5; grid-column: 5;"><d-math>r_t</d-math></div>
-    <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma r_{t+1}</d-math></div>
-    <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 r_{t+2}</d-math></div>
-    <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+    <div style="grid-row: 5; grid-column: 7;"><d-math>+~</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 11;"><d-math>+~</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 15;"><d-math>+~</d-math></div>
     <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
-    <figcaption style="grid-row: 6; grid-column: 1/17; max-width:140px;">Monte Carlo update</figcaption>
+    <figcaption style="grid-row: 6; grid-column: 5/7; max-width:90px; margin: 0px; padding: 0px;">Reward from present path.</figcaption>
+
+    <figcaption style="grid-row: 6; grid-column: 9/11; max-width:125px; margin: 0px; padding: 0px;">Expectation over paths intersecting present path.</figcaption>
+
+    <figcaption style="grid-row: 6; grid-column: 13/14; max-width:125px; margin: 0px; padding: 0px;">Expectation over paths intersecting <i>paths intersecting</i> present path...</figcaption>
+
+<!--
+    <figcaption style="grid-row: 6; grid-column: 9/11; max-width:125px; margin: 0px; padding: 0px;">TD averages the reward of <i>all</i> trajectories passing through <d-math>s_{t+1}</d-math></figcaption>
+  -->
 
   </div>
 
@@ -386,7 +404,7 @@
     </figure>
 
     <p>
-      <b>Effect on variance.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages,<d-footnote>In the tabular case.</d-footnote> the method that gives the better estimate, on average, will be the one that averages over more items. This raises a natural question: Which estimator averages over more items?
+      <b>Comparing the two.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages,<d-footnote>In the tabular case.</d-footnote> the method that gives the better estimate is the one that averages over more items. This raises a natural question: Which estimator averages over more items?
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -401,120 +419,48 @@
     </div>
 
     <p>
-      <b>Comparing the estimators.</b> Let's start with the Monte Carlo estimator. As we've seen, it computes $V(s)$ as a simple average. In the equations below, we show that its variance scales as the inverse of the number of trajectories through $s$. In order to simplify notation, we've introduced a "trajectory counting" operator $T_s$ which counts the number of trajectories that include state $s$.
-    </p>
-
-  <div class="eq-grid" style="grid-gap: 8px;">
-
-    <div style="grid-row: 1; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
-    <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
-    <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
-    <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma r'_{t+1}</d-math></div>
-    <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 r''_{t+2}</d-math></div>
-    <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
-
-    <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">MC update</figcaption>
-
-    <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
-    <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
-    <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
-    <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma 1</d-math></div>
-    <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 1</d-math></div>
-    <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
-
-    <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of MC update</figcaption>
-
-    <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-    <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~</d-math></div>
-    <div style="grid-row: 9; grid-column: 5;"><d-math>\bigr( 1</d-math></div>
-    <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma 1</d-math></div>
-    <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 1</d-math></div>
-    <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
-    <div style="grid-row: 9; grid-column: 17;"><d-math>...~\bigl)</d-math></div>
-    <div style="grid-row: 9; grid-column: 19;"><d-math>\cdot~~ \frac{1}{T_s}</d-math></div>
-
-    <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
-
-
-    <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-    <div style="grid-row: 13; grid-column: 3;"><d-math>=~~</d-math></div>
-    <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{C_{MC}}{T_s}</d-math></div>
-
-    <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of MC estimate</figcaption>
-
-    <figcaption style="grid-row: 14; grid-column: 5/7; max-width:140px;">$C_{MC}$ is a constant</figcaption>
-
-  </div>
-
-    <p>
-      Now let's turn our attention to TD learning. The first thing to note is that when trajectories <i>don't</i> intersect, it makes the same updates as Monte Carlo. This is because the "paths" picture looks exactly like the "trajectories" picture.
+      So far, we have seen that TD learning never averages over <i>fewer</i> trajectories than Monte Carlo. On the other hand, it can often take advantage of synthetic trajectories in order to average over <i>more</i> trajectories. Thus it seems likely that TD estimates will have lower variance.
     </p>
 
     <p>
-      Whenever two trajectories do intersect, though, TD learning has the opportunity to do much better. Since TD learning averages over all future paths, it's tempting to say that its variance scales with the number of paths. This is false, though, because many paths are not independent of one other. <d-footnote>For a concrete example of this idea, look back at the synthetic paths through Cliff World. You'll see, for example, that there are two paths that lead to the outcome where the agent reaches the goal. If we count these paths as separate items in an average, we will end up double-counting the contribution of this outcome. Hence we should count the number of <i>real</i> trajectories that are accessible via "synthetic" paths.</d-footnote>
-    </p>
-
-    <p>
-      We can fix this problem by using the $T$ operator to count only the real trajectories that run through states $s'_{t+1}, s''_{t+2}$, and so forth.
+      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the Appendix, but for now, we'll simply show the final equations. Note that we've introduced a new piece of notation, $T(s)$, which denotes the number of trajectories that contain state $s$.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
 
-      <div style="grid-row: 1; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
-      <div style="grid-row: 1; grid-column: 3;"><d-math>=~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>r_t</d-math></div>
-      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} [ r'_{t+1} ]</d-math></div>
-      <div style="grid-row: 1; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 1; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \mathop{\mathbb{E}} [ r''_{t+2} ]</d-math></div>
-      <div style="grid-row: 1; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 1; grid-column: 17;"><d-math>...</d-math></div>
+      <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;"><b>MC variance</b></figcaption>
 
-      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;">TD update</figcaption>
+      <div style="grid-row: 2; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
+      <div style="grid-row: 2; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 9;"><d-math>~\frac{\gamma}{T(s_{t+1})}</d-math></div>
+      <div style="grid-row: 2; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 13;"><d-math>~~\frac{\gamma^2}{T(s_{t+2})}</d-math></div>
+      <div style="grid-row: 2; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
 
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
-      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
-      <div style="grid-row: 5; grid-column: 5;"><d-math>1</d-math></div>
-      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \frac{1}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
-      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
-      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
-      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
+      <figcaption style="grid-row: 4; grid-column: 5;"><d-math>~~~~=</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 9;"><d-math>~~~~~~~~\geq</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 13;"><d-math>~~~~~~~~~\geq</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 17;"><d-math>\geq</d-math></figcaption>
 
-      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[V(s)]~~</d-math></div>
-      <div style="grid-row: 9; grid-column: 3;"><d-math>\propto~~</d-math></div>
-      <div style="grid-row: 9; grid-column: 5;"><d-math>\bigr( 1</d-math></div>
-      <div style="grid-row: 9; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 9;"><d-math>\gamma \frac{1}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
-      <div style="grid-row: 9; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 13;"><d-math>\gamma^2 \frac{1}{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T_{s'_{t+1}} T_{s''_{t+2}}]}</d-math></div>
-      <div style="grid-row: 9; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 9; grid-column: 17;"><d-math>...~\bigl)</d-math></div>
-      <div style="grid-row: 9; grid-column: 19;"><d-math> \cdot~~ \frac{1}{T_s}</d-math></div>
+      <figcaption style="grid-row: 6; grid-column: 0; max-width:140px;"><b>TD variance</b></figcaption>
 
-      <figcaption style="grid-row: 10; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
-
-      <div style="grid-row: 13; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-      <div style="grid-row: 13; grid-column: 3;"><d-math>\leq~~</d-math></div>
-      <div style="grid-row: 13; grid-column: 5;"><d-math>\frac{C_{MC}}{T_s}</d-math></div>
-
-      <figcaption style="grid-row: 14; grid-column: 1; max-width:140px;">Var. of TD estimate</figcaption>
-
-    </div>
+      <div style="grid-row: 7; grid-column: 1;"><d-math>Var[V(s_t)]~~</d-math></div>
+      <div style="grid-row: 7; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 7; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
+      <div style="grid-row: 7; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 7; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
+      <div style="grid-row: 7; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 7; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
+      <div style="grid-row: 7; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 7; grid-column: 17;"><d-math>...</d-math></div>
+  </div>
 
     <p>
-      It's important to note that this inequality only holds for tabular value estimators. Later on we'll see how things change when we add function approximation to the mix.
+      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than MC estimates.
     </p>
 
 
@@ -748,6 +694,8 @@
     <script src="vis/Playground.js" charset="utf-8"></script>
 
 
+
+
 </d-article>
 
 
@@ -755,7 +703,144 @@
 <d-appendix>
   <h3>Acknowledgments</h3>
   <p>
+    Thanks to these people for advice and feedback on early versions. Thanks to the Google AI Residency Program for supporting me on this project. Some other thank-you's.
   </p>
+
+  <h3>Variance Analysis</h3>
+
+    <p>
+      This section shows a quick derivation of the variance equations presented in the <i>Paths Perspective</i> section. As a broad overview, we will start with the expanded update rules we wrote down <i>Beating Monte Carlo</i> section. Next, we will analyze the variance of each individual term. Finally, we will write an expression for the variance of the MC and TD <i>estimates</i> using the fact that both estimates are just averages over one or more updates.
+    </p>
+
+    <p>
+      Let's start with Monte Carlo. We'll also need to introduce a new piece of notation: <d-math>T(s)</d-math>, which denotes the number of trajectories that pass through state <d-math>s</d-math>.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+
+      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:140px;">MC update</figcaption>
+
+      <div style="grid-row: 2; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>=~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>~r_t</d-math></div>
+      <div style="grid-row: 2; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma r'_{t+1}</d-math></div>
+      <div style="grid-row: 2; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 r''_{t+2}</d-math></div>
+      <div style="grid-row: 2; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 4; grid-column: 1/5; max-width:140px;">MC update variance</figcaption>
+
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>~1</d-math></div>
+      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma</d-math></div>
+      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2</d-math></div>
+      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 7; grid-column: 1/5; max-width:140px;">MC variance</figcaption>
+
+      <div style="grid-row: 8; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
+      <div style="grid-row: 8; grid-column: 3;"><d-math>\propto~</d-math></div>
+      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 8; grid-column: 17;"><d-math>...</d-math></div>
+
+    </div>
+
+    <p>
+      Now let's do the same exact thing for TD learning.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+
+      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:140px;">TD update</figcaption>
+
+      <div style="grid-row: 2; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>=~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>~r_t</d-math></div>
+      <div style="grid-row: 2; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} [ r'_{t+1} ]</d-math></div>
+      <div style="grid-row: 2; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}} [ r''_{t+2} ]</d-math></div>
+      <div style="grid-row: 2; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 4; grid-column: 1/5; max-width:140px;">TD update variance</figcaption>
+
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>~1</d-math></div>
+      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 9;"><d-math>\frac{\gamma}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
+      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 13;"><d-math>\frac{\gamma^2}{ \mathop{\mathbb{EE}} [T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
+      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
+
+      <figcaption style="grid-row: 7; grid-column: 1/5; max-width:140px;">TD variance</figcaption>
+
+      <div style="grid-row: 8; grid-column: 1;"><d-math>Var[ V(s_t)]~~</d-math></div>
+      <div style="grid-row: 8; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ]} </d-math></div>
+      <div style="grid-row: 8; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
+      <div style="grid-row: 8; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 8; grid-column: 17;"><d-math>...</d-math></div>
+
+    </div>
+
+
+    <p>
+      Now, if we rewrite the third line of the Monte Carlo analysis alongside the third line of the TD analysis, we can get the same expression that we wrote down at the end of the <i>Paths Perspective</i> section:
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+
+      <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;">MC variance</figcaption>
+
+      <div style="grid-row: 2; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
+      <div style="grid-row: 2; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 9;"><d-math>~\frac{\gamma}{T(s_{t+1})}</d-math></div>
+      <div style="grid-row: 2; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 13;"><d-math>~~\frac{\gamma^2}{T(s_{t+2})}</d-math></div>
+      <div style="grid-row: 2; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
+
+
+      <figcaption style="grid-row: 4; grid-column: 5;"><d-math>~~~~=</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 9;"><d-math>~~~~~~~~\geq</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 13;"><d-math>~~~~~~~~~\geq</d-math></figcaption>
+      <figcaption style="grid-row: 4; grid-column: 17;"><d-math>\geq</d-math></figcaption>
+
+      <figcaption style="grid-row: 5; grid-column: 0; max-width:140px;">TD variance</figcaption>
+
+      <div style="grid-row: 6; grid-column: 1;"><d-math>Var[V(s_t)]~~</d-math></div>
+      <div style="grid-row: 6; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 6; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
+      <div style="grid-row: 6; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 6; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
+      <div style="grid-row: 6; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 6; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T(s''_{t+2})]}</d-math></div>
+      <div style="grid-row: 6; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 6; grid-column: 17;"><d-math>...</d-math></div>
+    </div>
+
+    <p>
+      The next step is to note the 1:1 correspondence of terms in the two sums. For all <d-math>t' > t</d-math>we can say that <d-math>\mathop{\mathbb{E}} [T(s_{t'})] \geq T(s_{t'}) </d-math>. This means that the variance of the TD estimate will be equal or lower than the Monte Carlo estimate.
+    </p>
 
 
   <d-footnote-list></d-footnote-list>
