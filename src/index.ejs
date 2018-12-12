@@ -21,6 +21,13 @@
   <script src="vis/tug.js" charset="utf-8"></script>
   <script src="vis/tug_baseline.js" charset="utf-8"></script>
   <script src="vis/reinforce.js" charset="utf-8"></script>
+
+  <style type="text/css">
+    .eq-block {
+      /*border-left: solid 2px rgba(0, 0, 0, 0.2);*/
+      /*margin: 0 auto;*/
+    }
+  </style>
 </head>
 
 
@@ -138,7 +145,7 @@
   </figure>
 
   <figcaption class="l-gutter">
-    <b>Cliff World</b> <d-cite key="?"></d-cite> is a classic RL example, where the agent learns to walk along a <span style="background: #FFD5D5">cliff</span> to reach a <span style="background: #D5D5FF">goal</span>.
+    <b>Cliff World</b> <d-cite key="Sutton2017ReinforcementIntroduction"></d-cite> is a classic RL example, where the agent learns to walk along a <span style="background: #FFD5D5">cliff</span> to reach a <span style="background: #D5D5FF">goal</span>.
   </figcaption>
 
   <p>
@@ -188,27 +195,34 @@
       Under this update rule, intersections between two trajectories are handled differently. TD learning merges them so that the return flows backwards to all preceding states.
     <p>
 
-  <figure id="cliffworld-td" class="l-body" style="margin-top: 0; width: 100%;">
-    <center>
-      <img style="width: 30%; margin: 5px; " src="figures/cliffworld-path1.svg"/>
-      <img style="width: 30%; margin: 5px; " src="figures/cliffworld-path2.svg"/>
-      <img style="width: 30%; margin: 5px; " src="figures/cliffworld-td.svg"/>
-      <figcaption>
+  <style>
+  #cliffworld-td {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-auto-flow: column;
+  }
+  #cliffworld-td .figcaption {
 
-        <div class="eq-grid" style="grid-gap: 15%; width: 100%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            Sometimes the agent reaches its goal.
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            Other times it falls off the cliff.
-          </div>
-          <div style="grid-row: 1; grid-column: 3;">
-            TD learning merges paths where they intersect.
-          </div>
-        </div>
-      </figcaption>
+  }
+  </style>
+  <figure id="cliffworld-td" class="l-body">
+      <img src="figures/cliffworld-path1.svg"/>
+      <div class="figcaption">
+        Sometimes the agent reaches its goal.
+      </div>
 
-    </center>
+      <img src="figures/cliffworld-path2.svg"/>
+      <div class="figcaption">
+        Other times it falls off the cliff.
+      </div>
+
+      <img src="figures/cliffworld-td.svg"/>
+      <div class="figcaption">
+        TD learning merges paths where they intersect.
+      </div>
   </figure>
 
     <p>
@@ -381,16 +395,33 @@
       <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
 
-    <p>
-      <b>TODO:</b> Make this next figure interactive. User can toggle 2 trajectories and 4 paths on and off to see them add together (as transparencies). They will add together to give Monte Carlo and TD value updates respectively.</i>.
-    </p>
-
         <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
       <center>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-mc.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-td.svg"/>
+
+        <figure style="width: 20%; margin: 15px; display: inline-block;">
+          <img src="figures/cliffworld-mc.svg"/>
+          <figcaption class="l-body">Monte Carlo estimate</figcaption>
+        </figure>
+
+        <figure style="width: 10%; margin: 5px; display: inline-block;">
+          <img src="figures/traj-thumbnail.svg"/>
+          <figcaption class="l-body">Trajectories</figcaption>
+        </figure>
+
+        <figure style="width: 5%; margin: 5px; display: inline-block;">
+        </figure>
+
+        <figure style="width: 20%; margin: 15px; display: inline-block;">
+          <img src="figures/cliffworld-td.svg"/>
+          <figcaption class="l-body">TD estimate</figcaption>
+        </figure>
+
+        <figure style="width: 10%; margin: 5px; display: inline-block;">
+          <img src="figures/path-thumbnail.svg"/>
+          <figcaption style="min-width:150px;" class="l-body">Synthetic trajectories</figcaption>
+        </figure>
       
-      <figcaption class="l-body">
+<!--       <figcaption class="l-body">
         <div class="eq-grid" style="grid-gap: 30%; width: 40%;">
           <div style="grid-row: 1; grid-column: 1;">
             Monte Carlo value estimate.
@@ -399,7 +430,7 @@
             TD value estimate.
           </div>
         </div>
-      </figcaption>
+      </figcaption> -->
       </center>
     </figure>
 
