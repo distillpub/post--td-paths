@@ -41,14 +41,7 @@
   "authors": [
 
     {
-      "author": "Chris Olah",
-      "authorURL": "https://colah.github.io/",
-      "affiliation": "Google Brain Team",
-      "affiliationURL": "https://g.co/brain"
-    },
-
-    {
-      "author": "Sam Greydanus",
+      "author": "Sam Greydanus<d-footnote>Author order not finalized.</d-footnote>",
       "authorURL": "https://greydanus.github.io/about.html",
       "affiliation": "Google Brain Team",
       "affiliationURL": "https://g.co/brain"
@@ -57,6 +50,13 @@
     {
       "author": "Justin Gilmer",
       "authorURL": "https://scholar.google.com/citations?user=Ml_vQ8MAAAAJ&hl=en",
+      "affiliation": "Google Brain Team",
+      "affiliationURL": "https://g.co/brain"
+    },
+
+    {
+      "author": "Chris Olah",
+      "authorURL": "https://colah.github.io/",
       "affiliation": "Google Brain Team",
       "affiliationURL": "https://g.co/brain"
     }
@@ -95,12 +95,12 @@
   </p>
 </d-title>
 
-  <figure>
-    <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;"></div>
+  <figure style="width:1000px; height:410px; margin:auto; position:relative;" >
+    <button type="button" style="margin-left:20px;" onclick='alert("This button does not work yet.")'>Play</button>
+    <div id="compare_hero" style="width:1000px; height:350px; margin:auto; position:relative;">
+    </div>
     <script> compare_vis(d3.select("#compare_hero"), {algs: ["MC", "TD", "Q"] }); </script> 
   </figure>
-
-  <center> <button type="button" onclick='alert("This button does not work yet.")'>Run</button> </center>
 
 <d-article>
 <!-- <d-cite key="Tsividis2017HumanAtari"></d-cite> -->
@@ -122,27 +122,34 @@
     The natural way to estimate the value of a state is as the average return you observe from that state. We call this Monte Carlo value estimation. 
   </p>
 
+  <style>
+  #cliffworld-mc {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="cliffworld-mc" class="l-body">
+      <img src="figures/cliffworld-path1.svg"/>
+      <div class="figcaption">
+        Sometimes the agent reaches its goal.
+      </div>
 
-  <figure id="cliffworld-mc" class="l-body" style="margin-top: 0; margin-bottom: 0; width: 100%;">
+      <img src="figures/cliffworld-path2.svg"/>
+      <div class="figcaption">
+        Other times it falls off the cliff.
+      </div>
 
-      <img style="width: 30%; margin: 1%; " src="figures/cliffworld-path1.svg"/>
-      <img style="width: 30%; margin: 1%; " src="figures/cliffworld-path2.svg"/>
-      <img style="width: 30%; margin: 1%; " src="figures/cliffworld-mc.svg"/>
-
-      <figcaption>
-        <div class="eq-grid" style="grid-gap: 20%; width: 100%; float: right;">
-          <figcaption style="grid-row: 1; grid-column: 1;">
-            Sometimes the agent reaches its goal.
-          </figcaption>
-          <figcaption style="grid-row: 1; grid-column: 2;">
-            Other times it falls off the cliff.
-          </figcaption>
-          <figcaption style="grid-row: 1; grid-column: 3;">
-            Monte Carlo averages over trajectories where they intersect.
-          </figcaption>
-        </div>
-      </figcaption>
+      <img src="figures/cliffworld-mc.svg"/>
+      <div class="figcaption">
+        Monte Carlo averages over trajectories where they intersect.
+      </div>
   </figure>
+
 
   <figcaption class="l-gutter">
     <b>Cliff World</b> <d-cite key="Sutton2017ReinforcementIntroduction"></d-cite> is a classic RL example, where the agent learns to walk along a <span style="background: #FFD5D5">cliff</span> to reach a <span style="background: #D5D5FF">goal</span>.
@@ -161,7 +168,7 @@
   <div class="eq-grid" style="grid-gap: 8px;">
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>R_t</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{t} ~~ \gamma^{t} ~~ r_{t+1}</d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State value </figcaption>
       <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;"> Return </figcaption>
@@ -202,10 +209,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto;
     grid-column-gap: 20px;
+    grid-row-gap: 10px;
     grid-auto-flow: column;
-  }
-  #cliffworld-td .figcaption {
-
   }
   </style>
   <figure id="cliffworld-td" class="l-body">
@@ -325,10 +330,6 @@
 
     <figcaption style="grid-row: 6; grid-column: 13/14; max-width:125px; margin: 0px; padding: 0px;">Expectation over paths intersecting <i>paths intersecting</i> present path...</figcaption>
 
-<!--
-    <figcaption style="grid-row: 6; grid-column: 9/11; max-width:125px; margin: 0px; padding: 0px;">TD averages the reward of <i>all</i> trajectories passing through <d-math>s_{t+1}</d-math></figcaption>
-  -->
-
   </div>
 
 
@@ -342,29 +343,38 @@
       We often think about an agent's experience as a series of trajectories. The grouping is logical and easy to visualize.
     </p>
 
-    <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
-      <center>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-traj-1of2.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-traj-2of2.svg"/>
-      
-      <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 50%; width: 30%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            Trajectory 1
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            Trajectory 2
-          </div>
-        </div>
-      </figcaption>
-      </center>
-    </figure>
+  <style>
+  #cliffworld-trajectories {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 425px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="cliffworld-trajectories" class="l-body">
+      <img src="figures/cliffworld-traj-1of2.svg"/>
+      <div class="figcaption">
+        Trajectory 1.
+      </div>
+
+      <img src="figures/cliffworld-traj-2of2.svg"/>
+      <div class="figcaption">
+        Trajectory 2.
+      </div>
+  </figure>
+
 
     <p>
       But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths."
     </p>
 
-        <figure id="cliffworld-mc" class="l-page" style="margin-top: 0; width: 100%;">
+        <figure id="cliffworld-mc-" class="l-page" style="margin-top: 0; width: 100%;">
       <center>
         <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-1of4.svg"/>
         <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-2of4.svg"/>
@@ -391,6 +401,32 @@
       </center>
     </figure>
 
+<!--     <style>
+  #cliffworld-paths {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 425px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="cliffworld-trajectories" class="l-body">
+      <img src="figures/cliffworld-traj-1of2.svg"/>
+      <div class="figcaption">
+        Trajectory 1.
+      </div>
+
+      <img src="figures/cliffworld-traj-2of2.svg"/>
+      <div class="figcaption">
+        Trajectory 2.
+      </div>
+  </figure> -->
+
     <p>
       <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
@@ -398,27 +434,27 @@
         <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
       <center>
 
+        <figure style="width: 7%; margin: 5px; display: inline-block;">
+          <img src="figures/traj-thumbnail.svg"/>
+          <figcaption class="l-body">Trajectories</figcaption>
+        </figure>
+
         <figure style="width: 20%; margin: 15px; display: inline-block;">
           <img src="figures/cliffworld-mc.svg"/>
           <figcaption class="l-body">Monte Carlo estimate</figcaption>
         </figure>
 
-        <figure style="width: 10%; margin: 5px; display: inline-block;">
-          <img src="figures/traj-thumbnail.svg"/>
-          <figcaption class="l-body">Trajectories</figcaption>
+        <figure style="width: 5%; margin: 5px; display: inline-block;">
         </figure>
 
-        <figure style="width: 5%; margin: 5px; display: inline-block;">
+        <figure style="width: 14%; margin: 5px; display: inline-block;">
+          <img src="figures/path-thumbnail.svg"/>
+          <figcaption style="min-width:150px;" class="l-body">Synthetic trajectories</figcaption>
         </figure>
 
         <figure style="width: 20%; margin: 15px; display: inline-block;">
           <img src="figures/cliffworld-td.svg"/>
           <figcaption class="l-body">TD estimate</figcaption>
-        </figure>
-
-        <figure style="width: 10%; margin: 5px; display: inline-block;">
-          <img src="figures/path-thumbnail.svg"/>
-          <figcaption style="min-width:150px;" class="l-body">Synthetic trajectories</figcaption>
         </figure>
       
 <!--       <figcaption class="l-body">
