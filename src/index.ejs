@@ -124,7 +124,6 @@
 
   <style>
   #cliffworld-mc {
-    margin-top: 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto;
@@ -204,7 +203,6 @@
 
   <style>
   #cliffworld-td {
-    margin-top: 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto;
@@ -345,7 +343,6 @@
 
   <style>
   #cliffworld-trajectories {
-    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
     width: 425px;
@@ -360,12 +357,12 @@
   <figure id="cliffworld-trajectories" class="l-body">
       <img src="figures/cliffworld-traj-1of2.svg"/>
       <div class="figcaption">
-        Trajectory 1.
+        Trajectory 1
       </div>
 
       <img src="figures/cliffworld-traj-2of2.svg"/>
       <div class="figcaption">
-        Trajectory 2.
+        Trajectory 2
       </div>
   </figure>
 
@@ -374,101 +371,82 @@
       But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic "paths."
     </p>
 
-        <figure id="cliffworld-mc-" class="l-page" style="margin-top: 0; width: 100%;">
-      <center>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-1of4.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-2of4.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-3of4.svg"/>
-        <img style="width: 20%; margin: 15px; " src="figures/cliffworld-path-4of4.svg"/>
-      <figcaption class="l-body">
-
-        <div class="eq-grid" style="grid-gap: 26%; width: 70%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            Path 1
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            Path 2
-          </div>
-          <div style="grid-row: 1; grid-column: 3;">
-            Path 3
-          </div>
-          <div style="grid-row: 1; grid-column: 4;">
-            Path 4
-          </div>
-        </div>
-
-      </figcaption>
-      </center>
-    </figure>
-
-<!--     <style>
+    <style>
   #cliffworld-paths {
-    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 425px;
+    width: 875px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 10px;
     grid-auto-flow: column;
   }
   </style>
-  <figure id="cliffworld-trajectories" class="l-body">
-      <img src="figures/cliffworld-traj-1of2.svg"/>
+  <figure id="cliffworld-paths" class="l-page">
+      <img src="figures/cliffworld-path-1of4.svg"/>
       <div class="figcaption">
-        Trajectory 1.
+        Path 1
       </div>
 
-      <img src="figures/cliffworld-traj-2of2.svg"/>
+      <img src="figures/cliffworld-path-2of4.svg"/>
       <div class="figcaption">
-        Trajectory 2.
+        Path 2
       </div>
-  </figure> -->
+
+      <img src="figures/cliffworld-path-3of4.svg"/>
+      <div class="figcaption">
+        Path 3
+      </div>
+
+      <img src="figures/cliffworld-path-4of4.svg"/>
+      <div class="figcaption">
+        Path 4
+      </div>
+  </figure>
 
     <p>
       <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
 
-        <figure id="cliffworld-trajectories" class="l-page" style="margin-top: 0; width: 100%;">
-      <center>
+  <style>
+  #compare-mctd {
+    margin-left: auto;
+    margin-right: auto;
+    width: 725px;
+    display: grid;
+    grid-template-columns: .955fr 2fr .4fr 2fr 2fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="compare-mctd" class="l-page">
+      <img src="figures/traj-thumbnail.svg"/>
+      <div class="figcaption">
+        Trajectories
+      </div>
 
-        <figure style="width: 7%; margin: 5px; display: inline-block;">
-          <img src="figures/traj-thumbnail.svg"/>
-          <figcaption class="l-body">Trajectories</figcaption>
-        </figure>
+      <img src="figures/cliffworld-mc.svg"/>
+      <div class="figcaption">
+        Monte Carlo estimate
+      </div>
 
-        <figure style="width: 20%; margin: 15px; display: inline-block;">
-          <img src="figures/cliffworld-mc.svg"/>
-          <figcaption class="l-body">Monte Carlo estimate</figcaption>
-        </figure>
+      <div></div>
+      <div></div>
 
-        <figure style="width: 5%; margin: 5px; display: inline-block;">
-        </figure>
+      <img src="figures/path-thumbnail.svg"/>
+      <div class="figcaption">
+        Synthetic trajectories
+      </div>
 
-        <figure style="width: 14%; margin: 5px; display: inline-block;">
-          <img src="figures/path-thumbnail.svg"/>
-          <figcaption style="min-width:150px;" class="l-body">Synthetic trajectories</figcaption>
-        </figure>
-
-        <figure style="width: 20%; margin: 15px; display: inline-block;">
-          <img src="figures/cliffworld-td.svg"/>
-          <figcaption class="l-body">TD estimate</figcaption>
-        </figure>
-      
-<!--       <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 30%; width: 40%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            Monte Carlo value estimate.
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            TD value estimate.
-          </div>
-        </div>
-      </figcaption> -->
-      </center>
-    </figure>
+      <img src="figures/cliffworld-td.svg"/>
+      <div class="figcaption">
+        TD estimate
+      </div>
+  </figure>
 
     <p>
       <b>Comparing the two.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages,<d-footnote>In the tabular case.</d-footnote> the method that gives the better estimate is the one that averages over more items. This raises a natural question: Which estimator averages over more items?
@@ -633,27 +611,35 @@
       To get a better idea of how function approximators change things, let's return to the Cliff World example. This time, though, the environment has a large number of states.
     </p>
 
-    <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
-      <center>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-states.svg"/>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-path.svg"/>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-approx.svg"/>
-          
-      <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 15%; width: 90%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            As RL environments get bigger, the number of states grows dramatically.
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize
-          </div>
-          <div style="grid-row: 1; grid-column: 3;">
-            <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't visited.
-          </div>
-        </div>
-      </figcaption>
-      </center>
-    </figure>
+  <style>
+  #fnapprox-intro {
+    margin-left: auto;
+    margin-right: auto;
+    width: 850px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="fnapprox-intro" class="l-page">
+      <img src="figures/large-cliffworld-states.svg"/>
+      <div class="figcaption">
+        <b>Large or infinite state spaces</b> cause tabular methods to break down. To make better use of memory and experience, we must use function approximators.
+      </div>
+
+      <img src="figures/large-cliffworld-path.svg"/>
+      <div class="figcaption">
+        <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize
+      </div>
+
+      <img src="figures/large-cliffworld-approx.svg"/>
+      <div class="figcaption">
+        <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't visited.
+      </div>
+  </figure>
 
     <p>
       <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision to measure "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
