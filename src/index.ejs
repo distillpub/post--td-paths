@@ -627,7 +627,7 @@
   <figure id="fnapprox-intro" class="l-page">
       <img src="figures/large-cliffworld-states.svg"/>
       <div class="figcaption">
-        <b>Large or infinite state spaces</b> cause tabular methods to break down. To make better use of memory and experience, we must use function approximators.
+        <b>Large or infinite state spaces</b> cause tabular methods to break down. To make better use of memory and experience, we must use function approximation.
       </div>
 
       <img src="figures/large-cliffworld-path.svg"/>
@@ -649,40 +649,55 @@
       However, it's easy to imagine cases where this implicit assumption breaks down. By adding a single long barrier, we can construct a case where the Euclidean distance metric leads to bad generalization. The problem is that we have merged the wrong paths.
     </p>
 
-    <figure id="q-learning-intro" class="l-page" style="width: 100%; margin-top: 0px;">
-      <center>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-barrier-intro.svg"/>
-        <img style="width: 30%; margin: 15px; " src="figures/large-cliffworld-barrier.svg"/>
-          
-      <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 15%; width: 70%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            Imagine changing the Cliff World setup by adding a long barrier.
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            Now the Euclidean distance metric gives bad generalization.
-          </div>
-        </div>
-      </figcaption>
-      </center>
-    </figure>
+  <style>
+  #fnapprox-barrier {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="fnapprox-barrier" class="l-page">
+      <img src="figures/large-cliffworld-barrier-intro.svg"/>
+      <div class="figcaption">
+        Imagine changing the Cliff World setup by adding a long barrier.
+      </div>
+
+      <img src="figures/large-cliffworld-barrier.svg"/>
+      <div class="figcaption">
+        Now the Euclidean distance metric gives bad generalization.
+      </div>
+  </figure>
 
     <p>
       <b>Merging the wrong paths.</b> The diagram below shows the ill effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
 
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-        <img style="width: 70%; margin: 15px; " src="figures/compare-function-approx.svg"/>
-        <figcaption class="l-body" style="width: 60%;">
-          Effects of state approximation when the wrong paths are merged. Bad generalization can cause more severe errors under TD learning.
-        </figcaption>
-      </center>
-    </figure>
-
     <p>
       This is the price we must pay for using TD learning: it's far more sensitive to bad value updates.
     </p>
+
+  <style>
+  #fnapprox-compare {
+    margin-left: auto;
+    margin-right: auto;
+    width: 750px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="fnapprox-compare" class="l-page">
+      <img src="figures/compare-function-approx.svg"/>
+  </figure>
   
 
 
@@ -700,24 +715,28 @@
       But as training progresses, neural networks can actually learn to overcome these errors. They learn which states are "nearby" from experience. In the Cliff World example, we might expect a fully-trained neural network to have learned that value updates to states <i>above</i> the barrier should never affect the values of states <i>below</i> the barrier. This isn't something that most other function approximators can do. It's part of the reason why deep RL is so interesting!
     </p>
 
-    <figure class="l-page" style="width: 100%; margin-top: 15px;">
-      <center>
-        <img style="width: 80%; margin: 15px; " src="figures/latent-distance.png"/>
-      <figcaption class="l-body">
-        <div class="eq-grid" style="grid-gap: 3%; width: 85%;">
-          <div style="grid-row: 1; grid-column: 1;">
-            A robotic hand, controlled by a neural network, that has learned its own concept of which states are nearby. <d-cite key="Srinivas2018UniversalNetworks"></d-cite>
-          </div>
-          <div style="grid-row: 1; grid-column: 2;">
-            Lighter blue $\rightarrow$ more distant.
-          </div>
-          <div style="grid-row: 1; grid-column: 3;">
-            Notice that the shape and location of obstacles affects the agent's notion of distance.
-          </div>
-        </div>
-      </figcaption>
-      </center>
-    </figure>
+      <style>
+  #nn-latent-distance {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: row;
+  }
+  </style>
+  <figure id="nn-latent-distance" class="l-page">
+      <div class="figcaption">
+        <b>Lighter blue $\rightarrow$ more distant</b>
+      </div>
+      <img src="figures/latent-distance.png"/>
+      <div class="figcaption">
+        A robotic hand, controlled by a neural network, that has learned its own concept of which states are nearby <d-cite key="Srinivas2018UniversalNetworks"></d-cite>. Notice that the shape and location of obstacles affects the agent's notion of distance.
+      </div>
+  </figure>
 
     <p>
       <b>The best of both worlds?</b> So far, we have seen that TD learning has a clear advantage over Monte Carlo in tabular settings. But for different reasons, Monte Carlo can sometimes beat TD learning (or at least compete with it) when we use function approximation <d-cite key="Amiranashvili2018TDLearning"></d-cite>. Even though neural networks can learn to overcome bad generalization, it would be better if we were able to reduce bad generalization in the first place.
