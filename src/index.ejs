@@ -274,7 +274,7 @@
 </div>
 
     <p>
-      We could keep repeating this expansion forever. It looks like Monte Carlo is a straightforward running average but TD learning is a recursive mess so how can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      At this point, we can see that the TD update is a recursive mess but the Monte Carlo update is a simple running average. So how can we compare the two? More importantly <i>should</i> we compare the two? Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
@@ -325,7 +325,7 @@
 
 
     <p>
-      A pleasant correspondence has emerged! The difference between Monte Carlo and TD learning comes down to the nested expectation operators in the equation above. It turns out that there is a nice visual interpretation for what they are doing. We call it that <i>paths perspective</i> on value learning.
+      A pleasant correspondence has emerged. The difference between Monte Carlo and TD learning comes down to the nested expectation operators. It turns out that there is a nice visual interpretation for what they are doing. We call it the <i>paths perspective</i> on value learning.
     </p>
 
     <h2>The Paths Perspective</h2>
@@ -498,7 +498,7 @@
   </div>
 
     <p>
-      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than MC estimates.
+      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than Monte Carlo estimates.
     </p>
 
 
@@ -548,11 +548,11 @@
     </figure>
 
     <p>
-      But this value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's <i>empirical</i> policy distribution. Here, we have weighted each $Q$-value by the <i>true</i> probability of each action. This weighting corrects for the difference between the empirical vs. true policy distributions. It follows that this version of $V(s)$ actually gives <i>better</i> value estimates for the underlying policy.
+      But this value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's <i>empirical</i> policy distribution. Here, we have weighted each $Q$-value by the <i>true</i> probability of each action. Since this weighting corrects for the difference between the empirical and true policy distributions, this version of $V(s)$ actually gives an even better value estimate.
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not only a little different -- they are <i>completely</i> different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation. It looks similar to on-policy value estimation except we weight by the action probabilities under $\pi_2$ instead of $\pi_1$.
+      <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not just a little different but rather completely different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation.
     </p>
 
 
