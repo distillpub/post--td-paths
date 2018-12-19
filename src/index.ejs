@@ -505,8 +505,9 @@
     <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      There are many situations where we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about how to compare different actions. The solution is to estimate value over both states <i>and</i> actions.
+      So far, we've focused on estimating the value of states using the function $V(s)$. One of the problems with $V(s)$ is that it doesn't make it easy to compare two different actions. A simple solution to this problem is to learn the value of a state <i>and</i> and an action with a $Q$-function.
     </p>
+
 
     <style>
       #q-learning-graphics {
@@ -525,7 +526,7 @@
     </figure>
 
     <p>
-      Now the best action is simply the one with the highest value estimate. Should we ever need to recover $V(s)$, we can do so with a simple weighted sum.
+      The first thing to notice about $Q$-functions is that we can still use them to recover $V(s)$ using a simple weighted sum.
     </p>
 
     <style>
@@ -543,24 +544,17 @@
     <figure id="recovering-value" class="l-body">
         <!-- <img src="figures/on-policy-value.svg"/> -->
         <img src="figures/better-qfunc-intro.svg"/>
-        <div class="figcaption"> <b>A Gridworld example</b> showing how to do value estimation with $Q$-functions. </div>
-        <!-- <div class="figcaption"> <a href="#alt-qfunc-intro">Alternate diagram</a> </div> -->
+        <div class="figcaption"> <b>A Gridworld example</b> showing how to recover $V(s)$ from a $Q$-function. </div>
     </figure>
 
-
-
-
     <p>
-      It's worth noting that the value function we recover is slightly different from the original value function. And not only is it different, it's better.
+      But this value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's <i>empirical</i> policy distribution. Here, we have weighted each $Q$-value by the <i>true</i> probability of each action. This weighting corrects for the difference between the empirical vs. true policy distributions. It follows that this version of $V(s)$ actually gives <i>better</i> value estimates for the underlying policy.
     </p>
 
     <p>
-      The key is that there is often a difference between an agent's empirical distribution of actions and its actual policy distribution. What we've done by binning empirical returns by actions and then re-weighting their averages is to correct for that difference. This correction gives a better value estimate of the underlying policy.
+      <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not only a little different -- they are <i>completely</i> different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation. It looks similar to on-policy value estimation except we weight by the action probabilities under $\pi_2$ instead of $\pi_1$.
     </p>
 
-    <p>
-      <b>Off-policy value estimation.</b> We can also use re-weighting to estimate value under a different policy than the one that collected the experience. We call this <i>off-policy</i> value estimation since the policy isn't run through the environment.
-    </p>
 
     <style>
       #off-policy-value {
@@ -576,15 +570,15 @@
     </style>
     <figure id="off-policy-value" class="l-body">
       <img src="figures/on-policy-value.svg"/>
-        <img src="figures/off-policy-value.svg"/>
+      <img src="figures/off-policy-value.svg"/>
     </figure>
 
-<!--     <p>
-      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps more appropriate to say that we are re-weighting over transitions.
-    </p> -->
+    <p>
+      There are certainly ways of doing off-policy value estimation without $Q$-values, but they tend to be more complicated. Furthermore, $Q$-values make it easy to do a special version of off-policy value estimation called $Q$-learning.
+    </p>
 
     <p>
-      <b>$Q$-learning.</b> Estimating the value function of an <i>optimal</i> policy is often of special interest. Since an optimal policy function is an $\textrm{argmax}$ over the $Q$-values of each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD value estimation.
+      <b>$Q$-learning.</b> 
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -608,7 +602,6 @@
 
     </div>
 
-    We can think of $Q$-learning as a special case of off-policy value estimation where the re-weighting probabilities are either 1 (for the optimal action) or 0 (for all other actions).
 
     <style>
       #q-learning {
@@ -628,7 +621,6 @@
         <img src="figures/q-learning.svg"/>
     </figure>
 
-    By reweighting with binary probabilities, $Q$-learning aggressively prunes the agent's experience, keeping only the transitions that lead to the highest return.
 
 
     <h2>Merging Paths with Function Approximators</h2>
