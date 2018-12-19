@@ -1,5 +1,4 @@
 (function() {
-  console.log("shan")
   var stage = d3.select("#playground")
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},

@@ -85,7 +85,7 @@
 <d-title>
   <h1>The Paths Perspective on Value Learning</h1>
   <p>
-    A closer look at how Temporal Difference (TD) learning merges paths of experience for greater statistical efficiency.
+    A closer look at how Temporal Difference learning merges paths of experience for greater statistical efficiency.
   </p>
 </d-title>
 
@@ -160,14 +160,14 @@
   <div class="eq-grid" style="grid-gap: 8px;">
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{t} ~~ \gamma^{t} ~~ r_{t+1}</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>R_t</d-math></div>
 
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State value </figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;"> Return </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:200px;"> Return </figcaption>
   </div>
 
   <p>
-    Estimating value in this way makes a lot of sense. In fact, it might be surprising that we can do better.
+    Estimating value by updating towards return makes a lot of sense. After all, the <i>definition</i> of value is expected return. It might be surprising, then, that we can do better.
   </p>
 
   <h2>Beating Monte Carlo</h2>
@@ -191,7 +191,7 @@
     </div>
 
     <p>
-      Under this update rule, intersections between two trajectories are handled differently. TD learning merges them so that the return flows backwards to all preceding states.
+      Intersections between two trajectories are handled differently under this update. Unlike Monte Carlo, TD updates merge intersections so that the return flows backwards to all preceding states.
     <p>
 
   <style>
@@ -274,7 +274,7 @@
 </div>
 
     <p>
-      We could keep repeating this expansion forever. It looks like Monte Carlo is a straightforward running average but TD learning is a recursive mess. How can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      We could keep repeating this expansion forever. It looks like Monte Carlo is a straightforward running average but TD learning is a recursive mess so how can we compare the two? More importantly <i>should</i> we compare the two?! Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
@@ -361,7 +361,7 @@
 
 
     <p>
-      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these synthetic trajectories or "paths."
+      But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these simulated trajectories or "paths."
     </p>
 
     <style>
@@ -400,7 +400,7 @@
   </figure>
 
     <p>
-      <b>Estimating value.</b> It turns out that Monte Carlo is averaging over trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
+      <b>Estimating value.</b> It turns out that Monte Carlo is averaging over real trajectories whereas TD learning is averaging over paths. The nested expectation values we saw earlier correspond to the agent averaging across <i>all possible future paths</i>.
     </p>
 
   <style>
@@ -457,11 +457,11 @@
     </div>
 
     <p>
-      So far, we have seen that TD learning never averages over <i>fewer</i> trajectories than Monte Carlo. On the other hand, it can often take advantage of synthetic trajectories in order to average over <i>more</i> trajectories. Thus it seems likely that TD estimates will have lower variance.
+      So far, we have seen that TD learning never averages over <i>fewer</i> trajectories than Monte Carlo. On the other hand, it can often take advantage of simulated trajectories in order to average over <i>more</i> trajectories. Given this intuition, it seems likely that TD estimates will have lower variance.
     </p>
 
     <p>
-      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the Appendix, but for now, we'll simply show the final equations. Note that we've introduced a new piece of notation, $T(s)$, which denotes the number of trajectories that contain state $s$.
+      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the <a href="#variance-analysis-appendix">Appendix</a>, but for now, we'll simply show the final equations. Note that we've introduced some new notation: $T(s)$, which denotes the number of trajectories that contain state $s$.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -505,11 +505,7 @@
     <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      There are many situations where we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about how to compare different actions.
-    </p>
-
-    <p>
-      <b>$Q$-functions.</b> The solution is to estimate value over both states <i>and</i> actions using the function $Q(s,a)$.
+      There are many situations where we'd like to first estimate value and then use it to improve a policy (e.g. in policy-value iteration). It's hard to do this with $V(s)$ because it doesn't tell us anything about how to compare different actions. The solution is to estimate value over both states <i>and</i> actions.
     </p>
 
     <style>
@@ -529,7 +525,7 @@
     </figure>
 
     <p>
-      Now we can select the optimal policy just by computing $a^*$ across all states. Another nice property of $Q$-functions is that we can use them to recover $V(s)$ with a simple weighted sum.
+      Now the best action is simply the one with the highest value estimate. Should we ever need to recover $V(s)$, we can do so with a simple weighted sum.
     </p>
 
     <style>
@@ -545,8 +541,10 @@
       }
     </style>
     <figure id="recovering-value" class="l-body">
-        <img src="figures/on-policy-value.svg"/>
-        <div class="figcaption"> <a href="#alt-qfunc-intro">Alternate diagram</a> </div>
+        <!-- <img src="figures/on-policy-value.svg"/> -->
+        <img src="figures/better-qfunc-intro.svg"/>
+        <div class="figcaption"> <b>A Gridworld example</b> showing how to do value estimation with $Q$-functions. </div>
+        <!-- <div class="figcaption"> <a href="#alt-qfunc-intro">Alternate diagram</a> </div> -->
     </figure>
 
 
@@ -572,17 +570,18 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
-        grid-gap: 10px;
+        grid-row-gap: 30px;
         grid-auto-flow: row;
       }
     </style>
     <figure id="off-policy-value" class="l-body">
+      <img src="figures/on-policy-value.svg"/>
         <img src="figures/off-policy-value.svg"/>
     </figure>
 
-    <p>
-      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps more appropriate to say that we are <i>re-weighting over paths</i>.
-    </p>
+<!--     <p>
+      A natural question about off-policy value estimation is, "What are we re-weighting over?" It's easy to say that we are re-weighting $Q$-values, but that's not the whole story. Really, we are re-weighting the agent's experience -- on which the $Q$-values were built -- to account for some of the paths being more or less likely under the new policy. It's perhaps more appropriate to say that we are re-weighting over transitions.
+    </p> -->
 
     <p>
       <b>$Q$-learning.</b> Estimating the value function of an <i>optimal</i> policy is often of special interest. Since an optimal policy function is an $\textrm{argmax}$ over the $Q$-values of each state, it makes sense to re-weight the value estimate accordingly. This is the idea behind $Q$-learning, which is actually just a special case of off-policy TD value estimation.
@@ -619,7 +618,7 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
-        grid-gap: 10px;
+        grid-row-gap: 30px;
         grid-auto-flow: row;
       }
     </style>
@@ -629,7 +628,7 @@
         <img src="figures/q-learning.svg"/>
     </figure>
 
-    By reweighting paths with binary probabilities, $Q$-learning aggressively prunes the agent's experience, keeping only the transitions that lead to the highest return.
+    By reweighting with binary probabilities, $Q$-learning aggressively prunes the agent's experience, keeping only the transitions that lead to the highest return.
 
 
     <h2>Merging Paths with Function Approximators</h2>
@@ -705,7 +704,7 @@
 
       <img src="figures/large-cliffworld-barrier.svg"/>
       <div class="figcaption">
-        Now the Euclidean distance metric gives bad generalization.
+        Now the Euclidean averager gives bad generalization.
       </div>
   </figure>
 
@@ -810,7 +809,7 @@
     Thanks to these people for advice and feedback on early versions. Thanks to the Google AI Residency Program for supporting me on this project. Some other thank-you's.
   </p>
 
-  <h3>Variance Analysis</h3>
+  <h3 id="variance-analysis-appendix">Variance Analysis</h3>
 
     <p>
       This section shows a quick derivation of the variance equations presented in the <i>Paths Perspective</i> section. As a broad overview, we will start with the expanded update rules we wrote down <i>Beating Monte Carlo</i> section. Next, we will analyze the variance of each individual term. Finally, we will write an expression for the variance of the MC and TD <i>estimates</i> using the fact that both estimates are just averages over one or more updates.
