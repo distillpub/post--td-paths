@@ -630,7 +630,11 @@
     </figure>
 
     <p>
-      <b>$Q$-learning is over-optimistic.</b> One thing you might notice in the diagrams above is that $Q$-learning gives the most optimistic value estimate possible. This causes $Q$-learning to run into trouble in 
+      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: on machine 43 you hit the jackpot! Now, if you were to use $Q$-learning to estimate the value of playing the slot machines a second time, you would choose the maximum outcome over all the slot machines, giving you the value of the jackpot at machine 43. But this isn't the way to think about slot machines...the $Q$-learning estimate is wildly over-optimistic!
+    </p>
+
+    <p>
+      One way to fix this problem is to ask a friend to also play the hundred slot machines. Then, ask him how much he earned at machine 43 and use his answer as your value estimate. The odds that he <i>also</i> received a jackpot at the same machine are very low, so you value estimate will probably be much more reasonable. This is the general idea behind <i>Double Q-learning</i>, a simple extension to $Q$-learning.
     </p>
 
 
