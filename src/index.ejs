@@ -544,7 +544,7 @@
     <figure id="recovering-value" class="l-body">
         <!-- <img src="figures/on-policy-value.svg"/> -->
         <img src="figures/better-qfunc-intro.svg"/>
-        <div class="figcaption"> <b>A Gridworld example</b> showing how to recover $V(s)$ from a $Q$-function. </div>
+<!--         <div class="figcaption"> <b>A Gridworld example</b> showing how to recover $V(s)$ from a $Q$-function. </div> -->
     </figure>
 
     <p>
@@ -574,11 +574,15 @@
     </figure>
 
     <p>
-      There are certainly ways of doing off-policy value estimation without $Q$-values, but they tend to be more complicated. Furthermore, $Q$-values make it easy to do a special version of off-policy value estimation called $Q$-learning.
+      There are certainly other ways to do off-policy value estimation, but they tend to be more complicated. Furthermore, $Q$-values make it easy to do a special version of off-policy value estimation called $Q$-learning.
     </p>
 
     <p>
-      <b>$Q$-learning.</b> 
+      <b>$Q$-learning.</b> The idea behind $Q$-learning is to estimate value under an optimal policy while collecting experience under a non-optimal policy. This allows the agent to gain new experiences (via a sub-optimal policy) while keeping track of its objective.
+    </p>
+
+    <p>
+      The first step is to do a TD value update on a $Q$-function. This function estimates value under the current policy. The second step is to update $V(s)$ with the maximum $Q$ value at each state. This function measures value under the optimal policy.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -602,6 +606,10 @@
 
     </div>
 
+    <p>
+      To make the connection between off-policy value estimation and $Q$-learning even more explicit, we can place them beside one another.
+    </p>
+
 
     <style>
       #q-learning {
@@ -620,6 +628,10 @@
         <img src="figures/off-policy-value.svg"/>
         <img src="figures/q-learning.svg"/>
     </figure>
+
+    <p>
+      <b>$Q$-learning is over-optimistic.</b> One thing you might notice in the diagrams above is that $Q$-learning gives the most optimistic value estimate possible. This causes $Q$-learning to run into trouble in 
+    </p>
 
 
 
