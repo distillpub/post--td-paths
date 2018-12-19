@@ -37,7 +37,7 @@
     {
       "author": "Sam Greydanus<d-footnote>Author order not finalized.</d-footnote>",
       "authorURL": "https://greydanus.github.io/about.html",
-      "affiliation": "Google Brain Team",
+      "affiliation": "Google AI Residency",
       "affiliationURL": "https://g.co/brain"
     },
 
@@ -51,7 +51,7 @@
     {
       "author": "Chris Olah",
       "authorURL": "https://colah.github.io/",
-      "affiliation": "Google Brain Team",
+      "affiliation": "OpenAI",
       "affiliationURL": "https://g.co/brain"
     }
   ],
@@ -578,11 +578,11 @@
     </p>
 
     <p>
-      <b>$Q$-learning.</b> The idea behind $Q$-learning is to estimate value under an optimal policy while collecting experience under a non-optimal policy. This allows the agent to gain new experiences (via a sub-optimal policy) while keeping track of its objective.
+      <b>$Q$-learning.</b> The idea behind $Q$-learning is to estimate value under an optimal policy while collecting experience under a non-optimal policy. This allows the agent to gain new experiences (via a sub-optimal policy) while staying calibrated to its test-time behavior.
     </p>
 
     <p>
-      The first step is to do a TD value update on a $Q$-function. This function estimates value under the current policy. The second step is to update $V(s)$ with the maximum $Q$ value at each state. This function measures value under the optimal policy.
+      In $Q$-learning, every value update has two parts. The first is a normal TD update which estimates value under the current policy. The second is a maximum over $Q$-values that re-weights the value estimate according to the optimal policy.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -630,11 +630,11 @@
     </figure>
 
     <p>
-      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: on machine 43 you hit the jackpot! Now, if you were to use $Q$-learning to estimate the value of playing the slot machines a second time, you would choose the maximum outcome over all the slot machines, giving you the value of the jackpot at machine 43. But this isn't the way to think about slot machines...the $Q$-learning estimate is wildly over-optimistic!
+      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot at machine 43! Now, if you were to use $Q$-learning to estimate the value of playing the slot machines a second time, you would choose the maximum outcome over all the slot machines, giving you the value of the jackpot at machine 43. But this isn't the way to think about slot machines...the $Q$-learning estimate is wildly over-optimistic!
     </p>
 
     <p>
-      One way to fix this problem is to ask a friend to also play the hundred slot machines. Then, ask him how much he earned at machine 43 and use his answer as your value estimate. The odds that he <i>also</i> received a jackpot at the same machine are very low, so you value estimate will probably be much more reasonable. This is the general idea behind <i>Double Q-learning</i>, a simple extension to $Q$-learning.
+      One way to fix this problem is to ask a friend to also play the hundred slot machines. Then, ask him how much he earned at machine 43 and use his answer as your value estimate. The odds that he <i>also</i> received a jackpot at the same machine are very low, so your value estimate will probably be much more reasonable. This is the general idea behind <i>Double Q-learning</i>, a simple extension to $Q$-learning.
     </p>
 
 
@@ -720,10 +720,6 @@
       <b>Merging the wrong paths.</b> The diagram below shows the ill effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
 
-    <p>
-      This is the price we must pay for using TD learning: it's far more sensitive to bad value updates.
-    </p>
-
   <style>
   #fnapprox-compare {
     margin-left: auto;
@@ -741,6 +737,10 @@
       <img src="figures/compare-function-approx.svg"/>
   </figure>
   
+    <p>
+      This is the price we must pay for using TD learning: it's far more sensitive to bad value updates.
+    </p>
+
 
 
     <h2>Implications for deep reinforcement learning</h2>
@@ -782,14 +782,14 @@
     </p>
 
     <p>
-      That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates. <d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote> Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone. <b>TODO: add simple interactive figure where we can interpolate.</b>
+      That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates. <d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote> Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone.
 
     <p>
       Researchers usually keep the $\lambda$ coefficient constant as they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe we should gradually decrease $\lambda$ over the course of training...
     </p>
 
     <p>
-      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the ideas around value estimation and inspires you to try some experiments of your own. <b>TODO: make ending stronger.</b>
+      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the ideas around value estimation and inspires you to try some experiments of your own.
     </p>
 
 
@@ -952,28 +952,6 @@
     <p>
       The next step is to note the 1:1 correspondence of terms in the two sums. For all <d-math>t' > t</d-math>we can say that <d-math>\mathop{\mathbb{E}} [T(s_{t'})] \geq T(s_{t'}) </d-math>. This means that the variance of the TD estimate will be equal or lower than the Monte Carlo estimate.
     </p>
-
-
-    <h3>Alternate Q-value diagram</h3>
-      <style>
-      #alt-qfunc-intro {
-        margin-left: auto;
-        margin-right: auto;
-        width: 500px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-column-gap: 20px;
-        grid-row-gap: 10px;
-        grid-auto-flow: column;
-      }
-      </style>
-      <figure id="alt-qfunc-intro" class="l-body">
-          <img src="figures/better-qfunc-intro.svg"/>
-          <div class="figcaption">
-            <b>A Gridworld example</b> showing how to do (on-policy) value estimation with $Q$-functions.
-          </div>
-      </figure>
 
 
   <d-footnote-list></d-footnote-list>
