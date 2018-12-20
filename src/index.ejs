@@ -16,12 +16,6 @@
 
   <script src="vis/compare.js" charset="utf-8"></script>
 
-  <style type="text/css">
-    .eq-block {
-      /*border-left: solid 2px rgba(0, 0, 0, 0.2);*/
-      /*margin: 0 auto;*/
-    }
-  </style>
 </head>
 
 
@@ -175,6 +169,7 @@
     <p>
       But we <i>can</i> do better! The trick is to use a method called <i>Temporal Difference (TD) learning</i> which bootstraps off of nearby states to make value updates.
     </p>
+
 
     <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
     
@@ -461,7 +456,7 @@
     </p>
 
     <p>
-      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the <a href="#variance-analysis-appendix">Appendix</a>, but for now, we'll simply show the final equations. Note that we've introduced some new notation: $T(s)$, which denotes the number of trajectories that contain state $s$.
+      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the <a href="#variance-analysis-appendix">Appendix</a>, but for now, we'll simply show the final equations. Note that we've introduced some new notation, $T(s)$, which counts the number of trajectories that contain state $s$.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -634,7 +629,7 @@
     </p>
 
     <p>
-      One way to fix this problem is to ask a friend to also play the hundred slot machines. Then, ask him how much he earned at machine 43 and use his answer as your value estimate. The odds that he <i>also</i> received a jackpot at the same machine are very low, so your value estimate will probably be much more reasonable. This is the general idea behind <i>Double Q-learning</i>, a simple extension to $Q$-learning.
+      One way to fix this problem is to ask a friend to also play the hundred slot machines. Then, ask him how much he earned at machine 43 and use his answer as your value estimate. The odds that he <i>also</i> received a jackpot at the same machine are very low, so your value estimate will probably be much more reasonable. This is the general idea behind <i>Double Q-learning</i>, a simple extension to $Q$-learning<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>.
     </p>
 
 
@@ -724,7 +719,7 @@
   #fnapprox-compare {
     margin-left: auto;
     margin-right: auto;
-    width: 750px;
+    width: 675px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -798,7 +793,7 @@
     <br>
 
     <p>
-      In order to build intuition about how RL works, in particular about the relationship between various types of value learning, we encourage you to try training your own Gridworld agent in the playground below.
+      We encourage you to further develop your intuition around value estimation by training your own Gridworld agent.
     </p>
 
     <div id="playground"></div>
@@ -814,17 +809,17 @@
 <d-appendix>
   <h3>Acknowledgments</h3>
   <p>
-    Thanks to these people for advice and feedback on early versions. Thanks to the Google AI Residency Program for supporting me on this project. Some other thank-you's.
+    People to thank (running list): Google AI Residency Program, Shan Carter, (some correspondence with John Schulman), (some correspondence with Dale Schuurmans).
   </p>
 
   <h3 id="variance-analysis-appendix">Variance Analysis</h3>
 
     <p>
-      This section shows a quick derivation of the variance equations presented in the <i>Paths Perspective</i> section. As a broad overview, we will start with the expanded update rules we wrote down <i>Beating Monte Carlo</i> section. Next, we will analyze the variance of each individual term. Finally, we will write an expression for the variance of the MC and TD <i>estimates</i> using the fact that both estimates are just averages over one or more updates.
+      This section shows a quick derivation of the variance equations presented in the <i>Paths Perspective</i> section. As a broad overview, we will start with the expanded update rules we wrote down in the <i>Beating Monte Carlo</i> section and analyze the variance of each term. Then, using the fact that they are averages over one of more updates, we will analyze the variance of the estimates.
     </p>
 
     <p>
-      Let's start with Monte Carlo. We'll also need to introduce a new piece of notation: <d-math>T(s)</d-math>, which denotes the number of trajectories that pass through state <d-math>s</d-math>.
+      Let's start with Monte Carlo. First, we will introduce a new piece of notation, <d-math>T(s)</d-math>, which counts the number of trajectories that pass through state <d-math>s</d-math>.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -857,11 +852,11 @@
 
       <div style="grid-row: 8; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
       <div style="grid-row: 8; grid-column: 3;"><d-math>\propto~</d-math></div>
-      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T(s)}</d-math></div>
       <div style="grid-row: 8; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{T(s)}</d-math></div>
       <div style="grid-row: 8; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{T_s}</d-math></div>
+      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{T(s)}</d-math></div>
       <div style="grid-row: 8; grid-column: 15;"><d-math>+</d-math></div>
       <div style="grid-row: 8; grid-column: 17;"><d-math>...</d-math></div>
 
@@ -891,29 +886,32 @@
       <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
       <div style="grid-row: 5; grid-column: 5;"><d-math>~1</d-math></div>
       <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 9;"><d-math>\frac{\gamma}{ \mathop{\mathbb{E}} [ T_{s'_{t+1}} ] }</d-math></div>
+      <div style="grid-row: 5; grid-column: 9;"><d-math>\frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
       <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 13;"><d-math>\frac{\gamma^2}{ \mathop{\mathbb{EE}} [T_{s''_{t+2}}]}</d-math></div>
+      <div style="grid-row: 5; grid-column: 13;"><d-math>\frac{\gamma^2}{ \mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
       <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
       <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
-      <figcaption style="grid-row: 7; grid-column: 1/5; max-width:140px;">TD variance</figcaption>
+      <figcaption style="grid-row: 7; grid-column: 9/11; font-size:12px; max-width:140px;">(no change)</figcaption>
+      <figcaption style="grid-row: 7; grid-column: 13/15; font-size:12px; max-width:140px;">(no change)</figcaption>
 
-      <div style="grid-row: 8; grid-column: 1;"><d-math>Var[ V(s_t)]~~</d-math></div>
-      <div style="grid-row: 8; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T_s}</d-math></div>
-      <div style="grid-row: 8; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ]} </d-math></div>
-      <div style="grid-row: 8; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
-      <div style="grid-row: 8; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 8; grid-column: 17;"><d-math>...</d-math></div>
+      <figcaption style="grid-row: 8; grid-column: 1/5; max-width:140px;">TD variance</figcaption>
+
+      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]~~</d-math></div>
+      <div style="grid-row: 9; grid-column: 3;"><d-math>~\propto~~</d-math></div>
+      <div style="grid-row: 9; grid-column: 5;"><d-math>\frac{1}{T(s)}</d-math></div>
+      <div style="grid-row: 9; grid-column: 7;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 9; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ]} </d-math></div>
+      <div style="grid-row: 9; grid-column: 11;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 9; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
+      <div style="grid-row: 9; grid-column: 15;"><d-math>~+~</d-math></div>
+      <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
 
     </div>
 
 
     <p>
-      Now, if we rewrite the third line of the Monte Carlo analysis alongside the third line of the TD analysis, we can get the same expression that we wrote down at the end of the <i>Paths Perspective</i> section:
+      If we rewrite the third line of the Monte Carlo analysis alongside the third line of the TD analysis, we can get the same expression that we wrote down at the end of the <i>Paths Perspective</i> section:
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
