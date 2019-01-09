@@ -78,21 +78,23 @@
 
 <d-title>
   <h1 style="grid-column:page;">The Paths Perspective on Value Learning</h1>
-  <p  style="grid-column:page;">
+  <p  style="grid-column:page;padding-top: 10px;">
     A closer look at how Temporal Difference learning merges paths of experience for greater statistical efficiency.
   </p>
   <style>
     #compare-caption {
       grid-column: kicker;
       border-top: solid 1px rgba(0, 0, 0, 0.1);
-      padding-top: 20px;
+      padding-top: 30px;
+      margin-top: 10px;
     }
     #compare-figure {
       grid-column:page;
       position:relative;
       margin: 0;
       border-top: solid 1px rgba(0, 0, 0, 0.1);
-      padding-top: 20px;
+      padding-top: 30px;
+      margin-top: 10px;
     }
     #compare_play_button {
       margin-left: 20px;
@@ -114,7 +116,7 @@
 
     <button id="compare_play_button" type="button" style="margin: 0 0 20px;">Play</button>
     <div class="figcaption">
-      These three value estimators behave differently where paths of experience intersect.
+      These value estimators behave differently where paths of experience intersect.
     </div>
   </div>
   <figure id="compare-figure" style="grid-column: text-start/page-end;">
@@ -127,7 +129,7 @@
 
         let run = compare_vis(
           d3.select("#compare_hero"), 
-          {algs: ["MC", "TD", "Q"] }, 
+          {algs: ["MC", "TD", "Q"], trail: true}, 
           () => {
             compare_play_button.textContent = "Play"
             compare_play_button.disabled = false

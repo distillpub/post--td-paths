@@ -2,15 +2,9 @@
 function compare_vis(main_div, config, callback){
 
   config = config || {};
-  var grid_size = 5;
+  var grid_size = 7;
   var algs = config.algs || ["MC", "TD", "Q"] ;
-  var goals = [{x: 3, y: 0, reward: 2},
-               {x: 4, y: 0, reward: -1},
-               {x: 4, y: 1, reward: -1},
-               {x: 4, y: 2, reward: -1},
-               {x: 4, y: 3, reward: -1},
-               {x: 4, y: 4, reward: -1},];
-  var env = new GridWorld.Env({grid_size: grid_size, goals: goals});
+  var env = new GridWorld.Env({grid_size: grid_size, goals: [{x: 4, y: 2, reward: 1}]});
   var svg = main_div.append("svg")
     .attr("width", 900)
     .attr("height", 380)
@@ -69,7 +63,7 @@ function compare_vis(main_div, config, callback){
 
   function update(histories){
     compare_running = true;
-    discount = 1.0;
+    discount = 0.82;
     learn_MC(histories, {name: "MC", steps: 100});
     learn_TD(histories, {name: "TD", steps: 500});
     learn_Q(histories, {name: "Q", steps: 500});
@@ -79,8 +73,8 @@ function compare_vis(main_div, config, callback){
   }
 
   function visualize(){
-    var agent1 = new env.Agent({start: {x: 0, y: 2}, trail: true});
-    action_names = ["right", "up", "right", "up", "right", "right"];
+    var agent1 = new env.Agent({start: {x: 4, y: grid_size-1}});
+    action_names = repeat(grid_size-1, ["up"]);
     mapP(action_names, a_name => {
       var a = _.findWhere(agent1.state.actions, {name: a_name});
       if (agent1.history.length != 0) {
@@ -89,8 +83,12 @@ function compare_vis(main_div, config, callback){
       var P = agent1.step(a, 300);
       return P;
     }).then(() => {
-      var agent2 = new env.Agent({start: { x:2, y: grid_size-1}, trail: true});
-      action_names = ["up", "up", "up", "right", "right", "up", "up"];
+      var agent2 = new env.Agent({start: { x:0, y: grid_size-3}});
+      action_names = repeat(grid_size-1, ["right"])
+              .concat(repeat(grid_size-3, ["up"]))
+              .concat(repeat(grid_size-1, ["left"]))
+              .concat(repeat(2, ["down"]))
+              .concat(repeat(grid_size-2, ["right"]));
       return mapP(action_names, a_name => {
         var a = _.findWhere(agent2.state.actions, {name: a_name});
         update([agent1.history, agent2.history]);

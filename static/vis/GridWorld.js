@@ -56,10 +56,10 @@ GridWorld.Env = function Env(config) {
       .range([0, Math.min(width, height)]);
     this.S = S;
     var C = d3.scale.linear()
-      .domain([-1, 0, 1])
-      .range([ "#f50000", "#CCC", "#0000f5"]);
-    this.C = C;
-    this.goal_color = r => d3.rgb(C(r)).darker();
+      .domain([-2, 0, 2])
+      .range([ "#B43200", "#CCC", "#0032B4"]);
+    this.C = r => d3.rgb(C(r)).darker();
+    this.goal_color = C//r => d3.rgb(C(r)).darker();
     var Cp = d3.scale.linear()
       .domain([0, 1])
       .range(["#eef", "#001"]);
@@ -91,6 +91,23 @@ GridWorld.Env = function Env(config) {
         return "translate(" + S(d.x-0.5+0.1) + "," + S(d.y-0.5+0.1) + ")";
       })
       .style("fill", d => this.goal_color(d.reward));
+
+      goal_layer.append("rect")
+                .attr("width", S(0.9))
+                .attr("height", S(4.9))
+                .attr("transform", d => {
+                  return "translate(" + S(4-0.5+0.05) + "," + S(0-0.5+0.05) + ")";
+                })
+                .style("fill", d => this.goal_color(-1));
+
+      goal_layer.append("text")
+                .attr("width", S(2))
+                .attr("height", S(0.5))
+                .attr("transform", d => {
+                  return "translate(" + S(4-0.5+0.05) + "," + S(0-0.5+0.05) + ")";
+                })
+                .style("fill", 'black');
+                // .attr("textContent", "HI")
 
     cells_enter.append("g").attr("class", "V");
     cells_enter.append("g").attr("class", "Q");
@@ -166,12 +183,13 @@ GridWorld.Env = function Env(config) {
         v.env.select(".agent_layer")
           .append("path")
           .attr("class", "trail")
-          .attr("stroke", "#333")
-          .attr("stroke-width", v.S(0.7))
+          .attr("stroke", "#999")
+          .attr("stroke-width", v.S(0.15))
           .attr("fill", "none")
           .attr("d", "")
-          .style("opacity", 0.3)
+          .style("opacity", 1.0)
         );
+
     } else {
       this.trails = [];
     }
@@ -201,6 +219,7 @@ GridWorld.Env = function Env(config) {
       });
       this.trails.forEach((trail, i) => {
         var v = views[i];
+        console.log(v)
         var line = d3.svg.line().x(d => v.S(d[0])).y(d => v.S(d[1]));
         var trail_history_ = trail_history.slice(0);
         trail.transition().duration(T)
@@ -210,6 +229,7 @@ GridWorld.Env = function Env(config) {
             return roundPathCorners(line(trail_history.concat([mid])), 0.2, true);
           });
       });
+
       trail_history = trail_history.concat([[s2.x, s2.y]])
       this.state = s2;
       if (this.done){

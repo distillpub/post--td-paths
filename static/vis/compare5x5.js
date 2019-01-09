@@ -5,11 +5,7 @@ function compare_vis(main_div, config, callback){
   var grid_size = 5;
   var algs = config.algs || ["MC", "TD", "Q"] ;
   var goals = [{x: 3, y: 0, reward: 2},
-               {x: 4, y: 0, reward: -1},
-               {x: 4, y: 1, reward: -1},
-               {x: 4, y: 2, reward: -1},
-               {x: 4, y: 3, reward: -1},
-               {x: 4, y: 4, reward: -1},];
+               {x: 4, y: 1, reward: -1},];
   var env = new GridWorld.Env({grid_size: grid_size, goals: goals});
   var svg = main_div.append("svg")
     .attr("width", 900)
@@ -79,7 +75,7 @@ function compare_vis(main_div, config, callback){
   }
 
   function visualize(){
-    var agent1 = new env.Agent({start: {x: 0, y: 2}, trail: true});
+    var agent1 = new env.Agent({start: {x: 0, y: 2}});
     action_names = ["right", "up", "right", "up", "right", "right"];
     mapP(action_names, a_name => {
       var a = _.findWhere(agent1.state.actions, {name: a_name});
@@ -89,8 +85,8 @@ function compare_vis(main_div, config, callback){
       var P = agent1.step(a, 300);
       return P;
     }).then(() => {
-      var agent2 = new env.Agent({start: { x:2, y: grid_size-1}, trail: true});
-      action_names = ["up", "up", "up", "right", "right", "up", "up"];
+      var agent2 = new env.Agent({start: { x:2, y: grid_size-1}});
+      action_names = ["up", "up", "up", "right", "right", "up"];
       return mapP(action_names, a_name => {
         var a = _.findWhere(agent2.state.actions, {name: a_name});
         update([agent1.history, agent2.history]);
