@@ -79,6 +79,7 @@ function compare_vis(main_div, config, callback){
   }
 
   function visualize(){
+
     var agent1 = new env.Agent({start: {x: 0, y: 2}, trail: true});
     action_names = ["right", "up", "right", "up", "right", "right"];
     mapP(action_names, a_name => {
@@ -99,7 +100,6 @@ function compare_vis(main_div, config, callback){
       })
       .then(() => {
         compare_running = false;
-
         callback();
       });
 
@@ -118,7 +118,7 @@ function compare_vis(main_div, config, callback){
       el.style.visibility = 'hidden';
     });
 
-    update([]); // clear history first from previous git commit.
+    update([]); // clear history first
     visualize();
   };
 }

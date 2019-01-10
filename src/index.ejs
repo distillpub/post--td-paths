@@ -131,14 +131,17 @@
           d3.select("#compare_hero"), 
           {algs: ["MC", "TD", "Q"], trail: true}, 
           () => {
-            compare_play_button.textContent = "Play"
-            compare_play_button.disabled = false
+            compare_play_button.textContent = "Play";
+            compare_play_button.disabled = false;
+
           }
         );
 
         compare_play_button.addEventListener("click", () => {
+
           compare_play_button.textContent = "Playing..."
           compare_play_button.disabled = true;
+
           run();
         });
 

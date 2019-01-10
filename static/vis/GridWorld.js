@@ -161,14 +161,14 @@ GridWorld.Env = function Env(config) {
             "translate(" + S(0.25)*a.x + "," + S(0.25)*a.y + ")");
     })
 
-    // info["V"].append("line").attr("x2", 40).attr("y2", 0).attr("class", "left")
-    //          .style("stroke-width", 6).attr("visibility", "hidden");
-    // info["V"].append("line").attr("x2", -39).attr("y2", 0).attr("class", "right")
-    //          .style("stroke-width", 6).attr("visibility", "hidden");
-    // info["V"].append("line").attr("x2", 0).attr("y2", 50).attr("class", "up")
-    //          .style("stroke-width", 6).attr("visibility", "hidden");
-    // info["V"].append("line").attr("x2", 0).attr("y2", -50).attr("class", "down")
-    //          .style("stroke-width", 6).attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", 40).attr("y2", 0).attr("class", "left")
+             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", -39).attr("y2", 0).attr("class", "right")
+             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", 0).attr("y2", 50).attr("class", "up")
+             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", 0).attr("y2", -50).attr("class", "down")
+             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
 
     this.info = info;
     _.values(info).forEach(s => s.style("display", "none"));
@@ -179,26 +179,26 @@ GridWorld.Env = function Env(config) {
       );
       if (info_type == "V") {
 
-        // if (histories != undefined && histories.length > 0) {
-        //   let h = histories[histories.length-1].slice(0)
+        if (histories != undefined && histories.length > 0) {
+          let h = histories[histories.length-1].slice(0)
 
-        //   if (h != undefined && h.length > 1) {
-        //     let step = h[h.length-1]
-        //     let prev_step = h[h.length-2]
-        //     let cell_ix = step.s.x + step.s.y*4
-        //     cell_ix = (cell_ix > 2) ? cell_ix-1 : cell_ix;
-        //     console.log(cell_ix, h)
-        //     // console.log('T', info["T"])
+          if (h != undefined && h.length > 1) {
+            let step = h[h.length-1]
+            let prev_step = h[h.length-2]
+            let cell_ix = step.s.x + step.s.y*4
+            cell_ix = (cell_ix > 2) ? cell_ix-1 : cell_ix;
+            console.log(cell_ix, h)
+            // console.log('T', info["T"])
 
-        //     let line = info["V"][cell_ix][0].getElementsByClassName(prev_step.a.name)[0];
-        //     line.setAttribute("visibility", "visible");
+            let line = info["V"][cell_ix][0].getElementsByClassName(prev_step.a.name)[0];
+            line.setAttribute("visibility", "visible");
 
-        //     if (step.r != 0) {
-        //       let line = info["V"][cell_ix][0].getElementsByClassName("left")[0];
-        //       line.setAttribute("visibility", "visible");
-        //     };
-        //   };
-        // };
+            if (step.r != 0) {
+              let line = info["V"][cell_ix][0].getElementsByClassName("left")[0];
+              line.setAttribute("visibility", "visible");
+            };
+          };
+        };
 
         info["V"]
           .style("fill", d => C(d[name]))
@@ -245,7 +245,7 @@ GridWorld.Env = function Env(config) {
         v.env.select(".trails")
           .append("path")
           .attr("class", "trail")
-          .attr("stroke", "#bbb")
+          .attr("stroke", "#CAC9CC")
           .attr("stroke-width", v.S(0.13))
           .attr("fill", "none")
           .attr("d", "")
