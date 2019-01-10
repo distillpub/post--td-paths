@@ -74,7 +74,7 @@ function compare_vis(main_div, config, callback){
     learn_TD(histories, {name: "TD", steps: 500});
     learn_Q(histories, {name: "Q", steps: 500});
     _.range(algs.length).map(n => {
-       V[n].show_info("V", algs[n]);
+       V[n].show_info("V", algs[n], histories);
     });
   }
 
@@ -86,7 +86,7 @@ function compare_vis(main_div, config, callback){
       if (agent1.history.length != 0) {
         update([agent1.history]);
       }
-      var P = agent1.step(a, 300);
+      var P = agent1.step(a, 500);
       return P;
     }).then(() => {
       var agent2 = new env.Agent({start: { x:2, y: grid_size-1}, trail: true});
@@ -94,16 +94,17 @@ function compare_vis(main_div, config, callback){
       return mapP(action_names, a_name => {
         var a = _.findWhere(agent2.state.actions, {name: a_name});
         update([agent1.history, agent2.history]);
-        var P = agent2.step(a, 300);
+        var P = agent2.step(a, 500);
         return P;
       })
       .then(() => {
         compare_running = false;
+
         callback();
       });
 
     });
-  }  
+  }
   return function() {
 
     env.states.forEach(s => {
@@ -111,6 +112,10 @@ function compare_vis(main_div, config, callback){
       s.actions.forEach(a => {
         for (var k in a.Q) {a.Q[k] = undefined;}
       });
+    });
+
+    [].forEach.call(document.querySelectorAll('.trail'), function (el) {
+      el.style.visibility = 'hidden';
     });
 
     update([]); // clear history first from previous git commit.
