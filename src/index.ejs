@@ -335,7 +335,7 @@
 </div>
 
     <p>
-      At this point, we can see that the TD update is a recursive mess but the Monte Carlo update is a simple running average. So how can we compare the two? More importantly <i>should</i> we compare the two? Since the updates are so different, it feels a bit like we're comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      We've ended up with a strange-looking sum of nested expectation values. At first glance, it's not clear how we should compare them to the more simple-looking Monte Carlo update. More importantly, it's not clear that we <i>should</i> compare the two; the updates are so different that it feels a bit like comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
@@ -518,7 +518,7 @@
     </div>
 
     <p>
-      So far, we have seen that TD learning never averages over <i>fewer</i> trajectories than Monte Carlo. On the other hand, it can often take advantage of simulated trajectories in order to average over <i>more</i> trajectories. Given this intuition, it seems likely that TD estimates will have lower variance.
+      First off, TD learning never averages over <i>fewer</i> trajectories than Monte Carlo because there are never fewe simulated trajectories (paths) than real trajectories. On the other hand, when there are more simulated trajectories (paths) than real trajectories, TD learning has the chance to average over more of the agent's experience. Given this intuition, it seems plausible that TD estimates will have lower variance.
     </p>
 
     <p>
@@ -566,7 +566,7 @@
     <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      So far, we've focused on estimating the value of states using the function $V(s)$. One of the problems with $V(s)$ is that it doesn't make it easy to compare two different actions. A simple solution to this problem is to learn the value of a state <i>and</i> and an action with a $Q$-function.
+      So far, we've focused on estimating the value of states using the function $V(s)$. When we use value to choose a policy (e.g. in policy value iteration), though, we often care more about the relative value of different <i>actions</i>. Making this comparison with $V(s)$ doesn't make sense. A simple alternative is the $Q$-function, which estimates the joint value of an action <i>and</i> a state.
     </p>
 
 
@@ -609,11 +609,11 @@
     </figure>
 
     <p>
-      But this value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's <i>empirical</i> policy distribution. Here, we have weighted each $Q$-value by the <i>true</i> probability of each action. Since this weighting corrects for the difference between the empirical and true policy distributions, this version of $V(s)$ actually gives an even better value estimate.
+      This value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's empirical policy distribution. Here, we have weighted each $Q$-value by the true probability of each action. Since the weighting corrects for the difference between the empirical and true policy distributions, this version of $V(s)$ tends to give a better value estimate for the underlying policy.
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not just a little different but rather completely different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation.
+      <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not just slightly different -- instead, they are completely different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation.
     </p>
 
 
@@ -691,11 +691,15 @@
     </figure>
 
     <p>
-      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot at machine 43! Now, if you were to use $Q$-learning to estimate the value of going to a casino, you would choose the maximum outcome of all actions -- the jackpot -- which would make you think that a casino is a great place to be! This example illustrates how $Q$-learning is over-optimistic in the presence of noise, consistently choosing the best outcomes, even if they are unlikely.
+      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day and you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome of all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
     <p>
-      One way to fix this problem is to have a friend to visit the casino and play the same slot machines. Then, ask him which machine gave the best result and look up what outcome you got for playing the machine. The probability that you both scored jackpots on the same machine is very low and you won't fall into the trap of being over-optimistic about casinos! This is the general idea behind double-$Q$ learning, which fixes $Q$-learning's value updates to make them unbiased.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      But casinos don't work that way; where did we go wrong?! The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is often large simply by chance; choosing it over the others gives a <i>biased</i> value estimate.
+    </p>
+
+    <p>
+      One way to reduce this bias is to have a friend to visit the casino and play the same set of slot machines. Then, ask him what his winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low and you won't fall into the same trap. This clever extension is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
 
@@ -703,15 +707,15 @@
     <h2>Merging Paths with Function Approximators</h2>
 
     <p>
-      Up until now, we've kept track of a one parameter – the value of the running average – for every state. This worked fine for the simple Cliff World example, but it clearly won't work for environments that have large or infinite state-spaces. Unfortunately, most interesting RL problems fall under this category.
+      Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state.
     </p>
 
     <p>
-      In this section, we'll tackle value estimation when there are more states than learnable parameters. This means that, on average, updating one parameter will update more than one value estimate. There are countless methods for doing this: we refer to them collectively as <i>function approximators</i>.
+      Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximation.
     </p>
 
     <p>
-      To get a better idea of how function approximators change things, let's return to the Cliff World example. This time, though, the environment has a large number of states.
+      An interesting property of function approximators is that updating one parameter will change more than one value estimate on average. Let's see how this changes things by returning to the Cliff World example. This time, we'll give the environment many more states.
     </p>
 
   <style>
@@ -730,17 +734,17 @@
   <figure id="fnapprox-intro" class="l-page">
       <img src="figures/large-cliffworld-states.svg"/>
       <div class="figcaption">
-        <b>Large or infinite state spaces</b> cause tabular methods to break down. To make better use of memory and experience, we must use function approximation.
+        <b>Large or infinite state spaces</b> are a characteristic of many interesting RL problems. Value estimation in these spaces often requires function approximation.
       </div>
 
       <img src="figures/large-cliffworld-path.svg"/>
       <div class="figcaption">
-        <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize
+        <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize.
       </div>
 
       <img src="figures/large-cliffworld-approx.svg"/>
       <div class="figcaption">
-        <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't visited.
+        <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't yet visited.
       </div>
   </figure>
 
@@ -756,9 +760,9 @@
   #fnapprox-barrier {
     margin-left: auto;
     margin-right: auto;
-    width: 550px;
+    width: 700px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.464fr;
     grid-template-rows: auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 10px;
