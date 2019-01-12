@@ -777,12 +777,12 @@
 
       <img src="figures/large-cliffworld-barrier.svg"/>
       <div class="figcaption">
-        Now the Euclidean averager gives bad generalization.
+        Now the Euclidean averager produces bad value updates.
       </div>
   </figure>
 
     <p>
-      <b>Merging the wrong paths.</b> The diagram below shows the ill effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
+      <b>Merging the wrong paths.</b> The diagram below shows the effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
 
   <style>
@@ -803,7 +803,7 @@
   </figure>
   
     <p>
-      This is the price we must pay for using TD learning: it's far more sensitive to bad value updates.
+      As we saw earlier, TD learning makes more efficient use of an agent's experience. But the price we pay for this efficiency is that our value estimate is far more sensitive to bad value updates.
     </p>
 
 
@@ -811,7 +811,7 @@
     <h2>Implications for deep reinforcement learning</h2>
 
     <p>
-      <b>Neural networks.</b> One of the most popular types of function approximator, especially in recent years, has been deep neural networks. These models are exciting for many reasons, but one particularly nice property is that they don't make implicit assumptions about which states are "nearby."
+      <b>Neural networks.</b> Deep neural networks are perhaps the most popular function approximators for reinforcement learning. These models are exciting for many reasons, but one particularly nice property is that they don't make implicit assumptions about which states are "nearby."
     </p>
 
     <p>
@@ -843,27 +843,30 @@
   </figure>
 
     <p>
-      <b>The best of both worlds?</b> So far, we have seen that TD learning has a clear advantage over Monte Carlo in tabular settings. But for different reasons, Monte Carlo can sometimes beat TD learning (or at least compete with it) when we use function approximation <d-cite key="Amiranashvili2018TDLearning"></d-cite>. Even though neural networks can learn to overcome bad generalization, it would be better if we were able to reduce bad generalization in the first place.
+      <b>To TD or not TD?</b> So far, we've seen how TD learning can outperform Monte Carlo by merging paths of experience where they intersect. We've also seen that merging paths is a double-edged sword: when function approximation causes bad value updates, TD can end up doing worse that Monte Carlo.
     </p>
 
     <p>
-      That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates. <d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote> Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone.
-
-    <p>
-      Researchers usually keep the $\lambda$ coefficient constant as they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe we should gradually decrease $\lambda$ over the course of training...
+      There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD-based methods have dominated the RL literature for the past several decades. However, there are notable exceptions: one recent paper shows that Monte Carlo can outperform TD learning, depending on the environment<d-cite key="Amiranashvili2018TDLearning"></d-cite>.
     </p>
 
     <p>
-      Perhaps there are other ways for deep RL agents to combine the the stability of Monte Carlo with the efficiency of TD learning. Deep RL is still a young area of research and there are many open questions. We hope this post clarifies the ideas around value estimation and inspires you to try some experiments of your own.
+      Since Monte Carlo and TD learning both have desirable properties, why not try building a value estimator that is a mixture of the two? That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates<d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote>. Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone<d-footnote>Researchers often keep the $\lambda$ coefficient constant as they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe the best approach is to anneal $\lambda$ over the course of training!</d-footnote>.
     </p>
 
 
+    <h2>Conclusion</h2>
+    <p>
+      An RL agent can improve its policy by looking at separate episodes of experience, one at a time. When it does this, though, it discards a rich source of information: the ways that states from different episodes intersect with one another. The paths perspective is meant to emphasize this second source of information, and to demonstrate how some value estimators (TD learning) make use of it whereas others (Monte Carlo) do not.
+    </p>
+
+    <p>
+      We hope that the paths perspective clarifies the relationship between some of the most fundamental approaches to value learning. Understanding these relationships, and how they affect the way an agent learns, is the first step to making RL agents even better.
+    </p>
 
     <h2>Playground</h2>
-    <br>
-
     <p>
-      We encourage you to further develop your intuition around value estimation by training your own Gridworld agent.
+      We encourage you to verify -- and build upon -- the intuitions outlined in this article using the value learning playground below. Try watching value estimates improve with experience or comparing Monte Carlo to one of the TD value estimators.
     </p>
 
     <div id="playground"></div>

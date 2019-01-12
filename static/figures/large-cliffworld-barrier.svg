@@ -62,7 +62,7 @@
       .cls-12 {
         font-size: 15px;
         fill: #6d6e71;
-        font-family: Roboto-Regular, Roboto;
+        font-family: Roboto-Light, Roboto;
       }
 
       .cls-13 {
@@ -454,5 +454,5 @@
   <rect class="cls-10" x="280.00633" y="0.51609" width="19.95354" height="299.63761"/>
   <rect class="cls-11" x="80.2393" y="90.80863" width="167.28065" height="37.88288" rx="10.8245" ry="10.8245"/>
   <line class="cls-11" x1="246.95553" y1="111.76112" x2="325.50487" y2="111.76112"/>
-  <text class="cls-12" transform="translate(329.7541 89.56687)">These states<tspan x="0" y="18">should not h</tspan><tspan class="cls-13" x="82.33887" y="18">a</tspan><tspan class="cls-14" x="90.38818" y="18">v</tspan><tspan x="97.55859" y="18">e</tspan><tspan class="cls-15" x="0" y="36">r</tspan><tspan x="4.93652" y="36">ecei</tspan><tspan class="cls-14" x="32.32178" y="36">v</tspan><tspan x="39.49219" y="36">ed </tspan><tspan class="cls-13" x="59.61182" y="36">v</tspan><tspan x="66.76758" y="36">alue</tspan><tspan x="0" y="54">updates</tspan></text>
+  <text class="cls-12" transform="translate(331.52086 121.9235)">These states<tspan x="0" y="18">should not h</tspan><tspan class="cls-13" x="81.15234" y="18">a</tspan><tspan class="cls-14" x="89.07715" y="18">v</tspan><tspan x="96.19629" y="18">e</tspan><tspan class="cls-15" x="0" y="36">r</tspan><tspan x="4.90723" y="36">ecei</tspan><tspan class="cls-14" x="31.49414" y="36">v</tspan><tspan x="38.61328" y="36">ed </tspan><tspan class="cls-13" x="58.34473" y="36">v</tspan><tspan x="65.44922" y="36">alue</tspan><tspan x="0" y="54">updates</tspan></text>
 </svg>
