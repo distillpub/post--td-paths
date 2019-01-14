@@ -1,1 +1,76 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.13 94"><defs><style>.cls-1,.cls-3,.cls-7{fill:#58595b;}.cls-2{fill:#e7ebe8;}.cls-3{font-size:13px;}.cls-3,.cls-7{font-family:MyriadPro-Semibold, Myriad Pro;font-weight:700;}.cls-4{letter-spacing:0em;}.cls-5{letter-spacing:-0.01em;}.cls-6{letter-spacing:-0.01em;}.cls-7{font-size:10px;}.cls-8,.cls-9{fill:none;stroke:#58595b;stroke-width:2px;}.cls-8{stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.25 4;}.cls-9{stroke-miterlimit:10;}</style></defs><title>gridworld-puzzle-merge</title><rect class="cls-1" y="14.66" width="25.45" height="25.45"/><rect class="cls-2" x="26.94" y="14.69" width="25.45" height="25.45"/><rect class="cls-2" x="53.77" y="14.69" width="25.45" height="25.45"/><rect class="cls-2" x="80.68" y="14.7" width="25.45" height="25.45"/><rect class="cls-2" y="41.61" width="25.45" height="25.45"/><rect class="cls-2" x="26.94" y="41.63" width="25.45" height="25.45"/><rect class="cls-2" x="53.77" y="41.64" width="25.45" height="25.45"/><rect class="cls-1" x="80.68" y="41.65" width="25.45" height="25.45"/><rect class="cls-2" y="68.53" width="25.45" height="25.45"/><rect class="cls-2" x="26.94" y="68.55" width="25.45" height="25.45"/><rect class="cls-2" x="53.77" y="68.56" width="25.45" height="25.45"/><rect class="cls-2" x="80.68" y="68.57" width="25.45" height="25.45"/><text class="cls-3" transform="translate(2.64 9.23)"><tspan class="cls-4">M</tspan><tspan x="10.82" y="0">e</tspan><tspan class="cls-5" x="17.52" y="0">r</tspan><tspan x="22.05" y="0">ge p</tspan><tspan class="cls-6" x="46.5" y="0">a</tspan><tspan x="53.03" y="0">ths 1 &amp; 2</tspan></text><circle class="cls-1" cx="39.66" cy="54.36" r="2.95"/><circle class="cls-1" cx="39.61" cy="81.29" r="2.95"/><circle class="cls-1" cx="66.5" cy="81.25" r="2.95"/><circle class="cls-1" cx="93.4" cy="81.25" r="2.95"/><text class="cls-7" transform="translate(87.74 91.34)">+5</text><polyline class="cls-8" points="66.5 81.25 39.61 81.3 39.66 54.36 12.72 54.37"/><line class="cls-9" x1="93.4" y1="81.3" x2="66.5" y2="81.29"/><circle class="cls-1" cx="12.72" cy="54.37" r="2.95"/></svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.12547 94.00343">
+  <defs>
+    <style>
+      .cls-1, .cls-3, .cls-7 {
+        fill: #58595b;
+      }
+
+      .cls-2 {
+        fill: #e7ebe8;
+      }
+
+      .cls-3 {
+        font-size: 13px;
+      }
+
+      .cls-3, .cls-7 {
+        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-weight: 700;
+      }
+
+      .cls-4 {
+        letter-spacing: 0.005em;
+      }
+
+      .cls-5 {
+        letter-spacing: -0.008em;
+      }
+
+      .cls-6 {
+        letter-spacing: -0.00601em;
+      }
+
+      .cls-7 {
+        font-size: 10px;
+      }
+
+      .cls-8, .cls-9 {
+        fill: none;
+        stroke: #58595b;
+        stroke-width: 2px;
+      }
+
+      .cls-8 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 0.25 4;
+      }
+
+      .cls-9 {
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <title>gridworld-puzzle-merge</title>
+  <rect class="cls-1" y="14.66131" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.93954" y="14.68859" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.77147" y="14.69392" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.67581" y="14.70457" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" y="41.60604" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.93954" y="41.63332" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.77147" y="41.63865" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.67581" y="41.64931" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" y="68.52648" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.93954" y="68.55376" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.77147" y="68.55909" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.67581" y="68.56975" width="25.44966" height="25.44966"/>
+  <text class="cls-3" transform="translate(2.64347 9.22982)"><tspan class="cls-4">M</tspan><tspan x="10.81592" y="0">e</tspan><tspan class="cls-5" x="17.52393" y="0">r</tspan><tspan x="22.04785" y="0">ge p</tspan><tspan class="cls-6" x="46.50098" y="0">a</tspan><tspan x="53.02686" y="0">ths 1 &amp; 2</tspan></text>
+  <circle class="cls-1" cx="39.66438" cy="54.35816" r="2.94884"/>
+  <circle class="cls-1" cx="39.61057" cy="81.29458" r="2.94884"/>
+  <circle class="cls-1" cx="66.4963" cy="81.25131" r="2.94884"/>
+  <circle class="cls-1" cx="93.40064" cy="81.25131" r="2.94884"/>
+  <text class="cls-7" transform="translate(87.74015 91.34402)">+5</text>
+  <polyline class="cls-8" points="66.496 81.251 39.611 81.295 39.664 54.358 12.725 54.374"/>
+  <line class="cls-9" x1="93.40064" y1="81.29991" x2="66.4963" y2="81.28925"/>
+  <circle class="cls-1" cx="12.72483" cy="54.37414" r="2.94884"/>
+</svg>

@@ -10,7 +10,7 @@
       }
 
       .cls-3 {
-        fill: #6d79ba;
+        fill: #9ca3c4;
       }
 
       .cls-4 {
@@ -21,59 +21,55 @@
         fill: #dfe1ee;
       }
 
-      .cls-11, .cls-6, .cls-9 {
+      .cls-10, .cls-6, .cls-8 {
         fill: none;
         stroke-miterlimit: 10;
       }
 
       .cls-6 {
-        stroke: #6d79ba;
+        stroke: #9ca3c4;
       }
 
-      .cls-11, .cls-6 {
-        stroke-width: 2px;
+      .cls-6, .cls-8 {
+        stroke-width: 3px;
       }
 
       .cls-7 {
-        fill: #2c3592;
-      }
-
-      .cls-8 {
         font-size: 11.16879px;
-        fill: #d1d3d4;
+        fill: #e6e7e8;
         font-family: MyriadPro-Semibold, Myriad Pro;
         font-weight: 700;
       }
 
-      .cls-9 {
+      .cls-8 {
         stroke: #58595b;
         stroke-linecap: round;
-        stroke-width: 3px;
+      }
+
+      .cls-9 {
+        fill: #a92323;
       }
 
       .cls-10 {
-        fill: #aa1e22;
+        stroke: #f7941d;
+        stroke-width: 2px;
       }
 
       .cls-11 {
-        stroke: #f7941d;
-      }
-
-      .cls-12 {
         font-size: 15px;
         fill: #6d6e71;
         font-family: Roboto-Light, Roboto;
       }
 
-      .cls-13 {
+      .cls-12 {
         letter-spacing: -0.00732em;
       }
 
-      .cls-14 {
+      .cls-13 {
         letter-spacing: -0.00635em;
       }
 
-      .cls-15 {
+      .cls-14 {
         letter-spacing: -0.00928em;
       }
     </style>
@@ -448,11 +444,11 @@
     <circle class="cls-5" cx="10.28355" cy="290.24139" r="6.4307"/>
   </g>
   <polyline class="cls-6" points="31.775 268.6 31.775 117.998 10.29 117.998 10.29 53.66 53.274 53.66 53.274 32.049 117.749 32.049 117.749 53.729 139.24 53.729 139.24 74.968 160.732 74.968 182.224 74.968 182.224 53.807 225.207 53.807 225.207 32.213 246.956 32.213 246.956 10.698 268.177 10.698"/>
-  <rect class="cls-7" x="259.52717" y="2.01165" width="17.3554" height="17.3554"/>
-  <text class="cls-8" transform="translate(261.86349 12.76117)">+1</text>
-  <line class="cls-9" x1="280.0089" y1="85.9023" x2="43.25382" y2="85.69691"/>
-  <rect class="cls-10" x="280.00633" y="0.51609" width="19.95354" height="299.63761"/>
-  <rect class="cls-11" x="80.2393" y="90.80863" width="167.28065" height="37.88288" rx="10.8245" ry="10.8245"/>
-  <line class="cls-11" x1="246.95553" y1="111.76112" x2="325.50487" y2="111.76112"/>
-  <text class="cls-12" transform="translate(331.52086 121.9235)">These states<tspan x="0" y="18">should not h</tspan><tspan class="cls-13" x="81.15234" y="18">a</tspan><tspan class="cls-14" x="89.07715" y="18">v</tspan><tspan x="96.19629" y="18">e</tspan><tspan class="cls-15" x="0" y="36">r</tspan><tspan x="4.90723" y="36">ecei</tspan><tspan class="cls-14" x="31.49414" y="36">v</tspan><tspan x="38.61328" y="36">ed </tspan><tspan class="cls-13" x="58.34473" y="36">v</tspan><tspan x="65.44922" y="36">alue</tspan><tspan x="0" y="54">updates</tspan></text>
+  <rect class="cls-3" x="259.52717" y="2.01165" width="17.3554" height="17.3554"/>
+  <text class="cls-7" transform="translate(261.86352 12.7612)">+1</text>
+  <line class="cls-8" x1="280.0089" y1="85.9023" x2="43.25382" y2="85.69691"/>
+  <rect class="cls-9" x="280.00633" y="0.51609" width="19.95354" height="299.63761"/>
+  <rect class="cls-10" x="80.2393" y="90.80863" width="167.28065" height="37.88288" rx="10.8245" ry="10.8245"/>
+  <line class="cls-10" x1="246.95553" y1="111.76112" x2="321.5869" y2="111.76112"/>
+  <text class="cls-11" transform="translate(329.52087 117.92356)">These states<tspan x="0" y="18">should not h</tspan><tspan class="cls-12" x="81.15234" y="18">a</tspan><tspan class="cls-13" x="89.07715" y="18">v</tspan><tspan x="96.19629" y="18">e</tspan><tspan class="cls-14" x="0" y="36">r</tspan><tspan x="4.90723" y="36">ecei</tspan><tspan class="cls-13" x="31.49414" y="36">v</tspan><tspan x="38.61328" y="36">ed </tspan><tspan class="cls-12" x="58.34473" y="36">v</tspan><tspan x="65.44922" y="36">alue</tspan><tspan x="0" y="54">updates</tspan></text>
 </svg>

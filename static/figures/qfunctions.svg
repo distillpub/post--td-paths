@@ -1,4 +1,4 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.6691 186.22015">
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 601.86593 186.22015">
   <defs>
     <style>
       .cls-1 {
@@ -33,12 +33,12 @@
         fill: #010101;
       }
 
-      .cls-10, .cls-18 {
+      .cls-10 {
         font-size: 15.2726px;
         fill: #6d6e71;
       }
 
-      .cls-10, .cls-20, .cls-21, .cls-22, .cls-23 {
+      .cls-10, .cls-20 {
         font-family: Roboto-Regular, Roboto;
       }
 
@@ -70,32 +70,44 @@
         letter-spacing: -0.00831em;
       }
 
-      .cls-17 {
+      .cls-16 {
         letter-spacing: -0.00006em;
       }
 
-      .cls-21 {
-        letter-spacing: -0.00978em;
-      }
-
-      .cls-22, .cls-26 {
+      .cls-17 {
         letter-spacing: 0.00006em;
       }
 
-      .cls-23, .cls-27 {
-        letter-spacing: -0.00735em;
+      .cls-21 {
+        letter-spacing: -0.00729em;
+      }
+
+      .cls-22 {
+        letter-spacing: -0.03223em;
+      }
+
+      .cls-23 {
+        letter-spacing: -0.04585em;
       }
 
       .cls-24 {
-        letter-spacing: -0.08204em;
+        letter-spacing: -0.00978em;
       }
 
       .cls-25 {
         letter-spacing: -0.01413em;
       }
+
+      .cls-26 {
+        letter-spacing: -0.00735em;
+      }
+
+      .cls-27 {
+        letter-spacing: -0.07865em;
+      }
     </style>
   </defs>
-  <title>qfunctions-2</title>
+  <title>qfunctions</title>
   <rect class="cls-1" x="3.55559" y="105.48268" width="79.83102" height="79.83102"/>
   <polygon class="cls-2" points="14.063 145.397 22.329 161.993 22.329 128.8 14.063 145.397"/>
   <polygon class="cls-3" points="43.391 175.013 59.987 166.747 26.795 166.747 43.391 175.013"/>
@@ -133,7 +145,7 @@
     <path id="MJMATHI-73-3" data-name="MJMATHI-73" class="cls-9" d="M235.21322,74.80382a3.74923,3.74923,0,0,1,.4048-1.6445,4.16223,4.16223,0,0,1,1.4168-1.5433,4.04234,4.04234,0,0,1,2.4541-.6831,3.19645,3.19645,0,0,1,2.277.6831,2.16762,2.16762,0,0,1,.7337,1.518,1.50673,1.50673,0,0,1-.4301,1.1891,1.53281,1.53281,0,0,1-.9614.4048,1.01055,1.01055,0,0,1-.6072-.2024.81856.81856,0,0,1-.3036-.6578,1.14806,1.14806,0,0,1,.2277-.7084,2.2729,2.2729,0,0,1,.4301-.4554.61227.61227,0,0,1,.3289-.1518.02236.02236,0,0,0,.0253-.0253q0-.0759-.1771-.2277a1.7281,1.7281,0,0,0-.6325-.2783,4.47577,4.47577,0,0,0-.9867-.1518,2.13995,2.13995,0,0,0-2.3529,1.9987.91462.91462,0,0,0,.4807.8855,5.24743,5.24743,0,0,0,1.3915.4301,5.54361,5.54361,0,0,1,1.3156.3795,2.50039,2.50039,0,0,1,1.6698,2.4288,3.85007,3.85007,0,0,1-.2783,1.4168,5.65927,5.65927,0,0,1-.8349,1.4168,3.66008,3.66008,0,0,1-1.5939,1.1132,6.8701,6.8701,0,0,1-2.3782.4301,4.09238,4.09238,0,0,1-2.7577-.7337,2.34074,2.34074,0,0,1-.8349-1.7204,1.72062,1.72062,0,0,1,.5313-1.4168,1.74691,1.74691,0,0,1,1.1132-.4301,1.22073,1.22073,0,0,1,.7084.2277.94188.94188,0,0,1,.3542.7843,1.51426,1.51426,0,0,1-.4554,1.1132,1.246,1.246,0,0,1-.7843.4554.19426.19426,0,0,1-.0759.0253q-.0253,0-.0253.0506a.54686.54686,0,0,0,.2024.2024,3.5328,3.5328,0,0,0,.7843.3289,4.97609,4.97609,0,0,0,2.9601-.1012,2.17358,2.17358,0,0,0,.9614-.7084,3.35873,3.35873,0,0,0,.4301-.7843,1.90842,1.90842,0,0,0,.1265-.6325,1.19189,1.19189,0,0,0-.5313-1.0626,2.68934,2.68934,0,0,0-1.2144-.4301,6.26144,6.26144,0,0,1-1.4927-.3795,2.34137,2.34137,0,0,1-1.1891-.8855A2.54665,2.54665,0,0,1,235.21322,74.80382Z"/>
     <path id="MJMAIN-29-3" data-name="MJMAIN-29" class="cls-9" d="M245.28262,63.16582l.1012-.0253h.5566l.7084.6072a12.48528,12.48528,0,0,1,3.4661,5.3636,20.68516,20.68516,0,0,1,1.0879,6.6792,21.12052,21.12052,0,0,1-.253,3.3143,21.75292,21.75292,0,0,1-.5819,2.7071,11.3955,11.3955,0,0,1-.9361,2.2264q-.6072,1.1132-.9614,1.6951a7.69627,7.69627,0,0,1-1.0373,1.2903q-.6831.70839-.8096.8349t-.5819.4807l-.1012.1012h-.5819a.14867.14867,0,0,1-.1265-.0759.5957.5957,0,0,1-.0759-.2277q.02531-.02531.2783-.3289,3.9215-4.07331,3.9215-12.0175t-3.9215-12.0175q-.253-.3036-.2783-.3289A.29736.29736,0,0,1,245.28262,63.16582Z"/>
   </g>
-  <text class="cls-10" transform="translate(202.75748 12.84826)">I<tspan class="cls-11" x="4.15332" y="0">t</tspan><tspan class="cls-12" x="9.30664" y="0">’</tspan><tspan x="10.71582" y="0">s ha</tspan><tspan class="cls-13" x="39.09082" y="0">r</tspan><tspan x="44.11719" y="0">d </tspan><tspan class="cls-14" x="56.51172" y="0">t</tspan><tspan x="61.28418" y="0">o do this</tspan><tspan x="0" y="18.32715">with </tspan><tspan class="cls-15" x="32.36426" y="18.32715">v</tspan><tspan class="cls-16" x="39.95605" y="18.32715">alue functions</tspan><tspan class="cls-17" x="137.58789" y="18.32715">.</tspan></text>
-  <text class="cls-18" transform="translate(411.64755 13.02581)"><tspan class="cls-19">Q-functions</tspan><tspan class="cls-20" x="81.25488" y="0"> </tspan><tspan class="cls-21" x="85.03613" y="0">k</tspan><tspan class="cls-22" x="92.62695" y="0">eep </tspan><tspan class="cls-23" x="121.15918" y="0">v</tspan><tspan class="cls-20" x="128.44434" y="0">alue</tspan><tspan class="cls-20"><tspan x="0" y="18.32715">functions for each action,</tspan><tspan x="0" y="36.6543">making comparison easie</tspan><tspan class="cls-24" x="174.62012" y="36.6543">r</tspan><tspan x="178.53516" y="36.6543">.</tspan></tspan></text>
-  <text class="cls-10" transform="translate(3.12509 13.20336)">Often we need <tspan class="cls-25" x="101.44141" y="0">t</tspan><tspan x="106.21484" y="0">o</tspan><tspan x="0" y="18.32715">compa</tspan><tspan class="cls-13" x="46.96582" y="18.32715">r</tspan><tspan class="cls-26" x="51.99219" y="18.32715">e the </tspan><tspan class="cls-27" x="89.1377" y="18.32715">v</tspan><tspan x="96.42285" y="18.32715">alue of</tspan><tspan x="0" y="36.6543">actions under a </tspan><tspan class="cls-16" x="108.37695" y="36.6543">policy</tspan><tspan x="149.33984" y="36.6543">.</tspan></text>
+  <text class="cls-10" transform="translate(202.75757 12.84845)">I<tspan class="cls-11" x="4.15332" y="0">t</tspan><tspan class="cls-12" x="9.30664" y="0">’</tspan><tspan x="10.71582" y="0">s ha</tspan><tspan class="cls-13" x="39.09082" y="0">r</tspan><tspan x="44.11719" y="0">d </tspan><tspan class="cls-14" x="56.51172" y="0">t</tspan><tspan x="61.28418" y="0">o do this</tspan><tspan x="0" y="18.32715">with a </tspan><tspan class="cls-15" x="44.45313" y="18.32715">v</tspan><tspan class="cls-16" x="52.04492" y="18.32715">alue function</tspan><tspan x="141.82324" y="18.32715">.</tspan></text>
+  <text class="cls-10" transform="translate(411.64587 13.026)">I<tspan class="cls-11" x="4.15332" y="0">t</tspan><tspan class="cls-12" x="9.30664" y="0">’</tspan><tspan x="10.71582" y="0">s easier </tspan><tspan class="cls-14" x="67.3916" y="0">t</tspan><tspan class="cls-17" x="72.16406" y="0">o use</tspan><tspan class="cls-18"><tspan class="cls-19" x="0" y="18.32715">Q-functions</tspan><tspan class="cls-20" x="81.25488" y="18.32715" xml:space="preserve"> which estimate</tspan></tspan><tspan x="0" y="36.6543">joint state-action </tspan><tspan class="cls-21" x="117.63867" y="36.6543">v</tspan><tspan x="124.9248" y="36.6543">alues.</tspan></text>
+  <text class="cls-10" transform="translate(3.12518 13.20355)">Many times w<tspan class="cls-22" x="94.37988" y="0">e</tspan><tspan class="cls-23" x="101.97852" y="0">’</tspan><tspan x="104.32813" y="0">d li</tspan><tspan class="cls-24" x="124.13477" y="0">k</tspan><tspan class="cls-17" x="131.72559" y="0">e </tspan><tspan class="cls-25" x="143.59766" y="0">t</tspan><tspan x="148.37109" y="0">o</tspan><tspan x="0" y="18.32715">compa</tspan><tspan class="cls-13" x="46.96582" y="18.32715">r</tspan><tspan class="cls-17" x="51.99219" y="18.32715">e the </tspan><tspan class="cls-26" x="89.1377" y="18.32715">v</tspan><tspan x="96.42285" y="18.32715">alue of</tspan><tspan x="0" y="36.6543">actions under a polic</tspan><tspan class="cls-27" x="141.0625" y="36.6543">y</tspan><tspan x="147.08789" y="36.6543">.</tspan></text>
 </svg>

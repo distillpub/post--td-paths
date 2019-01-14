@@ -1,0 +1,62 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.29441 136.35725">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #aa1e22;
+      }
+
+      .cls-2 {
+        fill: #2c3592;
+      }
+
+      .cls-3 {
+        fill: #e7ebe8;
+      }
+
+      .cls-4 {
+        fill: #cac9cc;
+      }
+    </style>
+  </defs>
+  <title>cliff-walking-states</title>
+  <rect class="cls-1" x="109.91378" y="2.34344" width="25.01161" height="131.72706"/>
+  <rect class="cls-2" x="84.24331" y="3.25421" width="21.75487" height="21.75487"/>
+  <rect class="cls-3" x="1.72011" y="1.37952" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="28.65965" y="1.40681" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="55.49158" y="1.41214" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="1.72011" y="28.32426" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="28.65965" y="28.35154" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="55.49158" y="28.35687" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="82.39592" y="28.36753" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="1.72011" y="55.15318" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="28.65965" y="55.18046" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="55.49158" y="55.18579" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="82.39592" y="55.19645" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="1.72011" y="82.09791" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="28.65965" y="82.1252" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="55.49158" y="82.13052" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="82.39592" y="82.14118" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="1.72011" y="109.01835" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="28.65965" y="109.04563" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="55.49158" y="109.05096" width="25.44966" height="25.44966"/>
+  <rect class="cls-3" x="82.39592" y="109.06162" width="25.44966" height="25.44966"/>
+  <circle class="cls-4" cx="14.44494" cy="14.10436" r="8.06084"/>
+  <circle class="cls-4" cx="41.38448" cy="14.14231" r="8.06084"/>
+  <circle class="cls-4" cx="68.6472" cy="14.14231" r="8.06084"/>
+  <circle class="cls-4" cx="14.28335" cy="41.07338" r="8.06084"/>
+  <circle class="cls-4" cx="41.22289" cy="41.11133" r="8.06084"/>
+  <circle class="cls-4" cx="68.48562" cy="41.11133" r="8.06084"/>
+  <circle class="cls-4" cx="95.09513" cy="41.04909" r="8.06084"/>
+  <circle class="cls-4" cx="14.28335" cy="68.20014" r="8.06084"/>
+  <circle class="cls-4" cx="41.22289" cy="68.23809" r="8.06084"/>
+  <circle class="cls-4" cx="68.48562" cy="68.23809" r="8.06084"/>
+  <circle class="cls-4" cx="95.09513" cy="68.17585" r="8.06084"/>
+  <circle class="cls-4" cx="14.28335" cy="94.91625" r="8.06084"/>
+  <circle class="cls-4" cx="41.22289" cy="94.82274" r="8.06084"/>
+  <circle class="cls-4" cx="68.48562" cy="94.9542" r="8.06084"/>
+  <circle class="cls-4" cx="95.09513" cy="94.89195" r="8.06084"/>
+  <circle class="cls-4" cx="14.28335" cy="122.04301" r="8.06084"/>
+  <circle class="cls-4" cx="41.22289" cy="122.61285" r="8.06084"/>
+  <circle class="cls-4" cx="68.48562" cy="122.08096" r="8.06084"/>
+  <circle class="cls-4" cx="95.09513" cy="122.01871" r="8.06084"/>
+</svg>

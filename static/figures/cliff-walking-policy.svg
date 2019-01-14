@@ -1,1 +1,111 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.29 136.36"><defs><style>.cls-1{fill:#aa1e22;}.cls-2{fill:#2c3592;}.cls-3{fill:#e7ebe8;}.cls-4{fill:#efedf6;}.cls-5{fill:#231f20;}</style></defs><title>cliff-walking-policy</title><rect class="cls-1" x="110.08" y="2.86" width="24.91" height="131.21"/><rect class="cls-2" x="84.51" y="3.77" width="21.67" height="21.67"/><rect class="cls-3" x="2.3" y="1.9" width="25.35" height="25.35"/><polygon class="cls-4" points="14.95 23.98 20.22 21.36 9.68 21.36 14.95 23.98"/><polygon class="cls-5" points="24.32 14.58 21.69 9.31 21.69 19.85 24.32 14.58"/><rect class="cls-3" x="29.14" y="1.93" width="25.35" height="25.35"/><polygon class="cls-4" points="32.48 14.6 35.1 19.87 35.1 9.33 32.48 14.6"/><polygon class="cls-4" points="41.79 24.01 47.06 21.38 36.52 21.38 41.79 24.01"/><polygon class="cls-5" points="51.15 14.61 48.53 9.34 48.53 19.88 51.15 14.61"/><rect class="cls-3" x="55.87" y="1.93" width="25.35" height="25.35"/><polygon class="cls-4" points="59.2 14.61 61.83 19.88 61.83 9.34 59.2 14.61"/><polygon class="cls-4" points="68.52 24.01 73.79 21.39 63.25 21.39 68.52 24.01"/><polygon class="cls-5" points="77.88 14.61 75.25 9.34 75.25 19.88 77.88 14.61"/><rect class="cls-3" x="2.3" y="28.74" width="25.35" height="25.35"/><polygon class="cls-4" points="14.95 50.82 20.22 48.2 9.68 48.2 14.95 50.82"/><polygon class="cls-4" points="24.32 41.42 21.69 36.15 21.69 46.69 24.32 41.42"/><polygon class="cls-5" points="14.95 32.06 9.68 34.69 20.22 34.69 14.95 32.06"/><rect class="cls-3" x="29.14" y="28.77" width="25.35" height="25.35"/><polygon class="cls-4" points="32.48 41.44 35.1 46.71 35.1 36.17 32.48 41.44"/><polygon class="cls-4" points="41.79 50.85 47.06 48.22 36.52 48.22 41.79 50.85"/><polygon class="cls-4" points="51.15 41.45 48.53 36.18 48.53 46.72 51.15 41.45"/><polygon class="cls-5" points="41.79 32.09 36.52 34.72 47.06 34.72 41.79 32.09"/><rect class="cls-3" x="55.87" y="28.77" width="25.35" height="25.35"/><polygon class="cls-4" points="59.2 41.45 61.83 46.72 61.83 36.18 59.2 41.45"/><polygon class="cls-4" points="68.52 50.85 73.79 48.23 63.25 48.23 68.52 50.85"/><polygon class="cls-4" points="77.88 41.45 75.25 36.18 75.25 46.72 77.88 41.45"/><polygon class="cls-5" points="68.52 32.1 63.25 34.72 73.79 34.72 68.52 32.1"/><rect class="cls-3" x="82.67" y="28.78" width="25.35" height="25.35"/><polygon class="cls-4" points="86 41.46 88.63 46.73 88.63 36.19 86 41.46"/><polygon class="cls-4" points="95.31 50.86 100.59 48.24 90.05 48.24 95.31 50.86"/><polygon class="cls-4" points="104.68 41.46 102.06 36.19 102.06 46.73 104.68 41.46"/><polygon class="cls-5" points="95.31 32.11 90.05 34.73 100.59 34.73 95.31 32.11"/><rect class="cls-3" x="2.3" y="55.46" width="25.35" height="25.35"/><polygon class="cls-4" points="14.95 77.54 20.22 74.92 9.68 74.92 14.95 77.54"/><polygon class="cls-4" points="24.32 68.14 21.69 62.88 21.69 73.42 24.32 68.14"/><polygon class="cls-5" points="14.95 58.79 9.68 61.41 20.22 61.41 14.95 58.79"/><rect class="cls-3" x="29.14" y="55.49" width="25.35" height="25.35"/><polygon class="cls-4" points="32.48 68.17 35.1 73.44 35.1 62.9 32.48 68.17"/><polygon class="cls-4" points="41.79 77.57 47.06 74.95 36.52 74.95 41.79 77.57"/><polygon class="cls-4" points="51.15 68.17 48.53 62.9 48.53 73.44 51.15 68.17"/><polygon class="cls-5" points="41.79 58.82 36.52 61.44 47.06 61.44 41.79 58.82"/><rect class="cls-3" x="55.87" y="55.5" width="25.35" height="25.35"/><polygon class="cls-4" points="59.2 68.17 61.83 73.44 61.83 62.9 59.2 68.17"/><polygon class="cls-4" points="68.52 77.58 73.79 74.95 63.25 74.95 68.52 77.58"/><polygon class="cls-4" points="77.88 68.18 75.25 62.91 75.25 73.45 77.88 68.18"/><polygon class="cls-5" points="68.52 58.82 63.25 61.45 73.79 61.45 68.52 58.82"/><rect class="cls-3" x="82.67" y="55.51" width="25.35" height="25.35"/><polygon class="cls-4" points="86 68.18 88.63 73.45 88.63 62.91 86 68.18"/><polygon class="cls-4" points="95.31 77.59 100.59 74.96 90.05 74.96 95.31 77.59"/><polygon class="cls-4" points="104.68 68.19 102.06 62.92 102.06 73.46 104.68 68.19"/><polygon class="cls-5" points="95.31 58.83 90.05 61.46 100.59 61.46 95.31 58.83"/><rect class="cls-3" x="2.3" y="82.3" width="25.35" height="25.35"/><polygon class="cls-4" points="14.95 104.38 20.22 101.76 9.68 101.76 14.95 104.38"/><polygon class="cls-4" points="24.32 94.98 21.69 89.72 21.69 100.25 24.32 94.98"/><polygon class="cls-5" points="14.95 85.63 9.68 88.25 20.22 88.25 14.95 85.63"/><rect class="cls-3" x="29.14" y="82.33" width="25.35" height="25.35"/><polygon class="cls-5" points="32.48 95.01 35.1 100.28 35.1 89.74 32.48 95.01"/><polygon class="cls-4" points="41.79 104.41 47.06 101.79 36.52 101.79 41.79 104.41"/><polygon class="cls-4" points="51.15 95.01 48.53 89.74 48.53 100.28 51.15 95.01"/><polygon class="cls-4" points="41.79 85.66 36.52 88.28 47.06 88.28 41.79 85.66"/><rect class="cls-3" x="55.87" y="82.34" width="25.35" height="25.35"/><polygon class="cls-5" points="59.2 95.01 61.83 100.28 61.83 89.74 59.2 95.01"/><polygon class="cls-4" points="68.52 104.42 73.79 101.79 63.25 101.79 68.52 104.42"/><polygon class="cls-4" points="77.88 95.02 75.25 89.75 75.25 100.29 77.88 95.02"/><polygon class="cls-4" points="68.52 85.66 63.25 88.29 73.79 88.29 68.52 85.66"/><rect class="cls-3" x="82.67" y="82.35" width="25.35" height="25.35"/><polygon class="cls-5" points="86 95.02 88.63 100.29 88.63 89.75 86 95.02"/><polygon class="cls-4" points="95.31 104.43 100.59 101.8 90.05 101.8 95.31 104.43"/><polygon class="cls-4" points="104.68 95.03 102.06 89.76 102.06 100.3 104.68 95.03"/><polygon class="cls-4" points="95.31 85.67 90.05 88.3 100.59 88.3 95.31 85.67"/><rect class="cls-3" x="2.3" y="109.12" width="25.35" height="25.35"/><polygon class="cls-4" points="24.32 121.8 21.69 116.53 21.69 127.07 24.32 121.8"/><polygon class="cls-5" points="14.95 112.44 9.68 115.07 20.22 115.07 14.95 112.44"/><rect class="cls-3" x="29.14" y="109.15" width="25.35" height="25.35"/><polygon class="cls-5" points="32.48 121.82 35.1 127.09 35.1 116.55 32.48 121.82"/><polygon class="cls-4" points="51.15 121.83 48.53 116.56 48.53 127.1 51.15 121.83"/><polygon class="cls-4" points="41.79 112.47 36.52 115.1 47.06 115.1 41.79 112.47"/><rect class="cls-3" x="55.87" y="109.15" width="25.35" height="25.35"/><polygon class="cls-5" points="59.2 121.83 61.83 127.1 61.83 116.56 59.2 121.83"/><polygon class="cls-4" points="77.88 121.83 75.25 116.56 75.25 127.1 77.88 121.83"/><polygon class="cls-4" points="68.52 112.48 63.25 115.1 73.79 115.1 68.52 112.48"/><rect class="cls-3" x="82.67" y="109.16" width="25.35" height="25.35"/><polygon class="cls-5" points="86 121.84 88.63 127.11 88.63 116.57 86 121.84"/><polygon class="cls-4" points="104.68 121.84 102.06 116.57 102.06 127.11 104.68 121.84"/><polygon class="cls-4" points="95.31 112.49 90.05 115.11 100.59 115.11 95.31 112.49"/></svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.29441 136.35725">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #aa1e22;
+      }
+
+      .cls-2 {
+        fill: #2c3592;
+      }
+
+      .cls-3 {
+        fill: #e7ebe8;
+      }
+
+      .cls-4 {
+        fill: #efedf6;
+      }
+
+      .cls-5 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>cliff-walking-policy</title>
+  <rect class="cls-1" x="110.07628" y="2.86046" width="24.91422" height="131.21412"/>
+  <rect class="cls-2" x="84.50577" y="3.76768" width="21.67016" height="21.67016"/>
+  <rect class="cls-3" x="2.30391" y="1.9003" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="14.954 23.98 20.224 21.355 9.683 21.355 14.954 23.98"/>
+  <polygon class="cls-5" points="24.318 14.581 21.693 9.311 21.693 19.851 24.318 14.581"/>
+  <rect class="cls-3" x="29.13855" y="1.92748" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="32.475 14.602 35.1 19.872 35.1 9.332 32.475 14.602"/>
+  <polygon class="cls-4" points="41.788 24.007 47.058 21.382 36.518 21.382 41.788 24.007"/>
+  <polygon class="cls-5" points="51.153 14.608 48.528 9.338 48.528 19.878 51.153 14.608"/>
+  <rect class="cls-3" x="55.866" y="1.93278" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="59.203 14.608 61.827 19.878 61.827 9.337 59.203 14.608"/>
+  <polygon class="cls-4" points="68.516 24.012 73.786 21.388 63.246 21.388 68.516 24.012"/>
+  <polygon class="cls-5" points="77.88 14.613 75.255 9.343 75.255 19.884 77.88 14.613"/>
+  <rect class="cls-3" x="2.30391" y="28.74011" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="14.954 50.82 20.224 48.195 9.683 48.195 14.954 50.82"/>
+  <polygon class="cls-4" points="24.318 41.421 21.693 36.151 21.693 46.691 24.318 41.421"/>
+  <polygon class="cls-5" points="14.954 32.065 9.683 34.69 20.224 34.69 14.954 32.065"/>
+  <rect class="cls-3" x="29.13855" y="28.76729" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="32.475 41.442 35.1 46.712 35.1 36.172 32.475 41.442"/>
+  <polygon class="cls-4" points="41.788 50.847 47.058 48.222 36.518 48.222 41.788 50.847"/>
+  <polygon class="cls-4" points="51.153 41.448 48.528 36.178 48.528 46.718 51.153 41.448"/>
+  <polygon class="cls-5" points="41.788 32.093 36.518 34.717 47.058 34.717 41.788 32.093"/>
+  <rect class="cls-3" x="55.866" y="28.7726" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="59.203 41.447 61.827 46.718 61.827 36.177 59.203 41.447"/>
+  <polygon class="cls-4" points="68.516 50.852 73.786 48.227 63.246 48.227 68.516 50.852"/>
+  <polygon class="cls-4" points="77.88 41.453 75.255 36.183 75.255 46.723 77.88 41.453"/>
+  <polygon class="cls-5" points="68.516 32.098 63.246 34.723 73.786 34.723 68.516 32.098"/>
+  <rect class="cls-3" x="82.66557" y="28.78321" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="86.002 41.458 88.627 46.728 88.627 36.188 86.002 41.458"/>
+  <polygon class="cls-4" points="95.315 50.863 100.586 48.238 90.045 48.238 95.315 50.863"/>
+  <polygon class="cls-4" points="104.68 41.464 102.055 36.194 102.055 46.734 104.68 41.464"/>
+  <polygon class="cls-5" points="95.315 32.108 90.045 34.733 100.586 34.733 95.315 32.108"/>
+  <rect class="cls-3" x="2.30391" y="55.46456" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="14.954 77.544 20.224 74.919 9.683 74.919 14.954 77.544"/>
+  <polygon class="cls-4" points="24.318 68.145 21.693 62.875 21.693 73.415 24.318 68.145"/>
+  <polygon class="cls-5" points="14.954 58.79 9.683 61.415 20.224 61.415 14.954 58.79"/>
+  <rect class="cls-3" x="29.13855" y="55.49174" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="32.475 68.167 35.1 73.437 35.1 62.896 32.475 68.167"/>
+  <polygon class="cls-4" points="41.788 77.571 47.058 74.947 36.518 74.947 41.788 77.571"/>
+  <polygon class="cls-4" points="51.153 68.172 48.528 62.902 48.528 73.443 51.153 68.172"/>
+  <polygon class="cls-5" points="41.788 58.817 36.518 61.442 47.058 61.442 41.788 58.817"/>
+  <rect class="cls-3" x="55.866" y="55.49704" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="59.203 68.172 61.827 73.442 61.827 62.902 59.203 68.172"/>
+  <polygon class="cls-4" points="68.516 77.577 73.786 74.952 63.246 74.952 68.516 77.577"/>
+  <polygon class="cls-4" points="77.88 68.178 75.255 62.907 75.255 73.448 77.88 68.178"/>
+  <polygon class="cls-5" points="68.516 58.822 63.246 61.447 73.786 61.447 68.516 58.822"/>
+  <rect class="cls-3" x="82.66557" y="55.50766" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="86.002 68.182 88.627 73.453 88.627 62.912 86.002 68.182"/>
+  <polygon class="cls-4" points="95.315 77.587 100.586 74.962 90.045 74.962 95.315 77.587"/>
+  <polygon class="cls-4" points="104.68 68.188 102.055 62.918 102.055 73.458 104.68 68.188"/>
+  <polygon class="cls-5" points="95.315 58.833 90.045 61.458 100.586 61.458 95.315 58.833"/>
+  <rect class="cls-3" x="2.30391" y="82.30437" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="14.954 104.384 20.224 101.759 9.683 101.759 14.954 104.384"/>
+  <polygon class="cls-4" points="24.318 94.985 21.693 89.715 21.693 100.255 24.318 94.985"/>
+  <polygon class="cls-5" points="14.954 85.63 9.683 88.255 20.224 88.255 14.954 85.63"/>
+  <rect class="cls-3" x="29.13855" y="82.33155" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="32.475 95.006 35.1 100.277 35.1 89.736 32.475 95.006"/>
+  <polygon class="cls-4" points="41.788 104.411 47.058 101.786 36.518 101.786 41.788 104.411"/>
+  <polygon class="cls-4" points="51.153 95.012 48.528 89.742 48.528 100.282 51.153 95.012"/>
+  <polygon class="cls-4" points="41.788 85.657 36.518 88.282 47.058 88.282 41.788 85.657"/>
+  <rect class="cls-3" x="55.866" y="82.33686" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="59.203 95.012 61.827 100.282 61.827 89.741 59.203 95.012"/>
+  <polygon class="cls-4" points="68.516 104.416 73.786 101.792 63.246 101.792 68.516 104.416"/>
+  <polygon class="cls-4" points="77.88 95.017 75.255 89.747 75.255 100.288 77.88 95.017"/>
+  <polygon class="cls-4" points="68.516 85.662 63.246 88.287 73.786 88.287 68.516 85.662"/>
+  <rect class="cls-3" x="82.66557" y="82.34747" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="86.002 95.022 88.627 100.292 88.627 89.752 86.002 95.022"/>
+  <polygon class="cls-4" points="95.315 104.427 100.586 101.802 90.045 101.802 95.315 104.427"/>
+  <polygon class="cls-4" points="104.68 95.028 102.055 89.758 102.055 100.298 104.68 95.028"/>
+  <polygon class="cls-4" points="95.315 85.673 90.045 88.298 100.586 88.298 95.315 85.673"/>
+  <rect class="cls-3" x="2.30391" y="109.11998" width="25.35057" height="25.35057"/>
+  <polygon class="cls-4" points="24.318 121.801 21.693 116.53 21.693 127.071 24.318 121.801"/>
+  <polygon class="cls-5" points="14.954 112.445 9.683 115.07 20.224 115.07 14.954 112.445"/>
+  <rect class="cls-3" x="29.13855" y="109.14716" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="32.475 121.822 35.1 127.092 35.1 116.552 32.475 121.822"/>
+  <polygon class="cls-4" points="51.153 121.828 48.528 116.558 48.528 127.098 51.153 121.828"/>
+  <polygon class="cls-4" points="41.788 112.472 36.518 115.097 47.058 115.097 41.788 112.472"/>
+  <rect class="cls-3" x="55.866" y="109.15247" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="59.203 121.827 61.827 127.097 61.827 116.557 59.203 121.827"/>
+  <polygon class="cls-4" points="77.88 121.833 75.255 116.563 75.255 127.103 77.88 121.833"/>
+  <polygon class="cls-4" points="68.516 112.478 63.246 115.103 73.786 115.103 68.516 112.478"/>
+  <rect class="cls-3" x="82.66557" y="109.16308" width="25.35057" height="25.35057"/>
+  <polygon class="cls-5" points="86.002 121.838 88.627 127.108 88.627 116.568 86.002 121.838"/>
+  <polygon class="cls-4" points="104.68 121.844 102.055 116.573 102.055 127.114 104.68 121.844"/>
+  <polygon class="cls-4" points="95.315 112.488 90.045 115.113 100.586 115.113 95.315 112.488"/>
+</svg>

@@ -1,1 +1,79 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.28 133.07"><defs><style>.cls-1{fill:#2c3592;}.cls-2{fill:#e7ebe8;}.cls-3{fill:#cac9cc;}.cls-4{fill:#aa1e22;}.cls-5{fill:none;stroke:#aa1e22;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px;}.cls-6{font-size:11px;fill:#d1d3d4;font-family:MyriadPro-Semibold, Myriad Pro;font-weight:700;}</style></defs><title>cliffworld-traj-2of2</title><rect class="cls-1" x="82.54" y="1.83" width="21.75" height="21.75"/><rect class="cls-2" x="0.02" y="-0.05" width="25.45" height="25.45"/><rect class="cls-2" x="26.96" y="-0.02" width="25.45" height="25.45"/><rect class="cls-2" x="53.79" y="-0.02" width="25.45" height="25.45"/><rect class="cls-2" x="0.02" y="26.9" width="25.45" height="25.45"/><rect class="cls-2" x="26.96" y="26.92" width="25.45" height="25.45"/><rect class="cls-2" x="53.79" y="26.93" width="25.45" height="25.45"/><rect class="cls-2" x="80.69" y="26.94" width="25.45" height="25.45"/><rect class="cls-2" x="0.02" y="53.72" width="25.45" height="25.45"/><rect class="cls-2" x="26.96" y="53.75" width="25.45" height="25.45"/><rect class="cls-2" x="53.79" y="53.76" width="25.45" height="25.45"/><rect class="cls-2" x="80.69" y="53.77" width="25.45" height="25.45"/><rect class="cls-2" x="0.02" y="80.67" width="25.45" height="25.45"/><rect class="cls-2" x="26.96" y="80.7" width="25.45" height="25.45"/><rect class="cls-2" x="53.79" y="80.7" width="25.45" height="25.45"/><rect class="cls-2" x="80.69" y="80.71" width="25.45" height="25.45"/><rect class="cls-2" x="0.02" y="107.59" width="25.45" height="25.45"/><rect class="cls-2" x="26.96" y="107.62" width="25.45" height="25.45"/><rect class="cls-2" x="53.79" y="107.62" width="25.45" height="25.45"/><rect class="cls-2" x="80.69" y="107.63" width="25.45" height="25.45"/><circle class="cls-3" cx="12.74" cy="12.68" r="8.06"/><circle class="cls-3" cx="39.68" cy="12.71" r="8.06"/><circle class="cls-3" cx="66.94" cy="12.71" r="8.06"/><circle class="cls-3" cx="12.58" cy="39.64" r="8.06"/><circle class="cls-3" cx="39.52" cy="39.68" r="8.06"/><circle class="cls-3" cx="66.78" cy="39.68" r="8.06"/><circle class="cls-3" cx="93.39" cy="39.62" r="8.06"/><circle class="cls-3" cx="12.58" cy="66.77" r="8.06"/><circle class="cls-3" cx="39.52" cy="66.81" r="8.06"/><circle class="cls-3" cx="66.78" cy="66.81" r="8.06"/><circle class="cls-3" cx="93.39" cy="66.75" r="8.06"/><circle class="cls-3" cx="12.58" cy="93.49" r="8.06"/><circle class="cls-3" cx="39.52" cy="93.39" r="8.06"/><circle class="cls-3" cx="66.78" cy="93.53" r="8.06"/><circle class="cls-3" cx="93.39" cy="93.46" r="8.06"/><circle class="cls-3" cx="12.58" cy="120.61" r="8.06"/><circle class="cls-3" cx="39.52" cy="121.18" r="8.06"/><circle class="cls-3" cx="66.78" cy="120.65" r="8.06"/><circle class="cls-3" cx="93.39" cy="120.59" r="8.06"/><rect class="cls-4" x="108.21" y="0.92" width="25.01" height="131.73"/><polyline class="cls-5" points="68.09 119.01 67.75 41.06 117.02 40.41"/><text class="cls-6" transform="translate(112.45 43.42)">-1</text></svg>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.28464 133.07306">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #263b96;
+      }
+
+      .cls-2 {
+        fill: #e7ebe8;
+      }
+
+      .cls-3 {
+        fill: #cac9cc;
+      }
+
+      .cls-4 {
+        fill: #bb7566;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #bb7566;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+
+      .cls-6 {
+        font-size: 11px;
+        fill: #d1d3d4;
+        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <title>cliffworld-traj-2of2</title>
+  <rect class="cls-1" x="82.53931" y="1.82581" width="21.75487" height="21.75487"/>
+  <rect class="cls-2" x="0.0161" y="-0.04887" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.95565" y="-0.02159" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.78757" y="-0.01626" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="0.0161" y="26.89586" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.95565" y="26.92315" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.78757" y="26.92847" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.69191" y="26.93913" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="0.0161" y="53.72478" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.95565" y="53.75207" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.78757" y="53.75739" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.69191" y="53.76805" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="0.0161" y="80.66951" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.95565" y="80.6968" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.78757" y="80.70213" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.69191" y="80.71278" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="0.0161" y="107.58995" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="26.95565" y="107.61724" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="53.78757" y="107.62256" width="25.44966" height="25.44966"/>
+  <rect class="cls-2" x="80.69191" y="107.63322" width="25.44966" height="25.44966"/>
+  <circle class="cls-3" cx="12.74094" cy="12.67596" r="8.06084"/>
+  <circle class="cls-3" cx="39.68048" cy="12.71391" r="8.06084"/>
+  <circle class="cls-3" cx="66.9432" cy="12.71391" r="8.06084"/>
+  <circle class="cls-3" cx="12.57935" cy="39.64499" r="8.06084"/>
+  <circle class="cls-3" cx="39.51889" cy="39.68294" r="8.06084"/>
+  <circle class="cls-3" cx="66.78161" cy="39.68294" r="8.06084"/>
+  <circle class="cls-3" cx="93.39113" cy="39.62069" r="8.06084"/>
+  <circle class="cls-3" cx="12.57935" cy="66.77175" r="8.06084"/>
+  <circle class="cls-3" cx="39.51889" cy="66.8097" r="8.06084"/>
+  <circle class="cls-3" cx="66.78161" cy="66.8097" r="8.06084"/>
+  <circle class="cls-3" cx="93.39113" cy="66.74745" r="8.06084"/>
+  <circle class="cls-3" cx="12.57935" cy="93.48785" r="8.06084"/>
+  <circle class="cls-3" cx="39.51889" cy="93.39435" r="8.06084"/>
+  <circle class="cls-3" cx="66.78161" cy="93.5258" r="8.06084"/>
+  <circle class="cls-3" cx="93.39113" cy="93.46356" r="8.06084"/>
+  <circle class="cls-3" cx="12.57935" cy="120.61461" r="8.06084"/>
+  <circle class="cls-3" cx="39.51889" cy="121.18445" r="8.06084"/>
+  <circle class="cls-3" cx="66.78161" cy="120.65256" r="8.06084"/>
+  <circle class="cls-3" cx="93.39113" cy="120.59032" r="8.06084"/>
+  <rect class="cls-4" x="108.20978" y="0.91504" width="25.01161" height="131.72706"/>
+  <polyline class="cls-5" points="68.095 119.01 67.753 41.059 117.021 40.407"/>
+  <text class="cls-6" transform="translate(112.4543 43.41529)">-1</text>
+</svg>
