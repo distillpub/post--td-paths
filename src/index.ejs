@@ -695,11 +695,11 @@
     </p>
 
     <p>
-      But casinos don't work this way! Where did we go wrong? The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is often large simply by chance; choosing it over the others gives a <i>biased</i> value estimate.
+      But casinos don't work this way! Where did we go wrong? The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is sometimes large just by chance; choosing it over others produces a <i>biased</i> value estimate.
     </p>
 
     <p>
-      One way to reduce this bias is to have a friend to visit the casino and play the same set of slot machines. Then, ask him what his winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low and you won't fall into the same trap. This clever extension is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask him what his winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low, so this time you won't fall into the same trap. This clever fix is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
 
@@ -715,7 +715,7 @@
     </p>
 
     <p>
-      An interesting property of function approximators is that updating one parameter will change more than one value estimate on average. Let's see how this changes things by returning to the Cliff World example. This time, we'll give the environment many more states.
+      An interesting property of function approximation is that updating one parameter will tend to change more than one value estimate. Let's see how this changes things by returning to the Cliff World example. This time, we'll give the environment many more states.
     </p>
 
   <style>
@@ -744,7 +744,7 @@
 
       <img src="figures/large-cliffworld-approx.svg"/>
       <div class="figcaption">
-        <b>Euclidean averagers</b> – which are function approximators – save memory and let agents generalize to states they haven't yet visited.
+        <b>Euclidean averagers</b> – which are a type of function approximation – save memory and let agents generalize to states they haven't yet visited.
       </div>
   </figure>
 
@@ -777,7 +777,7 @@
 
       <img src="figures/large-cliffworld-barrier.svg"/>
       <div class="figcaption">
-        Now the Euclidean averager produces bad value updates.
+        Now using the Euclidean averager leads to bad value updates.
       </div>
   </figure>
 
@@ -803,7 +803,7 @@
   </figure>
   
     <p>
-      As we saw earlier, TD learning makes more efficient use of an agent's experience. But the price we pay for this efficiency is that our value estimate is far more sensitive to bad value updates.
+      We've seen that TD learning makes more efficient value updates. The price we pay, though, is that these updates end up being much more sensitive to bad value updates.
     </p>
 
 
@@ -843,11 +843,11 @@
   </figure>
 
     <p>
-      <b>To TD or not TD?</b> So far, we've seen how TD learning can outperform Monte Carlo by merging paths of experience where they intersect. We've also seen that merging paths is a double-edged sword: when function approximation causes bad value updates, TD can end up doing worse that Monte Carlo.
+      <b>TD or not TD?</b> So far, we've seen how TD learning can outperform Monte Carlo by merging paths of experience where they intersect. We've also seen that merging paths is a double-edged sword: when function approximation causes bad value updates, TD can end up doing worse that Monte Carlo.
     </p>
 
     <p>
-      There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD-based methods have dominated the RL literature for the past several decades. However, there are notable exceptions: one recent paper shows that Monte Carlo can outperform TD learning, depending on the environment<d-cite key="Amiranashvili2018TDLearning"></d-cite>.
+      There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD methods have dominated the RL literature for the past several decades. There are still some notable exceptions: one recent paper shows that Monte Carlo can still outperform TD methods in certain environments<d-cite key="Amiranashvili2018TDLearning"></d-cite>.
     </p>
 
     <p>
@@ -857,16 +857,16 @@
 
     <h2>Conclusion</h2>
     <p>
-      An RL agent can improve its policy by looking at separate episodes of experience, one at a time. When it does this, though, it discards a rich source of information: the ways that states from different episodes intersect with one another. The paths perspective is meant to emphasize this second source of information, and to demonstrate how some value estimators (TD learning) make use of it whereas others (Monte Carlo) do not.
+      An RL agent can improve its policy by looking at separate episodes of experience, one at a time. When it does this, though, it discards a rich source of information: the ways that states from different episodes intersect with one another. The paths perspective is meant to emphasize this second source of information, and to demonstrate how some value estimators, like TD learning, make use of it whereas others, like Monte Carlo, do not.
     </p>
 
     <p>
-      We hope that the paths perspective clarifies the relationship between some of the most fundamental approaches to value learning. Understanding these relationships, and how they affect the way an agent learns, is the first step to making RL agents even better.
+      We hope the paths perspective clarifies the relationship between some of the most fundamental approaches to value learning. Understanding these relationships and how they affect the way an agent learns is the first step to making even better RL agents.
     </p>
 
     <h2>Playground</h2>
     <p>
-      We encourage you to verify -- and build upon -- the intuitions outlined in this article using the value learning playground below. Try watching value estimates improve with experience or comparing Monte Carlo to one of the TD value estimators.
+      We encourage you to verify -- and build upon -- the intuitions outlined in this article using the playground below. Try watching value estimates improve with experience or comparing Monte Carlo to one of the TD value estimators.
     </p>
 
     <div id="playground"></div>

@@ -131,7 +131,7 @@ GridWorld.Env = function Env(config) {
       })
       .style("fill", '#CAC9CC')
       .style("font", 'bold 20px sans-serif')
-      .text("+1");
+      .text("+2");
 
     foreground.append("text")
       .attr("transform", d => {
