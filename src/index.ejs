@@ -214,7 +214,7 @@
   <p>
     Let's write Monte Carlo a bit more formally.
     In RL, we often describe algorithms with update rules, which tell us how estimates change with one more episode.
-    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.
+    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>Details about this notation.</d-footnote>
   </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -233,7 +233,7 @@
   <h2>Beating Monte Carlo</h2>
 
     <p>
-      But we <i>can</i> do better! The trick is to use a method called <i>Temporal Difference (TD) learning</i> which bootstraps off of nearby states to make value updates.
+      But we <i>can</i> do better! The trick is to use a method called <i>Temporal Difference (TD) learning</i>, which bootstraps off of nearby states to make value updates.
     </p>
 
 
@@ -335,7 +335,7 @@
 </div>
 
     <p>
-      We've ended up with a strange-looking sum of nested expectation values. At first glance, it's not clear how we should compare them to the more simple-looking Monte Carlo update. More importantly, it's not clear that we <i>should</i> compare the two; the updates are so different that it feels a bit like comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
+      This gives us a strange-looking sum of nested expectation values. At first glance, it's not clear how we should compare them to the more simple-looking Monte Carlo update. More importantly, it's not clear that we <i>should</i> compare the two; the updates are so different that it feels a bit like comparing apples to oranges. Indeed, it's easy to think of Monte Carlo and TD learning as two entirely different approaches.
     </p>
 
     <p>
@@ -518,7 +518,7 @@
     </div>
 
     <p>
-      First off, TD learning never averages over <i>fewer</i> trajectories than Monte Carlo because there are never fewe simulated trajectories (paths) than real trajectories. On the other hand, when there are more simulated trajectories (paths) than real trajectories, TD learning has the chance to average over more of the agent's experience. Given this intuition, it seems plausible that TD estimates will have lower variance.
+      First off, TD learning never averages over <i>fewer</i> trajectories than Monte Carlo because there are never fewer simulated trajectories (paths) than real trajectories. On the other hand, when there are more simulated trajectories (paths) than real trajectories, TD learning has the chance to average over more of the agent's experience. Given this intuition, it seems plausible that TD estimates will have lower variance.
     </p>
 
     <p>
@@ -559,14 +559,14 @@
   </div>
 
     <p>
-      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than Monte Carlo estimates.
+      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than Monte Carlo.
     </p>
 
 
     <h2>$Q$-functions and Off-policy Learning</h2>
 
     <p>
-      So far, we've focused on estimating the value of states using the function $V(s)$. When we use value to choose a policy (e.g. in policy value iteration), though, we often care more about the relative value of different <i>actions</i>. Making this comparison with $V(s)$ doesn't make sense. A simple alternative is the $Q$-function, which estimates the joint value of an action <i>and</i> a state.
+      So far, we've focused on learning the function $V(s)$ in order to estimate the value of states. However, there are many cases where we need to compare the value of different <i>actions</i> in order to choose a better policy (e.g. in policy value iteration). Making this comparison with $V(s)$ doesn't make sense. A simple alternative is the $Q$-function, which estimates the joint value of actions and states.
     </p>
 
 
@@ -691,11 +691,11 @@
     </figure>
 
     <p>
-      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day and you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome of all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
+      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
     <p>
-      But casinos don't work that way; where did we go wrong?! The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is often large simply by chance; choosing it over the others gives a <i>biased</i> value estimate.
+      But casinos don't work this way! Where did we go wrong? The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is often large simply by chance; choosing it over the others gives a <i>biased</i> value estimate.
     </p>
 
     <p>
