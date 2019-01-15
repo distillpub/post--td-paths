@@ -241,7 +241,7 @@
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>r_t </d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t+1} </d-math></div>
       <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
       <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
 
@@ -291,10 +291,10 @@
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\simeq~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} ~+~ \gamma V(s'_{t+2}) \bigl] </d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+2} ~+~ \gamma V(s'_{t+2}) \bigl] </d-math></div>
 
       <div style="grid-row: 3; grid-column: 3;"><d-math>\simeq~~</d-math></div>
-      <div style="grid-row: 3; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl] ~~+~~ \gamma \mathop{\mathbb{E}} \bigr[ V(s'_{t+2}) \bigl] </d-math></div>
+      <div style="grid-row: 3; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+2} \bigl] ~~+~~ \gamma \mathop{\mathbb{E}} \bigr[ V(s'_{t+2}) \bigl] </d-math></div>
 
     </div>
 
@@ -306,7 +306,7 @@
   
     <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 1; grid-column: 5;"><d-math>r_t </d-math></div>
+    <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t+1} </d-math></div>
     <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
     <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
 
@@ -314,21 +314,21 @@
 
     <div style="grid-row: 3; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 3; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 3; grid-column: 5;"><d-math>r_t </d-math></div>
+    <div style="grid-row: 3; grid-column: 5;"><d-math>r_{t+1} </d-math></div>
     <div style="grid-row: 3; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+2} \bigl]</d-math></div>
     <div style="grid-row: 3; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+2}) \bigl]</d-math></div>
+    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+3}) \bigl]</d-math></div>
 
     <div class="expansion-marker" style="grid-row: 4; grid-column: 13 / 18; "></div>
 
     <div style="grid-row: 5; grid-column: 1;"><d-math></d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
-    <div style="grid-row: 5; grid-column: 5;"><d-math>r_t </d-math></div>
+    <div style="grid-row: 5; grid-column: 5;"><d-math>r_{t+1} </d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+2} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}}  ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}}  ~ \bigr[ r''_{t+3} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 15;"><d-math>+~</d-math></div>
     <div style="grid-row: 5; grid-column: 17;"><d-math>...~~</d-math></div>
 
@@ -350,11 +350,11 @@
     <figcaption style="grid-row: 1; grid-column: 1/3; max-width:140px;"><b>MC update</b></figcaption>
     <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 2; grid-column: 3;"><d-math>~\hookleftarrow~~</d-math></div>
-    <div style="grid-row: 2; grid-column: 5;"><d-math>r_t</d-math></div>
+    <div style="grid-row: 2; grid-column: 5;"><d-math>r_{t+1}</d-math></div>
     <div style="grid-row: 2; grid-column: 7;"><d-math>+~</d-math></div>
-    <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma ~ r_{t+1}</d-math></div>
+    <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma ~ r_{t+2}</d-math></div>
     <div style="grid-row: 2; grid-column: 11;"><d-math>+~</d-math></div>
-    <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 ~ r_{t+2}</d-math></div>
+    <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 ~ r_{t+3}</d-math></div>
     <div style="grid-row: 2; grid-column: 15;"><d-math>+~</d-math></div>
     <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
 
@@ -368,11 +368,11 @@
     <figcaption style="grid-row: 4; grid-column: 1/3; max-width:140px; margin-top: 22px;"><b>TD update</b></figcaption>
     <div style="grid-row: 5; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 5; grid-column: 3;"><d-math>~\hookleftarrow~~</d-math></div>
-    <div style="grid-row: 5; grid-column: 5;"><d-math>r_t</d-math></div>
+    <div style="grid-row: 5; grid-column: 5;"><d-math>r_{t+1}</d-math></div>
     <div style="grid-row: 5; grid-column: 7;"><d-math>+~</d-math></div>
-    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+1} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} ~ \bigr[ r'_{t+2} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 11;"><d-math>+~</d-math></div>
-    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}} ~ \bigr[ r''_{t+2} \bigl]</d-math></div>
+    <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}} ~ \bigr[ r''_{t+3} \bigl]</d-math></div>
     <div style="grid-row: 5; grid-column: 15;"><d-math>+~</d-math></div>
     <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
 
@@ -521,11 +521,11 @@
       First off, TD learning never averages over <i>fewer</i> trajectories than Monte Carlo because there are never fewer simulated trajectories (paths) than real trajectories. On the other hand, when there are more simulated trajectories (paths) than real trajectories, TD learning has the chance to average over more of the agent's experience. Given this intuition, it seems plausible that TD estimates will have lower variance.
     </p>
 
-    <p>
+    <!-- <p>
       <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the <a href="#variance-analysis-appendix">Appendix</a>, but for now, we'll simply show the final equations. Note that we've introduced some new notation, $T(s)$, which counts the number of trajectories that contain state $s$.
-    </p>
+    </p> -->
 
-    <div class="eq-grid" style="grid-gap: 8px;">
+    <!-- <div class="eq-grid" style="grid-gap: 8px;">
 
       <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;"><b>MC variance</b></figcaption>
 
@@ -556,17 +556,17 @@
       <div style="grid-row: 7; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
       <div style="grid-row: 7; grid-column: 15;"><d-math>~+~</d-math></div>
       <div style="grid-row: 7; grid-column: 17;"><d-math>...</d-math></div>
-  </div>
+  </div> -->
 
-    <p>
+<!--     <p>
       Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than Monte Carlo.
-    </p>
+    </p> -->
 
 
     <h2>$Q$-functions and Off-policy Learning</h2>
-
+    
     <p>
-      So far, we've focused on learning the function $V(s)$ in order to estimate the value of states. However, there are many cases where we need to compare the value of different <i>actions</i> in order to choose a better policy (e.g. in policy value iteration). Making this comparison with $V(s)$ doesn't make sense. A simple alternative is the $Q$-function, which estimates the joint value of actions and states.
+      So far, we have considered learning value of states using $V(s)$. Another option, which we'll focus on in this section, is to learn the value of states <i>and</i> actions using $Q(s,a)$. This type of value estimation lets us compare different actions in order to improve a policy (e.g. in policy value iteration).
     </p>
 
 
@@ -587,10 +587,53 @@
     </figure>
 
     <p>
-      The first thing to notice about $Q$-functions is that we can still use them to recover $V(s)$ using a simple weighted sum.
+      We'll see that the paths perspective continues to be useful in this section; in particular, we'll explore the intuition of what it means to <i>re-weight paths where they intersect</i> to do off-policy value learning.
     </p>
 
-    <style>
+    <p>
+      <b>Monte Carlo and $Q$-functions.</b> The simplest way to learn a $Q$-function is with Monte Carlo. The update equation looks nearly identical to the one we wrote down for $V(s)$:
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>R_t</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State-action value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:200px;"> Return </figcaption>
+    </div>
+
+    <p>
+      <b>TD learning and $Q$-functions.</b> In the same way, we can try adapting the TD learning update to estimate $Q$-values:
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
+    
+      <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t+1} </d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma Q(s_{t+1}, a_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State-action value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 9; max-width:140px;">Next state value</figcaption>
+
+    </div>
+
+    <p>
+      This version of the TD update rule requires a tuple of the form $(s_t, a_t, r_{t+1}, s_{t+1}, a_{t+1})$, so we call it the <i>SARSA</i> algorithm.
+    </p>
+
+    <p>
+      Sarsa may be the simplest way to write a TD update rule for $Q$-functions, but it's not the most efficient. The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate of the value of the next state, when it should be using $V(s_{t+1})$. There's no reason we can't make this approximation, but most researchers prefer to avoid it by using a slightly different approach called <i>Expected Sarsa</i>.
+    </p>
+
+    <p>
+      <b>Expected Sarsa.</b> It's useful to break this update into two steps: 1) recover the value function and 2) perform a TD update. In the first step, we recover the value function for $V(s_{t+1})$ using an expectation over $Q$-values:
+    </p>
+
+        <style>
       #recovering-value {
         margin-left: auto;
         margin-right: auto;
@@ -603,21 +646,121 @@
       }
     </style>
     <figure id="recovering-value" class="l-body">
-        <!-- <img src="figures/on-policy-value.svg"/> -->
-        <img src="figures/better-qfunc-intro.svg"/>
-<!--         <div class="figcaption"> <b>A Gridworld example</b> showing how to recover $V(s)$ from a $Q$-function. </div> -->
+        <img src="figures/recovering-value.svg"/>
     </figure>
 
     <p>
+      The second step looks similar to Sarsa, but uses the value function we recovered in the first step. Combining these two steps gives the full Expected Sarsa update: 
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a} \pi(s_{t+1},a)Q(s_{t+1},a)</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
+    
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
+      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">TD update</figcaption>
+    </div>
+
+    <p>
+      One surprising observation is that the value estimate we recover in the first equation tends to be better than the value estimate we would compute straight from the agent's experience. This is because Expected Sarsa weights $Q$-values by the <i>true</i> policy distribution whereas a value function computed straight from the data would weight $Q$-values by the <i>empirical</i> policy distribution. This means that there's a hidden benefit to Expected Sarsa: it re-weights the agent's experience to match the underlying policy.
+    </p>
+
+    <p>
+      <b>Re-weighting experience.</b> What does it mean to re-weight the agent's experience? One intuition is that whenever the empirical policy distribution is different from the true policy distribution, there will be some paths that are more representative of the true policy and others that are less so. At a given state, some of these paths will intersect with one another but leave the state through different actions. When we weight over $Q$-values, we assign higher probability to the paths that exit the state through the actions that are especially likely under the true policy.
+    </p>
+
+    <p>
+      <b>Off-policy value estimation.</b> Expected Sarsa performs a relatively mild form of re-weighting. Generally speaking, though, we can re-weight an agent's experience by <i>any</i> policy distribution and use the resulting value estimate to perform a TD update as we did above.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a} \pi_{off}(s_{t+1},a)Q(s_{t+1},a)</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
+
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
+      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">TD update</figcaption>
+    </div>
+
+    <p>
+      We refer to this general technique as "off-policy value estimation." One special case is Expected Sarsa, where the "off" policy is the agent's true policy. Another special case, in fact, is regular Sarsa, where the "off" policy is a stochastic sample from a categorical distribution.
+    </p>
+
+    <p>
+      In fact, there is a third and equally important off-policy method to discuss.
+    </p>
+
+    <p>
+      <b>$Q$-learning.</b> Most RL agents explore their environments with sub-optimal policies in order to gain new experiences. As they do so, they also try to estimate the value of states and actions under an optimal policy. They achieve this by using a special type of off-policy value estimation called $Q$-learning.
+    </p>
+
+    <p>
+      Here, the "off" policy is the agent's optimal policy, found by selecting the highest-valued action in every state.
+    </p>
+
+
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\textrm{max}} \limits_{a} Q(s,a)</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1/4; max-width:200px;"> Value function </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
+    
+      <div style="grid-row: 5; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 5; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
+      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">TD update</figcaption>
+    </div>
+
+    <p>
+      $Q$-learning is a simple and effective update rule; it often gives better results than either Expected Sarsa or regular Sarsa.
+    </p>
+
+<!--     <style>
+      #recovering-value {
+        margin-left: auto;
+        margin-right: auto;
+        width: 500px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-gap: 10px;
+        grid-auto-flow: column;
+      }
+    </style>
+    <figure id="recovering-value" class="l-body">
+        <img src="figures/better-qfunc-intro.svg"/>
+    </figure> -->
+
+    <!-- <p>
       This value function is not the same as the one we would compute straight from an agent's experience. When we compute a value function from the agent's experience, we average over the agent's empirical policy distribution. Here, we have weighted each $Q$-value by the true probability of each action. Since the weighting corrects for the difference between the empirical and true policy distributions, this version of $V(s)$ tends to give a better value estimate for the underlying policy.
     </p>
 
     <p>
       <b>Off-policy value estimation.</b> Now imagine a situation where the empirical vs. true policy distributions are not just slightly different -- instead, they are completely different. Perhaps the experience was collected under policy $\pi_1$ and now we want to use it to estimate value under policy $\pi_2$. This is called "off-policy" value estimation.
-    </p>
+    </p> -->
 
 
-    <style>
+    <!-- <style>
       #off-policy-value {
         margin-left: auto;
         margin-right: auto;
@@ -632,9 +775,9 @@
     <figure id="off-policy-value" class="l-page">
       <img src="figures/on-policy-value.svg"/>
       <img src="figures/off-policy-value.svg"/>
-    </figure>
+    </figure> -->
 
-    <p>
+    <!-- <p>
       Off policy value estimation has many uses. One special case is so useful that it has its own name: $Q$-learning.
     </p>
 
@@ -644,9 +787,9 @@
 
     <p>
       In $Q$-learning, every value update has two parts. The first is a normal TD update which estimates value under the current policy. The second is a maximum over $Q$-values that re-weights the value estimate according to the optimal policy.
-    </p>
+    </p> -->
 
-    <div class="eq-grid" style="grid-gap: 8px;">
+    <!-- <div class="eq-grid" style="grid-gap: 8px;">
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
@@ -665,14 +808,14 @@
       <figcaption style="grid-row: 6; grid-column: 1/4; max-width:200px;"> Value function </figcaption>
       <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
 
-    </div>
+    </div> -->
 
-    <p>
+<!--     <p>
       To make the connection between off-policy value estimation and $Q$-learning even more explicit, we can place them beside one another.
-    </p>
+    </p> -->
 
 
-    <style>
+<!--     <style>
       #q-learning {
         margin-left: auto;
         margin-right: auto;
@@ -688,9 +831,9 @@
         <img src="figures/on-policy-value.svg"/>
         <img src="figures/off-policy-value.svg"/>
         <img src="figures/q-learning.svg"/>
-    </figure>
+    </figure> -->
 
-    <p>
+<!--     <p>
       <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
@@ -700,7 +843,7 @@
 
     <p>
       One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low, so this time you won't fall into the same trap. This clever fix is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
-    </p>
+    </p> -->
 
 
 
