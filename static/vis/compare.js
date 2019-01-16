@@ -48,10 +48,10 @@ function compare_vis(main_div, config, callback){
 
   label_data = {
      MC: {name: "Monte Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
-     TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_{t+1} ~+~ \\gamma V(s_{t+1})"},
+     TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})"},
      Q:  {
       name: "Q-Learning", 
-      eq: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t+1} ~+~ \\gamma V(s_{t+1})",
+      eq: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})",
       eq2: "V(s) ~=~ \\mathop{\\textrm{max}} \\limits_a ~ Q(s,a)",
      }
    }
