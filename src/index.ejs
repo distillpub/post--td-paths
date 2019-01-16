@@ -31,14 +31,14 @@
     {
       "author": "Sam Greydanus<d-footnote>Author order not finalized.</d-footnote>",
       "authorURL": "https://greydanus.github.io/about.html",
-      "affiliation": "Google Brain Team",
+      "affiliation": "Google Brain",
       "affiliationURL": "https://g.co/brain"
     },
 
     {
       "author": "Justin Gilmer",
       "authorURL": "https://scholar.google.com/citations?user=Ml_vQ8MAAAAJ&hl=en",
-      "affiliation": "Google Brain Team",
+      "affiliation": "Google Brain",
       "affiliationURL": "https://g.co/brain"
     },
 
@@ -563,10 +563,10 @@
     </p> -->
 
 
-    <h2>$Q$-functions and Off-policy Learning</h2>
+    <h2>Re-weighting paths with $Q$-functions</h2>
     
     <p>
-      So far, we have considered learning value of states using $V(s)$. Another option, which we'll focus on in this section, is to learn the value of states <i>and</i> actions using $Q(s,a)$. This type of value estimation lets us compare different actions in order to improve a policy (e.g. in policy value iteration).
+      An alternative to the value function is the $Q$-function. One motivation for $Q$-functions is that they make it easier to compare actions:
     </p>
 
 
@@ -587,11 +587,11 @@
     </figure>
 
     <p>
-      We'll see that the paths perspective continues to be useful in this section; in particular, we'll explore the intuition of what it means to <i>re-weight paths where they intersect</i> to do off-policy value learning.
+      There are other reasons to use $Q$-functions and we'll use the paths perspective to explore them in this section. But first, we need to modify our Monte Carlo and TD update rules.
     </p>
 
     <p>
-      <b>Monte Carlo and $Q$-functions.</b> The simplest way to learn a $Q$-function is with Monte Carlo. The update equation looks nearly identical to the one we wrote down for $V(s)$:
+      <b>Monte Carlo for $Q$-functions.</b> The simplest way to learn a $Q$-function is with Monte Carlo. The update equation looks nearly identical to the one we wrote down for $V(s)$:
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -626,11 +626,36 @@
     </p>
 
     <p>
-      Sarsa may be the simplest way to write a TD update rule for $Q$-functions, but it's not the most efficient. The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate of the value of the next state, when it should be using $V(s_{t+1})$. There's no reason we can't make this approximation, but most researchers prefer to avoid it by using a slightly different approach called <i>Expected Sarsa</i>.
+      Sarsa may be the simplest way to write a TD update rule for $Q$-functions, but it's not the most efficient. The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate of the next state value when it should be using $V(s_{t+1})$.
     </p>
 
     <p>
-      <b>Expected Sarsa.</b> It's useful to break this update into two steps: 1) recover the value function and 2) perform a TD update. In the first step, we recover the value function for $V(s_{t+1})$ using an expectation over $Q$-values:
+      <b>Expected Sarsa.</b> Let's try fixing Sarsa. First, let's isolate the problem by splitting the update into two parts
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px;">
+
+      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:300px;"><b>Sarsa (step 1)</b></figcaption>
+
+      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>Q(s_{t+1},a_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
+      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Problem: this should be $V(s_{t+1})$</figcaption>
+
+      <figcaption style="grid-row: 5; grid-column: 1/5; max-width:300px;"><b>Sarsa (step 2)</b></figcaption>
+
+      <div style="grid-row: 6; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 6; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 6; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 7; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
+      <figcaption style="grid-row: 7; grid-column: 5; max-width:140px;">TD update</figcaption>
+    </div>
+
+    <p>
+      Now let's try replacing the first step with a better estimate of $V(s)$. A natural choice is a simple weighted sum over all the $Q$-values of the state:
     </p>
 
         <style>
@@ -650,59 +675,59 @@
     </figure>
 
     <p>
-      The second step looks similar to Sarsa, but uses the value function we recovered in the first step. Combining these two steps gives the full Expected Sarsa update: 
+      Changing the first step in this way, we get an improved version of Sarsa called <i>Expected Sarsa</i>.
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
-      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a} \pi(s_{t+1},a)Q(s_{t+1},a)</d-math></div>
+      <figcaption style="grid-row: 1; grid-column: 1/10; max-width:300px;"><b>Expected Sarsa (step 1)</b></figcaption>
 
-      <figcaption style="grid-row: 2; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
-    
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
-      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 5; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
+      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a}\pi(s_{t+1},a_{t+1})Q(s_{t+1},a_{t+1})</d-math></div>
 
-      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
-      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">TD update</figcaption>
+      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
+      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Expectation over $Q$-values.</figcaption>
     </div>
 
     <p>
-      One surprising observation is that the value estimate we recover in the first equation tends to be better than the value estimate we would compute straight from the agent's experience. This is because Expected Sarsa weights $Q$-values by the <i>true</i> policy distribution whereas a value function computed straight from the data would weight $Q$-values by the <i>empirical</i> policy distribution. This means that there's a hidden benefit to Expected Sarsa: it re-weights the agent's experience to match the underlying policy.
+      Here's a surprising fact about Expected Sarsa: the value estimate it gives is often <i>better</i> than a value estimate computed straight from the experience. This is because the expectation value weights the $Q$-values by the <i>true</i> policy distribution rather than the empirical policy distribution, correcting for any difference between the two.
     </p>
 
-    <p>
+
+
+<!--     <p>
       <b>Re-weighting experience.</b> What does it mean to re-weight the agent's experience? One intuition is that whenever the empirical policy distribution is different from the true policy distribution, there will be some paths that are more representative of the true policy and others that are less so. At a given state, some of these paths will intersect with one another but leave the state through different actions. When we weight over $Q$-values, we assign higher probability to the paths that exit the state through the actions that are especially likely under the true policy.
-    </p>
+    </p> -->
 
     <p>
-      <b>Off-policy value estimation.</b> Expected Sarsa performs a relatively mild form of re-weighting. Generally speaking, though, we can re-weight an agent's experience by <i>any</i> policy distribution and use the resulting value estimate to perform a TD update as we did above.
+      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting the $Q$-values by the true policy distribution, we could weight them according to an <i>arbitrary</i> policy:
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
-      <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a} \pi_{off}(s_{t+1},a)Q(s_{t+1},a)</d-math></div>
+      <figcaption style="grid-row: 1; grid-column: 1/10; max-width:300px;"><b>Off policy learning (step 1)</b></figcaption>
 
-      <figcaption style="grid-row: 2; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
-      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Re-weighting</figcaption>
+      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 2; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a}\pi_{off}(s_{t+1},a_{t+1})Q(s_{t+1},a_{t+1})</d-math></div>
 
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
-      <div style="grid-row: 5; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 5; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
-
-      <figcaption style="grid-row: 6; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
-      <figcaption style="grid-row: 6; grid-column: 5; max-width:140px;">TD update</figcaption>
+      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
+      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Re-weight by an arbitrary policy.</figcaption>
     </div>
 
     <p>
-      We refer to this general technique as "off-policy value estimation." One special case is Expected Sarsa, where the "off" policy is the agent's true policy. Another special case, in fact, is regular Sarsa, where the "off" policy is a stochastic sample from a categorical distribution.
+      With this slight modification, we can now estimate value under any "off" policy like. We can also see that Expected Sarsa is a special case of off-policy learning where the "off" policy is just the underlying policy.
     </p>
 
     <p>
-      In fact, there is a third and equally important off-policy method to discuss.
+      We can even think of regular Sarsa as a type of off policy learning: the "off" policy would be a stochastic sample from a categorical distribution over the agent's policy.
+    </p>
+
+    <p>
+      <b>Re-weighting path intersections.</b> It's time to explore these ideas from the paths perspective. At the simplest level, what we've done is re-weight paths where they intersect.
+    </p>
+
+    <p>
+      Whenever we collect experience under one policy and estimate value under another, there will be some paths that are more representative of the true policy and others that are less so. At a given state, some of these paths will intersect with one another but leave the state through different actions. When we weight over $Q$-values, we assign higher probability to the paths that exit the state through the actions that are especially likely under the true policy.
     </p>
 
     <p>
@@ -732,7 +757,23 @@
     </div>
 
     <p>
-      $Q$-learning is a simple and effective update rule; it often gives better results than either Expected Sarsa or regular Sarsa.
+      $Q$-learning is a simple and effective update rule; often it gives better results than either Expected Sarsa or regular Sarsa<d-footnote>Try using the Playground at the end of this article to compare these three approaches.</d-footnote>. As effective as $Q$-learning can be, though, it does have a weakness: it is over-optimistic in the presence of stochastic rewards.
+    </p>
+
+    <p>
+      <b>Sometimes $Q$-learning is over-optimistic.</b> Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
+    </p>
+
+    <p>
+      But casinos don't work this way! Where did we go wrong? The problem is that $Q$-learning is over-optimistic in the presence of noisy rewards. The largest $Q$-value of a state is sometimes large just by chance; choosing it over others produces a <i>biased</i> value estimate.
+    </p>
+
+    <p>
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low, so this time you won't fall into the same trap. This clever fix is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+    </p>
+
+    <p>
+      <b>Re-weighting with Monte Carlo</b> Yes, but you need to re-weight the entire experience as a whole. It's much easier to re-weight one set of $Q$-values at a time, which something we can only do when we use TD updates.
     </p>
 
 <!--     <style>
@@ -1175,3 +1216,4 @@
 <d-bibliography src="bibliography.bib"></d-bibliography>
 
 </body>
+
