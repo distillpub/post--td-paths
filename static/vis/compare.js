@@ -51,8 +51,8 @@ function compare_vis(main_div, config, callback){
      TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})"},
      Q:  {
       name: "Q-Learning", 
-      eq: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})",
-      eq2: "V(s) ~=~ \\mathop{\\textrm{max}} \\limits_a ~ Q(s,a)",
+      eq: "V(s_{t+1}) ~=~ \\mathop{\\textrm{max}} \\limits_a ~ Q(s_{t+1},a_{t+1})",
+      eq2: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})",
      }
    }
 

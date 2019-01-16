@@ -187,7 +187,7 @@ GridWorld.Env = function Env(config) {
             let prev_step = h[h.length-2]
             let cell_ix = step.s.x + step.s.y*4
             cell_ix = (cell_ix > 2) ? cell_ix-1 : cell_ix;
-            console.log(cell_ix, h)
+            // console.log(cell_ix, h)
             // console.log('T', info["T"])
 
             let line = info["V"][cell_ix][0].getElementsByClassName(prev_step.a.name)[0];

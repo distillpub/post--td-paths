@@ -30,7 +30,7 @@
         stroke-width: 2px;
       }
 
-      .cls-35, .cls-6 {
+      .cls-25, .cls-6 {
         font-size: 6.65044px;
         font-family: MyriadPro-Semibold, Myriad Pro;
         font-weight: 700;
@@ -101,62 +101,22 @@
       .cls-21 {
         font-size: 17px;
         fill: #58595b;
-        font-family: MyriadPro-Regular, Myriad Pro;
+        font-family: ArialMT, Arial;
       }
 
       .cls-22 {
-        letter-spacing: 0.00597em;
+        letter-spacing: -0.11087em;
       }
 
       .cls-23 {
-        letter-spacing: -0.00396em;
+        letter-spacing: -0.01804em;
       }
 
       .cls-24 {
-        letter-spacing: -0.00603em;
+        letter-spacing: -0.0181em;
       }
 
       .cls-25 {
-        letter-spacing: -0.00695em;
-      }
-
-      .cls-26 {
-        letter-spacing: 0.00396em;
-      }
-
-      .cls-27 {
-        letter-spacing: -0.071em;
-      }
-
-      .cls-28 {
-        letter-spacing: -0.005em;
-      }
-
-      .cls-29 {
-        letter-spacing: -0.01298em;
-      }
-
-      .cls-30 {
-        letter-spacing: -0.01em;
-      }
-
-      .cls-31 {
-        letter-spacing: -0.00597em;
-      }
-
-      .cls-32 {
-        letter-spacing: -0.06399em;
-      }
-
-      .cls-33 {
-        letter-spacing: -0.00701em;
-      }
-
-      .cls-34 {
-        letter-spacing: -0.02097em;
-      }
-
-      .cls-35 {
         fill: #d1d3d4;
       }
     </style>
@@ -1664,16 +1624,16 @@
   <circle class="cls-16" cx="427.97694" cy="279.3753" r="3.82915"/>
   <circle class="cls-16" cx="325.4464" cy="279.27262" r="3.82915"/>
   <circle class="cls-16" cx="325.44238" cy="343.37179" r="3.82915"/>
-  <text class="cls-21" transform="translate(133.50874 13.03644)"><tspan class="cls-22">M</tspan><tspan x="13.76953" y="0">o</tspan><tspan class="cls-23" x="23.10254" y="0">n</tspan><tspan class="cls-24" x="32.46973" y="0">t</tspan><tspan x="37.99414" y="0">e </tspan><tspan class="cls-25" x="50.11426" y="0">C</tspan><tspan x="59.85547" y="0">a</tspan><tspan class="cls-26" x="68.0498" y="0">r</tspan><tspan x="73.67578" y="0">lo</tspan></text>
-  <text class="cls-21" transform="translate(299.11519 12.97736)"><tspan class="cls-27">T</tspan><tspan x="7.24219" y="0">empo</tspan><tspan class="cls-28" x="48.94238" y="0">r</tspan><tspan x="54.41602" y="0">al Di</tspan><tspan class="cls-29" x="85.52441" y="0">ff</tspan><tspan x="95.21484" y="0">e</tspan><tspan class="cls-30" x="103.73145" y="0">r</tspan><tspan x="109.12012" y="0">en</tspan><tspan class="cls-31" x="127.07129" y="0">c</tspan><tspan x="134.58594" y="0">e</tspan></text>
-  <text class="cls-21" transform="translate(19.96541 126.24597)"><tspan class="cls-32">T</tspan><tspan x="7.36133" y="0">abular</tspan></text>
-  <text class="cls-21" transform="translate(3.43806 303.85818)"><tspan class="cls-33">E</tspan><tspan x="8.24512" y="0">uclidean</tspan><tspan class="cls-34" x="5.13379" y="20.39941">A</tspan><tspan class="cls-30" x="15.18164" y="20.39941">v</tspan><tspan x="23.18848" y="20.39941">e</tspan><tspan class="cls-28" x="31.70508" y="20.39941">r</tspan><tspan x="37.17871" y="20.39941">ager</tspan></text>
+  <text class="cls-21" transform="translate(130.72163 13.138)">Monte Carlo</text>
+  <text class="cls-21" transform="translate(294.7607 13.07892)"><tspan class="cls-22">T</tspan><tspan x="8.5" y="0">emporal Di</tspan><tspan class="cls-23" x="90.69531" y="0">f</tspan><tspan x="95.11133" y="0">ference</tspan></text>
+  <text class="cls-21" transform="translate(16.56795 126.34754)"><tspan class="cls-22">T</tspan><tspan x="8.5" y="0">abular</tspan></text>
+  <text class="cls-21" transform="translate(-2.27678 303.95974)">Euclidean<tspan class="cls-24" x="5.99414" y="20.40039">A</tspan><tspan x="17.02539" y="20.40039">verager</tspan></text>
   <rect class="cls-4" x="254.0092" y="29.34987" width="11.8813" height="178.41872"/>
-  <text class="cls-35" transform="translate(255.17439 113.7265)">-2</text>
+  <text class="cls-25" transform="translate(255.17439 113.7265)">-2</text>
   <rect class="cls-4" x="447.65662" y="29.2317" width="11.8813" height="178.41872"/>
-  <text class="cls-35" transform="translate(448.82161 113.60834)">-2</text>
+  <text class="cls-25" transform="translate(448.82161 113.60834)">-2</text>
   <rect class="cls-4" x="254.0092" y="222.02285" width="11.8813" height="178.41872"/>
-  <text class="cls-35" transform="translate(254.88484 306.41007)">-2</text>
+  <text class="cls-25" transform="translate(254.88484 306.41007)">-2</text>
   <rect class="cls-4" x="447.65662" y="222.03834" width="11.8813" height="178.41872"/>
-  <text class="cls-35" transform="translate(448.53206 306.42551)">-2</text>
+  <text class="cls-25" transform="translate(448.53206 306.42551)">-2</text>
 </svg>

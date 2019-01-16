@@ -21,6 +21,29 @@
 
 <body>
 
+
+<!--   <div id="test">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: #fff;
+            stroke: #231f20;
+            stroke-miterlimit: 10;
+          }
+        </style>
+      </defs>
+      <title>Artboard 1</title>
+      <g id="square">
+        <rect class="cls-1" x="36.51534" y="45.1227" width="150.30675" height="150.30675"/>
+      </g>
+      <g id="circle">
+        <circle class="cls-1" cx="350.62577" cy="124.2638" r="77.30061"/>
+      </g>
+    </svg>
+  </div>
+  <script src="vis/test.js"></script> -->
+
 <d-front-matter>
   <script type="text/json">{
   "title": "The Paths Perspective on Value Learning",
@@ -632,7 +655,7 @@
     </p>
 
     <p>
-      <b>Expected Sarsa.</b> Let's try fixing the Sarsa update. First, let's isolate the problem by splitting it into two parts
+      <b>Expected Sarsa.</b> Let's try fixing the Sarsa update. First, let's isolate the problem by splitting the update into two steps:
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -657,7 +680,7 @@
     </div>
 
     <p>
-      Now let's try replacing the first step with a better estimate of $V(s)$. A natural choice is a simple weighted sum over all the $Q$-values of the state:
+      The problem with Sarsa is now fully contained in the first step. A simple fix is to change the first step into an expectation value over the $Q$-values of $s_{t+1}$.
     </p>
 
         <style>
@@ -800,7 +823,7 @@
     </p> -->
 
 
-    <style>
+    <!-- <style>
       #off-policy-value {
         margin-left: auto;
         margin-right: auto;
@@ -815,7 +838,7 @@
     <figure id="off-policy-value" class="l-page">
       <img src="figures/on-policy-value.svg"/>
       <img src="figures/off-policy-value.svg"/>
-    </figure>
+    </figure> -->
 
     <!-- <p>
       Off policy value estimation has many uses. One special case is so useful that it has its own name: $Q$-learning.

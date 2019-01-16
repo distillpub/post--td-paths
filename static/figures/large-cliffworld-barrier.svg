@@ -58,19 +58,7 @@
       .cls-11 {
         font-size: 15px;
         fill: #6d6e71;
-        font-family: Roboto-Light, Roboto;
-      }
-
-      .cls-12 {
-        letter-spacing: -0.00732em;
-      }
-
-      .cls-13 {
-        letter-spacing: -0.00635em;
-      }
-
-      .cls-14 {
-        letter-spacing: -0.00928em;
+        font-family: ArialMT, Arial;
       }
     </style>
   </defs>
@@ -450,5 +438,5 @@
   <rect class="cls-9" x="280.00633" y="0.51609" width="19.95354" height="299.63761"/>
   <rect class="cls-10" x="80.2393" y="90.80863" width="167.28065" height="37.88288" rx="10.8245" ry="10.8245"/>
   <line class="cls-10" x1="246.95553" y1="111.76112" x2="321.5869" y2="111.76112"/>
-  <text class="cls-11" transform="translate(329.52087 117.92356)">These states<tspan x="0" y="18">should not h</tspan><tspan class="cls-12" x="81.15234" y="18">a</tspan><tspan class="cls-13" x="89.07715" y="18">v</tspan><tspan x="96.19629" y="18">e</tspan><tspan class="cls-14" x="0" y="36">r</tspan><tspan x="4.90723" y="36">ecei</tspan><tspan class="cls-13" x="31.49414" y="36">v</tspan><tspan x="38.61328" y="36">ed </tspan><tspan class="cls-12" x="58.34473" y="36">v</tspan><tspan x="65.44922" y="36">alue</tspan><tspan x="0" y="54">updates</tspan></text>
+  <text class="cls-11" transform="translate(329.52087 117.92356)">These states<tspan x="0" y="18">should not have</tspan><tspan x="0" y="36">received value</tspan><tspan x="0" y="54">updates</tspan></text>
 </svg>
