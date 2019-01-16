@@ -588,22 +588,36 @@
       An alternative to the value function is the $Q$-function. One motivation for $Q$-functions is that they make it easier to compare actions:
     </p>
 
+  <style>
+  #qlearning-intro {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+  </style>
+  <figure id="qlearning-intro" class="l-page">
+      <img src="figures/policy.svg"/>
+      <div class="figcaption">
+        Many times we’d like to compare the value of actions under a policy.
+      </div>
 
-    <style>
-      #q-learning-graphics {
-        margin-left: auto;
-        margin-right: auto;
-        width: 575px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-gap: 10px;
-        grid-auto-flow: column;
-      }
-    </style>
-    <figure id="q-learning-graphics" class="l-body">
-        <img src="figures/qfunctions.svg"/>
-    </figure>
+      <img src="figures/value.svg"/>
+      <div class="figcaption">
+        It’s hard to do this with a value function.
+      </div>
+
+      <img src="figures/qvalue.svg"/>
+      <div class="figcaption">
+        It’s easier to use $Q$-functions which estimate joint state-action values.
+      </div>
+
+  </figure>
 
     <p>
       We'll see some other nice properties of $Q$-functions in this section. First, though, we need to modify our Monte Carlo and TD update rules.
@@ -647,94 +661,82 @@
     </div>
 
     <p>
-      This version of the TD update rule requires a tuple of the form $(s_t, a_t, r_{t}, s_{t+1}, a_{t+1})$, so we call it the <i>SARSA</i> algorithm.
+      This version of the TD update rule requires a tuple of the form $(s_t, a_t, r_{t}, s_{t+1}, a_{t+1})$, so we call it the <i>Sarsa</i> algorithm.
+      Sarsa may be the simplest way to write a $Q$-function TD update, but it's not the most efficient.
     </p>
 
     <p>
-      Sarsa may be the simplest way to write a $Q$-function TD update, but it's not the most efficient. The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate of the next state value when it should be using $V(s_{t+1})$.
+      <b>Expected Sarsa.</b> The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate of the next state value when it should be using $V(s_{t+1})$.
     </p>
 
-    <p>
-      <b>Expected Sarsa.</b> Let's try fixing the Sarsa update. First, let's isolate the problem by splitting the update into two steps:
-    </p>
+        <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
+    
+      <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma Q(s_{t+1}, a_{t+1})</d-math></div>
 
-    <div class="eq-grid" style="grid-gap: 8px;">
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State-action value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 9/10; max-width:140px;"><span style="background: #FFD5D5">Should be $V(s_{t+1})$</span></figcaption>
 
-      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:300px;"><b>Sarsa update (step 1)</b></figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>Q(s_{t+1},a_{t+1})</d-math></div>
-
-      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
-      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Problem: this should be $V(s_{t+1})$</figcaption>
-
-      <figcaption style="grid-row: 5; grid-column: 1/5; max-width:300px;"><b>Sarsa update (step 2)</b></figcaption>
-
-      <div style="grid-row: 6; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
-      <div style="grid-row: 6; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
-      <div style="grid-row: 6; grid-column: 5;"><d-math>r_t + \gamma V(s_{t+1})</d-math></div>
-
-      <figcaption style="grid-row: 7; grid-column: 1; max-width:140px;"> $Q$-function </figcaption>
-      <figcaption style="grid-row: 7; grid-column: 5; max-width:140px;">TD update</figcaption>
     </div>
 
     <p>
-      The problem with Sarsa is now fully contained in the first step. A simple fix is to change the first step into an expectation value over the $Q$-values of $s_{t+1}$.
+     A better way of estimating the next state value is to instead calculate a weighted sum or expectation value over the state's $Q$ values. This approach is called <i>Expected Sarsa</i>.
     </p>
 
-        <style>
-      #recovering-value {
-        margin-left: auto;
-        margin-right: auto;
-        width: 500px;
+      <style>
+      #expected-sarsa {
+        width: 700px;
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: .35fr 1fr;
         grid-template-rows: auto auto;
-        grid-gap: 10px;
-        grid-auto-flow: column;
+        grid-row-gap: 20px;
+        grid-column-gap: 30px;
+        grid-auto-flow: row;
       }
     </style>
-    <figure id="recovering-value" class="l-body">
-        <img src="figures/recovering-value.svg"/>
+    <figure id="expected-sarsa" class="l-body">
+      <div class="figcaption">
+        <b>Sarsa</b> uses the $Q$-value associated with $a_{t+1}$ to estimate the next state's value.
+      </div>
+      <img src="figures/sarsa.svg"/>
+      <div class="figcaption">
+        <b>Expected Sarsa</b> uses an expectation over $Q$ values to estimate the next state's values.
+      </div>
+      <img src="figures/expected-sarsa.svg"/>
     </figure>
 
     <p>
-      Changing the first step in this way, we get an improved version of Sarsa called <i>Expected Sarsa</i>.
-    </p>
-
-    <div class="eq-grid" style="grid-gap: 8px;">
-      <figcaption style="grid-row: 1; grid-column: 1/10; max-width:300px;"><b>Expected Sarsa update (step 1)</b></figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a}\pi(s_{t+1},a_{t+1})Q(s_{t+1},a_{t+1})</d-math></div>
-
-      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
-      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Expectation over $Q$-values.</figcaption>
-    </div>
-
-    <p>
-      Here's a surprising fact about Expected Sarsa: the value estimate it gives is often <i>better</i> than a value estimate computed straight from the experience. This is because the expectation value weights the $Q$-values by the true policy distribution rather than the empirical policy distribution. In doing this, <i>Expected Sarsa corrects for the difference between the empirical policy distribution and the true policy distribution.</i>
+      Here's a surprising fact about Expected Sarsa: the value estimate it gives is often <i>better</i> than a value estimate computed straight from the experience. This is because the expectation value weights the $Q$-values by the true policy distribution rather than the empirical policy distribution. In doing this, Expected Sarsa <i>corrects for the difference between the empirical policy distribution and the true policy distribution.</i>
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting $Q$-values by the true policy distribution, we can instead weight them by an arbitrary policy:
+      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting $Q$-values by the true policy distribution, we can instead weight them by an arbitrary policy $\pi^{off}$:
     </p>
 
-    <div class="eq-grid" style="grid-gap: 8px;">
-      <figcaption style="grid-row: 1; grid-column: 1/10; max-width:300px;"><b>Off policy update (step 1)</b></figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>=~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>\mathop{\sum} \limits_{a}\pi_{off}(s_{t+1},a_{t+1})Q(s_{t+1},a_{t+1})</d-math></div>
-
-      <figcaption style="grid-row: 3; grid-column: 1/4; max-width:200px;"> Next state value </figcaption>
-      <figcaption style="grid-row: 3; grid-column: 5/5; max-width:300px;">Re-weight by an arbitrary policy $\pi_{off}$.</figcaption>
-    </div>
+<style>
+      #off-policy {
+        width: 700px;
+        display: grid;
+        grid-template-columns: .35fr 1fr;
+        grid-template-rows: auto auto;
+        grid-row-gap: 20px;
+        grid-column-gap: 30px;
+        grid-auto-flow: row;
+      }
+    </style>
+    <figure id="off-policy" class="l-body">
+      <div class="figcaption">
+        <b>Off-policy value learning</b> weights $Q$ values by an arbitrary policy.
+      </div>
+      <img src="figures/off-policy.svg"/>
+    </figure>
 
     <p>
-      With this slight modification, we can estimate value under any policy we like. In fact, Expected Sarsa is just a special case of off-policy learning where the "off" policy is the true policy.
+      With this slight modification, we can estimate value under any policy we like. We can also see that Expected Sarsa is just a special case of off-policy learning where the "off" policy is the true policy.
     </p>
 
     <p>
@@ -742,7 +744,7 @@
     </p>
 
     <p>
-      <b>Re-weighting path intersections.</b> One intuition for the off-policy correction is that it re-weights paths where they intersect. To see this, consider some state where several paths of experience intersect.
+      <b>Re-weighting path intersections.</b> One intuition for the off-policy correction is that it re-weights paths where they intersect. To see this, consider some state where multiple paths of experience intersect.
     </p>
 
     <p>
