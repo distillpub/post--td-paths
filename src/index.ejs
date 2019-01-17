@@ -596,7 +596,7 @@
   </figure>
 
     <p>
-      We'll see some other nice properties of $Q$-functions in this section. First, though, we need to modify our Monte Carlo and TD update rules.
+      We'll see some other nice properties of $Q$-functions in this section. First, though, we need to modify our Monte Carlo and TD updates.
     </p>
 
     <p>
@@ -667,9 +667,9 @@
       #expected-sarsa {
         width: 700px;
         display: grid;
-        grid-template-columns: .35fr 1fr;
+        grid-template-columns: .4fr 1fr;
         grid-template-rows: auto auto;
-        grid-row-gap: 20px;
+        grid-row-gap: 30px;
         grid-column-gap: 30px;
         grid-auto-flow: row;
       }
@@ -697,9 +697,9 @@
       #off-policy {
         width: 700px;
         display: grid;
-        grid-template-columns: .35fr 1fr;
+        grid-template-columns: .4fr 1fr;
         grid-template-rows: auto auto;
-        grid-row-gap: 20px;
+        grid-row-gap: 30px;
         grid-column-gap: 30px;
         grid-auto-flow: row;
       }
@@ -720,14 +720,14 @@
     </p>
 
     <p>
-      <b>Re-weighting path intersections.</b> One intuition for the off-policy correction is that it re-weights paths where they intersect. To see this, consider some state where multiple paths of experience intersect.
+      <b>Re-weighting path intersections.</b> What does the paths perspective say about off-policy learning? To answer this question, let's consider some state where multiple paths of experience intersect.
     </p>
 
   <style>
   #reweighting-1 {
     margin-left: auto;
     margin-right: auto;
-    width: 140px;
+    width: 130px;
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 20px;
@@ -745,7 +745,7 @@
   #reweighting-2 {
     margin-left: auto;
     margin-right: auto;
-    width: 140px;
+    width: 130px;
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 20px;
@@ -756,7 +756,7 @@
   </figure>
 
     <p>
-      So whenever we re-weight $Q$ values, we are also re-weighting the paths of experience that pass through them.
+      So whenever we re-weight $Q$ values, we are also re-weighting the paths of experience that pass through them. In other words, off-policy learning <i>re-weights path intersections.</i>
     </p>
 
 
@@ -1009,7 +1009,89 @@
   <!-- <script src="vis/test.js"></script> -->
 
     <p>
-      Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, the paths that have low probability under the off-policy distribution make much smaller contributions.
+      Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, the paths that have lower probability make much smaller contributions.
+    </p>
+
+
+    <h2>Pruning paths with $Q$-learning</h2>
+
+    <p>
+      There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating value under an optimal one. For these cases, we use a version of off-policy learning called $Q$-learning.
+    </p>
+
+    <style>
+      #q-learning {
+        width: 700px;
+        display: grid;
+        grid-template-columns: .4fr 1fr;
+        grid-template-rows: auto auto;
+        grid-row-gap: 30px;
+        grid-column-gap: 30px;
+        grid-auto-flow: row;
+      }
+    </style>
+    <figure id="q-learning" class="l-body">
+      <div class="figcaption">
+        <b>$Q$-learning</b> estimates value under the optimal policy by choosing the max $Q$-value.
+      </div>
+      <img src="figures/q-learning.svg"/>
+    </figure>
+
+   <p>
+     $Q$-learning prunes away all but the highest-valued paths. The paths that remain are the paths that the agent will follow at test time; they are the only ones it needs to pay attention to. This sort of value learning often leads to faster convergence than on-policy methods<d-footnote>Try using the Playground at the end of this article to compare between approaches.</d-footnote>.
+   </p>
+
+    <p>
+      <b>Sometimes $Q$-learning is over-optimistic.</b> There is a problem with $Q$-learning though: it gives <i>biased</i> value estimates. Consider the following example:
+    </p>
+
+    <p>
+      Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
+    </p>
+
+    <p>
+      <b>Double-$Q$ Learning.</b> Sometimes -- as in this casino example -- the largest $Q$-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. This method of reducing bias is called double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+    </p>
+
+    <h2>Reviewing off-policy methods</h2>
+
+    <p>
+      It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
+    </p>
+
+    <style>
+      #off-policy-methods {
+        width: 700px;
+        display: grid;
+        grid-template-columns: .4fr 1fr;
+        grid-template-rows: auto auto;
+        grid-row-gap: 30px;
+        grid-column-gap: 30px;
+        grid-auto-flow: row;
+      }
+    </style>
+    <figure id="off-policy-methods" class="l-body">
+      <div class="figcaption">
+        <b>Sarsa</b> uses the $Q$-value associated with $a_{t+1}$ to estimate the next state's value.
+      </div>
+      <img src="figures/sarsa.svg"/>
+      <div class="figcaption">
+        <b>Expected Sarsa</b> uses an expectation over $Q$ values to estimate the next state's values.
+      </div>
+      <img src="figures/expected-sarsa.svg"/>
+      <div class="figcaption">
+        <b>$Q$-learning</b> estimates value under the optimal policy by choosing the max $Q$-value.
+      </div>
+      <img src="figures/q-learning.svg"/>
+      <div class="figcaption">
+        <b>Double $Q$-learning</b> estimates value under the optimal policy by using the action with the max $Q$-value to choose a $Q$-value from a friend's estimate.
+      </div>
+      <img src="figures/double-q-learning.svg"/>
+    </figure>
+
+    <p>
+      The intuition behind every one of these approaches is that they re-weight path intersections.
     </p>
 
     <p>
@@ -1035,49 +1117,7 @@
     </p>
 
     <p>
-      Another way to think about this problem is that, if you want to re-weight paths where they intersect, you need to merge them first. Since Monte Carlo doesn't merge paths, it can't re-weight them without looking back over all experiences.
-    </p>
-
-
-    <h2>Pruning paths with $Q$-learning</h2>
-
-    <p>
-      There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating the value of the optimal one. For these cases, we use a version of off-policy learning called $Q$-learning.
-    </p>
-
-    <style>
-      #q-learning {
-        width: 700px;
-        display: grid;
-        grid-template-columns: .35fr 1fr;
-        grid-template-rows: auto auto;
-        grid-row-gap: 20px;
-        grid-column-gap: 30px;
-        grid-auto-flow: row;
-      }
-    </style>
-    <figure id="q-learning" class="l-body">
-      <div class="figcaption">
-        <b>$Q$-learning</b> estimates value under the optimal policy by choosing the max $Q$-value.
-      </div>
-      <img src="figures/q-learning.svg"/>
-    </figure>
-
-     <p>
-       $Q$-learning prunes away all but the highest-valued paths. The paths that remain are the paths that the agent will follow at test time, so they are the only ones that it needs to pay attention to. This sort of value learning often leads to faster convergence than on-policy methods<d-footnote>Try using the Playground at the end of this article to compare between approaches.</d-footnote>.
-     </p>
-
-    <p>
-      <b>Sometimes $Q$-learning is over-optimistic.</b> There is one problem with $Q$-learning: it gives <i>biased</i> value estimates. In particular, when state transitions or rewards are noisy. Here's one way to see the problem:
-    </p>
-
-    <p>
-      Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over all the actions you took. In other words, you will think that the value of the casino is equal to the value of the jackpot...and decide that the casino is a great place to be.
-    </p>
-
-    <p>
-      Sometimes -- as in this casino example -- the largest $Q$-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
-      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43, and use them as your value estimate for the casino. The probability that you both scored jackpots on the same machine is very low, so this time you won't fall into the same trap. This clever fix is the idea behind double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      Another way to think about this problem is that, if you want to re-weight paths where they intersect, you need to merge them first. Since Monte Carlo doesn't merge paths, it can't re-weight them without looking back over the full experience.
     </p>
 
 
@@ -1085,14 +1125,6 @@
 
     <p>
       Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state.
-    </p>
-
-    <p>
-      Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximation.
-    </p>
-
-    <p>
-      An interesting property of function approximation is that updating one parameter will tend to change more than one value estimate. Let's see how this changes things by returning to the Cliff World example. This time, we'll give the environment many more states.
     </p>
 
   <style>
@@ -1124,6 +1156,14 @@
         <b>Euclidean averagers</b> – which are a type of function approximation – save memory and let agents generalize to states they haven't yet visited.
       </div>
   </figure>
+
+    <p>
+      Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximation.
+    </p>
+
+<!--     <p>
+      An interesting property of function approximation is that updating one parameter will tend to change more than one value estimate. Let's see how this changes things by returning to the Cliff World example. This time, we'll give the environment many more states.
+    </p> -->
 
     <p>
       <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision to measure "nearby" with Euclidean distance. This was a good idea, because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
