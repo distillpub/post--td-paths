@@ -428,12 +428,12 @@
   }
   </style>
   <figure id="cliffworld-trajectories" class="l-body">
-      <img src="figures/cliffworld-traj-1of2.svg"/>
+      <img src="figures/cliffworld-path-1of4.svg"/>
       <div class="figcaption">
         Trajectory 1
       </div>
 
-      <img src="figures/cliffworld-traj-2of2.svg"/>
+      <img src="figures/cliffworld-path-2of4.svg"/>
       <div class="figcaption">
         Trajectory 2
       </div>
@@ -497,7 +497,7 @@
   }
   </style>
   <figure id="compare-mctd" class="l-page">
-      <img src="figures/traj-thumbnail.svg"/>
+      <img src="figures/traj-thumbnails.svg"/>
       <div class="figcaption">
         Trajectories
       </div>
@@ -510,7 +510,7 @@
       <div></div>
       <div></div>
 
-      <img src="figures/path-thumbnail.svg"/>
+      <img src="figures/path-thumbnails.svg"/>
       <div class="figcaption">
         Paths
       </div>
@@ -616,7 +616,6 @@
       <div class="figcaption">
         It’s easier to use $Q$-functions which estimate joint state-action values.
       </div>
-
   </figure>
 
     <p>
@@ -747,13 +746,53 @@
       <b>Re-weighting path intersections.</b> One intuition for the off-policy correction is that it re-weights paths where they intersect. To see this, consider some state where multiple paths of experience intersect.
     </p>
 
+  <style>
+  #reweighting-1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  </style>
+  <figure id="reweighting-1" class="l-page">
+      <img src="figures/reweighting-1.svg"/>
+  </figure>
+
     <p>
       When these paths exit the state through different actions, they get associated with different $Q$-values.
     </p>
 
+  <style>
+  #reweighting-2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  </style>
+  <figure id="reweighting-2" class="l-page">
+      <img src="figures/reweighting-2.svg"/>
+  </figure>
+
     <p>
       We can interpret this re-weighting of $Q$-values as a re-weighting path intersections. Wherever it happens, all the "downstream" states are also affected.
     </p>
+
+  <style>
+  #reweighting-full {
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+  }
+  </style>
+  <figure id="reweighting-full" class="l-page">
+    <embed type="image/svg+xml" src="figures/reweighting-full.svg" />
+  </figure>
+  <script src="vis/reweighting.js"></script>
 
     <p>
       <b>Re-weighting paths with Monte Carlo</b> At this point, a natural question is: Can we accomplish the same re-weighting effect with Monte Carlo? Technically speaking, we could. It would involve weighting each term in the return by a different coefficient:

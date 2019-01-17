@@ -1,0 +1,128 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73.90824 160.61057">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #263b96;
+      }
+
+      .cls-2 {
+        fill: #e7ebe8;
+      }
+
+      .cls-3 {
+        fill: #cac9cc;
+      }
+
+      .cls-4 {
+        fill: #bb7566;
+      }
+
+      .cls-5 {
+        font-size: 6.10178px;
+        fill: #d1d3d4;
+        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-weight: 700;
+      }
+
+      .cls-6, .cls-7 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+
+      .cls-6 {
+        stroke: #263b96;
+      }
+
+      .cls-7 {
+        stroke: #bb7566;
+      }
+    </style>
+  </defs>
+  <title>traj-thumbnails</title>
+  <rect class="cls-1" x="45.7762" y="1.0399" width="12.06758" height="12.06758"/>
+  <rect class="cls-2" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.94356" y="0.01514" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.82741" y="0.01809" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" y="14.94643" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.94356" y="14.96157" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.82741" y="14.96452" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.75144" y="14.97044" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" y="29.82863" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.94356" y="29.84376" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.82741" y="29.84672" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.75144" y="29.85263" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" y="44.77506" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.94356" y="44.79019" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.82741" y="44.79315" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.75144" y="44.79906" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" y="59.70802" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.94356" y="59.72315" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.82742" y="59.7261" width="14.11711" height="14.1171"/>
+  <rect class="cls-2" x="44.75144" y="59.73202" width="14.11711" height="14.11711"/>
+  <circle class="cls-3" cx="7.05855" cy="7.05855" r="4.4714"/>
+  <circle class="cls-3" cx="22.00211" cy="7.07961" r="4.4714"/>
+  <circle class="cls-3" cx="51.79578" cy="37.05239" r="4.4714"/>
+  <circle class="cls-3" cx="6.96892" cy="51.88548" r="4.4714"/>
+  <circle class="cls-3" cx="21.91247" cy="51.83361" r="4.4714"/>
+  <circle class="cls-3" cx="51.79578" cy="51.872" r="4.4714"/>
+  <circle class="cls-3" cx="6.96892" cy="66.93288" r="4.4714"/>
+  <circle class="cls-3" cx="21.91247" cy="67.24898" r="4.4714"/>
+  <circle class="cls-3" cx="51.79578" cy="66.91941" r="4.4714"/>
+  <rect class="cls-4" x="60.0158" y="0.53469" width="13.87412" height="73.06993"/>
+  <circle class="cls-3" cx="37.12493" cy="7.07961" r="4.4714"/>
+  <circle class="cls-3" cx="21.91247" cy="22.03952" r="4.4714"/>
+  <circle class="cls-3" cx="37.0353" cy="22.03952" r="4.4714"/>
+  <circle class="cls-3" cx="51.79578" cy="22.00499" r="4.4714"/>
+  <circle class="cls-3" cx="6.96892" cy="37.06587" r="4.4714"/>
+  <circle class="cls-3" cx="21.91247" cy="37.08692" r="4.4714"/>
+  <circle class="cls-3" cx="37.0353" cy="37.08692" r="4.4714"/>
+  <circle class="cls-3" cx="37.0353" cy="51.90653" r="4.4714"/>
+  <circle class="cls-3" cx="37.0353" cy="66.95394" r="4.47141"/>
+  <text class="cls-5" transform="translate(47.35295 8.39028)">+2</text>
+  <path class="cls-6" d="M46.46927,7.07583H41.56611a4.45283,4.45283,0,0,0-4.4554,4.45539l-.09141,6.0529a4.45284,4.45284,0,0,1-4.4554,4.4554l-6.16119-.01778a4.45284,4.45284,0,0,0-4.4554,4.4554l.01136,6.22052a4.45284,4.45284,0,0,1-4.4554,4.4554H6.96892"/>
+  <circle class="cls-3" cx="6.95141" cy="21.88931" r="4.4714"/>
+  <rect class="cls-1" x="45.79453" y="87.67725" width="12.06758" height="12.06758"/>
+  <rect class="cls-2" x="0.01832" y="86.63735" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.96188" y="86.65248" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.84574" y="86.65544" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="0.01832" y="101.58378" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.96188" y="101.59892" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.84574" y="101.60187" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.76976" y="101.60778" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="0.01832" y="116.46597" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.96188" y="116.48111" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.84574" y="116.48406" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.76976" y="116.48997" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="0.01832" y="131.41241" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.96188" y="131.42754" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.84574" y="131.4305" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="44.76976" y="131.43641" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="0.01832" y="146.34536" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="14.96188" y="146.3605" width="14.11711" height="14.11711"/>
+  <rect class="cls-2" x="29.84574" y="146.36345" width="14.11711" height="14.1171"/>
+  <rect class="cls-2" x="44.76976" y="146.36936" width="14.11711" height="14.11711"/>
+  <circle class="cls-3" cx="7.07688" cy="93.6959" r="4.4714"/>
+  <circle class="cls-3" cx="22.02043" cy="93.71695" r="4.4714"/>
+  <circle class="cls-3" cx="51.81411" cy="123.68974" r="4.4714"/>
+  <circle class="cls-3" cx="6.98724" cy="138.52283" r="4.4714"/>
+  <circle class="cls-3" cx="21.9308" cy="138.47096" r="4.4714"/>
+  <circle class="cls-3" cx="51.81411" cy="138.50935" r="4.4714"/>
+  <circle class="cls-3" cx="6.98724" cy="153.57023" r="4.4714"/>
+  <circle class="cls-3" cx="21.9308" cy="153.88633" r="4.4714"/>
+  <circle class="cls-3" cx="51.81411" cy="153.55676" r="4.4714"/>
+  <rect class="cls-4" x="60.03412" y="87.17204" width="13.87412" height="73.06993"/>
+  <circle class="cls-3" cx="37.14326" cy="93.71695" r="4.4714"/>
+  <circle class="cls-3" cx="21.9308" cy="108.67686" r="4.4714"/>
+  <circle class="cls-3" cx="37.05362" cy="108.67686" r="4.4714"/>
+  <circle class="cls-3" cx="51.81411" cy="108.64234" r="4.4714"/>
+  <circle class="cls-3" cx="6.98724" cy="123.70322" r="4.4714"/>
+  <circle class="cls-3" cx="21.9308" cy="123.72427" r="4.4714"/>
+  <circle class="cls-3" cx="37.05362" cy="123.72427" r="4.4714"/>
+  <circle class="cls-3" cx="37.05362" cy="138.54388" r="4.4714"/>
+  <circle class="cls-3" cx="37.05362" cy="153.59128" r="4.47141"/>
+  <text class="cls-5" transform="translate(62.59319 110.95327)">-1</text>
+  <path class="cls-7" d="M37.01608,153.98571V113.15458a4.49864,4.49864,0,0,1,4.50123-4.50123H60.94678"/>
+  <circle class="cls-3" cx="6.96973" cy="108.52666" r="4.4714"/>
+</svg>

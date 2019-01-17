@@ -5,7 +5,7 @@
 	}
 
 	// Setup
-	let root = d3.select("#test");
+	let root = d3.select("#reweighting-full");
 	root.style("width", "200px");
 	let svg = root.select("svg");
 	let slider = root.append("input");

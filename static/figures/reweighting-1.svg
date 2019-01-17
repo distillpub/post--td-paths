@@ -1,0 +1,47 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154.54315 154.02922">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e7ebe8;
+      }
+
+      .cls-2 {
+        fill: #cac9cc;
+      }
+
+      .cls-3, .cls-5 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+      }
+
+      .cls-3 {
+        stroke: #bb7566;
+      }
+
+      .cls-4 {
+        fill: #bb7566;
+      }
+
+      .cls-5 {
+        stroke: #263b96;
+      }
+
+      .cls-6 {
+        fill: #263b96;
+      }
+    </style>
+  </defs>
+  <title>reweighting-1</title>
+  <rect class="cls-1" x="19.52074" y="33.78432" width="100.97058" height="100.97058"/>
+  <circle class="cls-2" cx="70.07409" cy="83.38717" r="31.98106"/>
+  <g>
+    <path class="cls-3" d="M130.82,84.219H103A32.17578,32.17578,0,0,0,70.8056,116.41336v32.14685"/>
+    <polygon class="cls-4" points="120.147 70.147 126.126 84.219 120.147 98.291 153.505 84.219 120.147 70.147"/>
+  </g>
+  <g>
+    <path class="cls-5" d="M70.95963,23.2012V52.5206A31.8483,31.8483,0,0,1,39.093,84.38718H5.67972"/>
+    <polygon class="cls-6" points="56.888 33.874 70.96 27.896 85.032 33.874 70.96 0.516 56.888 33.874"/>
+  </g>
+</svg>
