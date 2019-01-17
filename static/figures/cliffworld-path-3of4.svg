@@ -18,18 +18,18 @@
       }
 
       .cls-5 {
-        font-size: 10.97513px;
-        fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
-        font-weight: 700;
-      }
-
-      .cls-6 {
         fill: none;
         stroke: #263b96;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 4px;
+      }
+
+      .cls-6 {
+        font-size: 10.97513px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
       }
     </style>
   </defs>
@@ -73,7 +73,7 @@
   <circle class="cls-3" cx="66.49949" cy="66.72893" r="8.04261"/>
   <circle class="cls-3" cx="66.49949" cy="93.38462" r="8.04261"/>
   <circle class="cls-3" cx="66.49949" cy="120.45004" r="8.04261"/>
-  <text class="cls-5" transform="translate(85.0575 15.11287)">+2</text>
-  <path class="cls-6" d="M66.432,121.15948v-73.442l.03874-16.06779.16443-10.88719A8.00922,8.00922,0,0,1,74.649,12.74866h8.8192"/>
+  <path class="cls-5" d="M66.432,121.15948v-73.442l.03874-16.06779.16443-10.88719A8.00922,8.00922,0,0,1,74.649,12.74866h8.8192"/>
   <circle class="cls-3" cx="12.38829" cy="39.39333" r="8.04261"/>
+  <text class="cls-6" transform="translate(85.01258 15.11287)">+2</text>
 </svg>

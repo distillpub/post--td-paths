@@ -42,7 +42,7 @@
       .cls-9 {
         font-size: 11px;
         fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-family: Arial-BoldMT, Arial;
         font-weight: 700;
       }
     </style>
@@ -92,12 +92,12 @@
   <circle class="cls-2" cx="12.56333" cy="120.66531" r="8.06084"/>
   <circle class="cls-2" cx="39.50287" cy="121.23515" r="8.06084"/>
   <rect class="cls-8" x="108.19376" y="0.96575" width="25.01161" height="131.72706"/>
-  <text class="cls-9" transform="translate(111.78139 42.69184)">-1</text>
   <line class="cls-3" x1="66.76559" y1="120.70326" x2="66.76559" y2="93.5765"/>
   <circle class="cls-2" cx="93.37511" cy="93.51426" r="8.06084"/>
   <circle class="cls-7" cx="66.76559" cy="93.5765" r="8.06084"/>
   <circle class="cls-7" cx="66.76559" cy="120.70326" r="8.06084"/>
   <circle class="cls-2" cx="93.37511" cy="120.64102" r="8.06084"/>
   <rect class="cls-6" x="82.49767" y="1.78183" width="21.75487" height="21.75487"/>
-  <text class="cls-9" transform="translate(85.36532 15.12735)">+2</text>
+  <text class="cls-9" transform="translate(111.57143 42.69184)">-1</text>
+  <text class="cls-9" transform="translate(85.32039 15.12735)">+2</text>
 </svg>

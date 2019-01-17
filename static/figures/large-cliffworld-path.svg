@@ -27,7 +27,7 @@
       .cls-6 {
         font-size: 5.22534px;
         fill: #e6e7e8;
-        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-family: Arial-BoldMT, Arial;
         font-weight: 700;
       }
     </style>
@@ -400,5 +400,5 @@
   <circle class="cls-3" cx="5.96755" cy="172.64957" r="3.82915"/>
   <polyline class="cls-5" points="18.765 159.764 18.765 70.087 5.972 70.087 5.972 31.777 31.566 31.777 31.566 18.909 69.958 18.909 69.958 31.819 82.755 31.819 82.755 44.465 95.552 44.465 108.349 44.465 108.349 31.865 133.943 31.865 133.943 19.007 146.894 19.007 146.894 6.196 159.53 6.196"/>
   <rect class="cls-4" x="154.37926" y="1.02365" width="10.33424" height="10.33424"/>
-  <text class="cls-6" transform="translate(156.5764 7.42279)">+1</text>
+  <text class="cls-6" transform="translate(156.55491 7.42279)">+1</text>
 </svg>

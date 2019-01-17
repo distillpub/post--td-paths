@@ -17,26 +17,26 @@
         fill: #bb7566;
       }
 
-      .cls-5 {
-        font-size: 6.10178px;
-        fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
-        font-weight: 700;
-      }
-
-      .cls-6, .cls-7 {
+      .cls-5, .cls-6 {
         fill: none;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-width: 4px;
       }
 
-      .cls-6 {
+      .cls-5 {
         stroke: #263b96;
       }
 
-      .cls-7 {
+      .cls-6 {
         stroke: #bb7566;
+      }
+
+      .cls-7 {
+        font-size: 6.10178px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
       }
     </style>
   </defs>
@@ -80,8 +80,7 @@
   <circle class="cls-3" cx="37.0353" cy="37.08692" r="4.4714"/>
   <circle class="cls-3" cx="37.0353" cy="51.90653" r="4.4714"/>
   <circle class="cls-3" cx="37.0353" cy="66.95394" r="4.47141"/>
-  <text class="cls-5" transform="translate(47.35295 8.39028)">+2</text>
-  <path class="cls-6" d="M46.46927,7.07583H41.56611a4.45283,4.45283,0,0,0-4.4554,4.45539l-.09141,6.0529a4.45284,4.45284,0,0,1-4.4554,4.4554l-6.16119-.01778a4.45284,4.45284,0,0,0-4.4554,4.4554l.01136,6.22052a4.45284,4.45284,0,0,1-4.4554,4.4554H6.96892"/>
+  <path class="cls-5" d="M46.46927,7.07583H41.56611a4.45283,4.45283,0,0,0-4.4554,4.45539l-.09141,6.0529a4.45284,4.45284,0,0,1-4.4554,4.4554l-6.16119-.01778a4.45284,4.45284,0,0,0-4.4554,4.4554l.01136,6.22052a4.45284,4.45284,0,0,1-4.4554,4.4554H6.96892"/>
   <circle class="cls-3" cx="6.95141" cy="21.88931" r="4.4714"/>
   <rect class="cls-1" x="45.79453" y="87.67725" width="12.06758" height="12.06758"/>
   <rect class="cls-2" x="0.01832" y="86.63735" width="14.11711" height="14.11711"/>
@@ -122,7 +121,8 @@
   <circle class="cls-3" cx="37.05362" cy="123.72427" r="4.4714"/>
   <circle class="cls-3" cx="37.05362" cy="138.54388" r="4.4714"/>
   <circle class="cls-3" cx="37.05362" cy="153.59128" r="4.47141"/>
-  <text class="cls-5" transform="translate(62.59319 110.95327)">-1</text>
-  <path class="cls-7" d="M37.01608,153.98571V113.15458a4.49864,4.49864,0,0,1,4.50123-4.50123H60.94678"/>
+  <path class="cls-6" d="M37.01608,153.98571V113.15458a4.49864,4.49864,0,0,1,4.50123-4.50123H60.94678"/>
   <circle class="cls-3" cx="6.96973" cy="108.52666" r="4.4714"/>
+  <text class="cls-7" transform="translate(47.32756 8.39028)">+2</text>
+  <text class="cls-7" transform="translate(62.47697 110.95327)">-1</text>
 </svg>

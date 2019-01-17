@@ -35,7 +35,7 @@
       .cls-8 {
         font-size: 6.65044px;
         fill: #e6e7e8;
-        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-family: Arial-BoldMT, Arial;
         font-weight: 700;
       }
     </style>
@@ -412,5 +412,5 @@
   </g>
   <polyline class="cls-7" points="18.765 159.819 18.765 70.143 5.972 70.143 5.972 31.833 31.566 31.833 31.566 18.965 69.958 18.965 69.958 31.874 82.755 31.874 82.755 44.521 95.552 44.521 108.349 44.521 108.349 31.92 133.943 31.92 133.943 19.063 146.894 19.063 146.894 6.251 159.53 6.251"/>
   <rect class="cls-4" x="154.37926" y="1.07921" width="10.33424" height="10.33424"/>
-  <text class="cls-8" transform="translate(155.77029 7.47832)">+1</text>
+  <text class="cls-8" transform="translate(155.74295 7.47832)">+1</text>
 </svg>

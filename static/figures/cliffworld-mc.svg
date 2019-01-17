@@ -38,7 +38,7 @@
       .cls-8 {
         font-size: 11px;
         fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-family: Arial-BoldMT, Arial;
         font-weight: 700;
       }
     </style>
@@ -88,12 +88,12 @@
   <circle class="cls-2" cx="12.58419" cy="120.64942" r="8.06084"/>
   <circle class="cls-2" cx="39.52374" cy="121.21927" r="8.06084"/>
   <rect class="cls-7" x="108.21462" y="0.94986" width="25.01161" height="131.72706"/>
-  <text class="cls-8" transform="translate(111.8023 42.67595)">-1</text>
   <line class="cls-4" x1="66.78646" y1="120.68737" x2="66.78646" y2="93.56061"/>
   <circle class="cls-2" cx="93.39597" cy="93.49837" r="8.06084"/>
   <circle class="cls-7" cx="66.78646" cy="93.56061" r="8.06084"/>
   <circle class="cls-7" cx="66.78646" cy="120.68737" r="8.06084"/>
   <circle class="cls-2" cx="93.39597" cy="120.62513" r="8.06084"/>
   <rect class="cls-5" x="82.51854" y="1.76594" width="21.75487" height="21.75487"/>
-  <text class="cls-8" transform="translate(85.38623 15.11147)">+2</text>
+  <text class="cls-8" transform="translate(111.59234 42.67595)">-1</text>
+  <text class="cls-8" transform="translate(85.3413 15.11147)">+2</text>
 </svg>

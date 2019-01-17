@@ -21,14 +21,14 @@
       }
 
       .cls-5 {
-        font-size: 11px;
-        fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
-        font-weight: 700;
+        fill: #263b96;
       }
 
       .cls-6 {
-        fill: #263b96;
+        font-size: 11px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
       }
     </style>
   </defs>
@@ -72,11 +72,11 @@
   <circle class="cls-2" cx="12.63833" cy="120.69638" r="8.06084"/>
   <circle class="cls-2" cx="39.57787" cy="121.26622" r="8.06084"/>
   <rect class="cls-4" x="108.26876" y="0.99681" width="25.01161" height="131.72706"/>
-  <text class="cls-5" transform="translate(111.85636 42.72291)">-1</text>
   <line class="cls-3" x1="66.84059" y1="120.73433" x2="66.84059" y2="93.60757"/>
   <circle class="cls-2" cx="93.45011" cy="93.54532" r="8.06084"/>
   <circle class="cls-4" cx="66.84059" cy="93.60757" r="8.06084"/>
   <circle class="cls-4" cx="66.84059" cy="120.73433" r="8.06084"/>
   <circle class="cls-2" cx="93.45011" cy="120.67208" r="8.06084"/>
-  <rect class="cls-6" x="82.57267" y="1.8129" width="21.75487" height="21.75487"/>
+  <rect class="cls-5" x="82.57267" y="1.8129" width="21.75487" height="21.75487"/>
+  <text class="cls-6" transform="translate(111.6464 42.72291)">-1</text>
 </svg>
