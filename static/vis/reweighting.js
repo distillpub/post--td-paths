@@ -1,37 +1,35 @@
 (function() {
 	// State
 	let state = {
-		circleOpacity: 0.5,
+		testOpacity: 1.0,
 	}
 
 	// Setup
 	let root = d3.select("#reweighting-full");
-	root.style("width", "200px");
+	console.log(root);
+
 	let svg = root.select("svg");
 	let slider = root.append("input");
 	slider
 		.attr("type", "range")
 		.attr("min", 0)
-		.attr("max", 1)
-		.attr("step", 0.1);
+		.attr("max", 1.0)
+		.attr("step", 0.01);
 
-	let circle = root.select("#circle circle");
-	let square = root.select("#square rect");
-
+	let background = root.select("#background");
+	let up_path = root.select("#up-path");
 
 
 	// Render
 	let render = () => {
-		slider.attr("value", state.circleOpacity)
-		circle.style("opacity", state.circleOpacity)
-		circle.style("fill", "orange")
-		square.style("fill", "blue")
+		slider.attr("value", state.testOpacity)
+		background.style("opacity", state.testOpacity)
 	}
 
 	// Events
 	slider.on("input", (event) => {
 		let value = slider.property("value");
-		state.circleOpacity = value;
+		state.testOpacity = value;
 		render();
 	});
 
