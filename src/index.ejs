@@ -514,7 +514,7 @@
     </div>
 
     <p>
-      First off, TD learning never averages over <i>fewer</i> trajectories than Monte Carlo because there are never fewer simulated trajectories (paths) than real trajectories. On the other hand, when there are more simulated trajectories (paths) than real trajectories, TD learning has the chance to average over more of the agent's experience. Given this intuition, it seems plausible that TD estimates will have lower variance.
+      First off, TD learning never averages over fewer trajectories than Monte Carlo because there are never fewer simulated trajectories than real trajectories. On the other hand, when there are <i>more</i> simulated trajectories, TD learning has the chance to average over more of the agent's experience. This is an intuition for why TD estimates tend to have lower variance.
     </p>
 
     <!-- <p>
@@ -638,7 +638,7 @@
 
     <p>
       <b>Expected Sarsa.</b> The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate the value of the next state, when it should be using $V(s_{t+1})$.
-     A better way of estimating the next state value is to instead calculate a weighted sum or expectation value over the state's $Q$ values. This approach is called <i>Expected Sarsa</i>.
+     A better way of estimating the next state's value is with a weighted sum or expectation value over its $Q$ values. This approach is called <i>Expected Sarsa</i>.
     </p>
 
       <style>
@@ -677,8 +677,6 @@
         display: grid;
         grid-template-columns: .4fr 1fr;
         grid-template-rows: auto auto;
-        grid-row-gap: 30px;
-        grid-column-gap: 30px;
         grid-auto-flow: row;
       }
     </style>
@@ -834,7 +832,7 @@
   </div>
   <script src="vis/reweighting.js"></script>
       <div class="figcaption">
-        Whenever we re-weight $Q$-values, we are also re-weighting the paths that pass through them.
+        Whenever we re-weight $Q$-values, we also re-weight the paths that pass through them.
       </div>
   </figure>
 
@@ -862,7 +860,7 @@
   <!-- <script src="vis/test.js"></script> -->
 
     <p>
-      Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, the paths that have low probability make much smaller contributions.
+      Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, the paths that have low probability make smaller contributions.
     </p>
 
 
@@ -878,8 +876,6 @@
         display: grid;
         grid-template-columns: .4fr 1fr;
         grid-template-rows: auto auto;
-        grid-row-gap: 30px;
-        grid-column-gap: 30px;
         grid-auto-flow: row;
       }
     </style>
@@ -899,7 +895,7 @@
     </p>
 
     <p>
-      Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
+      You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
     <p>
@@ -970,14 +966,15 @@
     </p>
 
     <p>
-      Another way to think about this problem is that, if you want to re-weight paths where they intersect, you need to merge them first. Since Monte Carlo doesn't merge paths, it can't re-weight them without looking back over the full experience.
+      Another way to think about this problem is that, if you want to re-weight paths where they intersect, you need to merge them first. Since Monte Carlo doesn't merge paths, it can't re-weight them as easily.
     </p>
 
 
     <h2>Merging Paths with Function Approximators</h2>
 
     <p>
-      Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state.
+      Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But most interesting RL problems have large or infinite number of states and this makes it hard to store value estimates for each state.
+      <!-- ut as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state. -->
     </p>
 
   <style>
@@ -1073,7 +1070,7 @@
   </figure>
   
     <p>
-      We've seen that TD learning makes more efficient value updates. The price we pay, though, is that these updates end up being much more sensitive to bad value updates.
+      We've seen that TD learning makes more efficient value updates. The price we pay is that these updates end up being much more sensitive to bad value updates.
     </p>
 
 
@@ -1127,11 +1124,11 @@
 
     <h2>Conclusion</h2>
     <p>
-      An RL agent can improve its policy by looking at separate episodes of experience, one at a time. When it does this, though, it discards a rich source of information: the ways that states from different episodes intersect with one another. The paths perspective is meant to emphasize this second source of information, and to demonstrate how some value estimators, like TD learning, make use of it whereas others, like Monte Carlo, do not.
+      An RL agent can improve its policy by looking at separate episodes of experience one at a time. But this is not the best way to improve a policy because it discards information about how separate episodes overlap. The paths perspective is meant to emphasize this second source of information. Considering experience as a whole helps us do value estimation that is more efficient (TD learning), possible off-policy (e.g. $Q$-learning), and generalize across nearby states (function approximation).
     </p>
 
     <p>
-      We hope the paths perspective clarifies the relationship between some of the most fundamental approaches to value learning. Understanding these relationships and how they affect the way an agent learns is the first step to making even better RL agents.
+      We hope the paths perspective makes it easier to understand the problem of value estimation. Perhaps these intuitions can even guide better approaches to value estimation in the future.
     </p>
 
     <h2>Playground</h2>

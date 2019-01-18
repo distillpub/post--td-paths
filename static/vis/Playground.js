@@ -199,16 +199,16 @@
   var vis_select = learning_div.append("select");
   vis_select.append("option")
     .attr("value", "MC")
-    .text("Monte-Carlo (on-policy)");
+    .text("Monte Carlo");
   vis_select.append("option")
     .attr("value", "SARSA")
-    .text("SARSA (on-policy TD)");
+    .text("Sarsa");
   vis_select.append("option")
     .attr("value", "SARSA_V")
-    .text("special V SARSA (on-policy TD)");
+    .text("Expected Sarsa");
   vis_select.append("option")
     .attr("value", "Q")
-    .text("Q-Learning (off-policy TD)")
+    .text("Q-Learning")
     .attr("selected", "selected");
   vis_select.on("change", function() {
     if (this.value == "MC") {
@@ -243,10 +243,10 @@
     .text("Visualization");
 
   var vis_select = visualize_div.append("select");
-  vis_select.append("option").attr("value", "policy").text("policy")
-  vis_select.append("option").attr("value", "Q").text("Q")
+  vis_select.append("option").attr("value", "policy").text("Policy")
+  vis_select.append("option").attr("value", "Q").text("Q(s,a)")
     .attr("selected", "selected")
-  vis_select.append("option").attr("value", "V").text("V")
+  vis_select.append("option").attr("value", "V").text("V(s)")
   vis_select.on("change", function() {
     if (this.value == "policy") {
       Pg.style("display", "");
