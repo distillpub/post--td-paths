@@ -559,7 +559,7 @@
     </p> -->
 
 
-    <h2>Re-weighting paths with $Q$-functions</h2>
+    <h2>Introducing $Q$-functions</h2>
     
     <p>
       An alternative to the value function is the $Q$-function. Here's the most obvious reason to use $Q$-functions:
@@ -633,12 +633,39 @@
 
     <p>
       This version of the TD update rule requires a tuple of the form $(s_t, a_t, r_{t}, s_{t+1}, a_{t+1})$, so we call it the <i>Sarsa</i> algorithm.
-      Sarsa may be the simplest way to write a $Q$-function TD update, but it's not the most efficient.
+      Sarsa may be the simplest way to write a $Q$-function TD update, but it's not the most efficient. The problem with Sarsa is that it updates towards $Q(s_{t+1},a_{t+1})$ when in fact it should update towards $V(s_{t+1})$.
     </p>
 
     <p>
-      <b>Expected Sarsa.</b> The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ to approximate the value of the next state, when it should be using $V(s_{t+1})$.
-     A better way of estimating the next state's value is with a weighted sum or expectation value over its $Q$ values. This approach is called <i>Expected Sarsa</i>.
+      What we'd like is a better way of estimating $V(s_{t+1})$.
+    </p>
+
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
+      <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
+      <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
+      <div style="grid-row: 1; grid-column: 7;"><d-math>+</d-math></div>
+      <div style="grid-row: 1; grid-column: 9;"><d-math>\gamma V(s_{t+1})</d-math></div>
+
+      <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State-action value </figcaption>
+      <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
+      <figcaption style="grid-row: 2; grid-column: 9; max-width:140px;">Next state value</figcaption>
+
+      <div style="grid-row: 4; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
+      <div style="grid-row: 4; grid-column: 3;"><d-math>=~~</d-math></div>
+      <div style="grid-row: 4; grid-column: 5;"><d-math>? </d-math></div>
+    </div>
+
+    <p>
+      There are many ways to do this and we'll look at four of them in the next section. We'll also see that one thing they all have in common is that they re-weight paths intersections.
+    </p>
+
+
+    <h2>Learning $Q$-functions with reweighted paths</h2>
+
+    <p>
+      <b>Expected Sarsa.</b>
+      A better way of estimating the next state's value is with a weighted sum or expectation value over its Q-values. This approach is called <i>Expected Sarsa</i>.
     </p>
 
       <style>
@@ -654,21 +681,21 @@
     </style>
     <figure id="expected-sarsa" class="l-body">
       <div class="figcaption">
-        <b>Sarsa</b> uses the $Q$-value associated with $a_{t+1}$ to estimate the next state's value.
+        <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
       </div>
       <img src="figures/sarsa.svg"/>
       <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over $Q$ values to estimate the next state's values.
+        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's values.
       </div>
       <img src="figures/expected-sarsa.svg"/>
     </figure>
 
     <p>
-      Here's a surprising fact about Expected Sarsa: the value estimate it gives is often <i>better</i> than a value estimate computed straight from the experience. This is because the expectation value weights the $Q$-values by the true policy distribution rather than the empirical policy distribution. In doing this, Expected Sarsa <i>corrects for the difference between the empirical policy distribution and the true policy distribution.</i>
+      Here's a surprising fact about Expected Sarsa: the value estimate it gives is often <i>better</i> than a value estimate computed straight from the experience. This is because the expectation value weights the Q-values by the true policy distribution rather than the empirical policy distribution. In doing this, Expected Sarsa <i>corrects for the difference between the empirical policy distribution and the true policy distribution.</i>
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting $Q$-values by the true policy distribution, we can instead weight them by an arbitrary policy $\pi^{off}$
+      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting Q-values by the true policy distribution, we can instead weight them by an arbitrary policy $\pi^{off}$
     </p>
 
     <style>
@@ -682,7 +709,7 @@
     </style>
     <figure id="off-policy" class="l-body">
       <div class="figcaption">
-        <b>Off-policy value learning</b> weights $Q$ values by an arbitrary policy.
+        <b>Off-policy value learning</b> weights Q values by an arbitrary policy.
       </div>
       <img src="figures/off-policy.svg"/>
     </figure>
@@ -717,7 +744,7 @@
 
       <img src="figures/reweighting-2.svg"/>
       <div class="figcaption">
-        Paths that exit the state through different actions get associated with different $Q$-values.
+        Paths that exit the state through different actions get associated with different Q-values.
       </div>
 
       <div id="reweighting-full">
@@ -832,7 +859,7 @@
   </div>
   <script src="vis/reweighting.js"></script>
       <div class="figcaption">
-        Whenever we re-weight $Q$-values, we also re-weight the paths that pass through them.
+        Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
       </div>
   </figure>
 
@@ -863,11 +890,8 @@
       Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, the paths that have low probability make smaller contributions.
     </p>
 
-
-    <h2>Pruning paths with $Q$-learning</h2>
-
     <p>
-      There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating value under an optimal one. For these cases, we use a version of off-policy learning called $Q$-learning.
+      <b>Q-learning.</b>There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating value under an optimal one. For these cases, we use a version of off-policy learning called Q-learning.
     </p>
 
     <style>
@@ -881,36 +905,36 @@
     </style>
     <figure id="q-learning" class="l-body">
       <div class="figcaption">
-        <b>$Q$-learning</b> estimates value under the optimal policy by choosing the max $Q$-value.
+        <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
       </div>
       <img src="figures/q-learning.svg"/>
     </figure>
 
    <p>
-     $Q$-learning prunes away all but the highest-valued paths. The paths that remain are the paths that the agent will follow at test time; they are the only ones it needs to pay attention to. This sort of value learning often leads to faster convergence than on-policy methods<d-footnote>Try using the Playground at the end of this article to compare between approaches.</d-footnote>.
+     Q-learning prunes away all but the highest-valued paths. The paths that remain are the paths that the agent will follow at test time; they are the only ones it needs to pay attention to. This sort of value learning often leads to faster convergence than on-policy methods<d-footnote>Try using the Playground at the end of this article to compare between approaches.</d-footnote>.
    </p>
 
     <p>
-      <b>Sometimes $Q$-learning is over-optimistic.</b> There is a problem with $Q$-learning though: it gives <i>biased</i> value estimates. Consider the following example:
+      <b>Double Q-Learning.</b> There is a problem with Q-learning though: it gives biased value estimates. Consider the following example:
     </p>
 
     <p>
-      You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use $Q$-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
+      You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
     <p>
-      <b>Double-$Q$ Learning.</b> Sometimes -- as in this casino example -- the largest $Q$-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
-      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. This method of reducing bias is called double $Q$-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      Sometimes -- as in this casino example -- the largest Q-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. This method of reducing bias is called double Q-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
-    <h2>Reviewing off-policy methods</h2>
-
     <p>
-      It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
+      <b>Putting everything together. </b> It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
     </p>
 
     <style>
       #off-policy-methods {
+        margin-left: auto;
+        margin-right: auto;
         width: 700px;
         display: grid;
         grid-template-columns: .4fr 1fr;
@@ -920,21 +944,24 @@
         grid-auto-flow: row;
       }
     </style>
-    <figure id="off-policy-methods" class="l-body">
+    <figure id="off-policy-methods" class="l-page">
+
+      <!-- <div class="expansion-marker" style="grid-row: 1/2; grid-column: 0; "></div> -->
+
       <div class="figcaption">
-        <b>Sarsa</b> uses the $Q$-value associated with $a_{t+1}$ to estimate the next state's value.
+        <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
       </div>
       <img src="figures/sarsa.svg"/>
       <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over $Q$ values to estimate the next state's values.
+        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's values.
       </div>
       <img src="figures/expected-sarsa.svg"/>
       <div class="figcaption">
-        <b>$Q$-learning</b> estimates value under the optimal policy by choosing the max $Q$-value.
+        <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
       </div>
       <img src="figures/q-learning.svg"/>
       <div class="figcaption">
-        <b>Double $Q$-learning</b> selects the best action with $Q_A$ and then estimates the value of that action with $Q_B$.
+        <b>Double Q-learning</b> selects the best action with $Q_A$ and then estimates the value of that action with $Q_B$.
       </div>
       <img src="figures/double-q-learning.svg"/>
     </figure>
@@ -944,29 +971,7 @@
     </p>
 
     <p>
-      <b>Re-weighting paths with Monte Carlo.</b> At this point, a natural question is: Can we accomplish the same re-weighting effect with Monte Carlo? Technically speaking, we could. It would involve weighting each term in the return by a different coefficient:
-    </p>
-
-    <div class="eq-grid" style="grid-gap: 8px;">
-
-    <figcaption style="grid-row: 1; grid-column: 1/3; max-width:140px;"><b>MC update</b></figcaption>
-    <div style="grid-row: 2; grid-column: 1;"><d-math>Q(s_t, a_t)~</d-math></div>
-    <div style="grid-row: 2; grid-column: 3;"><d-math>~\hookleftarrow~~</d-math></div>
-    <div style="grid-row: 2; grid-column: 5;"><d-math>r_{t}</d-math></div>
-    <div style="grid-row: 2; grid-column: 7;"><d-math>+~</d-math></div>
-    <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma ~ c_{1} ~ r_{t+1}</d-math></div>
-    <div style="grid-row: 2; grid-column: 11;"><d-math>+~</d-math></div>
-    <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 ~ c_{2} ~ r_{t+2}</d-math></div>
-    <div style="grid-row: 2; grid-column: 15;"><d-math>+~</d-math></div>
-    <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-  </div>
-
-    <p>
-      In order to find the re-weighting coefficients $c_1, c_2, ...$, though, we would need to compute statistics across the agent's entire experience. This would end up being far messier than the TD update we saw above.
-    </p>
-
-    <p>
-      Another way to think about this problem is that, if you want to re-weight paths where they intersect, you need to merge them first. Since Monte Carlo doesn't merge paths, it can't re-weight them as easily.
+      <b>Re-weighting paths with Monte Carlo.</b> At this point, a natural question is: Could we accomplish the same re-weighting effect with Monte Carlo? We could, but it would be messier. We would need to re-weight the agent's experiences as a whole. By working at intersections, TD learning re-weights individual transitions instead of episodes as a whole. In practice, this makes TD methods much better for off-policy learning.
     </p>
 
 
@@ -1123,17 +1128,13 @@
 
 
     <h2>Conclusion</h2>
+
     <p>
-      An RL agent can improve its policy by looking at separate episodes of experience one at a time. But this is not the best way to improve a policy because it discards information about how separate episodes overlap. The paths perspective is meant to emphasize this second source of information. Considering experience as a whole helps us do value estimation that is more efficient (TD learning), possible off-policy (e.g. $Q$-learning), and generalize across nearby states (function approximation).
+      In this article we have introduced a new way to think about TD learning. It helps us see why TD learning can be beneficial, why it can be effective for off-policy learning, and why there can be challenges in combining TD learning with function approximators.
     </p>
 
     <p>
-      We hope the paths perspective makes it easier to understand the problem of value estimation. Perhaps these intuitions can even guide better approaches to value estimation in the future.
-    </p>
-
-    <h2>Playground</h2>
-    <p>
-      We encourage you to verify -- and build upon -- the intuitions outlined in this article using the playground below. Try watching value estimates improve with experience or comparing Monte Carlo to one of the TD value estimators.
+      We encourage you to verify -- and build upon -- the intuitions outlined in this article using the playground below.
     </p>
 
     <div id="playground"></div>
