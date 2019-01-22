@@ -67,7 +67,7 @@ GridWorld.Env = function Env(config) {
       .domain([-2, 0, 2])
       .range([ "#AA1E00", "#CCC", "#001EAA"]);
 
-    this.C = r => d3.rgb(C(r)).darker();
+    this.C = r => d3.rgb(C(r));
     this.goal_color = C;
     //r => d3.rgb(C(r)).darker();
 

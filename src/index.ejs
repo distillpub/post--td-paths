@@ -695,7 +695,7 @@
     </p>
 
     <p>
-      <b>Off-policy value estimation.</b> We can push this idea even further. Instead of weighting Q-values by the true policy distribution, we can instead weight them by an arbitrary policy $\pi^{off}$
+      <b>Off-policy value learning.</b> We can push this idea even further. Instead of weighting Q-values by the true policy distribution, we can weight them by an arbitrary policy, $\pi^{off}$:
     </p>
 
     <style>
@@ -705,18 +705,18 @@
         grid-template-columns: .4fr 1fr;
         grid-template-rows: auto auto;
         grid-auto-flow: row;
+        grid-column-gap: 30px;
       }
     </style>
     <figure id="off-policy" class="l-body">
       <div class="figcaption">
-        <b>Off-policy value learning</b> weights Q values by an arbitrary policy.
+        <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
       </div>
       <img src="figures/off-policy.svg"/>
     </figure>
 
     <p>
-      With this slight modification, we can estimate value under any policy we like. We can also see that Expected Sarsa is just a special case of off-policy learning where the "off" policy is the true policy.
-      We can even think of regular Sarsa as a type of off policy learning where the weighting is determined by $a_{t+1}$.
+      This slight modification lets us estimate value under and policy we like. In fact, it's interesting to think about Expected Sarsa as a special case that uses off-policy learning for on-policy estimation.
     </p>
 
     <p>
@@ -891,7 +891,7 @@
     </p>
 
     <p>
-      <b>Q-learning.</b>There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating value under an optimal one. For these cases, we use a version of off-policy learning called Q-learning.
+      <b>Q-learning.</b> There are many cases where an agent needs to collect experience under a sub-optimal policy while estimating value under an optimal one. For these cases, we use a version of off-policy learning called Q-learning.
     </p>
 
     <style>
@@ -915,20 +915,20 @@
    </p>
 
     <p>
-      <b>Double Q-Learning.</b> There is a problem with Q-learning though: it gives biased value estimates. Consider the following example:
+      <b>Double Q-Learning.</b> The problem with Q-learning is that it gives biased value estimates. More specifically, it is over-optimistic in the presence of noisy rewards:
     </p>
 
     <p>
-      You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
+      Imagine you go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
     </p>
 
     <p>
       Sometimes -- as in this casino example -- the largest Q-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
-      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. This method of reducing bias is called double Q-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. We call this approach double Q-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
     <p>
-      <b>Putting everything together. </b> It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
+      <b>Putting it together. </b> It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
     </p>
 
     <style>
@@ -956,6 +956,11 @@
         <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's values.
       </div>
       <img src="figures/expected-sarsa.svg"/>
+
+      <div class="figcaption">
+        <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
+      </div>
+      <img src="figures/off-policy.svg"/>
       <div class="figcaption">
         <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
       </div>
@@ -1152,145 +1157,6 @@
   <p>
     People to thank (living list): Google AI Residency Program, Shan Carter, Ludwig Schubert, Cassandra Xia. Some correspondence with John Schulman and Dale Schuurmans.
   </p>
-
-  <h3 id="variance-analysis-appendix">Variance Analysis</h3>
-
-    <p>
-      This section shows a quick derivation of the variance equations presented in the <i>Paths Perspective</i> section. As a broad overview, we will start with the expanded update rules we wrote down in the <i>Beating Monte Carlo</i> section and analyze the variance of each term. Then, using the fact that they are averages over one of more updates, we will analyze the variance of the estimates.
-    </p>
-
-    <p>
-      Let's start with Monte Carlo. First, we will introduce a new piece of notation, <d-math>T(s)</d-math>, which counts the number of trajectories that pass through state <d-math>s</d-math>.
-    </p>
-
-    <div class="eq-grid" style="grid-gap: 8px;">
-
-      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:140px;">MC update</figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>=~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>~r_t</d-math></div>
-      <div style="grid-row: 2; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma r'_{t+1}</d-math></div>
-      <div style="grid-row: 2; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 r''_{t+2}</d-math></div>
-      <div style="grid-row: 2; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-
-      <figcaption style="grid-row: 4; grid-column: 1/5; max-width:140px;">MC update variance</figcaption>
-
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
-      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
-      <div style="grid-row: 5; grid-column: 5;"><d-math>~1</d-math></div>
-      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 9;"><d-math>\gamma</d-math></div>
-      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 13;"><d-math>\gamma^2</d-math></div>
-      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
-
-      <figcaption style="grid-row: 7; grid-column: 1/5; max-width:140px;">MC variance</figcaption>
-
-      <div style="grid-row: 8; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-      <div style="grid-row: 8; grid-column: 3;"><d-math>\propto~</d-math></div>
-      <div style="grid-row: 8; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 8; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 8; grid-column: 9;"><d-math> \frac{\gamma}{T(s_t)}</d-math></div>
-      <div style="grid-row: 8; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 8; grid-column: 13;"><d-math>\frac{\gamma^2 }{T(s_t)}</d-math></div>
-      <div style="grid-row: 8; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 8; grid-column: 17;"><d-math>...</d-math></div>
-
-    </div>
-
-    <p>
-      Now let's do the same exact thing for TD learning.
-    </p>
-
-    <div class="eq-grid" style="grid-gap: 8px;">
-
-      <figcaption style="grid-row: 1; grid-column: 1/5; max-width:140px;">TD update</figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>U(s_t)~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>=~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>~r_t</d-math></div>
-      <div style="grid-row: 2; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} [ r'_{t+1} ]</d-math></div>
-      <div style="grid-row: 2; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{EE}} [ r''_{t+2} ]</d-math></div>
-      <div style="grid-row: 2; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-
-      <figcaption style="grid-row: 4; grid-column: 1/5; max-width:140px;">TD update variance</figcaption>
-
-      <div style="grid-row: 5; grid-column: 1;"><d-math>Var[ U(s_t)]~</d-math></div>
-      <div style="grid-row: 5; grid-column: 3;"><d-math>\propto~</d-math></div>
-      <div style="grid-row: 5; grid-column: 5;"><d-math>~1</d-math></div>
-      <div style="grid-row: 5; grid-column: 7;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 9;"><d-math>\frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
-      <div style="grid-row: 5; grid-column: 11;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 13;"><d-math>\frac{\gamma^2}{ \mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
-      <div style="grid-row: 5; grid-column: 15;"><d-math>+</d-math></div>
-      <div style="grid-row: 5; grid-column: 17;"><d-math>...</d-math></div>
-
-      <figcaption style="grid-row: 7; grid-column: 9/11; font-size:12px; max-width:140px;">(no change)</figcaption>
-      <figcaption style="grid-row: 7; grid-column: 13/15; font-size:12px; max-width:140px;">(no change)</figcaption>
-
-      <figcaption style="grid-row: 8; grid-column: 1/5; max-width:140px;">TD variance</figcaption>
-
-      <div style="grid-row: 9; grid-column: 1;"><d-math>Var[ V(s_t)]~~</d-math></div>
-      <div style="grid-row: 9; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 9; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 9; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 9; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ]} </d-math></div>
-      <div style="grid-row: 9; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 9; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
-      <div style="grid-row: 9; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 9; grid-column: 17;"><d-math>...</d-math></div>
-
-    </div>
-
-
-    <p>
-      If we rewrite the third line of the Monte Carlo analysis alongside the third line of the TD analysis, we can get the same expression that we wrote down at the end of the <i>Paths Perspective</i> section:
-    </p>
-
-    <div class="eq-grid" style="grid-gap: 8px;">
-
-      <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;">MC variance</figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 2; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 9;"><d-math>~\frac{\gamma}{T(s_t)}</d-math></div>
-      <div style="grid-row: 2; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 13;"><d-math>~~\frac{\gamma^2}{T(s_t)}</d-math></div>
-      <div style="grid-row: 2; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-
-
-      <figcaption style="grid-row: 4; grid-column: 5;"><d-math>~~~~=</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 9;"><d-math>~~~~~~~~\geq</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 13;"><d-math>~~~~~~~~~\geq</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 17;"><d-math>\geq</d-math></figcaption>
-
-      <figcaption style="grid-row: 5; grid-column: 0; max-width:140px;">TD variance</figcaption>
-
-      <div style="grid-row: 6; grid-column: 1;"><d-math>Var[V(s_t)]~~</d-math></div>
-      <div style="grid-row: 6; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 6; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 6; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 6; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
-      <div style="grid-row: 6; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 6; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{E}} \mathop{\mathbb{E}} [T(s''_{t+2})]}</d-math></div>
-      <div style="grid-row: 6; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 6; grid-column: 17;"><d-math>...</d-math></div>
-    </div>
-
-    <p>
-      The next step is to note the 1:1 correspondence of terms in the two sums. For all <d-math>t' > t</d-math>we can say that <d-math>\mathop{\mathbb{E}} [T(s_{t'})] \geq T(s_{t'}) </d-math>. This means that the variance of the TD estimate will be equal or lower than the Monte Carlo estimate.
-    </p>
 
 
   <d-footnote-list></d-footnote-list>
