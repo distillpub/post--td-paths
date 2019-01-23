@@ -24,7 +24,9 @@
   var X = d3.scale.linear().domain([0, grid_size]).range([0, width]);
   var Y = d3.scale.linear().domain([0, grid_size]).range([0, height]);
   var S = d3.scale.linear().domain([0, grid_size]).range([0, width]);
-  var Qscale = d3.scale.linear().domain([0, 1]).range(["#aaa", "#22f"]);
+  var Qscale = d3.scale.linear()
+      .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
+      .range(['#8a181a','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#2a2d7c']);
   var Pscale = d3.scale.linear().domain([0, 1]).range(["#d8d0d0", "#000"]);
 
   var line = d3.svg.line().x(d => X(d[0])).y(d => Y(d[1]));
@@ -82,11 +84,11 @@
         );
   }
 
-  Vg = cell_enter.append("g").attr("class", "V").style("display", "none")
+  Vg = cell_enter.append("g").attr("class", "V").style("display", "")
       .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")");
   Vg.append("circle").attr("r", S(0.3));
 
-  Qg = cell_enter.append("g").attr("class", "Q")
+  Qg = cell_enter.append("g").attr("class", "Q").style("display", "none")
       .attr("transform", "translate("+X(0.475)+","+Y(0.475)+")")
       .call(add_triangles);
 
@@ -128,18 +130,34 @@
   agent_layer = grid.append("g");
 
   goal = grid.append("rect").attr("class", "goal")
-      .attr("width", S(0.85))
-      .attr("height", S(0.85))
+      .attr("width", S(0.95))
+      .attr("height", S(0.95))
       .attr("data-x", 3)
       .attr("data-y", 0)
-      .attr("transform", d => "translate(" + X(3+0.05) + "," + Y(0+0.05) + ")" );
+      .attr("transform", d => "translate(" + X(3+0.0) + "," + Y(0+0.0) + ")" );
+
+  goal_label = grid.append("text")
+      .attr("transform", d => {
+        return "translate(" + X(3.22) + "," + Y(0.6) + ")";
+      })
+      .style("fill", '#CAC9CC')
+      .style("font", 'bold 30px sans-serif')
+      .text("+2");
 
   cliff = grid.append("rect").attr("class", "cliff")
-      .attr("width", S(0.85))
-      .attr("height", S(0.85))
+      .attr("width", S(0.95))
+      .attr("height", S(4 + 0.95))
       .attr("data-x", 4)
-      .attr("data-y", 1)
-      .attr("transform", d => "translate(" + X(4+0.05) + "," + Y(1+0.05) + ")" );
+      .attr("data-y", 0)
+      .attr("transform", d => "translate(" + X(4) + "," + Y(0) + ")" );
+
+  cliff_label = grid.append("text")
+      .attr("transform", d => {
+        return "translate(" + X(4.26) + "," + Y(2.6) + ")";
+      })
+      .style("fill", '#CAC9CC')
+      .style("font", 'bold 30px sans-serif')
+      .text("-1");
 
   cell.exit().remove();
 
@@ -147,8 +165,8 @@
   // USER INTERFACE
   //================
 
-  var epsilon=0.2;
-  var discount=0.6;
+  var epsilon = 0.5;
+  var discount = 0.8;
 
   var policy_div = outer.append("div")
     .attr("class", "control-panel")
@@ -182,18 +200,19 @@
       .text("Add an agent")
       .on("click", () => run_episode(epsilon_greedy_policy) )
       .style("position", "absolute")
-      // .style("left", "90px")
       .style("top", "90px")
       .style("width", "100%")
 
-  policy_div.append("input")
+      // min="0" max="1" step="0.01" ticks="10" style="width: 100%;
+
+  var slider = policy_div.append("d-slider")
     .attr("type", "range")
     .attr("min", 0)
-    .attr("max", 1)
-    .attr("step", 0.01)
-    .on("mousemove", function () {epsilon=this.value; display(); })
+    .attr("max", 100)
+    .attr("step", 0.5)
+    .attr("value", epsilon*100)
+    .on("mousemove", function () {epsilon=this.value/100; display(); })
     .style("position", "absolute")
-    // .style("left", "30px")
     .style("width", "100%")
     .style("top", "40px")
 
@@ -201,8 +220,6 @@
       .attr("class", "control-panel")
       .style("top", "160px")
       .style("left", (margin.left)+"px");
-      // .style("padding", "10px");
-      // .style("width", "260px");
 
 
   learning_div.append("h2")
@@ -216,7 +233,8 @@
                     .attr("size", "4");
   vis_select.append("option")
     .attr("value", "MC")
-    .text("Monte Carlo");
+    .text("Monte Carlo")
+    .attr("selected", "selected");
   vis_select.append("option")
     .attr("value", "SARSA")
     .text("Sarsa");
@@ -225,8 +243,7 @@
     .text("Expected Sarsa");
   vis_select.append("option")
     .attr("value", "Q")
-    .text("Q-Learning")
-    .attr("selected", "selected");
+    .text("Q-Learning");
   vis_select.on("change", function() {
     if (this.value == "MC") {
       learning_algorithm = update_Q_MC;
@@ -240,20 +257,16 @@
     run_update();
   });
 
+
+
   function run_update() {
     _.range(50).forEach(() => learning_algorithm(episode_histories));
   }
-
-  // learning_div.append("button")
-  //     .text("Update Q")
-  //     .on("click", run_update);
 
   var visualize_div = outer.append("div")
       .attr("class", "control-panel")
       .style("top", "288px")
       .style("left", (margin.left)+"px");
-      // .style("padding", "10px");
-      // .style("width", "260px");
 
   visualize_div.append("h2")
     .style("margin-top", "0px")
@@ -265,9 +278,8 @@
                       .style("width", "100%")
                       .attr("size", "3");
   vis_select.append("option").attr("value", "policy").text("Policy")
-  vis_select.append("option").attr("value", "Q").text("Q(s,a)")
-    .attr("selected", "selected")
-  vis_select.append("option").attr("value", "V").text("V(s)")
+  vis_select.append("option").attr("value", "Q").text("Q(s,a)");
+  vis_select.append("option").attr("value", "V").text("V(s)").attr("selected", "selected");
   vis_select.on("change", function() {
     if (this.value == "policy") {
       Pg.style("display", "");
@@ -297,7 +309,7 @@
     function random_agent_position(){
       var x = randInt(grid_size), y = randInt(grid_size);
       if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y")) ||
-          x == JSON.parse(cliff.attr("data-x")) && y == JSON.parse(cliff.attr("data-y"))) {
+          x == JSON.parse(cliff.attr("data-x")) && y in [0,1,2,3,4]) {
         return random_agent_position();
       }
       return [x,y];
@@ -326,8 +338,8 @@
             .remove();
         goal.transition(0.4*T).delay(0.4*T).style("fill", "#ccf");
         goal.transition(0.1*T).delay(0.8*T).style("fill", "")
-        return {reward: 1, end: true, state: ""};
-      } else if (x2 == cliff.attr("data-x") && y2 == cliff.attr("data-y")) {
+        return {reward: 2, end: true, state: ""};
+      } else if (x2 == cliff.attr("data-x") && y2 in [0,1,2,3,4]) {
         agent
           .attr("data-x", "")
           .attr("data-y", "")
@@ -519,7 +531,7 @@
     display()
   }
 
-  var learning_algorithm = update_Q_Q;
+  var learning_algorithm = update_Q_MC;
 
   display();
   run_episode(epsilon_greedy_policy);

@@ -4,15 +4,15 @@
 #playground .Q .triangle {
 }
 #playground .goal {
-  fill: #44a;
+  fill: #2d307b;
 }
 #playground .cliff {
-  fill: #a44;
+  fill: #bd5f35;
 }
 #playground .control-panel {
   position: absolute;
   /*background-color: #efe7e7;*/
-  border-radius: 8px;
+  border-radius: 0px;
   width: 170px;
 }
 #playground .control-panel h2 {
