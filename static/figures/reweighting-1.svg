@@ -11,25 +11,26 @@
 
       .cls-3, .cls-5 {
         fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
         stroke-width: 10px;
       }
 
       .cls-3 {
-        stroke: #bb7566;
+        stroke: #bd5f36;
+        stroke-miterlimit: 10;
       }
 
       .cls-4 {
-        fill: #bb7566;
+        fill: #bd5f36;
       }
 
       .cls-5 {
-        stroke: #263b96;
+        stroke: #2a2d7c;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       .cls-6 {
-        fill: #263b96;
+        fill: #2a2d7c;
       }
     </style>
   </defs>
@@ -48,11 +49,11 @@
   <circle class="cls-2" cx="177.13703" cy="-20.66641" r="31.84452"/>
   <circle class="cls-2" cx="177.13703" cy="84.87616" r="31.84452"/>
   <g>
-    <path class="cls-3" d="M130.82,84.219H103A32.17578,32.17578,0,0,0,70.8056,116.41336v32.14685"/>
+    <path class="cls-3" d="M130.82,84.219H103.00017a32.17585,32.17585,0,0,0-32.19458,32.19434v32.14688"/>
     <polygon class="cls-4" points="120.147 70.147 126.126 84.219 120.147 98.291 153.505 84.219 120.147 70.147"/>
   </g>
   <g>
-    <path class="cls-5" d="M70.95963,23.2012V52.5206A31.8483,31.8483,0,0,1,39.093,84.38718H5.67972"/>
-    <polygon class="cls-6" points="56.888 33.874 70.96 27.896 85.032 33.874 70.96 0.516 56.888 33.874"/>
+    <path class="cls-5" d="M70.95964,23.20118v29.3194a31.84836,31.84836,0,0,1-31.8667,31.86661H5.67961"/>
+    <polygon class="cls-6" points="56.888 33.874 70.96 27.896 85.031 33.874 70.96 0.516 56.888 33.874"/>
   </g>
 </svg>

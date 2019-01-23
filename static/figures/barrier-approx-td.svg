@@ -18,7 +18,7 @@
       }
 
       .cls-5 {
-        fill: #aa1e22;
+        fill: #8a181a;
       }
 
       .cls-6 {
@@ -35,7 +35,7 @@
       }
 
       .cls-8 {
-        stroke: #9ca3c4;
+        stroke: #8191c8;
       }
 
       .cls-11, .cls-8 {
@@ -43,7 +43,7 @@
       }
 
       .cls-9 {
-        fill: #9ca3c4;
+        fill: #8191c8;
       }
 
       .cls-10 {
@@ -53,7 +53,7 @@
       }
 
       .cls-11 {
-        stroke: #aa1e22;
+        stroke: #8a181a;
       }
 
       .cls-12 {
@@ -65,21 +65,10 @@
       }
 
       .cls-14 {
-        fill: #a92323;
-      }
-
-      .cls-15, .cls-16 {
         font-size: 6.65044px;
+        fill: #d1d3d4;
         font-family: Arial-BoldMT, Arial;
         font-weight: 700;
-      }
-
-      .cls-15 {
-        fill: #e6e7e8;
-      }
-
-      .cls-16 {
-        fill: #d1d3d4;
       }
     </style>
   </defs>
@@ -460,7 +449,7 @@
   <circle class="cls-13" cx="147.18818" cy="57.44545" r="3.82915"/>
   <circle class="cls-13" cx="44.65764" cy="57.34277" r="3.82915"/>
   <circle class="cls-13" cx="44.65362" cy="121.44193" r="3.82915"/>
-  <rect class="cls-14" x="166.86786" y="0.10848" width="11.8813" height="178.41872"/>
-  <text class="cls-15" transform="translate(156.03735 7.39901)">+1</text>
-  <text class="cls-16" transform="translate(167.61645 84.49569)">-2</text>
+  <rect class="cls-5" x="166.86786" y="0.10848" width="11.8813" height="178.41872"/>
+  <text class="cls-14" transform="translate(156.03735 7.39901)">+1</text>
+  <text class="cls-14" transform="translate(167.61645 84.49569)">-2</text>
 </svg>

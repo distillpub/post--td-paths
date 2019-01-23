@@ -11,17 +11,17 @@
 
       .cls-3 {
         fill: none;
-        stroke: #bb7566;
+        stroke: #bd5f36;
         stroke-miterlimit: 10;
         stroke-width: 4px;
       }
 
       .cls-4 {
-        fill: #bb7566;
+        fill: #bd5f36;
       }
 
       .cls-5 {
-        fill: #263b96;
+        fill: #2a2d7c;
       }
 
       .cls-6 {

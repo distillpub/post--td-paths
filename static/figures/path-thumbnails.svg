@@ -2,7 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #263b96;
+        fill: #2a2d7c;
       }
 
       .cls-2 {
@@ -14,22 +14,23 @@
       }
 
       .cls-4 {
-        fill: #bb7566;
+        fill: #bd5f36;
       }
 
       .cls-5, .cls-6 {
         fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
         stroke-width: 4px;
       }
 
       .cls-5 {
-        stroke: #263b96;
+        stroke: #2a2d7c;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
       .cls-6 {
-        stroke: #bb7566;
+        stroke: #bd5f36;
+        stroke-miterlimit: 10;
       }
 
       .cls-7 {

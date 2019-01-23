@@ -11,24 +11,20 @@
 
       .cls-3 {
         fill: none;
-        stroke: #2c3592;
+        stroke: #2a2d7c;
         stroke-miterlimit: 10;
         stroke-width: 4px;
       }
 
       .cls-4 {
-        fill: #263b96;
+        fill: #2a2d7c;
       }
 
       .cls-5 {
-        fill: #2c3592;
+        fill: #bd5f36;
       }
 
       .cls-6 {
-        fill: #bb7566;
-      }
-
-      .cls-7 {
         font-size: 11px;
         fill: #d1d3d4;
         font-family: MyriadPro-Semibold, Myriad Pro;
@@ -67,20 +63,20 @@
   <line class="cls-3" x1="66.93489" y1="12.75714" x2="66.7733" y2="39.72617"/>
   <line class="cls-3" x1="93.40843" y1="12.71919" x2="66.93489" y2="12.75714"/>
   <circle class="cls-4" cx="66.93489" cy="12.75714" r="8.06084"/>
-  <circle class="cls-5" cx="39.51058" cy="39.72617" r="8.06084"/>
-  <circle class="cls-5" cx="66.7733" cy="39.72617" r="8.06084"/>
+  <circle class="cls-4" cx="39.51058" cy="39.72617" r="8.06084"/>
+  <circle class="cls-4" cx="66.7733" cy="39.72617" r="8.06084"/>
   <circle class="cls-2" cx="93.38282" cy="39.66392" r="8.06084"/>
-  <circle class="cls-5" cx="12.57103" cy="66.81498" r="8.06084"/>
-  <circle class="cls-5" cx="39.51058" cy="66.85293" r="8.06084"/>
+  <circle class="cls-4" cx="12.57103" cy="66.81498" r="8.06084"/>
+  <circle class="cls-4" cx="39.51058" cy="66.85293" r="8.06084"/>
   <circle class="cls-2" cx="66.7733" cy="66.85293" r="8.06084"/>
   <circle class="cls-2" cx="39.51058" cy="93.43758" r="8.06084"/>
   <circle class="cls-2" cx="12.57103" cy="120.65784" r="8.06084"/>
   <circle class="cls-2" cx="39.51058" cy="121.22768" r="8.06084"/>
-  <rect class="cls-6" x="108.20147" y="0.95828" width="25.01161" height="131.72706"/>
+  <rect class="cls-5" x="108.20147" y="0.95828" width="25.01161" height="131.72706"/>
   <circle class="cls-2" cx="93.38282" cy="93.50679" r="8.06084"/>
   <circle class="cls-2" cx="66.7733" cy="93.56903" r="8.06084"/>
   <circle class="cls-2" cx="66.7733" cy="120.69579" r="8.06084"/>
   <circle class="cls-2" cx="93.38282" cy="120.63355" r="8.06084"/>
-  <rect class="cls-5" x="82.50538" y="1.77436" width="21.75487" height="21.75487"/>
-  <text class="cls-7" transform="translate(85.37296 15.11989)">+2</text>
+  <rect class="cls-4" x="82.50538" y="1.77436" width="21.75487" height="21.75487"/>
+  <text class="cls-6" transform="translate(85.37296 15.11989)">+2</text>
 </svg>

@@ -6,9 +6,13 @@
 
 	// Setup
 	let root = d3.select("#reweighting-full");
-	var C = d3.scale.linear()
-      .domain([-2, 0, 2])
-      .range([ "#AA1E00", "#CCC", "#001EAA"]);
+	// var C = d3.scale.linear()
+ //      .domain([-2, 0, 2])
+ //      .range([ "#AA1E00", "#CCC", "#001EAA"]);
+
+    var C = d3.scale.linear()
+      .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
+      .range(['#8a181a','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#2a2d7c']);
 
 	let svg = root.select("svg");
 	let slider = d3.select("#q-value-slider")

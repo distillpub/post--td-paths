@@ -76,7 +76,7 @@
   }
 </style>
 
-<div id="scale"></div>
+<!-- <div id="scale"></div>
 <script>
 
 // let color = d3.scale.linear()
@@ -90,7 +90,8 @@
 
 let color = d3.scale.linear()
     .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
-    .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#96bbd2','#6e9ec4','#4682b4']);
+    .range(['#8b0000','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#00008b']);
+    // .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#96bbd2','#6e9ec4','#4682b4']);
     // .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#78c196','#47a088','#008080']);
 
 let container = d3.select("#scale");
@@ -104,7 +105,7 @@ container.selectAll("div")
   .style("height", "40px")
   .style("background", d => color(d));
 
-</script>
+</script> -->
 
 <d-title>
   <h1 style="grid-column:page;">The Paths Perspective on Value Learning</h1>
@@ -779,7 +780,7 @@ container.selectAll("div")
 
       <style>
         #reweighting-full .cls-1 {
-          fill: #263b96;
+          fill: #2d307b;
         }
 
         #reweighting-full .cls-2 {
@@ -791,30 +792,34 @@ container.selectAll("div")
         }
 
         #reweighting-full .cls-4 {
-          fill: #bb7566;
+          fill: #bd5f35;
         }
 
         #reweighting-full .cls-5, .cls-6, .cls-7 {
           fill: none;
-          stroke-linecap: round;
-          stroke-linejoin: round;
           stroke-width: 10px;
         }
 
         #reweighting-full .cls-5 {
-          stroke: #bb7566;
+          stroke: #bd5f35;
+        }
+
+        #reweighting-full .cls-5, .cls-7 {
+          stroke-miterlimit: 10;
         }
 
         #reweighting-full .cls-6 {
-          stroke: #263b96;
+          stroke: #2d307b;
+          stroke-linecap: round;
+          stroke-linejoin: round;
         }
 
         #reweighting-full .cls-7 {
-          stroke: #9ba2c4;
+          stroke: #8191c9;
         }
 
         #reweighting-full .cls-8 {
-          fill: #9ba2c4;
+          fill: #8191c9;
         }
 
         #reweighting-full .cls-9 {
@@ -823,7 +828,6 @@ container.selectAll("div")
           font-family: Arial-BoldMT, Arial;
           font-weight: 700;
         }
-
       </style>
 
       <div id="reweighting-full">
@@ -887,9 +891,9 @@ container.selectAll("div")
       </svg>
   </div>
       <div class="figcaption">
-        <div>q value: <span id="q-value-label"></span></div>
+        <div>Weight of blue path: <span id="q-value-label"></span></div>
         <d-slider id="q-value-slider" min="0" max="1" step="0.01" ticks="10" style="width: 100%;"></d-slider>
-        Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
+        Whenever we re-weight Q-values, we also re-weight the paths that pass through them. 
       </div>
   </figure>
   <script src="vis/reweighting.js"></script>

@@ -10,23 +10,23 @@
       }
 
       .cls-3 {
-        fill: #9ca3c4;
+        fill: #8191c8;
       }
 
       .cls-4 {
-        fill: #a92323;
+        fill: #8a181a;
       }
 
-      .cls-19, .cls-5, .cls-6, .cls-7 {
+      .cls-5, .cls-6, .cls-7 {
         fill: none;
         stroke-miterlimit: 10;
       }
 
       .cls-5 {
-        stroke: #9ca3c4;
+        stroke: #8191c8;
       }
 
-      .cls-19, .cls-5, .cls-7 {
+      .cls-5, .cls-7 {
         stroke-width: 2px;
       }
 
@@ -37,7 +37,7 @@
       }
 
       .cls-7 {
-        stroke: #a92323;
+        stroke: #8a181a;
       }
 
       .cls-8 {
@@ -52,7 +52,7 @@
         opacity: 0.53;
       }
 
-      .cls-11, .cls-18 {
+      .cls-11, .cls-17 {
         fill: #cdd1e2;
       }
 
@@ -60,7 +60,7 @@
         opacity: 0.81;
       }
 
-      .cls-13, .cls-17 {
+      .cls-13, .cls-16 {
         fill: #aab1d3;
       }
 
@@ -73,51 +73,36 @@
       }
 
       .cls-16 {
-        fill: #aa1e22;
-      }
-
-      .cls-17 {
         opacity: 0.55;
       }
 
-      .cls-18 {
+      .cls-17 {
         opacity: 0.52;
       }
 
-      .cls-19 {
-        stroke: #aa1e22;
-      }
-
-      .cls-20 {
+      .cls-18 {
         font-size: 17px;
         fill: #58595b;
         font-family: ArialMT, Arial;
       }
 
-      .cls-21 {
+      .cls-19 {
         letter-spacing: -0.11087em;
       }
 
-      .cls-22 {
+      .cls-20 {
         letter-spacing: -0.01804em;
       }
 
-      .cls-23 {
+      .cls-21 {
         letter-spacing: -0.0181em;
       }
 
-      .cls-24, .cls-25 {
+      .cls-22 {
         font-size: 6.65044px;
+        fill: #d1d3d4;
         font-family: Arial-BoldMT, Arial;
         font-weight: 700;
-      }
-
-      .cls-24 {
-        fill: #e6e7e8;
-      }
-
-      .cls-25 {
-        fill: #d1d3d4;
       }
     </style>
   </defs>
@@ -1485,21 +1470,21 @@
   <circle class="cls-9" cx="429.12736" cy="266.48924" r="3.82915"/>
   <circle class="cls-9" cx="441.76771" cy="266.45967" r="3.82915"/>
   <g>
-    <circle class="cls-16" cx="416.17635" cy="304.99422" r="3.82915"/>
-    <circle class="cls-16" cx="429.12699" cy="304.99422" r="3.82915"/>
-    <circle class="cls-16" cx="441.76735" cy="304.96466" r="3.82915"/>
-    <circle class="cls-16" cx="377.78533" cy="279.32906" r="3.82915"/>
-    <circle class="cls-16" cx="390.58245" cy="279.59975" r="3.82915"/>
-    <circle class="cls-16" cx="352.19107" cy="279.30084" r="3.82915"/>
-    <circle class="cls-16" cx="364.9882" cy="279.57153" r="3.82915"/>
-    <circle class="cls-16" cx="403.37922" cy="292.09013" r="3.82915"/>
-    <circle class="cls-16" cx="416.17635" cy="292.10816" r="3.82915"/>
-    <circle class="cls-16" cx="390.58209" cy="292.07994" r="3.82915"/>
-    <circle class="cls-16" cx="352.19071" cy="292.0337" r="3.82915"/>
-    <circle class="cls-16" cx="339.39358" cy="292.02351" r="3.82915"/>
-    <circle class="cls-16" cx="326.59645" cy="304.89154" r="3.82915"/>
-    <circle class="cls-16" cx="339.39358" cy="304.90957" r="3.82915"/>
-    <circle class="cls-16" cx="326.59645" cy="317.58253" r="3.82915"/>
+    <circle class="cls-4" cx="416.17635" cy="304.99422" r="3.82915"/>
+    <circle class="cls-4" cx="429.12699" cy="304.99422" r="3.82915"/>
+    <circle class="cls-4" cx="441.76735" cy="304.96466" r="3.82915"/>
+    <circle class="cls-4" cx="377.78533" cy="279.32906" r="3.82915"/>
+    <circle class="cls-4" cx="390.58245" cy="279.59975" r="3.82915"/>
+    <circle class="cls-4" cx="352.19107" cy="279.30084" r="3.82915"/>
+    <circle class="cls-4" cx="364.9882" cy="279.57153" r="3.82915"/>
+    <circle class="cls-4" cx="403.37922" cy="292.09013" r="3.82915"/>
+    <circle class="cls-4" cx="416.17635" cy="292.10816" r="3.82915"/>
+    <circle class="cls-4" cx="390.58209" cy="292.07994" r="3.82915"/>
+    <circle class="cls-4" cx="352.19071" cy="292.0337" r="3.82915"/>
+    <circle class="cls-4" cx="339.39358" cy="292.02351" r="3.82915"/>
+    <circle class="cls-4" cx="326.59645" cy="304.89154" r="3.82915"/>
+    <circle class="cls-4" cx="339.39358" cy="304.90957" r="3.82915"/>
+    <circle class="cls-4" cx="326.59645" cy="317.58253" r="3.82915"/>
   </g>
   <circle class="cls-2" cx="326.59243" cy="356.10465" r="3.82915"/>
   <circle class="cls-8" cx="301.07932" cy="227.98542" r="3.82915"/>
@@ -1507,16 +1492,16 @@
   <circle class="cls-8" cx="326.59243" cy="368.99071" r="3.82915"/>
   <circle class="cls-8" cx="326.59243" cy="381.6817" r="3.82915"/>
   <circle class="cls-8" cx="326.59243" cy="394.56776" r="3.82915"/>
-  <circle class="cls-17" cx="416.25347" cy="228.10106" r="3.82915"/>
-  <circle class="cls-17" cx="441.76771" cy="240.88263" r="3.82915"/>
-  <circle class="cls-18" cx="403.45634" cy="228.08303" r="3.82915"/>
-  <circle class="cls-17" cx="441.76771" cy="253.76869" r="3.82915"/>
+  <circle class="cls-16" cx="416.25347" cy="228.10106" r="3.82915"/>
+  <circle class="cls-16" cx="441.76771" cy="240.88263" r="3.82915"/>
+  <circle class="cls-17" cx="403.45634" cy="228.08303" r="3.82915"/>
+  <circle class="cls-16" cx="441.76771" cy="253.76869" r="3.82915"/>
   <circle class="cls-8" cx="377.86209" cy="228.05482" r="3.82915"/>
   <circle class="cls-9" cx="390.65921" cy="228.07284" r="3.82915"/>
   <polyline class="cls-5" points="300.998 381.669 300.998 291.993 288.205 291.993 288.205 253.683 313.8 253.683 313.8 240.815 352.191 240.815 352.191 253.724 364.988 253.724 364.988 266.37 377.785 266.37 390.582 266.37 390.582 253.77 416.177 253.77 416.177 240.912 429.127 240.912 429.127 228.101 441.763 228.101"/>
   <rect class="cls-3" x="436.61276" y="222.92887" width="10.33424" height="10.33424"/>
   <line class="cls-6" x1="448.80857" y1="272.88142" x2="307.83314" y2="272.75912"/>
-  <polyline class="cls-19" points="326.596 317.583 326.596 304.892 339.394 304.91 339.394 292.024 352.191 292.034 352.191 279.301 364.988 279.572 377.785 279.329 390.582 279.6 390.582 292.08 403.379 292.09 416.176 292.108 416.176 304.994 429.127 304.994 441.767 304.994 454.748 304.994"/>
+  <polyline class="cls-7" points="326.596 317.583 326.596 304.892 339.394 304.91 339.394 292.024 352.191 292.034 352.191 279.301 364.988 279.572 377.785 279.329 390.582 279.6 390.582 292.08 403.379 292.09 416.176 292.108 416.176 304.994 429.127 304.994 441.767 304.994 454.748 304.994"/>
   <circle class="cls-3" cx="429.20412" cy="228.10106" r="3.82915"/>
   <circle class="cls-3" cx="416.17671" cy="240.9122" r="3.82915"/>
   <circle class="cls-3" cx="429.12736" cy="240.9122" r="3.82915"/>
@@ -1620,20 +1605,20 @@
   <circle class="cls-15" cx="429.12736" cy="279.3753" r="3.82915"/>
   <circle class="cls-15" cx="326.59682" cy="279.27262" r="3.82915"/>
   <circle class="cls-15" cx="326.59279" cy="343.37179" r="3.82915"/>
-  <text class="cls-20" transform="translate(131.87205 13.138)">Monte Carlo</text>
-  <text class="cls-20" transform="translate(295.91111 13.07892)"><tspan class="cls-21">T</tspan><tspan x="8.5" y="0">emporal Di</tspan><tspan class="cls-22" x="90.69531" y="0">f</tspan><tspan x="95.11133" y="0">ference</tspan></text>
-  <text class="cls-20" transform="translate(17.71836 126.34754)"><tspan class="cls-21">T</tspan><tspan x="8.5" y="0">abular</tspan></text>
-  <text class="cls-20" transform="translate(-1.12636 303.95974)">Euclidean<tspan class="cls-23" x="5.99414" y="20.40039">A</tspan><tspan x="17.02539" y="20.40039">verager</tspan></text>
+  <text class="cls-18" transform="translate(131.87205 13.138)">Monte Carlo</text>
+  <text class="cls-18" transform="translate(295.91111 13.07892)"><tspan class="cls-19">T</tspan><tspan x="8.5" y="0">emporal Di</tspan><tspan class="cls-20" x="90.69531" y="0">f</tspan><tspan x="95.11133" y="0">ference</tspan></text>
+  <text class="cls-18" transform="translate(17.71836 126.34754)"><tspan class="cls-19">T</tspan><tspan x="8.5" y="0">abular</tspan></text>
+  <text class="cls-18" transform="translate(-1.12636 303.95974)">Euclidean<tspan class="cls-21" x="5.99414" y="20.40039">A</tspan><tspan x="17.02539" y="20.40039">verager</tspan></text>
   <rect class="cls-4" x="255.15961" y="29.34987" width="11.8813" height="178.41872"/>
   <rect class="cls-4" x="448.80703" y="29.2317" width="11.8813" height="178.41872"/>
   <rect class="cls-4" x="255.15961" y="222.02285" width="11.8813" height="178.41872"/>
   <rect class="cls-4" x="448.80703" y="222.03834" width="11.8813" height="178.41872"/>
-  <text class="cls-24" transform="translate(244.32969 36.63959)">+1</text>
-  <text class="cls-24" transform="translate(437.97691 36.52143)">+1</text>
-  <text class="cls-24" transform="translate(244.3292 229.31339)">+1</text>
-  <text class="cls-24" transform="translate(437.97642 229.32883)">+1</text>
-  <text class="cls-25" transform="translate(256.19785 113.7265)">-2</text>
-  <text class="cls-25" transform="translate(449.84507 113.60834)">-2</text>
-  <text class="cls-25" transform="translate(255.9083 306.41007)">-2</text>
-  <text class="cls-25" transform="translate(449.55552 306.42551)">-2</text>
+  <text class="cls-22" transform="translate(244.32969 36.63959)">+1</text>
+  <text class="cls-22" transform="translate(437.97691 36.52143)">+1</text>
+  <text class="cls-22" transform="translate(244.3292 229.31339)">+1</text>
+  <text class="cls-22" transform="translate(437.97642 229.32883)">+1</text>
+  <text class="cls-22" transform="translate(256.19785 113.7265)">-2</text>
+  <text class="cls-22" transform="translate(449.84507 113.60834)">-2</text>
+  <text class="cls-22" transform="translate(255.9083 306.41007)">-2</text>
+  <text class="cls-22" transform="translate(449.55552 306.42551)">-2</text>
 </svg>

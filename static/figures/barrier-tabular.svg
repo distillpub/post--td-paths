@@ -9,12 +9,12 @@
         fill: #cac9cc;
       }
 
-      .cls-3, .cls-6 {
-        fill: #9ca3c4;
+      .cls-3 {
+        fill: #8191c8;
       }
 
       .cls-4 {
-        fill: #aa1e22;
+        fill: #8a181a;
       }
 
       .cls-5, .cls-7, .cls-8 {
@@ -23,16 +23,17 @@
       }
 
       .cls-5 {
-        stroke: #9ca3c4;
+        stroke: #8191c8;
       }
 
       .cls-5, .cls-8 {
         stroke-width: 2px;
       }
 
-      .cls-10, .cls-6 {
+      .cls-6 {
         font-size: 6.65044px;
-        font-family: MyriadPro-Semibold, Myriad Pro;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
         font-weight: 700;
       }
 
@@ -43,15 +44,7 @@
       }
 
       .cls-8 {
-        stroke: #aa1e22;
-      }
-
-      .cls-9 {
-        fill: #a92323;
-      }
-
-      .cls-10 {
-        fill: #d1d3d4;
+        stroke: #8a181a;
       }
     </style>
   </defs>
@@ -424,9 +417,9 @@
   <circle class="cls-2" cx="5.96793" cy="172.57669" r="3.82915"/>
   <polyline class="cls-5" points="18.765 159.691 18.765 70.014 5.972 70.014 5.972 31.705 31.567 31.705 31.567 18.836 69.958 18.836 69.958 31.746 82.755 31.746 82.755 44.392 95.552 44.392 108.349 44.392 108.349 31.792 133.944 31.792 133.944 18.934 146.894 18.934 146.894 6.123 159.53 6.123"/>
   <rect class="cls-3" x="154.37964" y="0.95077" width="10.33424" height="10.33424"/>
-  <text class="cls-6" transform="translate(155.77089 7.35)">+1</text>
+  <text class="cls-6" transform="translate(155.74355 7.35)">+1</text>
   <line class="cls-7" x1="166.57545" y1="50.90331" x2="25.60003" y2="50.78102"/>
   <polyline class="cls-8" points="44.363 95.604 44.363 82.913 57.16 82.931 57.16 70.045 69.958 70.056 69.958 57.323 82.755 57.593 95.552 57.351 108.349 57.622 108.349 70.102 121.146 70.112 133.943 70.13 133.943 83.016 146.894 83.016 159.534 83.016 172.515 83.016"/>
-  <rect class="cls-9" x="166.57392" y="0.06023" width="11.8813" height="178.41872"/>
-  <text class="cls-10" transform="translate(167.73867 84.43691)">-2</text>
+  <rect class="cls-4" x="166.57392" y="0.06023" width="11.8813" height="178.41872"/>
+  <text class="cls-6" transform="translate(167.61171 84.43691)">-2</text>
 </svg>

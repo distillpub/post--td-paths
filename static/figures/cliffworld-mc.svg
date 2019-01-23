@@ -16,23 +16,23 @@
       }
 
       .cls-3 {
-        stroke: #263b96;
+        stroke: #2a2d7c;
       }
 
       .cls-4 {
-        stroke: #bb7566;
+        stroke: #bd5f36;
       }
 
       .cls-5 {
-        fill: #263b96;
+        fill: #2a2d7c;
       }
 
       .cls-6 {
-        fill: #9ca3c4;
+        fill: #8191c8;
       }
 
       .cls-7 {
-        fill: #bb7566;
+        fill: #bd5f36;
       }
 
       .cls-8 {

@@ -17,34 +17,34 @@
         fill: #bb7566;
       }
 
-      .cls-5 {
-        font-size: 24.25341px;
-        fill: #d1d3d4;
-        font-family: MyriadPro-Semibold, Myriad Pro;
-        font-weight: 700;
-      }
-
-      .cls-6, .cls-7, .cls-8 {
+      .cls-5, .cls-6, .cls-7 {
         fill: none;
         stroke-linecap: round;
         stroke-linejoin: round;
-        stroke-width: 7px;
+        stroke-width: 10px;
       }
 
-      .cls-6 {
+      .cls-5 {
         stroke: #bb7566;
       }
 
-      .cls-7 {
+      .cls-6 {
         stroke: #263b96;
       }
 
-      .cls-8 {
+      .cls-7 {
         stroke: #9ba2c4;
       }
 
-      .cls-9 {
+      .cls-8 {
         fill: #9ba2c4;
+      }
+
+      .cls-9 {
+        font-size: 24.25341px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
       }
     </style>
   </defs>
@@ -80,29 +80,29 @@
     <circle class="cls-3" cx="87.14964" cy="267.64814" r="17.77298"/>
     <circle class="cls-3" cx="205.93014" cy="266.33815" r="17.77298"/>
     <rect class="cls-4" x="238.60313" y="2.47146" width="55.147" height="290.43915"/>
-    <text class="cls-5" transform="translate(248.77732 96.99745)">-1</text>
     <circle class="cls-3" cx="27.68222" cy="87.35202" r="17.77298"/>
-    <text class="cls-5" transform="translate(188.26951 33.69667)">+2</text>
   </g>
   <g id="right-path">
-    <line class="cls-6" x1="147.26" y1="87.94907" x2="244.851" y2="87.94907"/>
+    <line class="cls-5" x1="147.26" y1="87.94907" x2="244.851" y2="87.94907"/>
   </g>
   <g id="up-path">
-    <polyline class="cls-7" points="147.26 87.949 147.26 26.856 186.377 26.856"/>
+    <polyline class="cls-6" points="147.26 87.949 147.26 26.856 186.377 26.856"/>
   </g>
   <g id="downstream">
-    <polyline class="cls-8" points="147.111 268.043 147.111 133.574 147.111 84.699"/>
-    <path class="cls-8" d="M27.75183,148.02255H69.62388a17.69918,17.69918,0,0,0,17.70937-17.70937l-.04514-24.72539a17.69919,17.69919,0,0,1,17.70937-17.70937l24.48954.07065h17.59692"/>
-    <circle class="cls-9" cx="27.75183" cy="147.67598" r="17.77298"/>
-    <circle class="cls-9" cx="87.14964" cy="147.75966" r="17.77298"/>
-    <circle class="cls-9" cx="147.26" cy="147.75966" r="17.77298"/>
-    <circle class="cls-9" cx="147.26" cy="206.6648" r="17.77298"/>
-    <circle class="cls-9" cx="147.26001" cy="266.47539" r="17.77299"/>
-    <circle class="cls-9" cx="147.26" cy="87.94907" r="17.77298"/>
-    <circle class="cls-9" cx="87.14964" cy="87.94907" r="17.77298"/>
+    <polyline class="cls-7" points="147.111 268.043 147.111 133.574 147.111 84.699"/>
+    <path class="cls-7" d="M27.75183,148.02255H69.62388a17.69918,17.69918,0,0,0,17.70937-17.70937l-.04514-24.72539a17.69919,17.69919,0,0,1,17.70937-17.70937l24.48954.07065h17.59692"/>
+    <circle class="cls-8" cx="27.75183" cy="147.67598" r="17.77298"/>
+    <circle class="cls-8" cx="87.14964" cy="147.75966" r="17.77298"/>
+    <circle class="cls-8" cx="147.26" cy="147.75966" r="17.77298"/>
+    <circle class="cls-8" cx="147.26" cy="206.6648" r="17.77298"/>
+    <circle class="cls-8" cx="147.26001" cy="266.47539" r="17.77299"/>
+    <circle class="cls-8" cx="147.26" cy="87.94907" r="17.77298"/>
+    <circle class="cls-8" cx="87.14964" cy="87.94907" r="17.77298"/>
   </g>
   <g id="foreground">
     <circle class="cls-4" cx="205.93014" cy="87.81183" r="17.77298"/>
     <circle class="cls-1" cx="147.61628" cy="28.48625" r="17.77298"/>
+    <text class="cls-9" transform="translate(188.17039 33.69667)">+2</text>
+    <text class="cls-9" transform="translate(248.31443 96.99745)">-1</text>
   </g>
 </svg>

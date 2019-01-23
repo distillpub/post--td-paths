@@ -64,11 +64,17 @@ GridWorld.Env = function Env(config) {
     this.S = S;
 
     var C = d3.scale.linear()
-      .domain([-2, 0, 2])
-      .range(["red", "grey", "blue"])
-      // .domain([-2, -1, 0, 1, 2])
-      // .range([ "#AA1E00", "orange", "#CCC", "#70A8DA", "#001EAA"])
-      .interpolate(d3.interpolateHcl);
+      .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
+      .range(['#8b0000','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#00008b'
+]);
+      // .range(['#8b0000','#a85949','#b99892','#d3d3d3','#8593bd','#4a52a5','#00008b']);
+
+    // var C = d3.scale.linear()
+    //   .domain([-2, 0, 2])
+    //   .range(["red", "grey", "blue"])
+    //   // .domain([-2, -1, 0, 1, 2])
+    //   // .range([ "#AA1E00", "orange", "#CCC", "#70A8DA", "#001EAA"])
+    //   .interpolate(d3.interpolateHcl);
 
     this.C = r => d3.rgb(C(r));
     this.goal_color = C;
