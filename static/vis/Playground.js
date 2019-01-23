@@ -144,35 +144,41 @@
   var policy_div = outer.append("div")
     .attr("class", "control-panel")
     .style("top", "20px")
-    .style("left", (width+margin.left+margin.right+20)+"px")
+    .style("left", (width+margin.left+margin.right+30)+"px")
     .append("div")
       .style("position", "relative")
-      .style("width", "260px")
-      .style("height", "100px")
+      // .style("width", "260px")
+      // .style("height", "100px")
       .style("margin", "0px")
-      .style("padding", "10px")
+      .style("display", "block")
+      // .style("padding", "10px")
 
   policy_div.append("h2")
     .style("margin-top", "0px")
     .text("Epsilon-greedy policy")
+    .style("padding-bottom", "8px")
+    .style("margin-bottom", "12px");
 
   policy_div.append("p").text("explore")
     .attr('class', 'label')
     .style("position", "absolute")
-    .style("left", "202px")
-    .style("top", "65px")
+    .style("right", "0px")
+    .style("top", "55px")
+    .style("font-size", "11px")
   policy_div.append("p").text("exploit")
     .attr('class', 'label')
     .style("position", "absolute")
-    .style("left", "10px")
-    .style("top", "65px")
+    .style("left", "0px")
+    .style("top", "55px")
+    .style("font-size", "11px")
 
   policy_div.append("button")
       .text("Run Episode")
       .on("click", () => run_episode(epsilon_greedy_policy) )
       .style("position", "absolute")
-      .style("left", "90px")
+      // .style("left", "90px")
       .style("top", "90px")
+      .style("width", "100%")
 
   policy_div.append("input")
     .attr("type", "range")
@@ -181,22 +187,27 @@
     .attr("step", 0.01)
     .on("mousemove", function () {epsilon=this.value; display(); })
     .style("position", "absolute")
-    .style("left", "30px")
-    .style("width", "200px")
-    .style("top", "50px")
+    // .style("left", "30px")
+    .style("width", "100%")
+    .style("top", "40px")
 
   var learning_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "150px")
-      .style("left", (width+margin.left+margin.right+20)+"px")
-      .style("padding", "10px")
-      .style("width", "260px");
+      .style("top", "160px")
+      .style("left", (width+margin.left+margin.right+30)+"px");
+      // .style("padding", "10px");
+      // .style("width", "260px");
 
 
   learning_div.append("h2")
     .style("margin-top", "0px")
     .text("Learning Algorithm")
-  var vis_select = learning_div.append("select");
+    .style("padding-bottom", "8px")
+    .style("margin-bottom", "12px");
+
+  var vis_select = learning_div.append("select")
+                    .style("width", "100%")
+                    .attr("size", "4");
   vis_select.append("option")
     .attr("value", "MC")
     .text("Monte Carlo");
@@ -227,22 +238,26 @@
     _.range(50).forEach(() => learning_algorithm(episode_histories));
   }
 
-  learning_div.append("button")
-      .text("Update Q")
-      .on("click", run_update);
+  // learning_div.append("button")
+  //     .text("Update Q")
+  //     .on("click", run_update);
 
   var visualize_div = outer.append("div")
       .attr("class", "control-panel")
-      .style("top", "307px")
-      .style("left", (width+margin.left+margin.right+20)+"px")
-      .style("padding", "10px")
-      .style("width", "260px");
+      .style("top", "288px")
+      .style("left", (width+margin.left+margin.right+30)+"px");
+      // .style("padding", "10px");
+      // .style("width", "260px");
 
   visualize_div.append("h2")
     .style("margin-top", "0px")
-    .text("Visualization");
+    .text("Visualization")
+    .style("padding-bottom", "8px")
+    .style("margin-bottom", "12px");
 
-  var vis_select = visualize_div.append("select");
+  var vis_select = visualize_div.append("select")
+                      .style("width", "100%")
+                      .attr("size", "3");
   vis_select.append("option").attr("value", "policy").text("Policy")
   vis_select.append("option").attr("value", "Q").text("Q(s,a)")
     .attr("selected", "selected")

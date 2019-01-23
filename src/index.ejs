@@ -76,6 +76,36 @@
   }
 </style>
 
+<div id="scale"></div>
+<script>
+
+// let color = d3.scale.linear()
+//       .domain([-2, 0, 2])
+//       .range(["red", "grey", "blue"])
+//       // .domain([-2, -1, 0, 1, 2])
+//       // .range([ "#AA1E00", "orange", "#CCC", "#70A8DA", "#001EAA"])
+//       .interpolate(d3.interpolateLab);
+
+// http://gka.github.io/palettes/#diverging|c0=darkred,deeppink,lightgrey|c1=lightgrey,lightblue,steelblue|steps=7|bez0=1|bez1=1|coL0=1|coL1=1
+
+let color = d3.scale.linear()
+    .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
+    .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#96bbd2','#6e9ec4','#4682b4']);
+    // .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#78c196','#47a088','#008080']);
+
+let container = d3.select("#scale");
+
+container.selectAll("div")
+  .data(d3.range(-2, 2, 0.1))
+  .enter()
+  .append("div")
+  .style("display", "inline-block")
+  .style("width", "20px")
+  .style("height", "40px")
+  .style("background", d => color(d));
+
+</script>
+
 <d-title>
   <h1 style="grid-column:page;">The Paths Perspective on Value Learning</h1>
   <p  style="grid-column:page;padding-top: 10px;">
@@ -665,7 +695,7 @@
 
     <p>
       <b>Expected Sarsa.</b>
-      A better way of estimating the next state's value is with a weighted sum or expectation value over its Q-values. This approach is called <i>Expected Sarsa</i>.
+      A better way of estimating the next state's value is with a weighted sum<d-footnote>Also written as an expectation value, hence "Expected Sarsa".</d-footnote> over its Q-values. We call this approach Expected Sarsa:
     </p>
 
       <style>
@@ -747,58 +777,57 @@
         Paths that exit the state through different actions get associated with different Q-values.
       </div>
 
+      <style>
+        #reweighting-full .cls-1 {
+          fill: #263b96;
+        }
+
+        #reweighting-full .cls-2 {
+          fill: #e7ebe8;
+        }
+
+        #reweighting-full .cls-3 {
+          fill: #cac9cc;
+        }
+
+        #reweighting-full .cls-4 {
+          fill: #bb7566;
+        }
+
+        #reweighting-full .cls-5, .cls-6, .cls-7 {
+          fill: none;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-width: 10px;
+        }
+
+        #reweighting-full .cls-5 {
+          stroke: #bb7566;
+        }
+
+        #reweighting-full .cls-6 {
+          stroke: #263b96;
+        }
+
+        #reweighting-full .cls-7 {
+          stroke: #9ba2c4;
+        }
+
+        #reweighting-full .cls-8 {
+          fill: #9ba2c4;
+        }
+
+        #reweighting-full .cls-9 {
+          font-size: 24.25341px;
+          fill: #d1d3d4;
+          font-family: Arial-BoldMT, Arial;
+          font-weight: 700;
+        }
+
+      </style>
+
       <div id="reweighting-full">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 293.92624 293.92633">
-        <defs>
-          <style>
-            .cls-1 {
-              fill: #263b96;
-            }
-
-            .cls-2 {
-              fill: #e7ebe8;
-            }
-
-            .cls-3 {
-              fill: #cac9cc;
-            }
-
-            .cls-4 {
-              fill: #bb7566;
-            }
-
-            .cls-5, .cls-6, .cls-7 {
-              fill: none;
-              stroke-linecap: round;
-              stroke-linejoin: round;
-              stroke-width: 10px;
-            }
-
-            .cls-5 {
-              stroke: #bb7566;
-            }
-
-            .cls-6 {
-              stroke: #263b96;
-            }
-
-            .cls-7 {
-              stroke: #9ba2c4;
-            }
-
-            .cls-8 {
-              fill: #9ba2c4;
-            }
-
-            .cls-9 {
-              font-size: 24.25341px;
-              fill: #d1d3d4;
-              font-family: Arial-BoldMT, Arial;
-              font-weight: 700;
-            }
-          </style>
-        </defs>
-        <title>reweighting-full</title>
+      <svg viewBox="0 0 293.92624 293.92633">
         <g id="background">
           <rect class="cls-1" x="182.00345" y="4.47957" width="47.96635" height="47.96635"/>
           <rect class="cls-2" x="0.05169" y="0.34616" width="56.11284" height="56.11284"/>
@@ -857,11 +886,14 @@
         </g>
       </svg>
   </div>
-  <script src="vis/reweighting.js"></script>
       <div class="figcaption">
+        <div>q value: <span id="q-value-label"></span></div>
+        <d-slider id="q-value-slider" min="0" max="1" step="0.01" ticks="10" style="width: 100%;"></d-slider>
         Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
       </div>
   </figure>
+  <script src="vis/reweighting.js"></script>
+
 
 <!-- 
     <div id="test">
@@ -930,6 +962,8 @@
     <p>
       <b>Putting it together. </b> It's easy to think of Sarsa, Expected Sarsa, $Q$-learning, and Double $Q$-learning as different algorithms. But as we've seen, they are simply four special cases of off-policy learning.
     </p>
+
+    <h4>Header one</h4>
 
     <style>
       #off-policy-methods {
