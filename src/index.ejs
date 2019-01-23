@@ -547,7 +547,7 @@ container.selectAll("div")
     <p>
       First off, TD learning never averages over fewer trajectories than Monte Carlo because there are never fewer simulated trajectories than real trajectories. On the other hand, when there are <i>more</i> simulated trajectories, TD learning has the chance to average over more of the agent's experience.
 
-      This line of reasoning suggests that TD learning is the better estimator and helps explain why TD methods tend to outperform Monte Carlo in tabular environments.
+      This line of reasoning suggests that TD learning is the better estimator and helps explain why TD tends to outperform Monte Carlo in tabular environments.
     </p>
 
     <!-- <p>
@@ -629,16 +629,16 @@ container.selectAll("div")
   </figure>
 
     <p>
-      There are some other nice properties of Q-functions. In order to see them, we let's write out the Monte Carlo and TD update rules.
+      There are some other nice properties of Q-functions. In order to see them, let's write out the Monte Carlo and TD update rules.
 
       <!-- First, though, we need to modify our Monte Carlo and TD updates. -->
     </p>
 
     <p>
-      <b>Learning Q-functions.</b> The Monte Carlo update rule looks nearly identical to the one we wrote down for $V(s)$:
+      <b>Updating Q-functions.</b> The Monte Carlo update rule looks nearly identical to the one we wrote down for $V(s)$:
     </p>
 
-    <div class="eq-grid" style="grid-gap: 8px;">
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 10; margin-bottom: 10;">
       <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>R_t</d-math></div>
@@ -652,10 +652,10 @@ container.selectAll("div")
     </p>
 
     <p>
-      Now let's try writing the TD update by replacing $V(s)$ with $Q(s,a)$ wherever it occurs:
+      Now let's try doing the same thing with the TD update:
     </p>
 
-    <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 10; margin-bottom: 10;">
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
@@ -666,19 +666,20 @@ container.selectAll("div")
       <figcaption style="grid-row: 2; grid-column: 1; max-width:140px;"> State-action value </figcaption>
       <figcaption style="grid-row: 2; grid-column: 5; max-width:140px;">Reward</figcaption>
       <figcaption style="grid-row: 2; grid-column: 9/12; max-width:300px;">Next state value</figcaption>
+      <!-- <figcaption style="grid-row: 2; grid-column: 9/12; max-width:300px;">Next state value (should be $V(s_{t+1})$)</figcaption> -->
 
     </div>
 
     <p>
       This version of the TD update rule requires a tuple of the form $(s_t, a_t, r_{t}, s_{t+1}, a_{t+1})$, so we call it the <i>Sarsa</i> algorithm.
-      Sarsa may be the simplest way to write a Q-function TD update, but it's not the most efficient.
-      The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ for the next state value when in fact it should be using $V(s_{t+1})$.
+      Sarsa may be the simplest way to write this TD update, but it's not the most efficient.
+      The problem with Sarsa is that it uses $Q(s_{t+1},a_{t+1})$ for the next state value when it really should be using $V(s_{t+1})$.
 <!--       The problem is that we're using $Q(s_{t+1},a_{t+1})$ to estimate the next state value. -->
 <!--       The problem with Sarsa is that it updates towards $Q(s_{t+1},a_{t+1})$ when in fact it should update towards $V(s_{t+1})$. -->
       What we need is a better estimate of $V(s_{t+1})$.
     </p>
 
-    <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
+    <div class="eq-grid" style="grid-gap: 8px; margin-top: 10; margin-bottom: 10;">
       <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
@@ -962,11 +963,11 @@ container.selectAll("div")
     </p>
 
     <p>
-      You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.
+      <i>You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.</i>
     </p>
 
     <p>
-      Sometimes -- as in this casino example -- the largest Q-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
+      Sometimes the largest Q-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
       One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. We call this approach double Q-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
