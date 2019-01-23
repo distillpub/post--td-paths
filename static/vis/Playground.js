@@ -1,20 +1,22 @@
 (function() {
   var stage = d3.select("#playground")
 
-  var margin = {top: 20, right: 20, bottom: 20, left: 20},
+  var margin = {top: 20, right: 40, bottom: 20, left: 0},
       width = 400,
       height = 400,
-      grid_size = 4;
+      grid_size = 5;
+
+  var control_panel_width = margin.left+margin.right+185;
 
 
   var outer = stage.append("div")
     .style("width", "100%")
     .style("position", "relative");
 
-  var svg = outer
-      .append("svg")
+  var svg = outer.append("svg")
           .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom);
+          .attr("height", height + margin.top + margin.bottom)
+          .attr("transform", "translate(" + control_panel_width + ",0)");
 
   var main = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -126,11 +128,18 @@
   agent_layer = grid.append("g");
 
   goal = grid.append("rect").attr("class", "goal")
-      .attr("width", S(0.7))
-      .attr("height", S(0.7))
-      .attr("data-x", 1)
+      .attr("width", S(0.85))
+      .attr("height", S(0.85))
+      .attr("data-x", 3)
       .attr("data-y", 0)
-      .attr("transform", d => "translate(" + X(1+0.1) + "," + Y(0+0.1) + ")" );
+      .attr("transform", d => "translate(" + X(3+0.05) + "," + Y(0+0.05) + ")" );
+
+  cliff = grid.append("rect").attr("class", "cliff")
+      .attr("width", S(0.85))
+      .attr("height", S(0.85))
+      .attr("data-x", 4)
+      .attr("data-y", 1)
+      .attr("transform", d => "translate(" + X(4+0.05) + "," + Y(1+0.05) + ")" );
 
   cell.exit().remove();
 
@@ -139,19 +148,16 @@
   //================
 
   var epsilon=0.2;
-  var discount=0.8;
+  var discount=0.6;
 
   var policy_div = outer.append("div")
     .attr("class", "control-panel")
     .style("top", "20px")
-    .style("left", (width+margin.left+margin.right+30)+"px")
+    .style("left", (margin.left)+"px")
     .append("div")
       .style("position", "relative")
-      // .style("width", "260px")
-      // .style("height", "100px")
       .style("margin", "0px")
       .style("display", "block")
-      // .style("padding", "10px")
 
   policy_div.append("h2")
     .style("margin-top", "0px")
@@ -173,7 +179,7 @@
     .style("font-size", "11px")
 
   policy_div.append("button")
-      .text("Run Episode")
+      .text("Add an agent")
       .on("click", () => run_episode(epsilon_greedy_policy) )
       .style("position", "absolute")
       // .style("left", "90px")
@@ -194,7 +200,7 @@
   var learning_div = outer.append("div")
       .attr("class", "control-panel")
       .style("top", "160px")
-      .style("left", (width+margin.left+margin.right+30)+"px");
+      .style("left", (margin.left)+"px");
       // .style("padding", "10px");
       // .style("width", "260px");
 
@@ -245,7 +251,7 @@
   var visualize_div = outer.append("div")
       .attr("class", "control-panel")
       .style("top", "288px")
-      .style("left", (width+margin.left+margin.right+30)+"px");
+      .style("left", (margin.left)+"px");
       // .style("padding", "10px");
       // .style("width", "260px");
 
@@ -290,7 +296,8 @@
 
     function random_agent_position(){
       var x = randInt(grid_size), y = randInt(grid_size);
-      if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y"))) {
+      if (x == JSON.parse(goal.attr("data-x")) && y == JSON.parse(goal.attr("data-y")) ||
+          x == JSON.parse(cliff.attr("data-x")) && y == JSON.parse(cliff.attr("data-y"))) {
         return random_agent_position();
       }
       return [x,y];
@@ -317,11 +324,20 @@
             .attr("cx", X(x2+0.475))
             .attr("cy", Y(y2+0.475))
             .remove();
-        //agent.transition().delay(0.6*T)
-        //  .style("display", "none"); //remove();
         goal.transition(0.4*T).delay(0.4*T).style("fill", "#ccf");
         goal.transition(0.1*T).delay(0.8*T).style("fill", "")
         return {reward: 1, end: true, state: ""};
+      } else if (x2 == cliff.attr("data-x") && y2 == cliff.attr("data-y")) {
+        agent
+          .attr("data-x", "")
+          .attr("data-y", "")
+          .transition(0.6*T)
+            .attr("cx", X(x2+0.475))
+            .attr("cy", Y(y2+0.475))
+            .remove();
+        cliff.transition(0.4*T).delay(0.4*T).style("fill", "#fcc");
+        cliff.transition(0.1*T).delay(0.8*T).style("fill", "")
+        return {reward: -1, end: true, state: ""};
       } else if (0 <= x2 && x2 < grid_size && 0 <= y2 && y2 < grid_size) {
         agent
           .attr("data-x", x2)

@@ -1,10 +1,13 @@
 #playground .cell rect {
-  fill: #efe7e7;
+  fill: #e7e7e7;
 }
 #playground .Q .triangle {
 }
 #playground .goal {
   fill: #44a;
+}
+#playground .cliff {
+  fill: #a44;
 }
 #playground .control-panel {
   position: absolute;
