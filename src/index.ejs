@@ -76,37 +76,6 @@
   }
 </style>
 
-<!-- <div id="scale"></div>
-<script>
-
-// let color = d3.scale.linear()
-//       .domain([-2, 0, 2])
-//       .range(["red", "grey", "blue"])
-//       // .domain([-2, -1, 0, 1, 2])
-//       // .range([ "#AA1E00", "orange", "#CCC", "#70A8DA", "#001EAA"])
-//       .interpolate(d3.interpolateLab);
-
-// http://gka.github.io/palettes/#diverging|c0=darkred,deeppink,lightgrey|c1=lightgrey,lightblue,steelblue|steps=7|bez0=1|bez1=1|coL0=1|coL1=1
-
-let color = d3.scale.linear()
-    .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
-    .range(['#8b0000','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#00008b']);
-    // .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#96bbd2','#6e9ec4','#4682b4']);
-    // .range(['#8b0000','#cb3558','#e7819e','#d3d3d3','#78c196','#47a088','#008080']);
-
-let container = d3.select("#scale");
-
-container.selectAll("div")
-  .data(d3.range(-2, 2, 0.1))
-  .enter()
-  .append("div")
-  .style("display", "inline-block")
-  .style("width", "20px")
-  .style("height", "40px")
-  .style("background", d => color(d));
-
-</script> -->
-
 <d-title>
   <h1 style="grid-column:page;">The Paths Perspective on Value Learning</h1>
   <p  style="grid-column:page;padding-top: 10px;">
@@ -239,7 +208,7 @@ container.selectAll("div")
   </figure>
 
   <p>
-    If a state is visited by only one episode, Monte Carlo says its value is the return of that episode. If multiple episodes visit a state, Monte Carlo estimates its value to be the average over them.
+    If a state is visited by only one episode, Monte Carlo says its value is the return of that episode. If multiple episodes visit a state, Monte Carlo estimates its value as the average over them.
   </p>
 
   <p>
@@ -724,7 +693,7 @@ container.selectAll("div")
       </div>
       <img src="figures/sarsa.svg"/>
       <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's values.
+        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
       </div>
       <img src="figures/expected-sarsa.svg"/>
     </figure>
@@ -755,7 +724,7 @@ container.selectAll("div")
     </figure>
 
     <p>
-      This slight modification lets us estimate value under any policy we like. It's interesting to think about Expected Sarsa as a special case that uses off-policy learning for on-policy estimation.
+      This slight modification lets us estimate value under any policy we like. It's interesting to think about Expected Sarsa as a special case of off-policy learning that's used for on-policy estimation.
     </p>
 
     <p>
@@ -996,7 +965,7 @@ container.selectAll("div")
       </div>
       <img src="figures/sarsa.svg"/>
       <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's values.
+        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
       </div>
       <img src="figures/expected-sarsa.svg"/>
 
