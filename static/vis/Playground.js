@@ -183,13 +183,13 @@
     .style("padding-bottom", "8px")
     .style("margin-bottom", "12px");
 
-  policy_div.append("p").text("exploit")
+  policy_div.append("p").text("explore")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("right", "0px")
     .style("top", "55px")
     .style("font-size", "11px")
-  policy_div.append("p").text("explore")
+  policy_div.append("p").text("exploit")
     .attr('class', 'label')
     .style("position", "absolute")
     .style("left", "0px")
