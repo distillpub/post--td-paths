@@ -65,16 +65,7 @@ GridWorld.Env = function Env(config) {
 
     var C = d3.scale.linear()
       .domain([-2, -1.2, -.5, 0, .5, 1.2, 2])
-      .range(['#8b0000','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#00008b'
-]);
-      // .range(['#8b0000','#a85949','#b99892','#d3d3d3','#8593bd','#4a52a5','#00008b']);
-
-    // var C = d3.scale.linear()
-    //   .domain([-2, 0, 2])
-    //   .range(["red", "grey", "blue"])
-    //   // .domain([-2, -1, 0, 1, 2])
-    //   // .range([ "#AA1E00", "orange", "#CCC", "#70A8DA", "#001EAA"])
-    //   .interpolate(d3.interpolateHcl);
+      .range(['#8b0000','#b54d24','#d08b66','#cccccc','#788cda','#394bbd','#00008b']);
 
     this.C = r => d3.rgb(C(r));
     this.goal_color = C;
@@ -170,17 +161,19 @@ GridWorld.Env = function Env(config) {
             "translate(" + S(0.25)*a.x + "," + S(0.25)*a.y + ")");
     })
 
-    info["V"].append("line").attr("x2", 40).attr("y2", 0).attr("class", "left")
+    info["V"].selectAll("line").remove();
+
+    info["V"].append("line").attr("x2", 40).attr("y2", 0).attr("class", "left").attr("id", "connector")
              .style("stroke-width", S(0.13)).attr("visibility", "hidden");
-    info["V"].append("line").attr("x2", -39).attr("y2", 0).attr("class", "right")
+    info["V"].append("line").attr("x2", -39).attr("y2", 0).attr("class", "right").attr("id", "connector")
              .style("stroke-width", S(0.13)).attr("visibility", "hidden");
-    info["V"].append("line").attr("x2", 0).attr("y2", 50).attr("class", "up")
+    info["V"].append("line").attr("x2", 0).attr("y2", 50).attr("class", "up").attr("id", "connector")
              .style("stroke-width", S(0.13)).attr("visibility", "hidden");
-    info["V"].append("line").attr("x2", 0).attr("y2", -50).attr("class", "down")
+    info["V"].append("line").attr("x2", 0).attr("y2", -50).attr("class", "down").attr("id", "connector")
              .style("stroke-width", S(0.13)).attr("visibility", "hidden");
 
-    this.info = info;
-    _.values(info).forEach(s => s.style("display", "none"));
+    // this.info = info;
+    // _.values(info).forEach(s => s.style("display", "none"));
 
     this.show_info = function show_info(info_type, name, histories) {
       _.keys(info).filter(k => k != info_type).forEach(cls =>{
@@ -196,8 +189,6 @@ GridWorld.Env = function Env(config) {
             let prev_step = h[h.length-2]
             let cell_ix = step.s.x + step.s.y*4
             cell_ix = (cell_ix > 2) ? cell_ix-1 : cell_ix;
-            // console.log(cell_ix, h)
-            // console.log('T', info["T"])
 
             let line = info["V"][cell_ix][0].getElementsByClassName(prev_step.a.name)[0];
             line.setAttribute("visibility", "visible");

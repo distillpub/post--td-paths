@@ -134,7 +134,7 @@
 
           compare_play_button.textContent = "Playing..."
           compare_play_button.disabled = true;
-
+          d3.selectAll("#connector").attr("visibility", "hidden"); // a hack to fix a hack
           run();
         });
 

@@ -1,3 +1,7 @@
+// To intrepid readers: the code contained in this file and the GridWorld.js file is somewhat messy.
+// The reason it is messy is that each of its authors had different intents.
+// Author history: Cassandra Xia -> (adapted) -> Chris Olah -> (adapted) -> Sam Greydanus
+// But maybe even though it's not perfect, it will still manage to spark joy... :P - Sam Greydanus
 
 function compare_vis(main_div, config, callback){
 
@@ -63,7 +67,7 @@ function compare_vis(main_div, config, callback){
 
   function update(histories){
     compare_running = true;
-    discount = 0.82;
+    discount = 1.0;
     learn_MC(histories, {name: "MC", steps: 100});
     learn_TD(histories, {name: "TD", steps: 500});
     learn_Q(histories, {name: "Q", steps: 500});
@@ -73,6 +77,7 @@ function compare_vis(main_div, config, callback){
   }
 
   function visualize(){
+
     var agent1 = new env.Agent({start: {x: 4, y: grid_size-1}});
     action_names = repeat(grid_size-1, ["up"]);
     mapP(action_names, a_name => {
@@ -110,6 +115,7 @@ function compare_vis(main_div, config, callback){
         for (var k in a.Q) {a.Q[k] = undefined;}
       });
     });
+
 
     update([]); // clear history first from previous git commit.
     visualize();
