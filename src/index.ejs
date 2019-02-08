@@ -869,29 +869,6 @@
   <script src="vis/reweighting.js"></script>
 
 
-<!-- 
-    <div id="test">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: #fff;
-            stroke: #231f20;
-            stroke-miterlimit: 10;
-          }
-        </style>
-      </defs>
-      <title>Artboard 1</title>
-      <g id="square">
-        <rect class="cls-1" x="36.51534" y="45.1227" width="150.30675" height="150.30675"/>
-      </g>
-      <g id="circle">
-        <circle class="cls-1" cx="350.62577" cy="124.2638" r="77.30061"/>
-      </g>
-    </svg>
-  </div> -->
-  <!-- <script src="vis/test.js"></script> -->
-
     <p>
       Wherever intersecting paths are re-weighted, the paths that are most representative of the off-policy distribution end up making larger contributions to the value estimate. Meanwhile, paths that have low probability make smaller contributions.
     </p>
@@ -925,12 +902,12 @@
     </p>
 
     <p>
-      <i>You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be.</i>
+      <i>You go to a casino and play a hundred slot machines. It's your lucky day: you hit the jackpot on machine 43. Now, if you use Q-learning to estimate the value of being in the casino, you will choose the best outcome over the actions of playing slot machines. You'll end up thinking that the value of the casino is the value of the jackpot...and decide that the casino is a great place to be!</i>
     </p>
 
     <p>
       Sometimes the largest Q-value of a state is large <i>just by chance</i>; choosing it over others makes the value estimate biased.
-      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. We call this approach double Q-learning.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
+      One way to reduce this bias is to have a friend visit the casino and play the same set of slot machines. Then, ask them what their winnings were at machine 43 and use their response as your value estimate. It's not likely that you both won the jackpot on the same machine, so this time you won't end up with an over-optimistic estimate. We call this approach <i>Double Q-learning</i>.<d-cite key="VanHasselt2010DoubleQ-learning"></d-cite>
     </p>
 
     <p>
@@ -979,18 +956,18 @@
     </figure>
 
     <p>
-      The intuition behind every one of these approaches is that they re-weight path intersections.
+      The intuition behind all of these approaches is that they re-weight path intersections.
     </p>
 
     <p>
-      <b>Re-weighting paths with Monte Carlo.</b> At this point, a natural question is: Could we accomplish the same re-weighting effect with Monte Carlo? We could, but it would be messier and involve re-weighting all of the agent's experience. By working at intersections, TD learning re-weights individual transitions instead of episodes as a whole. In practice, this makes TD methods much more convenient for off-policy learning.
+      <b>Re-weighting paths with Monte Carlo.</b> At this point, a natural question is: Could we accomplish the same re-weighting effect with Monte Carlo? We could, but it would be messier and involve re-weighting all of the agent's experience. By working at intersections, TD learning re-weights individual transitions instead of episodes as a whole. This makes TD methods much more convenient for off-policy learning.
     </p>
 
 
     <h2>Merging Paths with Function Approximators</h2>
 
     <p>
-      Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But most interesting RL problems have a large or infinite number of states and this makes it hard to store value estimates for each state.
+      Up until now, we've learned one parameter -- the value estimate -- for every state or every state-action pair. This works well for the Cliff World example because it has a small number of states. But most interesting RL problems have a large or infinite number of states. This makes it hard to store value estimates for each state.
       <!-- ut as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state. -->
     </p>
 
@@ -1020,12 +997,12 @@
 
       <img src="figures/large-cliffworld-approx.svg"/>
       <div class="figcaption">
-        <b>Euclidean averagers</b> – which are a type of function approximation – save memory and let agents generalize to states they haven't yet visited.
+        <b>Euclidean averagers</b> – which are a type of function approximator – save memory and let agents generalize to states they haven't visited yet.
       </div>
   </figure>
 
     <p>
-      Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximators.
+      Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximation.
     </p>
 
 <!--     <p>
@@ -1033,7 +1010,7 @@
     </p> -->
 
     <p>
-      <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we have made an implicit decision to measure "nearby" with Euclidean distance. This was a good idea because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
+      <b>Merging nearby paths.</b> From the paths perspective, we can interpret function approximation as a way of merging nearby paths. But what do we mean by "nearby"? In the figure above, we made an implicit decision to measure "nearby" with Euclidean distance. This was a good idea because the Euclidean distance between two states is highly correlated with the probability that the agent will transition between them.
     </p>
 
     <p>
@@ -1061,7 +1038,7 @@
 
       <img src="figures/large-cliffworld-barrier.svg"/>
       <div class="figcaption">
-        Now using the Euclidean averager leads to bad value updates.
+        Now, using the Euclidean averager leads to bad value updates.
       </div>
   </figure>
 
@@ -1127,7 +1104,7 @@
   </figure>
 
     <p>
-      <b>TD or not TD?</b> So far, we've seen how TD learning can outperform Monte Carlo by merging paths of experience where they intersect. We've also seen that merging paths is a double-edged sword: when function approximation causes generalization, TD can end up doing worse.
+      <b>TD or not TD?</b> So far, we've seen how TD learning can outperform Monte Carlo by merging paths of experience where they intersect. We've also seen that merging paths is a double-edged sword: when function approximation causes bad value updates, TD can end up doing worse.
     </p>
 
     <p>
@@ -1142,7 +1119,7 @@
     <h2>Conclusion</h2>
 
     <p>
-      In this article we have introduced a new way to think about TD learning. It helps us see why TD learning can be beneficial, why it can be effective for off-policy learning, and why there can be challenges in combining TD learning with function approximators.
+      In this article we introduced a new way to think about TD learning. It helps us see why TD learning can be beneficial, why it can be effective for off-policy learning, and why there can be challenges in combining TD learning with function approximators.
     </p>
 
     <p>
