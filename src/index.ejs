@@ -207,7 +207,7 @@
   <p>
     Let's write Monte Carlo a bit more formally.
     In RL, we often describe algorithms with update rules, which tell us how estimates change with one more episode.
-    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>Details about this notation.</d-footnote>
+    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>In tabular settings such as the Cliff World example, this "updates toward" operator computes a running average. In this case, we can rewrite the $n^{th}$ Monte Carlo update as $ V(s_t) = V(s_{t-1}) + \frac{1}{n} \bigr[ R_{n} - V(s_t) \bigl] $. Since this notation is not as clean or general, we chose to use the $\hookleftarrow$ notation instead.</d-footnote>
   </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -311,7 +311,7 @@
     <div style="grid-row: 3; grid-column: 7;"><d-math>+</d-math></div>
     <div style="grid-row: 3; grid-column: 9;"><d-math>\gamma \mathop{\mathbb{E}} \bigr[ r'_{t+1} \bigl]</d-math></div>
     <div style="grid-row: 3; grid-column: 11;"><d-math>+</d-math></div>
-    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+3}) \bigl]</d-math></div>
+    <div style="grid-row: 3; grid-column: 13;"><d-math>\gamma^2 \mathop{\mathbb{E}} \bigr[ V(s''_{t+2}) \bigl]</d-math></div>
 
     <div class="expansion-marker" style="grid-row: 4; grid-column: 13 / 18; "></div>
 
@@ -492,7 +492,7 @@
   </figure>
 
     <p>
-      <b>Comparing the two.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since both TD and Monte Carlo are empirical averages,<d-footnote>In the tabular case.</d-footnote> the method that gives the better estimate is the one that averages over more items. This raises a natural question: Which estimator averages over more items?
+      <b>Comparing the two.</b> Generally speaking, the best value estimate is the one with the lowest variance. Since tabular TD and Monte Carlo are empirical averages, the method that gives the better estimate is the one that averages over more items. This raises a natural question: Which estimator averages over more items?
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
@@ -512,45 +512,8 @@
       This line of reasoning suggests that TD learning is the better estimator and helps explain why TD tends to outperform Monte Carlo in tabular environments.
     </p>
 
-    <!-- <p>
-      <b>Analyzing variance.</b> It's possible to express this idea more formally by writing out the variances of the Monte Carlo and TD estimates. We show how to do this in the <a href="#variance-analysis-appendix">Appendix</a>, but for now, we'll simply show the final equations. Note that we've introduced some new notation, $T(s)$, which counts the number of trajectories that contain state $s$.
-    </p> -->
-
-    <!-- <div class="eq-grid" style="grid-gap: 8px;">
-
-      <figcaption style="grid-row: 1; grid-column: 1; max-width:140px;"><b>MC variance</b></figcaption>
-
-      <div style="grid-row: 2; grid-column: 1;"><d-math>Var[ V(s_t)]~</d-math></div>
-      <div style="grid-row: 2; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 2; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 2; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 9;"><d-math>~\frac{\gamma}{T(s_{t+1})}</d-math></div>
-      <div style="grid-row: 2; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 13;"><d-math>~~\frac{\gamma^2}{T(s_{t+2})}</d-math></div>
-      <div style="grid-row: 2; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 2; grid-column: 17;"><d-math>...</d-math></div>
-
-
-      <figcaption style="grid-row: 4; grid-column: 5;"><d-math>~~~~=</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 9;"><d-math>~~~~~~~~\geq</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 13;"><d-math>~~~~~~~~~\geq</d-math></figcaption>
-      <figcaption style="grid-row: 4; grid-column: 17;"><d-math>\geq</d-math></figcaption>
-
-      <figcaption style="grid-row: 6; grid-column: 0; max-width:140px;"><b>TD variance</b></figcaption>
-
-      <div style="grid-row: 7; grid-column: 1;"><d-math>Var[V(s_t)]~~</d-math></div>
-      <div style="grid-row: 7; grid-column: 3;"><d-math>~\propto~~</d-math></div>
-      <div style="grid-row: 7; grid-column: 5;"><d-math>\frac{1}{T(s_t)}</d-math></div>
-      <div style="grid-row: 7; grid-column: 7;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 7; grid-column: 9;"><d-math> \frac{\gamma}{ \mathop{\mathbb{E}} [ T(s'_{t+1}) ] }</d-math></div>
-      <div style="grid-row: 7; grid-column: 11;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 7; grid-column: 13;"><d-math>\frac{\gamma^2 }{\mathop{\mathbb{EE}} [T(s''_{t+2})]}</d-math></div>
-      <div style="grid-row: 7; grid-column: 15;"><d-math>~+~</d-math></div>
-      <div style="grid-row: 7; grid-column: 17;"><d-math>...</d-math></div>
-  </div> -->
-
 <!--     <p>
-      Since every term in the first sum is greater than or equal to the corresponding term in the second sum, tabular<d-footnote>It's important to note that this inequality only holds for tabular value estimators. Later on we'll see that things change when we add function approximation to the mix.</d-footnote> TD estimates will always have equal or lower variance than Monte Carlo.
+      Here's a link to my latest <a href="https://www.overleaf.com/read/nppjvtjfmqjr">attempt at a proof</a>.
     </p> -->
 
 
