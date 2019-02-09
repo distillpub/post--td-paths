@@ -25,8 +25,14 @@ function learn_template(R_func, V_is_Q_max) {
           R = R_func(R, discount, step, name);
           step.a.Q[name] += 0.05*(R - step.a.Q[name]);
           if (V_is_Q_max) {
-            var qs = step.s.actions.map(a => a.Q[name]);
-            step.s.V[name] = reduce_max(qs, 0);
+            
+            if (step.s.name == "s-3-1") { // hard code this update for the hero @ state[3,1]
+              step.s.V[name] += 0.05*(R - step.s.V[name]);
+            } else {
+              var qs = step.s.actions.map(a => a.Q[name]); // normal Q-learning update
+              step.s.V[name] = reduce_max(qs, 0);
+            }
+
           } else {
             step.s.V[name] += 0.05*(R - step.s.V[name]);
           }

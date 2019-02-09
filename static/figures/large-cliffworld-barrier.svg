@@ -28,9 +28,6 @@
 
       .cls-6 {
         stroke: #8191c8;
-      }
-
-      .cls-6, .cls-8 {
         stroke-width: 3px;
       }
 
@@ -44,6 +41,7 @@
       .cls-8 {
         stroke: #58595b;
         stroke-linecap: round;
+        stroke-width: 5px;
       }
 
       .cls-9 {

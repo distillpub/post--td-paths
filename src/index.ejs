@@ -29,7 +29,7 @@
   "authors": [
 
     {
-      "author": "Sam Greydanus<d-footnote>Author order not finalized.</d-footnote>",
+      "author": "Sam Greydanus",
       "authorURL": "https://greydanus.github.io/about.html",
       "affiliation": "Google Brain",
       "affiliationURL": "https://g.co/brain"
@@ -279,7 +279,6 @@
       What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as the expectation over all of its TD updates:
     <p>
 
-
     <div class="eq-grid" style="grid-gap: 8px;">
     
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
@@ -292,7 +291,7 @@
     </div>
 
     <p>
-      We can use this to expand the TD update rule recursively:
+      Now we can use this equation to expand the TD update rule recursively:
     <p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -1071,11 +1070,13 @@
     </p>
 
     <p>
-      There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD methods have dominated the RL literature for the past several decades. There are still some notable exceptions: one recent paper shows that Monte Carlo can outperform TD methods in certain environments<d-cite key="Amiranashvili2018TDLearning"></d-cite>.
+
+      Over the last few decades, most work in deep RL has preferred TD learning to Monte Carlo. Indeed, most approaches to deep RL use TD-style value updates. That said, a lot of work goes into making these methods more stable.
+<!--       There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD methods have dominated the RL literature for the past several decades. There are still some notable exceptions: one recent paper shows that Monte Carlo can outperform TD methods in certain environments<d-cite key="Amiranashvili2018TDLearning"></d-cite>. -->
     </p>
 
     <p>
-      Since Monte Carlo and TD learning both have desirable properties, why not try building a value estimator that is a mixture of the two? That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates<d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote>. Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone<d-footnote>Researchers often keep the $\lambda$ coefficient constant as they train a deep RL model. However, if Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe the best approach is to anneal $\lambda$ over the course of training!</d-footnote>.
+      Since Monte Carlo and TD learning both have desirable properties, why not try building a value estimator that is a mixture of the two? That's the reasoning behind TD($\lambda$) learning. It's a technique that simply interpolates (using the coefficient $\lambda$) between Monte Carlo and TD updates<d-footnote>In the limit $\lambda=0$, we recover the TD update rule. Meanwhile, when $\lambda=1$, we recover Monte Carlo.</d-footnote>. Often, TD($\lambda$) works better than either Monte Carlo or TD learning alone<d-footnote>Researchers often keep the $\lambda$ coefficient constant as they train a deep RL model. However, if we think Monte Carlo learning is best early in training (before the agent has learned a good state representation) and TD learning is best later on (when it's easier to benefit from merging paths), maybe the best approach is to anneal $\lambda$ over the course of training.</d-footnote>.
     </p>
 
 
@@ -1102,9 +1103,22 @@
 
 
 <d-appendix>
+
   <h3>Acknowledgments</h3>
   <p>
-    People to thank (living list): Google AI Residency Program, Justin Gilmer, Shan Carter, Ludwig Schubert, Cassandra Xia. Some correspondence with John Schulman and Dale Schuurmans.
+    We are grateful to Justin Gilmer, Shan Carter, and John Schulman for feedback on early drafts of this article. Shan also gave invaluable design and implementation advice on diagrams and interactive components. Special thanks to Cassandra Xia for helping develop the playground demo.
+  </p>
+
+  <p>
+    Sam would like to thank the <a href="https://ai.google/research/join-us/ai-residency/">Google AI Residency Program</a> for offering continous support and guidance as he explored this line of research.
+  </p>
+
+  <h3>Author Contributions</h3>
+  <p>
+    <b>Concepts:</b> Chris introduced the central concept and structure of this article. Working together, Sam and Chris fleshed out the finer points. Many of the original concepts, of course, are endemic to the reinforcement learning community as a whole.
+  </p>
+  <p>
+    <b>Writing & Diagrams:</b> The text and figures were initially drafted by Sam and then refined under Chris's guidance. Chris, with help from Cassandra, wrote the code used for the hero and playground visualizations. Sam modified the code to fit the Distill format.
   </p>
 
 
