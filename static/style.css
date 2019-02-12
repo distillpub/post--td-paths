@@ -1,3 +1,40 @@
+/* Hero Layout */
+
+figure#compare-figure {
+    grid-column: text;
+    display: grid;
+    grid-column-gap: inherit;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    margin-bottom: 0;
+}
+
+#compare-figure svg {
+    width: 100%;
+    height: auto;
+}
+
+#compare-figure h4 {
+    margin: 0;
+}
+
+#cliffworld-mc > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    grid-auto-flow: column;
+  }
+
+/* Pre-existing CSS */
+
+#cliff_iter .cell rect {
+    fill: #e7eae7;
+  }
+  .cell rect {
+    fill: #e7eae7;
+  }
+
 .eq-grid {
   padding: 10px;
   padding-left: 20px;

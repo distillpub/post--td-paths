@@ -6,7 +6,7 @@
   <script src="https://distill.pub/template.v2.js"></script>
   <style><%= require("raw-loader!../static/style.css") %></style>
   <style type="text/css">@import "vis/playground.css";</style>
-  
+
   <script src="vis/js/d3.min.js" charset="utf-8"></script>
   <script src="vis/js/underscore.js" charset="utf-8"></script>
   <script src="vis/js/rounding.js" charset="utf-8"></script>
@@ -60,18 +60,9 @@
   }</script>
 </d-front-matter>
 
-<style>
-  #cliff_iter .cell rect {
-    fill: #e7eae7;
-  }
-  .cell rect {
-    fill: #e7eae7;
-  }
-</style>
-
 <d-title>
-  <h1 style="grid-column:page;">The Paths Perspective on Value Learning</h1>
-  <p  style="grid-column:page;padding-top: 10px;">
+  <h1>The Paths Perspective on Value Learning</h1>
+  <p>
     A closer look at how Temporal Difference learning merges paths of experience for greater statistical efficiency.
   </p>
   <style>
@@ -82,9 +73,6 @@
       margin-top: 10px;
     }
     #compare-figure {
-      grid-column:page;
-      position:relative;
-      margin: 0;
       border-top: solid 1px rgba(0, 0, 0, 0.1);
       padding-top: 30px;
       margin-top: 10px;
@@ -112,17 +100,37 @@
       These value estimators behave differently where paths of experience intersect.
     </div>
   </div>
-  <figure id="compare-figure" style="grid-column: text-start/page-end;">
-
-    <div id="compare_hero" style="height:400px; position:relative;">
+  <figure id="compare-figure">
+    <div id="MC">
+        <svg width=380 height=380 viewbox="0 0 380 380"></svg>
+        <figcaption>
+            <h4>Monte Carlo</h4>
+            <d-math block>V(s_t) ~\hookleftarrow~ R_t</d-math>
+        </figcaption>
     </div>
-    <script> 
+    <div id="TD">
+        <svg width=380 height=380 viewbox="0 0 380 380"></svg>
+        <figcaption>
+            <h4>Temporal Difference</h4>
+            <d-math block>V(s_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
+        </figcaption>
+    </div>
+    <div id="Q">
+        <svg width=380 height=380 viewbox="0 0 380 380"></svg>
+        <figcaption>
+            <h4>Q-Learning</h4>
+            <d-math block>Q(s_t, a_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
+            <d-math block>V(s_{t+1}) ~=~ \mathop{\textrm{max}} \limits_{a} ~ Q(s_{t+1},a_{t+1})</d-math>
+        </figcaption>
+    </div>
+
+    <script>
       (function() {
         let compare_play_button = document.querySelector("#compare_play_button");
 
         let run = compare_vis(
-          d3.select("#compare_hero"), 
-          {algs: ["MC", "TD", "Q"], trail: true}, 
+          document.getElementById("compare-figure"),
+          {algs: ["MC", "TD", "Q"], trail: true},
           () => {
             compare_play_button.textContent = "Play";
             compare_play_button.disabled = false;
@@ -141,9 +149,9 @@
         compare_play_button.click();
 
       })();
-      
 
-    </script> 
+
+    </script>
 
   </figure>
 
@@ -151,7 +159,7 @@
 
 <d-article>
 <!-- <d-cite key="Tsividis2017HumanAtari"></d-cite> -->
-  
+
   <h2>Introduction</h2>
   <p>
     In the last few years, reinforcement learning (RL) has made remarkable progress, including <a href="https://deepmind.com/research/alphago/">beating world-champion Go players</a>, <a href="https://blog.openai.com/learning-dexterity/">controlling robotic hands</a>, and even <a href="https://deepmind.com/blog/learning-to-generate-images/">painting pictures</a>.
@@ -166,39 +174,33 @@
   </p>
 
   <p>
-    The natural way to estimate the value of a state is as the average return you observe from that state. We call this Monte Carlo value estimation. 
+    The natural way to estimate the value of a state is as the average return you observe from that state. We call this Monte Carlo value estimation.
   </p>
 
-  <figcaption style="grid-column: kicker">
-    <b>Cliff World</b> <d-cite key="Sutton2017ReinforcementIntroduction"></d-cite> is a classic RL example, where the agent learns to walk along a <span style="background: #FFD5D5">cliff</span> to reach a <span style="background: #D5D5FF">goal</span>.
-  </figcaption>
+<figure id="cliffworld-mc" class="base-grid">
+    <figcaption style="grid-column: kicker">
+            <b>Cliff World</b>
+            <d-cite key="Sutton2017ReinforcementIntroduction"></d-cite> is a classic RL example, where the agent learns to
+            walk along a <span style="background: #FFD5D5">cliff</span> to reach a <span
+                style="background: #D5D5FF">goal</span>.
+    </figcaption>
+    <div class="l-text">
+        <img src="figures/cliffworld-path1.svg" />
+        <div class="figcaption">
+            Sometimes the agent reaches its goal.
+        </div>
 
-  <style>
-  #cliffworld-mc {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
-  <figure id="cliffworld-mc" class="l-body">
-      <img src="figures/cliffworld-path1.svg"/>
-      <div class="figcaption">
-        Sometimes the agent reaches its goal.
-      </div>
+        <img src="figures/cliffworld-path2.svg" />
+        <div class="figcaption">
+            Other times it falls off the cliff.
+        </div>
 
-      <img src="figures/cliffworld-path2.svg"/>
-      <div class="figcaption">
-        Other times it falls off the cliff.
-      </div>
-
-      <img src="figures/cliffworld-mc.svg"/>
-      <div class="figcaption">
-        Monte Carlo averages over trajectories where they intersect.
-      </div>
-  </figure>
+        <img src="figures/cliffworld-mc.svg" />
+        <div class="figcaption">
+            Monte Carlo averages over trajectories where they intersect.
+        </div>
+    </div>
+</figure>
 
   <p>
     If a state is visited by only one episode, Monte Carlo says its value is the return of that episode. If multiple episodes visit a state, Monte Carlo estimates its value as the average over them.
@@ -231,7 +233,7 @@
 
 
     <div class="eq-grid" style="grid-gap: 8px; margin-top: 0; margin-bottom: 0;">
-    
+
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
@@ -280,7 +282,7 @@
     <p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
-    
+
       <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_{t+1})~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\simeq~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>\mathop{\mathbb{E}} \bigr[ r'_{t+1} ~+~ \gamma V(s'_{t+2}) \bigl] </d-math></div>
@@ -295,7 +297,7 @@
     <p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
-  
+
     <div style="grid-row: 1; grid-column: 1;"><d-math>V(s_t)~</d-math></div>
     <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~</d-math></div>
     <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
@@ -333,7 +335,7 @@
     <p>
       But they are not so different after all. Let's rewrite the Monte Carlo update in terms of reward and place it beside the expanded TD update.
     </p>
-  
+
   <div class="eq-grid" style="grid-gap: 8px;">
 
     <figcaption style="grid-row: 1; grid-column: 1/3; max-width:140px;"><b>MC update</b></figcaption>
@@ -495,7 +497,7 @@
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
-    
+
       <div style="grid-row: 1; grid-column: 1;"><d-math>Var[V(s)]~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\propto~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>\frac{1}{N} </d-math></div>
@@ -517,7 +519,7 @@
 
 
     <h2>Introducing Q-functions</h2>
-    
+
     <p>
       An alternative to the value function is the Q-function. Instead of estimating the value of a state, it estimates the value of a state and an action. The most obvious reason to use Q-functions is that they allow us to compare different actions.
     </p>
@@ -580,7 +582,7 @@
     </p>
 
     <div class="eq-grid" style="grid-gap: 8px; margin-top: 10; margin-bottom: 10;">
-    
+
       <div style="grid-row: 1; grid-column: 1;"><d-math>Q(s_t, a_t)~~</d-math></div>
       <div style="grid-row: 1; grid-column: 3;"><d-math>\hookleftarrow~~</d-math></div>
       <div style="grid-row: 1; grid-column: 5;"><d-math>r_{t} </d-math></div>
@@ -825,7 +827,7 @@
       <div class="figcaption">
         <div>Weight of blue Q-value: <span id="q-value-label"></span></div>
         <d-slider id="q-value-slider" min="0" max="1" step="0.01" ticks="10" style="width: 100%;"></d-slider>
-        Whenever we re-weight Q-values, we also re-weight the paths that pass through them. 
+        Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
       </div>
   </figure>
   <script src="vis/reweighting.js"></script>
@@ -1024,7 +1026,7 @@
   <figure id="fnapprox-compare" class="l-page">
       <img src="figures/compare-function-approx.svg"/>
   </figure>
-  
+
     <p>
       We've seen that TD learning makes more efficient value updates. The price we pay is that these updates end up being much more sensitive to bad generalization.
     </p>

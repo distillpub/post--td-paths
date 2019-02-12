@@ -2,66 +2,25 @@
 function compare_vis(main_div, config, callback){
 
   config = config || {};
-  var grid_size = 5;
-  var algs = config.algs || ["MC", "TD", "Q"] ;
-  var goals = [{x: 3, y: 0, reward: 2},
+  const   label_data = {
+    MC: {name: "Monte Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
+    TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})"},
+    Q:  {
+     name: "Q-Learning",
+     eq: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})",
+     eq2: "V(s_{t+1}) ~=~ \\mathop{\\textrm{max}} \\limits_{a} ~ Q(s_{t+1},a_{t+1})",
+    }
+  }
+  const grid_size = 5;
+  const algs = config.algs || ["MC", "TD", "Q"] ;
+  const goals = [{x: 3, y: 0, reward: 2},
                {x: 4, y: 0, reward: -1},
                {x: 4, y: 1, reward: -1},
                {x: 4, y: 2, reward: -1},
                {x: 4, y: 3, reward: -1},
                {x: 4, y: 4, reward: -1},];
-  var env = new GridWorld.Env({grid_size: grid_size, goals: goals});
-  var svg = main_div.append("svg")
-    .attr("width", 900)
-    .attr("height", 380)
-    .attr("viewBox", "0 0 900 380")
-    .style("width", "100%");
-
-  var S = _.range(algs.length).map(n =>
-    svg.append("g").attr("width", 280).attr("height", 280)
-      .attr("transform", "translate("+(310 * n)+",0)"));
-
-  function make_label(pos_x, name, latex, latex2) {
-    var label1 = main_div.append("div")
-      .style("position", "absolute")
-      .style("top", "280px")
-      .style("left", (310*pos_x) + "px")
-      .style("width", "300px")
-      .style("text-align", "left");
-
-    label1.append("div")
-      .text(name)
-      .style("font-weight", "bold")
-      .style("margin", "8px 0 4px");
-
-    label1.append("d-math")
-      .style("font-size", "90%")
-      .html(latex);
-
-    if (latex2) {
-      label1.append("d-math")
-        .style("font-size", "85%")
-        .html(latex2);
-    }
-
-  }
-
-  label_data = {
-     MC: {name: "Monte Carlo", eq: "V(s_t) ~\\hookleftarrow~ R_t"},
-     TD: {name: "Temporal Difference", eq: "V(s_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})"},
-     Q:  {
-      name: "Q-Learning", 
-      eq: "Q(s_t, a_t) ~\\hookleftarrow~ r_{t} ~+~ \\gamma V(s_{t+1})",
-      eq2: "V(s_{t+1}) ~=~ \\mathop{\\textrm{max}} \\limits_{a} ~ Q(s_{t+1},a_{t+1})",
-     }
-   }
-
-  setTimeout(() => {
-     _.range(algs.length).map(n => {
-        name_info = label_data[algs[n]];
-        make_label(n, name_info.name, name_info.eq, name_info.eq2);
-     });
-    }, 200);
+  const env = new GridWorld.Env({grid_size: grid_size, goals: goals});
+  const S = algs.map( algID => d3.select("#" + algID + " svg"));
 
   var V = S.map(s => new env.View(s));
 
