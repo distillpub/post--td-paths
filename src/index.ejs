@@ -65,37 +65,9 @@
   <p>
     A closer look at how Temporal Difference learning merges paths of experience for greater statistical efficiency.
   </p>
-  <style>
-    #compare-caption {
-      grid-column: kicker;
-      border-top: solid 1px rgba(0, 0, 0, 0.1);
-      padding-top: 30px;
-      margin-top: 10px;
-    }
-    #compare-figure {
-      border-top: solid 1px rgba(0, 0, 0, 0.1);
-      padding-top: 30px;
-      margin-top: 10px;
-    }
-    #compare_play_button {
-      margin-left: 20px;
-      padding: 0 8px;
-      background-color: rgba(255, 130, 0);
-      border-radius: 4px;
-      border: none;
-      color: white;
-      height: 32px;
-      font-size: 13px;
-      text-transform: uppercase;
-      width: 100px;
-    }
-    #compare_play_button[disabled] {
-      opacity: 0.5;
-    }
-  </style>
   <div id="compare-caption">
 
-    <button id="compare_play_button" type="button" style="margin: 0 0 20px;">Play</button>
+    <button id="compare_play_button" type="button" style="margin: 0 0 1rem;">Play</button>
     <div class="figcaption">
       These value estimators behave differently where paths of experience intersect.
     </div>
@@ -105,22 +77,22 @@
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
         <figcaption>
             <h4>Monte Carlo</h4>
-            <d-math block>V(s_t) ~\hookleftarrow~ R_t</d-math>
+            <d-math>V(s_t) ~\hookleftarrow~ R_t</d-math>
         </figcaption>
     </div>
     <div id="TD">
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
         <figcaption>
             <h4>Temporal Difference</h4>
-            <d-math block>V(s_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
+            <d-math>V(s_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
         </figcaption>
     </div>
     <div id="Q">
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
         <figcaption>
             <h4>Q-Learning</h4>
-            <d-math block>Q(s_t, a_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
-            <d-math block>V(s_{t+1}) ~=~ \mathop{\textrm{max}} \limits_{a} ~ Q(s_{t+1},a_{t+1})</d-math>
+            <d-math>Q(s_t, a_t) ~\hookleftarrow~ r_{t} ~+~ \gamma V(s_{t+1})</d-math>
+            <d-math>V(s_{t+1}) ~=~ \mathop{\textrm{max}} \limits_{a} ~ Q(s_{t+1},a_{t+1})</d-math>
         </figcaption>
     </div>
 
@@ -185,19 +157,25 @@
                 style="background: #D5D5FF">goal</span>.
     </figcaption>
     <div class="l-text">
-        <img src="figures/cliffworld-path1.svg" />
-        <div class="figcaption">
-            Sometimes the agent reaches its goal.
+        <div class="subfigure">
+            <img src="figures/cliffworld-path1.svg" />
+            <div class="figcaption">
+                Sometimes the agent reaches its goal.
+            </div>
         </div>
 
-        <img src="figures/cliffworld-path2.svg" />
-        <div class="figcaption">
-            Other times it falls off the cliff.
+        <div class="subfigure">
+            <img src="figures/cliffworld-path2.svg" />
+            <div class="figcaption">
+                Other times it falls off the cliff.
+            </div>
         </div>
 
-        <img src="figures/cliffworld-mc.svg" />
-        <div class="figcaption">
-            Monte Carlo averages over trajectories where they intersect.
+        <div class="subfigure">
+            <img src="figures/cliffworld-mc.svg" />
+            <div class="figcaption">
+                Monte Carlo averages over trajectories where they intersect.
+            </div>
         </div>
     </div>
 </figure>
@@ -250,36 +228,32 @@
       Intersections between two trajectories are handled differently under this update. Unlike Monte Carlo, TD updates merge intersections so that the return flows backwards to all preceding states.
     <p>
 
-  <style>
-  #cliffworld-td {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
   <figure id="cliffworld-td" class="l-body">
-      <img src="figures/cliffworld-path1.svg"/>
-      <div class="figcaption">
-        Sometimes the agent reaches its goal.
-      </div>
+        <div class="subfigure">
+            <img src="figures/cliffworld-path1.svg"/>
+            <div class="figcaption">
+                Sometimes the agent reaches its goal.
+            </div>
+        </div>
 
-      <img src="figures/cliffworld-path2.svg"/>
-      <div class="figcaption">
-        Other times it falls off the cliff.
-      </div>
+        <div class="subfigure">
+            <img src="figures/cliffworld-path2.svg"/>
+            <div class="figcaption">
+                Other times it falls off the cliff.
+            </div>
+        </div>
 
-      <img src="figures/cliffworld-td.svg"/>
-      <div class="figcaption">
-        TD learning merges paths where they intersect.
-      </div>
+        <div class="subfigure">
+            <img src="figures/cliffworld-td.svg"/>
+            <div class="figcaption">
+                TD learning merges paths where they intersect.
+            </div>
+        </div>
   </figure>
 
     <p>
       What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as the expectation over all of its TD updates:
-    <p>
+    </p>
 
     <div class="eq-grid" style="grid-gap: 8px;">
 
@@ -294,7 +268,7 @@
 
     <p>
       Now we can use this equation to expand the TD update rule recursively:
-    <p>
+    </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
 
@@ -385,69 +359,62 @@
       We often think about an agent's experience as a series of trajectories. The grouping is logical and easy to visualize.
     </p>
 
-  <style>
-  #cliffworld-trajectories {
-    margin-left: auto;
-    margin-right: auto;
-    width: 420px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
   <figure id="cliffworld-trajectories" class="l-body">
-      <img src="figures/cliffworld-path-1of4.svg"/>
-      <div class="figcaption">
-        Trajectory 1
-      </div>
-
+    <div class="subfigure">
+        <img src="figures/cliffworld-path-1of4.svg"/>
+        <div class="figcaption">
+            Trajectory 1
+        </div>
+    </div>
+    <div>
       <img src="figures/cliffworld-path-2of4.svg"/>
       <div class="figcaption">
         Trajectory 2
       </div>
+    </div>
   </figure>
 
 
     <p>
       But this way of organizing experience de-emphasizes relationships <i>between</i> trajectories. Wherever two trajectories intersect, both outcomes are valid futures for the agent. So even if the agent has followed Trajectory 1 to the intersection, it could <i>in theory</i> follow Trajectory 2 from that point onward. We can dramatically expand the agent's experience using these simulated trajectories or "paths."
     </p>
-
     <style>
   #cliffworld-paths {
-    margin-left: auto;
-    margin-right: auto;
-    width: 840px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
+    grid-gap: 20px;
   }
   </style>
   <figure id="cliffworld-paths" class="l-page">
-      <img src="figures/cliffworld-path-1of4.svg"/>
-      <div class="figcaption">
-        Path 1
-      </div>
 
+      <div class="subfigure">
+          <img src="figures/cliffworld-path-1of4.svg"/>
+      <div class="figcaption">
+      Path 1
+      </div>
+    </div>
+
+    <div class="subfigure">
       <img src="figures/cliffworld-path-2of4.svg"/>
       <div class="figcaption">
         Path 2
       </div>
+    </div>
 
+    <div class="subfigure">
       <img src="figures/cliffworld-path-3of4.svg"/>
       <div class="figcaption">
         Path 3
       </div>
+    </div>
 
+    <div class="subfigure">
       <img src="figures/cliffworld-path-4of4.svg"/>
       <div class="figcaption">
         Path 4
       </div>
+    </div>
   </figure>
 
     <p>
@@ -526,32 +493,31 @@
 
   <style>
   #qlearning-intro {
-    margin-left: auto;
-    margin-right: auto;
-    width: 550px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 30px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
   </style>
-  <figure id="qlearning-intro" class="l-page">
-      <img src="figures/policy.svg"/>
-      <div class="figcaption">
-        Many times we’d like to compare the value of actions under a policy.
-      </div>
+  <figure id="qlearning-intro">
+    <div>
+        <img src="figures/policy.svg"/>
+        <div class="figcaption">
+            Many times we’d like to compare the value of actions under a policy.
+        </div>
+    </div>
 
-      <img src="figures/value.svg"/>
-      <div class="figcaption">
-        It’s hard to do this with a value function.
-      </div>
+    <div>
+        <img src="figures/value.svg"/>
+        <div class="figcaption">
+            It’s hard to do this with a value function.
+        </div>
+    </div>
 
-      <img src="figures/qvalue.svg"/>
-      <div class="figcaption">
-        It’s easier to use Q-functions, which estimate joint state-action values.
-      </div>
+    <div>
+        <img src="figures/qvalue.svg"/>
+        <div class="figcaption">
+            It’s easier to use Q-functions, which estimate joint state-action values.
+        </div>
+    </div>
   </figure>
 
     <p>
