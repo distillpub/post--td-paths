@@ -72,6 +72,7 @@
       These value estimators behave differently where paths of experience intersect.
     </div>
   </div>
+  <!-- <figure id="compare-figure" style="grid-column: text-start/page-end;"> -->
   <figure id="compare-figure">
     <div id="MC">
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
@@ -359,6 +360,16 @@
       We often think about an agent's experience as a series of trajectories. The grouping is logical and easy to visualize.
     </p>
 
+
+  <style>
+  #cliffworld-trajectories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 250px));
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+    /*max-width: 520px;*/
+  }
+  </style>
   <figure id="cliffworld-trajectories" class="l-body">
     <div class="subfigure">
         <img src="figures/cliffworld-path-1of4.svg"/>
@@ -428,6 +439,7 @@
     width: 800px;
     display: grid;
     grid-template-columns: .955fr 2fr .4fr 2fr 2fr;
+    /*grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));*/
     grid-template-rows: auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 10px;
