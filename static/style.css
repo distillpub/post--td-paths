@@ -59,6 +59,10 @@ figure#compare-figure {
     grid-gap: 20px;
 }
 
+figure {
+    overflow-x: scroll;
+}
+
 
 figure figcaption,
 figure .figcaption {

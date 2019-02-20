@@ -621,26 +621,28 @@
       A better way of estimating the next state's value is with a weighted sum<d-footnote>Also written as an expectation value, hence "Expected Sarsa".</d-footnote> over its Q-values. We call this approach Expected Sarsa:
     </p>
 
-      <style>
-      #expected-sarsa {
-        width: 700px;
-        display: grid;
-        grid-template-columns: .4fr 1fr;
-        grid-template-rows: auto auto;
-        grid-row-gap: 30px;
-        grid-column-gap: 30px;
-        grid-auto-flow: row;
-      }
+    <style>
+        #expected-sarsa .wrapper {
+            width: 700px;
+            display: grid;
+            grid-template-columns: .4fr 1fr;
+            grid-template-rows: auto auto;
+            grid-row-gap: 30px;
+            grid-column-gap: 30px;
+            grid-auto-flow: row;
+        }
     </style>
     <figure id="expected-sarsa" class="l-body">
-      <div class="figcaption">
-        <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
-      </div>
-      <img src="figures/sarsa.svg"/>
-      <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
-      </div>
-      <img src="figures/expected-sarsa.svg"/>
+        <div class="wrapper">
+            <div class="figcaption">
+                <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
+            </div>
+            <img src="figures/sarsa.svg" />
+            <div class="figcaption">
+                <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
+            </div>
+            <img src="figures/expected-sarsa.svg" />
+        </div>
     </figure>
 
     <p>
@@ -650,22 +652,23 @@
     <p>
       <b>Off-policy value learning.</b> We can push this idea even further. Instead of weighting Q-values by the true policy distribution, we can weight them by an arbitrary policy, $\pi^{off}$:
     </p>
-
     <style>
-      #off-policy {
-        width: 700px;
-        display: grid;
-        grid-template-columns: .4fr 1fr;
-        grid-template-rows: auto auto;
-        grid-auto-flow: row;
-        grid-column-gap: 30px;
-      }
+        #off-policy .wrapper {
+            width: 700px;
+            display: grid;
+            grid-template-columns: .4fr 1fr;
+            grid-template-rows: auto auto;
+            grid-auto-flow: row;
+            grid-column-gap: 30px;
+        }
     </style>
     <figure id="off-policy" class="l-body">
-      <div class="figcaption">
-        <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
-      </div>
-      <img src="figures/off-policy.svg"/>
+        <div class="wrapper">
+            <div class="figcaption">
+                <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
+            </div>
+            <img src="figures/off-policy.svg" />
+        </div>
     </figure>
 
     <p>
@@ -829,19 +832,21 @@
     </p>
 
     <style>
-      #q-learning {
-        width: 700px;
-        display: grid;
-        grid-template-columns: .4fr 1fr;
-        grid-template-rows: auto auto;
-        grid-auto-flow: row;
-      }
+        #q-learning .wrapper {
+            width: 700px;
+            display: grid;
+            grid-template-columns: .4fr 1fr;
+            grid-template-rows: auto auto;
+            grid-auto-flow: row;
+        }
     </style>
     <figure id="q-learning" class="l-body">
-      <div class="figcaption">
-        <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
-      </div>
-      <img src="figures/q-learning.svg"/>
+        <div class="wrapper">
+            <div class="figcaption">
+                <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
+            </div>
+            <img src="figures/q-learning.svg" />
+        </div>
     </figure>
 
    <p>
@@ -866,44 +871,48 @@
     </p>
 
     <style>
-      #overview {
-        margin-left: auto;
-        margin-right: auto;
-        width: 700px;
-        display: grid;
-        grid-template-columns: .4fr 1fr;
-        grid-template-rows: auto auto;
-        grid-row-gap: 30px;
-        grid-column-gap: 30px;
-        grid-auto-flow: row;
-      }
+        #overview .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            width: 700px;
+            display: grid;
+            grid-template-columns: .4fr 1fr;
+            grid-template-rows: auto auto;
+            grid-row-gap: 30px;
+            grid-column-gap: 30px;
+            grid-auto-flow: row;
+        }
     </style>
-
     <figure id="overview" class="l-page">
-      <h4>On-policy methods</h4><div></div>
-      <div class="figcaption">
-        <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
-      </div>
-      <img src="figures/sarsa.svg"/>
-      <div class="figcaption">
-        <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
-      </div>
-      <img src="figures/expected-sarsa.svg"/>
+        <div class="wrapper">
+            <h4>On-policy methods</h4>
+            <div></div>
+            <div class="figcaption">
+                <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
+            </div>
+            <img src="figures/sarsa.svg" />
+            <div class="figcaption">
+                <b>Expected Sarsa</b> uses an expectation over Q-values to estimate the next state's value.
+            </div>
+            <img src="figures/expected-sarsa.svg" />
 
-      <h4>Off-policy methods</h4><div></div>
+            <h4>Off-policy methods</h4>
+            <div></div>
 
-      <div class="figcaption">
-        <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
-      </div>
-      <img src="figures/off-policy.svg"/>
-      <div class="figcaption">
-        <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
-      </div>
-      <img src="figures/q-learning.svg"/>
-      <div class="figcaption">
-        <b>Double Q-learning</b> selects the best action with $Q_A$ and then estimates the value of that action with $Q_B$.
-      </div>
-      <img src="figures/double-q-learning.svg"/>
+            <div class="figcaption">
+                <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
+            </div>
+            <img src="figures/off-policy.svg" />
+            <div class="figcaption">
+                <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
+            </div>
+            <img src="figures/q-learning.svg" />
+            <div class="figcaption">
+                <b>Double Q-learning</b> selects the best action with $Q_A$ and then estimates the value of that action with
+                $Q_B$.
+            </div>
+            <img src="figures/double-q-learning.svg" />
+        </div>
     </figure>
 
     <p>
@@ -973,51 +982,54 @@
       However, it's easy to imagine cases where this implicit assumption breaks down. By adding a single long barrier, we can construct a case where the Euclidean distance metric leads to bad generalization. The problem is that we have merged the wrong paths.
     </p>
 
-  <style>
-  #fnapprox-barrier {
-    margin-left: auto;
-    margin-right: auto;
-    width: 700px;
-    display: grid;
-    grid-template-columns: 1fr 1.464fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
-  <figure id="fnapprox-barrier" class="l-page">
-      <img src="figures/large-cliffworld-barrier-intro.svg"/>
-      <div class="figcaption">
-        Imagine changing the Cliff World setup by adding a long barrier.
-      </div>
+    <style>
+        #fnapprox-barrier .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            width: 700px;
+            display: grid;
+            grid-template-columns: 1fr 1.464fr;
+            grid-template-rows: auto auto;
+            grid-column-gap: 20px;
+            grid-row-gap: 10px;
+            grid-auto-flow: column;
+        }
+    </style>
+    <figure id="fnapprox-barrier" class="l-page">
+        <div class="wrapper">
+            <img src="figures/large-cliffworld-barrier-intro.svg" />
+            <div class="figcaption">
+                Imagine changing the Cliff World setup by adding a long barrier.
+            </div>
 
-      <img src="figures/large-cliffworld-barrier.svg"/>
-      <div class="figcaption">
-        Now, using the Euclidean averager leads to bad value updates.
-      </div>
-  </figure>
+            <img src="figures/large-cliffworld-barrier.svg" />
+            <div class="figcaption">
+                Now, using the Euclidean averager leads to bad value updates.
+            </div>
+        </div>
+    </figure>
 
     <p>
       <b>Merging the wrong paths.</b> The diagram below shows the effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
-
-  <style>
-  #fnapprox-compare {
-    margin-left: auto;
-    margin-right: auto;
-    width: 675px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
-  <figure id="fnapprox-compare" class="l-page">
-      <img src="figures/compare-function-approx.svg"/>
-  </figure>
+    <style>
+        #fnapprox-compare .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            width: 675px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            grid-column-gap: 20px;
+            grid-row-gap: 10px;
+            grid-auto-flow: column;
+        }
+    </style>
+    <figure id="fnapprox-compare" class="l-page">
+        <div class="wrapper">
+            <img src="figures/compare-function-approx.svg" />
+        </div>
+    </figure>
 
     <p>
       We've seen that TD learning makes more efficient value updates. The price we pay is that these updates end up being much more sensitive to bad generalization.
@@ -1073,11 +1085,8 @@
 
     <h4>Gridworld playground</h4>
 
-    <div id="playground"></div>
+    <div id="playground" style="overflow-x: scroll;"></div>
     <script src="vis/Playground.js" charset="utf-8"></script>
-
-
-
 
 </d-article>
 
@@ -1087,7 +1096,7 @@
 
   <h3>Acknowledgments</h3>
   <p>
-    We are grateful to Justin Gilmer, Shan Carter, and John Schulman for feedback on early drafts of this article. Shan also gave invaluable design advice on diagrams and interactive components. Thanks to Cassandra Xia for helping develop the playground demo.
+        We are grateful to Ludwig Schubert, Justin Gilmer, Shan Carter, and John Schulman for feedback on early drafts of this article. Shan also gave invaluable design advice on diagrams and interactive components. Thanks to Cassandra Xia for helping develop the playground demo.
   </p>
 
   <p>
