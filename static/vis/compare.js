@@ -43,9 +43,9 @@ function compare_vis(main_div, config, callback){
     action_names = ["right", "up", "right", "up", "right", "right"];
     mapP(action_names, a_name => {
       var a = _.findWhere(agent1.state.actions, {name: a_name});
-      if (agent1.history.length != 0) {
+    //   if (agent1.history.length != 0) {
         update([agent1.history]);
-      }
+    //   }
       var P = agent1.step(a, 500);
       return P;
     }).then(() => {

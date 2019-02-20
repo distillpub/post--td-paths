@@ -65,26 +65,33 @@ figure .figcaption {
   margin-bottom: 1em;
 }
 
+figure .column-heading {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 8px;
+    margin: 0;
+}
+
 /* Pre-existing CSS */
 
 #cliffworld-td {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     grid-gap: 20px;
-  }
+}
 
-  #cliffworld-trajectories {
+#cliffworld-trajectories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     grid-gap: 20px;
-  }
+}
 
 #cliff_iter .cell rect {
-    fill: #e7eae7;
-  }
-  .cell rect {
-    fill: #e7eae7;
-  }
+    fill: #eee;
+}
+
+.cell rect {
+    fill: #eee;
+}
 
 .eq-grid {
   grid-column: text-start / end;

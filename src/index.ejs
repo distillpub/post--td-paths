@@ -382,17 +382,16 @@
   #cliffworld-paths {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    grid-template-rows: auto auto;
     grid-gap: 20px;
   }
   </style>
-  <figure id="cliffworld-paths" class="l-page">
+  <figure id="cliffworld-paths" class="l-text">
 
-      <div class="subfigure">
-          <img src="figures/cliffworld-path-1of4.svg"/>
-      <div class="figcaption">
-      Path 1
-      </div>
+    <div class="subfigure">
+        <img src="figures/cliffworld-path-1of4.svg"/>
+        <div class="figcaption">
+        Path 1
+        </div>
     </div>
 
     <div class="subfigure">
@@ -422,40 +421,63 @@
     </p>
 
   <style>
-  #compare-mctd {
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
+  figure#compare-mctd {
     display: grid;
-    grid-template-columns: .955fr 2fr .4fr 2fr 2fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
+    grid-gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
+  #compare-mctd .subfigure {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(2, minmax(160px, 1fr));
+      /* grid-auto-rows: min-content; */
+      /* grid-template-rows: min-content auto; */
+    }
+  #compare-mctd .subfigure .column-heading {
+      grid-column: 1 / -1;
+  }
+
+  #compare-mctd .figcaption {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 5px;
+    margin-top: 5px;
+      /* min-height: 179px; */
+      /* min-width: 179px; */
+      /* flex: 1; */
+  }
+
+
   </style>
   <figure id="compare-mctd" class="l-page">
-      <img src="figures/traj-thumbnails.svg"/>
-      <div class="figcaption">
-        Trajectories
+      <div class="subfigure">
+        <h4 style="grid-column: span 2;" class="column-heading">Monte Carlo Estimation</h4>
+        <div style="grid-column: 1;" class="evidence">
+            <img src="figures/traj-thumbnails.svg"/>
+            <div class="figcaption">
+                Averages over <strong>real trajectories</strong>
+            </div>
+        </div>
+        <div style="grid-column: 2;" class="estimate">
+            <img src="figures/cliffworld-mc.svg"/>
+            <div class="figcaption">
+                Resulting MC estimate
+            </div>
+        </div>
       </div>
-
-      <img src="figures/cliffworld-mc.svg"/>
-      <div class="figcaption">
-        MC estimate
-      </div>
-
-      <div></div>
-      <div></div>
-
-      <img src="figures/path-thumbnails.svg"/>
-      <div class="figcaption">
-        Paths
-      </div>
-
-      <img src="figures/cliffworld-td.svg"/>
-      <div class="figcaption">
-        TD estimate
+      <div class="subfigure">
+        <h4 style="grid-column: span 2;" class="column-heading">Temporal Difference Estimation</h4>
+        <div class="evidence">
+            <img src="figures/path-thumbnails.svg"/>
+            <div class="figcaption">
+                    Averages over <strong>possible paths</strong>
+            </div>
+        </div>
+        <div class="estimate">
+            <img src="figures/cliffworld-td.svg"/>
+            <div class="figcaption">
+                Resulting TD estimate
+            </div>
+        </div>
       </div>
   </figure>
 
@@ -655,148 +677,147 @@
     </p>
 
     <style>
-  #reweighting {
-    margin-left: auto;
-    margin-right: auto;
-    width: 700px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 30px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
-  <figure id="reweighting" class="l-page">
-      <img src="figures/reweighting-1.svg"/>
-      <div class="figcaption">
-        Multiple paths of experience intersect at this state.
-      </div>
-
-      <img src="figures/reweighting-2.svg"/>
-      <div class="figcaption">
-        Paths that exit the state through different actions get associated with different Q-values.
-      </div>
-
-      <style>
+        #reweighting {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-gap: 20px;
+        }
+        /* #reweighting .wrapper {
+            min-width: 160px;
+        } */
         #reweighting-full .cls-1 {
-          fill: #2d307b;
+            fill: #2d307b;
         }
 
         #reweighting-full .cls-2 {
-          fill: #e7ebe8;
+            fill: #e7ebe8;
         }
 
         #reweighting-full .cls-3 {
-          fill: #cac9cc;
+            fill: #cac9cc;
         }
 
         #reweighting-full .cls-4 {
-          fill: #bd5f35;
+            fill: #bd5f35;
         }
 
         #reweighting-full .cls-5, .cls-6, .cls-7 {
-          fill: none;
-          stroke-width: 10px;
+            fill: none;
+            stroke-width: 10px;
         }
 
         #reweighting-full .cls-5 {
-          stroke: #bd5f35;
+            stroke: #bd5f35;
         }
 
         #reweighting-full .cls-5, .cls-7 {
-          stroke-miterlimit: 10;
+            stroke-miterlimit: 10;
         }
 
         #reweighting-full .cls-6 {
-          stroke: #2d307b;
-          stroke-linecap: round;
-          stroke-linejoin: round;
+            stroke: #2d307b;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         #reweighting-full .cls-7 {
-          stroke: #8191c9;
+            stroke: #8191c9;
         }
 
         #reweighting-full .cls-8 {
-          fill: #8191c9;
+            fill: #8191c9;
         }
 
         #reweighting-full .cls-9 {
-          font-size: 24.25341px;
-          fill: #d1d3d4;
-          font-family: Arial-BoldMT, Arial;
-          font-weight: 700;
+            font-size: 24.25341px;
+            fill: #d1d3d4;
+            font-family: Arial-BoldMT, Arial;
+            font-weight: 700;
         }
-      </style>
+    </style>
+  <figure id="reweighting" class="l-text">
 
-      <div id="reweighting-full">
-      <svg viewBox="0 0 293.92624 293.92633">
-        <g id="background">
-          <rect class="cls-1" x="182.00345" y="4.47957" width="47.96635" height="47.96635"/>
-          <rect class="cls-2" x="0.05169" y="0.34616" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="59.4495" y="0.40632" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="118.61002" y="0.41807" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="0.05169" y="59.75541" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="59.4495" y="59.81557" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="118.61002" y="59.82731" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="177.9302" y="59.85081" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="0.05169" y="118.9093" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="59.4495" y="118.96946" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="118.61002" y="118.98121" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="177.9302" y="119.0047" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="0.05169" y="178.31855" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="59.4495" y="178.37871" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="118.61002" y="178.39046" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="177.9302" y="178.41395" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="0.05169" y="237.67423" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="59.4495" y="237.73439" width="56.11284" height="56.11284"/>
-          <rect class="cls-2" x="118.61003" y="237.74613" width="56.11285" height="56.11281"/>
-          <rect class="cls-2" x="177.9302" y="237.76963" width="56.11284" height="56.11284"/>
-          <circle class="cls-3" cx="28.10811" cy="28.40258" r="17.77298"/>
-          <circle class="cls-3" cx="87.50592" cy="28.48625" r="17.77298"/>
-          <circle class="cls-3" cx="205.93014" cy="147.62242" r="17.77298"/>
-          <circle class="cls-3" cx="27.75183" cy="206.58113" r="17.77298"/>
-          <circle class="cls-3" cx="87.14964" cy="206.37497" r="17.77298"/>
-          <circle class="cls-3" cx="205.93014" cy="206.52757" r="17.77298"/>
-          <circle class="cls-3" cx="27.75183" cy="266.39172" r="17.77298"/>
-          <circle class="cls-3" cx="87.14964" cy="267.64814" r="17.77298"/>
-          <circle class="cls-3" cx="205.93014" cy="266.33815" r="17.77298"/>
-          <rect class="cls-4" x="238.60313" y="2.47146" width="55.147" height="290.43915"/>
-          <circle class="cls-3" cx="27.68222" cy="87.35202" r="17.77298"/>
-        </g>
-        <g id="right-path">
-          <line class="cls-5" x1="147.26" y1="87.94907" x2="244.851" y2="87.94907"/>
-        </g>
-        <g id="up-path">
-          <polyline class="cls-6" points="147.26 87.949 147.26 26.856 186.377 26.856"/>
-        </g>
-        <g id="downstream">
-          <polyline class="cls-7" points="147.111 268.043 147.111 133.574 147.111 84.699"/>
-          <path class="cls-7" d="M27.75183,148.02255H69.62388a17.69918,17.69918,0,0,0,17.70937-17.70937l-.04514-24.72539a17.69919,17.69919,0,0,1,17.70937-17.70937l24.48954.07065h17.59692"/>
-          <circle class="cls-8" cx="27.75183" cy="147.67598" r="17.77298"/>
-          <circle class="cls-8" cx="87.14964" cy="147.75966" r="17.77298"/>
-          <circle class="cls-8" cx="147.26" cy="147.75966" r="17.77298"/>
-          <circle class="cls-8" cx="147.26" cy="206.6648" r="17.77298"/>
-          <circle class="cls-8" cx="147.26001" cy="266.47539" r="17.77299"/>
-          <circle class="cls-8" cx="147.26" cy="87.94907" r="17.77298"/>
-          <circle class="cls-8" cx="87.14964" cy="87.94907" r="17.77298"/>
-        </g>
-        <g id="foreground">
-          <circle class="cls-4" cx="205.93014" cy="87.81183" r="17.77298"/>
-          <circle class="cls-1" cx="147.61628" cy="28.48625" r="17.77298"/>
-          <text class="cls-9" transform="translate(188.17039 33.69667)">+2</text>
-          <text class="cls-9" transform="translate(248.31443 96.99745)">-1</text>
-        </g>
-      </svg>
-  </div>
-      <div class="figcaption">
-        <div>Weight of blue Q-value: <span id="q-value-label"></span></div>
-        <d-slider id="q-value-slider" min="0" max="1" step="0.01" ticks="10" style="width: 100%;"></d-slider>
-        Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
-      </div>
-  </figure>
-  <script src="vis/reweighting.js"></script>
+    <div class="wrapper">
+        <img src="figures/reweighting-1.svg"/>
+        <div class="figcaption">
+            Multiple paths of experience intersect at this state.
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <img src="figures/reweighting-2.svg"/>
+        <div class="figcaption">
+            Paths that exit the state through different actions get associated with different Q-values.
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <svg width="100%" id="reweighting-full" viewBox="0 0 294 294">
+            <g id="background">
+            <rect class="cls-1" x="182.00345" y="4.47957" width="47.96635" height="47.96635"/>
+            <rect class="cls-2" x="0.05169" y="0.34616" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="59.4495" y="0.40632" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="118.61002" y="0.41807" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="0.05169" y="59.75541" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="59.4495" y="59.81557" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="118.61002" y="59.82731" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="177.9302" y="59.85081" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="0.05169" y="118.9093" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="59.4495" y="118.96946" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="118.61002" y="118.98121" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="177.9302" y="119.0047" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="0.05169" y="178.31855" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="59.4495" y="178.37871" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="118.61002" y="178.39046" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="177.9302" y="178.41395" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="0.05169" y="237.67423" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="59.4495" y="237.73439" width="56.11284" height="56.11284"/>
+            <rect class="cls-2" x="118.61003" y="237.74613" width="56.11285" height="56.11281"/>
+            <rect class="cls-2" x="177.9302" y="237.76963" width="56.11284" height="56.11284"/>
+            <circle class="cls-3" cx="28.10811" cy="28.40258" r="17.77298"/>
+            <circle class="cls-3" cx="87.50592" cy="28.48625" r="17.77298"/>
+            <circle class="cls-3" cx="205.93014" cy="147.62242" r="17.77298"/>
+            <circle class="cls-3" cx="27.75183" cy="206.58113" r="17.77298"/>
+            <circle class="cls-3" cx="87.14964" cy="206.37497" r="17.77298"/>
+            <circle class="cls-3" cx="205.93014" cy="206.52757" r="17.77298"/>
+            <circle class="cls-3" cx="27.75183" cy="266.39172" r="17.77298"/>
+            <circle class="cls-3" cx="87.14964" cy="267.64814" r="17.77298"/>
+            <circle class="cls-3" cx="205.93014" cy="266.33815" r="17.77298"/>
+            <rect class="cls-4" x="238.60313" y="2.47146" width="55.147" height="290.43915"/>
+            <circle class="cls-3" cx="27.68222" cy="87.35202" r="17.77298"/>
+            </g>
+            <g id="right-path">
+            <line class="cls-5" x1="147.26" y1="87.94907" x2="244.851" y2="87.94907"/>
+            </g>
+            <g id="up-path">
+            <polyline class="cls-6" points="147.26 87.949 147.26 26.856 186.377 26.856"/>
+            </g>
+            <g id="downstream">
+            <polyline class="cls-7" points="147.111 268.043 147.111 133.574 147.111 84.699"/>
+            <path class="cls-7" d="M27.75183,148.02255H69.62388a17.69918,17.69918,0,0,0,17.70937-17.70937l-.04514-24.72539a17.69919,17.69919,0,0,1,17.70937-17.70937l24.48954.07065h17.59692"/>
+            <circle class="cls-8" cx="27.75183" cy="147.67598" r="17.77298"/>
+            <circle class="cls-8" cx="87.14964" cy="147.75966" r="17.77298"/>
+            <circle class="cls-8" cx="147.26" cy="147.75966" r="17.77298"/>
+            <circle class="cls-8" cx="147.26" cy="206.6648" r="17.77298"/>
+            <circle class="cls-8" cx="147.26001" cy="266.47539" r="17.77299"/>
+            <circle class="cls-8" cx="147.26" cy="87.94907" r="17.77298"/>
+            <circle class="cls-8" cx="87.14964" cy="87.94907" r="17.77298"/>
+            </g>
+            <g id="foreground">
+            <circle class="cls-4" cx="205.93014" cy="87.81183" r="17.77298"/>
+            <circle class="cls-1" cx="147.61628" cy="28.48625" r="17.77298"/>
+            <text class="cls-9" transform="translate(188.17039 33.69667)">+2</text>
+            <text class="cls-9" transform="translate(248.31443 96.99745)">-1</text>
+            </g>
+        </svg>
+        <div class="figcaption">
+            <div>Weight of blue Q-value: <span id="q-value-label"></span></div>
+            <d-slider id="q-value-slider" min="0" max="1" step="0.01" ticks="10" style="width: 100%;"></d-slider>
+            Whenever we re-weight Q-values, we also re-weight the paths that pass through them.
+        </div>
+    </div>
+</figure>
+<script src="vis/reweighting.js"></script>
 
 
     <p>
@@ -901,35 +922,40 @@
       <!-- ut as the number of states becomes large or infinite -- as is the case in many interesting RL problems -- it becomes impossible to store a value estimate for each state. -->
     </p>
 
-  <style>
-  #fnapprox-intro {
-    margin-left: auto;
-    margin-right: auto;
-    width: 850px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: column;
-  }
-  </style>
-  <figure id="fnapprox-intro" class="l-page">
-      <img src="figures/large-cliffworld-states.svg"/>
-      <div class="figcaption">
-        <b>Large or infinite state spaces</b> are a characteristic of many interesting RL problems. Value estimation in these spaces often requires function approximation.
-      </div>
+    <style>
+        #figure-fnapprox-intro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-column-gap: 20px;
+            grid-row-gap: 10px;
+            /* grid-auto-flow: column; */
+        }
+    </style>
+    <figure id="figure-fnapprox-intro" class="l-page">
+        <div class="wrapper">
+            <img src="figures/large-cliffworld-states.svg" />
+            <div class="figcaption">
+                <b>Large or infinite state spaces</b> are a characteristic of many interesting RL problems. Value estimation
+                in these spaces often requires function approximation.
+            </div>
+        </div>
 
-      <img src="figures/large-cliffworld-path.svg"/>
-      <div class="figcaption">
-        <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of memory and don't generalize.
-      </div>
+        <div class="wrapper">
+            <img src="figures/large-cliffworld-path.svg" />
+            <div class="figcaption">
+                <b>Tabular value functions</b> keep value estimates for each individual state. They consume a great deal of
+                memory and don't generalize.
+            </div>
+        </div>
 
-      <img src="figures/large-cliffworld-approx.svg"/>
-      <div class="figcaption">
-        <b>Euclidean averagers</b> – which are a type of function approximator – save memory and let agents generalize to states they haven't visited yet.
-      </div>
-  </figure>
+        <div class="wrapper">
+            <img src="figures/large-cliffworld-approx.svg" />
+            <div class="figcaption">
+                <b>Euclidean averagers</b> – which are a type of function approximator – save memory and let agents
+                generalize to states they haven't visited yet.
+            </div>
+        </div>
+    </figure>
 
     <p>
       Instead, we must force our value estimator to have fewer parameters than there are states. We can do this with machine learning methods such as linear regression, decision trees, or neural networks. All of these methods fall under the umbrella of function approximation.
@@ -1013,24 +1039,11 @@
       But as training progresses, neural networks can actually learn to overcome these errors. They learn which states are "nearby" from experience. In the Cliff World example, we might expect a fully-trained neural network to have learned that value updates to states <i>above</i> the barrier should never affect the values of states <i>below</i> the barrier. This isn't something that most other function approximators can do. It's one of the reasons deep RL is so interesting!
     </p>
 
-      <style>
-  #nn-latent-distance {
-    margin-left: auto;
-    margin-right: auto;
-    width: 550px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    grid-column-gap: 20px;
-    grid-row-gap: 10px;
-    grid-auto-flow: row;
-  }
-  </style>
-  <figure id="nn-latent-distance" class="l-page">
+  <figure id="nn-latent-distance" class="l-text">
       <img src="figures/latent-distance.png"/>
-      <div class="figcaption">
+      <figcaption>
         A distance metric learned by a neural network <d-cite key="Srinivas2018UniversalNetworks"></d-cite>. <b>Lighter blue $\rightarrow$ more distant</b>. The agent, which was trained to grasp objects using the robotic arm, takes into account obstacles and arm length when it measures the distance between two states.
-      </div>
+      </figcaption>
   </figure>
 
     <p>

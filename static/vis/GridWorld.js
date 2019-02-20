@@ -163,14 +163,14 @@ GridWorld.Env = function Env(config) {
 
     info["V"].selectAll("line").remove();
 
-    info["V"].append("line").attr("x2", 40).attr("y2", 0).attr("class", "left").attr("id", "connector")
-             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
-    info["V"].append("line").attr("x2", -39).attr("y2", 0).attr("class", "right").attr("id", "connector")
-             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", 50).attr("y2", 0).attr("class", "left").attr("id", "connector")
+             .style("stroke-width", "10px").attr("visibility", "hidden");
+    info["V"].append("line").attr("x2", -50).attr("y2", 0).attr("class", "right").attr("id", "connector")
+             .style("stroke-width", "10px").attr("visibility", "hidden");
     info["V"].append("line").attr("x2", 0).attr("y2", 50).attr("class", "up").attr("id", "connector")
-             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+             .style("stroke-width", "10px").attr("visibility", "hidden");
     info["V"].append("line").attr("x2", 0).attr("y2", -50).attr("class", "down").attr("id", "connector")
-             .style("stroke-width", S(0.13)).attr("visibility", "hidden");
+             .style("stroke-width", "10px").attr("visibility", "hidden");
 
     // this.info = info;
     // _.values(info).forEach(s => s.style("display", "none"));
