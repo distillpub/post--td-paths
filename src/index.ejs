@@ -72,7 +72,7 @@
       These value estimators behave differently where paths of experience intersect.
     </div>
   </div>
-  <figure id="compare-figure">
+  <figure id="compare-figure" style="grid-column: text-start/page-end;">
     <div id="MC">
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
         <figcaption>
@@ -228,7 +228,7 @@
       Intersections between two trajectories are handled differently under this update. Unlike Monte Carlo, TD updates merge intersections so that the return flows backwards to all preceding states.
     <p>
 
-  <figure id="cliffworld-td" class="l-body">
+<!--   <figure id="cliffworld-td" class="l-body">
         <div class="subfigure">
             <img src="figures/cliffworld-path1.svg"/>
             <div class="figcaption">
@@ -249,7 +249,32 @@
                 TD learning merges paths where they intersect.
             </div>
         </div>
-  </figure>
+  </figure> -->
+
+  <figure id="cliffworld-mc" class="base-grid">
+    <div class="l-text">
+        <div class="subfigure">
+            <img src="figures/cliffworld-path1.svg" />
+            <div class="figcaption">
+                Sometimes the agent reaches its goal.
+            </div>
+        </div>
+
+        <div class="subfigure">
+            <img src="figures/cliffworld-path2.svg" />
+            <div class="figcaption">
+                Other times it falls off the cliff.
+            </div>
+        </div>
+
+        <div class="subfigure">
+            <img src="figures/cliffworld-td.svg" />
+            <div class="figcaption">
+                TD learning merges paths where they intersect.
+            </div>
+        </div>
+    </div>
+</figure>
 
     <p>
       What does it mean to "merge trajectories" in a more formal sense? Why might it be a good idea? One thing to notice is that $V(s_{t+1})$ can be written as the expectation over all of its TD updates:
@@ -421,7 +446,7 @@
     </p>
 
   <style>
-  figure#compare-mctd {
+  #compare-mctd {
     display: grid;
     grid-gap: 40px;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -517,9 +542,10 @@
   #qlearning-intro {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    grid-column-gap: 30px;
   }
   </style>
-  <figure id="qlearning-intro">
+  <figure id="qlearning-intro" style="max-width: 600px;">
     <div>
         <img src="figures/policy.svg"/>
         <div class="figcaption">
@@ -683,7 +709,7 @@
         #reweighting {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            grid-gap: 20px;
+            grid-gap: 30px;
         }
         /* #reweighting .wrapper {
             min-width: 160px;
@@ -837,15 +863,29 @@
             display: grid;
             grid-template-columns: .4fr 1fr;
             grid-template-rows: auto auto;
+            grid-row-gap: 30px;
+            grid-column-gap: 30px;
             grid-auto-flow: row;
         }
+
+/*        #q-learning .wrapper {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        #q-learning .figcaption {
+          flex: 1 0 1px;
+          margin-right: 20px;
+        }
+        #q-learning .diagram {
+          flex: 3.4 0 1px;
+        }*/
     </style>
     <figure id="q-learning" class="l-body">
         <div class="wrapper">
             <div class="figcaption">
                 <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
             </div>
-            <img src="figures/q-learning.svg" />
+            <img class="diagram" src="figures/q-learning.svg" />
         </div>
     </figure>
 
@@ -887,7 +927,7 @@
         <div class="wrapper">
             <h4>On-policy methods</h4>
             <div></div>
-            <div class="figcaption">
+            <div class="figcaption" id="overview-caption">
                 <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
             </div>
             <img src="figures/sarsa.svg" />

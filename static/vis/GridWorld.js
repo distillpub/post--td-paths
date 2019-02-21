@@ -130,7 +130,7 @@ GridWorld.Env = function Env(config) {
         return "translate(" + S(2.5+0.2) + "," + S(0.0+0.1) + ")";
       })
       .style("fill", '#CAC9CC')
-      .style("font", 'bold 20px sans-serif')
+      .style("font", 'bold 30px sans-serif')
       .text("+2");
 
     foreground.append("text")
@@ -138,7 +138,7 @@ GridWorld.Env = function Env(config) {
         return "translate(" + S(3.5+0.2) + "," + S(1+0.1) + ")";
       })
       .style("fill", '#CAC9CC')
-      .style("font", 'bold 20px sans-serif')
+      .style("font", 'bold 30px sans-serif')
       .text("–1");
 
     var info = {};
