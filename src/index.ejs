@@ -189,7 +189,9 @@
   <p>
     Let's write Monte Carlo a bit more formally.
     In RL, we often describe algorithms with update rules, which tell us how estimates change with one more episode.
-    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>In tabular settings such as the Cliff World example, this "update towards" operator computes a running average. More specifically, the $n^{th}$ Monte Carlo update is $ V(s_t) = V(s_{t-1}) + \frac{1}{n} \bigr[ R_{n} - V(s_t) \bigl] $ and we could just as easily use the "+=" notation. But when using parameteric function approximators such as neural networks, our "update towards" operator may represent a gradient step, which cannot be written in "+=" notation. In order to keep our notation clean and general, we chose to use the $\hookleftarrow$ operator throughout.
+    We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>
+
+    In tabular settings such as the Cliff World example, this "update towards" operator computes a running average. More specifically, the $n^{th}$ Monte Carlo update is $ V(s_t) = V(s_{t-1}) + \frac{1}{n} \bigr[ R_{n} - V(s_t) \bigl] $ and we could just as easily use the "+=" notation. But when using parameteric function approximators such as neural networks, our "update towards" operator may represent a gradient step, which cannot be written in "+=" notation. In order to keep our notation clean and general, we chose to use the $\hookleftarrow$ operator throughout.</d-footnote>
   </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
@@ -1106,7 +1108,7 @@
 
     <p>
 
-      Over the last few decades, most work in deep RL has preferred TD learning to Monte Carlo. Indeed, most approaches to deep RL use TD-style value updates. That said, a lot of work goes into making these methods more stable.
+      Over the last few decades, most work in deep RL has preferred TD learning to Monte Carlo. Indeed, many approaches to deep RL use TD-style value updates. With that being said, there are many other ways to use Monte Carlo for reinforcement learning. Our discussion centers around Monte Carlo for value estimation in this article, but it can also be used for policy selection as in Silver et al.<d-cite key="silver2017mastering"></d-cite>
 <!--       There's an informal consensus that TD works better than Monte Carlo for deep RL. Indeed, TD methods have dominated the RL literature for the past several decades. There are still some notable exceptions: one recent paper shows that Monte Carlo can outperform TD methods in certain environments<d-cite key="Amiranashvili2018TDLearning"></d-cite>. -->
     </p>
 
