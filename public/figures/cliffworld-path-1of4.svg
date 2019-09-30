@@ -1,0 +1,79 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.08369 133.06065">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2a2d7c;
+      }
+
+      .cls-2 {
+        fill: #e7ebe8;
+      }
+
+      .cls-3 {
+        fill: #cac9cc;
+      }
+
+      .cls-4 {
+        fill: #bd5f36;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke: #2a2d7c;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 4px;
+      }
+
+      .cls-6 {
+        font-size: 10.97513px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <title>cliffworld-path-1of4</title>
+  <rect class="cls-1" x="82.38894" y="1.89198" width="21.70568" height="21.70568"/>
+  <rect class="cls-2" x="0.05233" y="0.02154" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="26.93096" y="0.04876" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="53.70222" y="0.05408" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="0.05233" y="26.90534" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="26.93096" y="26.93257" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="53.70222" y="26.93788" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="80.54572" y="26.94852" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="0.05233" y="53.6736" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="26.93096" y="53.70082" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="53.70222" y="53.70614" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="80.54572" y="53.71677" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="0.05233" y="80.55741" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="26.93096" y="80.58463" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="53.70222" y="80.58994" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="80.54572" y="80.60058" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="0.05233" y="107.41697" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="26.93096" y="107.4442" width="25.39212" height="25.39212"/>
+  <rect class="cls-2" x="53.70222" y="107.44951" width="25.39212" height="25.39211"/>
+  <rect class="cls-2" x="80.54572" y="107.46014" width="25.39212" height="25.39212"/>
+  <circle class="cls-3" cx="12.74839" cy="12.7176" r="8.04261"/>
+  <circle class="cls-3" cx="39.62702" cy="12.75546" r="8.04261"/>
+  <circle class="cls-3" cx="93.21622" cy="66.66683" r="8.04261"/>
+  <circle class="cls-3" cx="12.58717" cy="93.34676" r="8.04261"/>
+  <circle class="cls-3" cx="39.4658" cy="93.25347" r="8.04261"/>
+  <circle class="cls-3" cx="93.21622" cy="93.32252" r="8.04261"/>
+  <circle class="cls-3" cx="12.58717" cy="120.41218" r="8.04261"/>
+  <circle class="cls-3" cx="39.4658" cy="120.98073" r="8.04261"/>
+  <circle class="cls-3" cx="93.21622" cy="120.38794" r="8.04261"/>
+  <rect class="cls-4" x="108.00136" y="0.98327" width="24.95506" height="131.4292"/>
+  <circle class="cls-3" cx="66.8281" cy="12.75546" r="8.04261"/>
+  <circle class="cls-3" cx="39.4658" cy="39.66351" r="8.04261"/>
+  <circle class="cls-3" cx="66.66687" cy="39.66351" r="8.04261"/>
+  <circle class="cls-3" cx="93.21622" cy="39.6014" r="8.04261"/>
+  <circle class="cls-3" cx="12.58717" cy="66.69106" r="8.04261"/>
+  <circle class="cls-3" cx="39.4658" cy="66.72893" r="8.04261"/>
+  <circle class="cls-3" cx="66.66687" cy="66.72893" r="8.04261"/>
+  <circle class="cls-3" cx="66.66687" cy="93.38462" r="8.04261"/>
+  <circle class="cls-3" cx="66.66687" cy="120.45004" r="8.04261"/>
+  <path class="cls-5" d="M83.63554,12.74866h-8.8192a8.00922,8.00922,0,0,0-8.01382,8.01383l-.16443,10.88719a8.00922,8.00922,0,0,1-8.01383,8.01383l-11.082-.032a8.00922,8.00922,0,0,0-8.01382,8.01382l.02043,11.18871a8.00921,8.00921,0,0,1-8.01383,8.01382H12.58717"/>
+  <circle class="cls-3" cx="12.55567" cy="39.39333" r="8.04261"/>
+  <text class="cls-6" transform="translate(85.17996 15.11287)">+2</text>
+</svg>

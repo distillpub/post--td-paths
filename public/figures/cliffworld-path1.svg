@@ -1,0 +1,82 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.21968 133.26853">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e7ebe8;
+      }
+
+      .cls-2 {
+        fill: #cac9cc;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #2a2d7c;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+
+      .cls-4 {
+        fill: #2a2d7c;
+      }
+
+      .cls-5 {
+        fill: #bd5f36;
+      }
+
+      .cls-6 {
+        font-size: 11px;
+        fill: #d1d3d4;
+        font-family: MyriadPro-Semibold, Myriad Pro;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <title>cliffworld-path1</title>
+  <rect class="cls-1" x="0.00779" y="-0.00564" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.94734" y="0.02164" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.77926" y="0.02697" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.00779" y="26.93909" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.94734" y="26.96638" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.77926" y="26.9717" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.6836" y="26.98236" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.00779" y="53.76801" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.94734" y="53.7953" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.77926" y="53.80062" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.6836" y="53.81128" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.00779" y="80.71275" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.94734" y="80.74003" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.77926" y="80.74536" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.6836" y="80.75601" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.00779" y="107.63318" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.94734" y="107.66047" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.77926" y="107.6658" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.6836" y="107.67645" width="25.44966" height="25.44966"/>
+  <circle class="cls-2" cx="12.73262" cy="12.71919" r="8.06084"/>
+  <circle class="cls-2" cx="39.67217" cy="12.75714" r="8.06084"/>
+  <circle class="cls-2" cx="12.57103" cy="39.68822" r="8.06084"/>
+  <circle class="cls-2" cx="93.38282" cy="66.79068" r="8.06084"/>
+  <circle class="cls-2" cx="12.57103" cy="93.53108" r="8.06084"/>
+  <line class="cls-3" x1="12.57103" y1="66.81498" x2="39.51058" y2="66.85293"/>
+  <line class="cls-3" x1="39.51058" y1="39.72617" x2="39.51058" y2="66.85293"/>
+  <line class="cls-3" x1="66.7733" y1="39.72617" x2="39.51058" y2="39.72617"/>
+  <line class="cls-3" x1="66.93489" y1="12.75714" x2="66.7733" y2="39.72617"/>
+  <line class="cls-3" x1="93.40843" y1="12.71919" x2="66.93489" y2="12.75714"/>
+  <circle class="cls-4" cx="66.93489" cy="12.75714" r="8.06084"/>
+  <circle class="cls-4" cx="39.51058" cy="39.72617" r="8.06084"/>
+  <circle class="cls-4" cx="66.7733" cy="39.72617" r="8.06084"/>
+  <circle class="cls-2" cx="93.38282" cy="39.66392" r="8.06084"/>
+  <circle class="cls-4" cx="12.57103" cy="66.81498" r="8.06084"/>
+  <circle class="cls-4" cx="39.51058" cy="66.85293" r="8.06084"/>
+  <circle class="cls-2" cx="66.7733" cy="66.85293" r="8.06084"/>
+  <circle class="cls-2" cx="39.51058" cy="93.43758" r="8.06084"/>
+  <circle class="cls-2" cx="12.57103" cy="120.65784" r="8.06084"/>
+  <circle class="cls-2" cx="39.51058" cy="121.22768" r="8.06084"/>
+  <rect class="cls-5" x="108.20147" y="0.95828" width="25.01161" height="131.72706"/>
+  <circle class="cls-2" cx="93.38282" cy="93.50679" r="8.06084"/>
+  <circle class="cls-2" cx="66.7733" cy="93.56903" r="8.06084"/>
+  <circle class="cls-2" cx="66.7733" cy="120.69579" r="8.06084"/>
+  <circle class="cls-2" cx="93.38282" cy="120.63355" r="8.06084"/>
+  <rect class="cls-4" x="82.50538" y="1.77436" width="21.75487" height="21.75487"/>
+  <text class="cls-6" transform="translate(85.37296 15.11989)">+2</text>
+</svg>

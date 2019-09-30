@@ -1,0 +1,82 @@
+#playground .cell rect {
+	fill: #e7e7e7;
+}
+#playground .Q .triangle {
+}
+#playground .goal {
+	fill: #2d307b;
+}
+#playground .cliff {
+	fill: #bd5f35;
+}
+#playground .control-panel {
+	/*background-color: #efe7e7;*/
+	/* border-radius: 0px; */
+	/* min-width: min-content; */
+	display: grid;
+	/* flex-direction: column; */
+}
+#playground .control-panel h2 {
+	/*  margin-top: 15px;*/
+	font-weight: 700;
+	font-size: 1em;
+}
+
+#playground .label {
+	font-size: 14px;
+}
+
+#playground .tiny {
+	font-size: 12px;
+}
+
+/* 2019-09-25 Ludwig recommendations */
+
+#playground select {
+	padding: 0.25em;
+	border-color: #eee;
+}
+
+#playground select option {
+	/* min-height: max-content; */
+	padding: 0.25em 0;
+}
+
+#playground button {
+	padding: 0.5em;
+	background-color: #eee;
+	border-radius: 0.5em;
+}
+
+#playground {
+	display: grid;
+	grid-template:
+		"controls"
+		"vis";
+	grid-gap: 1em;
+}
+
+#playground .controls {
+	grid-area: controls;
+	display: grid;
+	grid-gap: 0.5em;
+}
+
+#playground .control-panel {
+	display: inherit;
+}
+
+#playground .visualization {
+	margin: 0 auto;
+	grid-area: vis;
+}
+
+@media (min-width: 768px) {
+	#playground {
+		grid-template: "controls vis";
+	}
+}
+
+#playground h5 {
+	margin: 0;
+}

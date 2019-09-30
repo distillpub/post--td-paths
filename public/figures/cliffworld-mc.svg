@@ -1,0 +1,99 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.23178 133.17554">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e7ebe8;
+      }
+
+      .cls-2 {
+        fill: #cac9cc;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        stroke: #2a2d7c;
+      }
+
+      .cls-4 {
+        stroke: #bd5f36;
+      }
+
+      .cls-5 {
+        fill: #2a2d7c;
+      }
+
+      .cls-6 {
+        fill: #8191c8;
+      }
+
+      .cls-7 {
+        fill: #bd5f36;
+      }
+
+      .cls-8 {
+        font-size: 11px;
+        fill: #d1d3d4;
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <title>cliffworld-mc</title>
+  <rect class="cls-1" x="0.02095" y="-0.01406" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.96049" y="0.01322" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.79242" y="0.01855" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.02095" y="26.93067" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.96049" y="26.95796" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.79242" y="26.96328" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.69676" y="26.97394" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.02095" y="53.75959" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.96049" y="53.78688" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.79242" y="53.7922" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.69676" y="53.80286" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.02095" y="80.70433" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.96049" y="80.73161" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.79242" y="80.73694" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.69676" y="80.74759" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="0.02095" y="107.62476" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="26.96049" y="107.65205" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="53.79242" y="107.65738" width="25.44966" height="25.44966"/>
+  <rect class="cls-1" x="80.69676" y="107.66803" width="25.44966" height="25.44966"/>
+  <circle class="cls-2" cx="12.74578" cy="12.71077" r="8.06084"/>
+  <circle class="cls-2" cx="39.68532" cy="12.74872" r="8.06084"/>
+  <circle class="cls-2" cx="12.58419" cy="39.6798" r="8.06084"/>
+  <circle class="cls-2" cx="93.39597" cy="66.78226" r="8.06084"/>
+  <circle class="cls-2" cx="12.58419" cy="93.52266" r="8.06084"/>
+  <line class="cls-3" x1="12.58419" y1="66.80656" x2="39.52374" y2="66.84451"/>
+  <line class="cls-3" x1="39.52374" y1="39.71775" x2="39.52374" y2="66.84451"/>
+  <line class="cls-3" x1="66.78646" y1="39.71775" x2="39.52374" y2="39.71775"/>
+  <line class="cls-3" x1="66.94805" y1="12.74872" x2="66.78646" y2="39.71775"/>
+  <line class="cls-3" x1="93.42159" y1="12.71077" x2="66.94805" y2="12.74872"/>
+  <line class="cls-4" x1="66.51725" y1="66.48442" x2="66.51725" y2="93.49837"/>
+  <line class="cls-4" x1="66.78646" y1="39.71775" x2="66.51725" y2="66.48442"/>
+  <line class="cls-4" x1="93.42159" y1="39.6555" x2="66.78646" y2="39.71775"/>
+  <line class="cls-4" x1="120.72043" y1="39.71775" x2="93.39597" y2="39.6555"/>
+  <circle class="cls-5" cx="66.94805" cy="12.74872" r="8.06084"/>
+  <circle class="cls-5" cx="39.52374" cy="39.71775" r="8.06084"/>
+  <circle class="cls-6" cx="66.78646" cy="39.71775" r="8.06084"/>
+  <circle class="cls-7" cx="93.39597" cy="39.6555" r="8.06084"/>
+  <circle class="cls-5" cx="12.58419" cy="66.80656" r="8.06084"/>
+  <circle class="cls-5" cx="39.52374" cy="66.84451" r="8.06084"/>
+  <circle class="cls-7" cx="66.78646" cy="66.84451" r="8.06084"/>
+  <circle class="cls-2" cx="39.52374" cy="93.42916" r="8.06084"/>
+  <circle class="cls-2" cx="12.58419" cy="120.64942" r="8.06084"/>
+  <circle class="cls-2" cx="39.52374" cy="121.21927" r="8.06084"/>
+  <rect class="cls-7" x="108.21462" y="0.94986" width="25.01161" height="131.72706"/>
+  <line class="cls-4" x1="66.78646" y1="120.68737" x2="66.78646" y2="93.56061"/>
+  <circle class="cls-2" cx="93.39597" cy="93.49837" r="8.06084"/>
+  <circle class="cls-7" cx="66.78646" cy="93.56061" r="8.06084"/>
+  <circle class="cls-7" cx="66.78646" cy="120.68737" r="8.06084"/>
+  <circle class="cls-2" cx="93.39597" cy="120.62513" r="8.06084"/>
+  <rect class="cls-5" x="82.51854" y="1.76594" width="21.75487" height="21.75487"/>
+  <text class="cls-8" transform="translate(111.59234 42.67595)">-1</text>
+  <text class="cls-8" transform="translate(85.3413 15.11147)">+2</text>
+</svg>

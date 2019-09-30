@@ -1,0 +1,59 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 155">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e7ebe8;
+      }
+
+      .cls-2 {
+        fill: #cac9cc;
+      }
+
+      .cls-3, .cls-5 {
+        fill: none;
+        stroke-width: 10px;
+      }
+
+      .cls-3 {
+        stroke: #bd5f36;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4 {
+        fill: #bd5f36;
+      }
+
+      .cls-5 {
+        stroke: #2a2d7c;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .cls-6 {
+        fill: #2a2d7c;
+      }
+    </style>
+  </defs>
+  <title>reweighting-1</title>
+  <rect class="cls-1" x="19.52074" y="33.78432" width="100.97058" height="100.97058"/>
+  <circle class="cls-2" cx="70.07409" cy="83.38717" r="31.98106"/>
+  <rect class="cls-1" x="-86.62162" y="-72.35866" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="19.80366" y="-72.25087" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="125.80379" y="-72.22983" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="-86.62162" y="34.08711" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="125.80379" y="34.21595" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="-86.62162" y="140.43691" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="19.80366" y="140.5447" width="100.53947" height="100.53947"/>
+  <rect class="cls-1" x="125.8038" y="140.56573" width="100.5395" height="100.53943"/>
+  <circle class="cls-2" cx="69.43503" cy="-20.66641" r="31.84452"/>
+  <circle class="cls-2" cx="177.13703" cy="-20.66641" r="31.84452"/>
+  <circle class="cls-2" cx="177.13703" cy="84.87616" r="31.84452"/>
+  <g>
+    <path class="cls-3" d="M130.82,84.219H103.00017a32.17585,32.17585,0,0,0-32.19458,32.19434v32.14688"/>
+    <polygon class="cls-4" points="120.147 70.147 126.126 84.219 120.147 98.291 153.505 84.219 120.147 70.147"/>
+  </g>
+  <g>
+    <path class="cls-5" d="M70.95964,23.20118v29.3194a31.84836,31.84836,0,0,1-31.8667,31.86661H5.67961"/>
+    <polygon class="cls-6" points="56.888 33.874 70.96 27.896 85.031 33.874 70.96 0.516 56.888 33.874"/>
+  </g>
+</svg>
