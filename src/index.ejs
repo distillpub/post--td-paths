@@ -74,7 +74,7 @@
       These value estimators behave differently where paths of experience intersect.
     </div>
   </div>
-  <figure id="compare-figure" style="grid-column: text-start/page-end;">
+  <figure id="compare-figure" style="grid-column: text-start/page-end; overflow-x: visible">
     <div id="MC">
         <svg width=380 height=380 viewbox="0 0 380 380"></svg>
         <figcaption>
@@ -651,18 +651,7 @@
       A better way of estimating the next state's value is with a weighted sum<d-footnote>Also written as an expectation value, hence "Expected Sarsa".</d-footnote> over its Q-values. We call this approach Expected Sarsa:
     </p>
 
-    <style>
-        #expected-sarsa .wrapper {
-            width: 700px;
-            display: grid;
-            grid-template-columns: .4fr 1fr;
-            grid-template-rows: auto auto;
-            grid-row-gap: 30px;
-            grid-column-gap: 30px;
-            grid-auto-flow: row;
-        }
-    </style>
-    <figure id="expected-sarsa" class="l-body">
+    <figure id="expected-sarsa" class="l-body two-column-math">
         <div class="wrapper">
             <div class="figcaption">
                 <b>Sarsa</b> uses the Q-value associated with $a_{t+1}$ to estimate the next state's value.
@@ -682,17 +671,7 @@
     <p>
       <b>Off-policy value learning.</b> We can push this idea even further. Instead of weighting Q-values by the true policy distribution, we can weight them by an arbitrary policy, $\pi^{off}$:
     </p>
-    <style>
-        #off-policy .wrapper {
-            width: 700px;
-            display: grid;
-            grid-template-columns: .4fr 1fr;
-            grid-template-rows: auto auto;
-            grid-auto-flow: row;
-            grid-column-gap: 30px;
-        }
-    </style>
-    <figure id="off-policy" class="l-body">
+    <figure id="off-policy" class="l-body two-column-math">
         <div class="wrapper">
             <div class="figcaption">
                 <b>Off-policy value learning</b> weights Q-values by an arbitrary policy.
@@ -862,29 +841,9 @@
     </p>
 
     <style>
-        #q-learning .wrapper {
-            width: 700px;
-            display: grid;
-            grid-template-columns: .4fr 1fr;
-            grid-template-rows: auto auto;
-            grid-row-gap: 30px;
-            grid-column-gap: 30px;
-            grid-auto-flow: row;
-        }
-
-/*        #q-learning .wrapper {
-          display: flex;
-          flex-wrap: wrap;
-        }
-        #q-learning .figcaption {
-          flex: 1 0 1px;
-          margin-right: 20px;
-        }
-        #q-learning .diagram {
-          flex: 3.4 0 1px;
-        }*/
+      
     </style>
-    <figure id="q-learning" class="l-body">
+    <figure id="q-learning" class="l-body two-column-math">
         <div class="wrapper">
             <div class="figcaption">
                 <b>Q-learning</b> estimates value under the optimal policy by choosing the max Q-value.
@@ -914,20 +873,7 @@
       <b>Putting it together. </b> It's easy to think of Sarsa, Expected Sarsa, Q-learning, and Double Q-learning as different algorithms. But as we've seen, they are simply different ways of estimating $V(s_{t+1})$ in a TD update.
     </p>
 
-    <style>
-        #overview .wrapper {
-            margin-left: auto;
-            margin-right: auto;
-            width: 700px;
-            display: grid;
-            grid-template-columns: .4fr 1fr;
-            grid-template-rows: auto auto;
-            grid-row-gap: 30px;
-            grid-column-gap: 30px;
-            grid-auto-flow: row;
-        }
-    </style>
-    <figure id="overview" class="l-page">
+    <figure id="overview" class="l-page two-column-math">
         <div class="wrapper">
             <h4>On-policy methods</h4>
             <div></div>
@@ -1030,7 +976,6 @@
         #fnapprox-barrier .wrapper {
             margin-left: auto;
             margin-right: auto;
-            width: 700px;
             display: grid;
             grid-template-columns: 1fr 1.464fr;
             grid-template-rows: auto auto;
@@ -1056,23 +1001,8 @@
     <p>
       <b>Merging the wrong paths.</b> The diagram below shows the effects of merging the wrong paths a bit more explicitly. Since the Euclidean averager is to blame for poor generalization, both Monte Carlo and TD make bad value updates. However, TD learning amplifies these errors dramatically whereas Monte Carlo does not.
     </p>
-    <style>
-        #fnapprox-compare .wrapper {
-            margin-left: auto;
-            margin-right: auto;
-            width: 675px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto;
-            grid-column-gap: 20px;
-            grid-row-gap: 10px;
-            grid-auto-flow: column;
-        }
-    </style>
     <figure id="fnapprox-compare" class="l-page">
-        <div class="wrapper">
-            <img src="figures/compare-function-approx.svg" />
-        </div>
+      <img src="figures/compare-function-approx.svg" />
     </figure>
 
     <p>
@@ -1129,7 +1059,7 @@
 
     <h4>Gridworld playground</h4>
 
-    <div id="playground" style="overflow-x: scroll;"></div>
+    <div id="playground"></div>
     <script src="vis/Playground.js" charset="utf-8"></script>
 
 </d-article>
