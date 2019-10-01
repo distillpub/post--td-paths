@@ -125,14 +125,14 @@
 	labels
 		.append("label")
 		.attr("for", "playground-policy-slider")
-		.text("explore")
+		.text("exploit")
 		.attr("class", "label");
 	// .style("font-size", "11px");
 
 	labels
 		.append("label")
 		.attr("for", "playground-policy-slider")
-		.text("exploit")
+		.text("explore")
 		.attr("class", "label")
 		.style("float", "right");
 	// .style("font-size", "11px");
