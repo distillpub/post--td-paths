@@ -188,7 +188,7 @@
     In RL, we often describe algorithms with update rules, which tell us how estimates change with one more episode.
     We'll use an "updates toward" ($\hookleftarrow$) operator to keep equations simple.<d-footnote>
 
-    In tabular settings such as the Cliff World example, this "update towards" operator computes a running average. More specifically, the $n^{th}$ Monte Carlo update is $ V(s_t) = V(s_{t-1}) + \frac{1}{n} \bigr[ R_{n} - V(s_t) \bigl] $ and we could just as easily use the "+=" notation. But when using parameteric function approximators such as neural networks, our "update towards" operator may represent a gradient step, which cannot be written in "+=" notation. In order to keep our notation clean and general, we chose to use the $\hookleftarrow$ operator throughout.</d-footnote>
+    In tabular settings such as the Cliff World example, this "update towards" operator computes a running average. More specifically, the $n^{th}$ Monte Carlo update is $ V(s_t) = V(s_{t}) + \frac{1}{n} \bigr[ R_{n} - V(s_t) \bigl] $ and we could just as easily use the "+=" notation. But when using parameteric function approximators such as neural networks, our "update towards" operator may represent a gradient step, which cannot be written in "+=" notation. In order to keep our notation clean and general, we chose to use the $\hookleftarrow$ operator throughout.</d-footnote>
   </p>
 
   <div class="eq-grid" style="grid-gap: 8px;">
